@@ -12,6 +12,30 @@ export const metadata: Metadata = {
   title: "vnbuildr — Landing Pages, Ready in Days",
   description:
     "Done-for-you landing pages built fast. No delays, no bloated agencies. Just clean, converting pages delivered in days.",
+  metadataBase: new URL("https://vnbuildr.com"),
+  openGraph: {
+    title: "vnbuildr — Landing Pages, Ready in Days",
+    description:
+      "Done-for-you landing pages built fast. No delays, no bloated agencies. Just clean, converting pages delivered in days.",
+    url: "https://vnbuildr.com",
+    siteName: "vnbuildr",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "vnbuildr — Landing Pages, Ready in Days",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "vnbuildr — Landing Pages, Ready in Days",
+    description:
+      "Done-for-you landing pages built fast. No delays, no bloated agencies. Just clean, converting pages delivered in days.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({
