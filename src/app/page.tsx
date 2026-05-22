@@ -161,6 +161,7 @@ function Hero() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
+            className="hidden md:block"
           >
             <Floating sensitivity={0.8} easingFactor={0.04}>
               {/* Top-left cluster */}
@@ -314,7 +315,7 @@ function HowItWorks() {
   ];
 
   return (
-    <section id="how" className="py-24 px-6 bg-[var(--color-surface)]">
+    <section id="how" className="py-16 md:py-24 px-6 bg-[var(--color-surface)]">
       <div className="max-w-[1100px] mx-auto">
         <FadeUp className="text-center mb-16">
           <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
@@ -334,7 +335,7 @@ function HowItWorks() {
           {steps.map(({ num, title, body, time }, i) => (
             <motion.div
               key={num}
-              className="neo-card bg-white p-10"
+              className="neo-card bg-white p-6 md:p-10"
               initial={{ opacity: 0, x: i === 0 ? -80 : i === 2 ? 80 : 0, y: i === 1 ? 60 : 0 }}
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
@@ -393,7 +394,7 @@ function Features() {
   ];
 
   return (
-    <section id="features" className="py-24 px-6 bg-white">
+    <section id="features" className="py-16 md:py-24 px-6 bg-white">
       <div className="max-w-[1100px] mx-auto">
         <FadeUp className="mb-14">
           <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
@@ -414,7 +415,7 @@ function Features() {
           {cards.map(({ icon, title, body }) => (
             <div
               key={title}
-              className="neo-card bg-white p-9"
+              className="neo-card bg-white p-6 md:p-9"
             >
               <div className="w-[42px] h-[42px] bg-[var(--color-surface)] border-2 border-[var(--color-ink)] shadow-[2px_2px_0_var(--color-ink)] rounded flex items-center justify-center text-[var(--color-ink)] mb-5">
                 {icon}
@@ -464,7 +465,7 @@ function DevTracks() {
   ]
 
   return (
-    <section id="track" className="py-24 px-6 bg-[var(--color-surface)]">
+    <section id="track" className="py-16 md:py-24 px-6 bg-[var(--color-surface)]">
       <div className="max-w-[1100px] mx-auto">
         <FadeUp className="text-center mb-14">
           <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
@@ -486,7 +487,7 @@ function DevTracks() {
               className={`bg-white flex flex-col h-full overflow-hidden ${featured ? "neo-card-blue" : "neo-card"}`}
             >
               {/* Header */}
-              <div className={`px-8 pt-8 pb-6 border-b ${featured ? "border-[var(--color-blue)]/20" : "border-[var(--color-ink)]/12"}`}>
+              <div className={`px-5 pt-6 pb-4 md:px-8 md:pt-8 md:pb-6 border-b ${featured ? "border-[var(--color-blue)]/20" : "border-[var(--color-ink)]/12"}`}>
                 <span
                   className={`inline-flex items-center gap-1.5 text-[11px] font-bold tracking-[0.08em] uppercase px-2.5 py-1 rounded-full mb-4 ${
                     featured
@@ -510,7 +511,7 @@ function DevTracks() {
               </div>
 
               {/* Body */}
-              <div className="px-8 py-7 space-y-6 flex-1">
+              <div className="px-5 py-5 md:px-8 md:py-7 space-y-6 flex-1">
                 <div>
                   <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-2">Best For</p>
                   <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.65]">{bestFor}</p>
@@ -541,7 +542,7 @@ function DevTracks() {
 
               {/* Footer */}
               <div
-                className={`px-8 py-5 border-t flex items-center justify-between ${
+                className={`px-5 py-4 md:px-8 md:py-5 border-t flex items-center justify-between ${
                   featured
                     ? "border-[var(--color-blue)]/20 bg-[#f5f8ff]"
                     : "border-[var(--color-ink)]/12 bg-[var(--color-surface)]"
@@ -786,7 +787,7 @@ function ContactForm() {
 // ─── Final CTA ────────────────────────────────────────────────────────────────
 function CtaSection() {
   return (
-    <section id="contact" className="py-24 px-6 bg-[var(--color-ink)]">
+    <section id="contact" className="py-16 md:py-24 px-6 bg-[var(--color-ink)]">
       <div className="max-w-[600px] mx-auto">
         <FadeUp className="text-center mb-2">
           <span className="inline-flex items-center gap-1.5 bg-white/10 text-white/55 text-[13px] font-medium px-3 py-1 rounded-full mb-6 before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-[#5c9e6e]">
@@ -811,12 +812,12 @@ function CtaSection() {
 function Footer() {
   return (
     <footer className="bg-[var(--color-ink)] border-t border-white/[0.08] py-8 px-6">
-      <div className="max-w-[1100px] mx-auto grid grid-cols-3 items-center gap-4">
+      <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-3 items-center gap-3 md:gap-4 text-center md:text-left">
         <Link href="/" onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }) }} className="font-serif text-[18px] text-white/90">
           <span className="text-[var(--color-blue)] font-bold">vn</span><em>buildr</em>
         </Link>
         <p className="text-[13px] text-white/30 text-center">© 2026 vnbuildr. All rights reserved.</p>
-        <ul className="flex gap-6 list-none justify-end">
+        <ul className="flex gap-6 list-none justify-center md:justify-end">
           {(
             [
               ["https://wa.me/601112173995", "WhatsApp"],
@@ -932,7 +933,7 @@ function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-24 px-6 bg-[var(--color-surface)]">
+    <section id="faq" className="py-16 md:py-24 px-6 bg-[var(--color-surface)]">
       <div className="max-w-[720px] mx-auto">
         <FadeUp className="text-center mb-14">
           <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
@@ -948,7 +949,7 @@ function FAQ() {
           {faqs.map(({ q, a }, i) => (
             <div key={i} className="bg-white">
               <button
-                className="w-full flex items-start justify-between gap-6 px-8 py-5 text-left hover:bg-[var(--color-surface)] transition-colors group"
+                className="w-full flex items-start justify-between gap-4 px-5 py-4 md:px-8 md:py-5 text-left hover:bg-[var(--color-surface)] transition-colors group"
                 onClick={() => setOpen(open === i ? null : i)}
                 aria-expanded={open === i}
               >
@@ -970,7 +971,7 @@ function FAQ() {
                 transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
                 style={{ overflow: "hidden" }}
               >
-                <div className="px-8 pt-4 pb-8 text-[14px] text-[var(--color-ink-muted)] leading-[1.85]">
+                <div className="px-5 pt-3 pb-6 md:px-8 md:pt-4 md:pb-8 text-[14px] text-[var(--color-ink-muted)] leading-[1.85]">
                   {a}
                 </div>
               </motion.div>

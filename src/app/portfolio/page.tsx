@@ -117,7 +117,7 @@ export default function PortfolioPage() {
 
           <Link
             href="/"
-            className="text-sm text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors flex items-center gap-1.5"
+            className="hidden sm:flex text-sm text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors items-center gap-1.5"
           >
             <ChevronLeft /> Back to home
           </Link>
@@ -135,7 +135,7 @@ export default function PortfolioPage() {
 
       <main>
         {/* ─── Hero ────────────────────────────────────────────────────────── */}
-        <section className="py-20 px-6 text-center bg-white">
+        <section className="py-14 md:py-20 px-6 text-center bg-white">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -157,7 +157,7 @@ export default function PortfolioPage() {
         </section>
 
         {/* ─── Carousel ────────────────────────────────────────────────────── */}
-        <section className="py-16 px-6 bg-[var(--color-surface)]">
+        <section className="py-12 md:py-16 px-6 bg-[var(--color-surface)]">
           <div className="max-w-[1100px] mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 32 }}
@@ -216,7 +216,7 @@ export default function PortfolioPage() {
                       className="flex items-end justify-center gap-6 md:gap-10 py-4 px-4"
                       style={{ willChange: "transform, opacity" }}
                     >
-                      <div className="w-[55%] max-w-[460px]">
+                      <div className="w-[80%] sm:w-[55%] max-w-[460px]">
                         <img
                           src={projects[current].macbook}
                           alt={`${projects[current].name} desktop`}
@@ -302,7 +302,7 @@ export default function PortfolioPage() {
         </section>
 
         {/* ─── CTA ─────────────────────────────────────────────────────────── */}
-        <section className="py-20 px-6 bg-white text-center">
+        <section className="py-14 md:py-20 px-6 bg-white text-center">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -329,12 +329,12 @@ export default function PortfolioPage() {
 
       {/* ─── Footer ──────────────────────────────────────────────────────────── */}
       <footer className="bg-[var(--color-ink)] border-t border-white/[0.08] py-8 px-6">
-        <div className="max-w-[1100px] mx-auto grid grid-cols-3 items-center gap-4">
+        <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-3 items-center gap-3 md:gap-4 text-center md:text-left">
           <Link href="/" className="font-serif text-[18px] text-white/90">
             <span className="text-[var(--color-blue)] font-bold">vn</span><em>buildr</em>
           </Link>
           <p className="text-[13px] text-white/30 text-center">© 2026 vnbuildr. All rights reserved.</p>
-          <div className="flex gap-6 justify-end">
+          <div className="flex gap-6 justify-center md:justify-end">
             <Link href="/" className="text-[13px] text-white/35 hover:text-white/75 transition-colors">
               Home
             </Link>
