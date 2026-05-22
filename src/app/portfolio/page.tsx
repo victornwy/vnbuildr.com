@@ -1,8 +1,7 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
 import Link from "next/link"
-import { motion, AnimatePresence } from "motion/react"
+import { motion } from "motion/react"
 
 // ─── Project data ─────────────────────────────────────────────────────────────
 const projects = [
@@ -15,6 +14,7 @@ const projects = [
     tags: ["React", "Landing Page"],
     macbook: "/portfolio-mockups/an-accounts-macbook.png",
     iphone: "/portfolio-mockups/an-accounts-iphone.png",
+    featured: true,
   },
   {
     id: 2,
@@ -25,6 +25,7 @@ const projects = [
     tags: ["Static HTML", "E-commerce"],
     macbook: "/portfolio-mockups/everbest-macbook.png",
     iphone: "/portfolio-mockups/everbest-iphone.png",
+    featured: false,
   },
   {
     id: 3,
@@ -35,6 +36,7 @@ const projects = [
     tags: ["React", "SaaS"],
     macbook: "/portfolio-mockups/top-space-macbook.png",
     iphone: "/portfolio-mockups/topspace-iphone.png",
+    featured: false,
   },
   {
     id: 4,
@@ -45,6 +47,7 @@ const projects = [
     tags: ["React", "Consulting"],
     macbook: "/portfolio-mockups/meridian-macbook.png",
     iphone: "/portfolio-mockups/meridian-iphone.png",
+    featured: false,
   },
   {
     id: 5,
@@ -55,6 +58,7 @@ const projects = [
     tags: ["Static HTML", "Finance"],
     macbook: "/portfolio-mockups/novadax-macbook.png",
     iphone: "/portfolio-mockups/novadax-iphone.png",
+    featured: false,
   },
 ]
 
@@ -67,44 +71,78 @@ function ChevronLeft() {
   )
 }
 
-function ChevronRight() {
+// ─── Bento card ───────────────────────────────────────────────────────────────
+interface BentoCardProps {
+  project: typeof projects[0]
+  className?: string
+  wide?: boolean
+  delay?: number
+}
+
+function BentoCard({ project, className = "", wide = false, delay = 0 }: BentoCardProps) {
+  const { featured } = project
   return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
+    <motion.div
+      className={`${featured ? "neo-card-blue" : "neo-card"} bg-white flex flex-col overflow-hidden ${className}`}
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -4, transition: { type: "spring", stiffness: 300, damping: 22 } }}
+    >
+      {/* Image area */}
+      <div className={`bg-[var(--color-surface)] flex items-end justify-center px-6 pt-6 overflow-hidden flex-1 ${wide ? "min-h-[180px] md:min-h-[260px]" : "min-h-[160px] md:min-h-[210px]"}`}>
+        {wide ? (
+          <div className="flex items-end justify-center gap-4 md:gap-8 w-full">
+            <div className="w-[60%] sm:w-[55%] max-w-[520px]">
+              <img src={project.macbook} alt={`${project.name} desktop`} className="w-full h-auto object-contain select-none" draggable={false} />
+            </div>
+            <div className="w-[18%] sm:w-[12%] max-w-[100px] mb-3">
+              <img src={project.iphone} alt={`${project.name} mobile`} className="w-full h-auto object-contain select-none" draggable={false} />
+            </div>
+          </div>
+        ) : (
+          <img
+            src={project.macbook}
+            alt={`${project.name} desktop`}
+            className="w-full h-auto object-contain select-none"
+            draggable={false}
+          />
+        )}
+      </div>
+
+      {/* Info */}
+      <div className={`p-5 border-t ${featured ? "border-[var(--color-blue)]/20" : "border-[var(--color-border)]"}`}>
+        <div className="flex items-start gap-2 mb-1.5">
+          <h3 className="font-serif text-[18px] font-normal tracking-tight leading-snug">{project.name}</h3>
+          <span
+            className={`shrink-0 mt-0.5 text-[10px] font-bold tracking-[0.08em] uppercase px-2 py-0.5 rounded border-2 ${
+              featured
+                ? "border-[var(--color-blue)] shadow-[2px_2px_0_var(--color-blue)] text-[var(--color-blue)]"
+                : "border-[var(--color-ink)] shadow-[2px_2px_0_var(--color-ink)] text-[var(--color-ink)]"
+            }`}
+          >
+            {project.category}
+          </span>
+        </div>
+        <p className="text-[13px] text-[var(--color-ink-muted)] leading-[1.65] mb-3">{project.description}</p>
+        <div className="flex flex-wrap gap-1.5">
+          {project.tags.map(tag => (
+            <span key={tag} className="text-[11px] font-medium bg-[var(--color-surface)] border border-[var(--color-border)] px-2.5 py-0.5 rounded text-[var(--color-ink-muted)]">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </motion.div>
   )
 }
 
-// ─── Portfolio page ───────────────────────────────────────────────────────────
-const slideVariants = {
-  enter: (dir: number) => ({ x: dir >= 0 ? "55%" : "-55%", opacity: 0 }),
-  center: { x: "0%", opacity: 1 },
-  exit: (dir: number) => ({ x: dir >= 0 ? "-55%" : "55%", opacity: 0 }),
-}
-
+// ─── Page ─────────────────────────────────────────────────────────────────────
 export default function PortfolioPage() {
-  const [current, setCurrent] = useState(0)
-  const [direction, setDirection] = useState(1)
-  const [paused, setPaused] = useState(false)
-  const [dragStart, setDragStart] = useState<number | null>(null)
-
-  const navigate = useCallback((to: number, dir: number) => {
-    setDirection(dir)
-    setCurrent(to)
-  }, [])
-
-  const next = useCallback(() => navigate((current + 1) % projects.length, 1), [current, navigate])
-  const prev = useCallback(() => navigate((current - 1 + projects.length) % projects.length, -1), [current, navigate])
-
-  useEffect(() => {
-    if (paused) return
-    const t = setInterval(next, 4500)
-    return () => clearInterval(t)
-  }, [paused, next])
-
   return (
     <>
-      {/* ─── Nav ─────────────────────────────────────────────────────────── */}
+      {/* Nav */}
       <nav className="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-[var(--color-border)]">
         <div className="max-w-[1100px] mx-auto px-6 h-[60px] flex items-center justify-between">
           <Link
@@ -114,14 +152,12 @@ export default function PortfolioPage() {
           >
             <span className="text-[var(--color-blue)] font-bold">vn</span><em>buildr</em>
           </Link>
-
           <Link
             href="/"
             className="hidden sm:flex text-sm text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors items-center gap-1.5"
           >
             <ChevronLeft /> Back to home
           </Link>
-
           <a
             href="https://wa.me/601112173995?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page"
             target="_blank"
@@ -134,7 +170,7 @@ export default function PortfolioPage() {
       </nav>
 
       <main>
-        {/* ─── Hero ────────────────────────────────────────────────────────── */}
+        {/* Hero */}
         <section className="py-14 md:py-20 px-6 text-center bg-white">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -156,152 +192,23 @@ export default function PortfolioPage() {
           </motion.div>
         </section>
 
-        {/* ─── Carousel ────────────────────────────────────────────────────── */}
+        {/* Bento grid */}
         <section className="py-12 md:py-16 px-6 bg-[var(--color-surface)]">
           <div className="max-w-[1100px] mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 32 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <div
-                className="relative neo-card bg-white p-6 md:p-10 overflow-hidden"
-                onMouseEnter={() => setPaused(true)}
-                onMouseLeave={() => setPaused(false)}
-              >
-                {/* Prev arrow */}
-                <button
-                  onClick={prev}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 neo-card bg-white flex items-center justify-center hover:bg-[var(--color-surface)] transition-colors"
-                  aria-label="Previous project"
-                >
-                  <ChevronLeft />
-                </button>
-
-                {/* Next arrow */}
-                <button
-                  onClick={next}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 neo-card bg-white flex items-center justify-center hover:bg-[var(--color-surface)] transition-colors"
-                  aria-label="Next project"
-                >
-                  <ChevronRight />
-                </button>
-
-                {/* Slide */}
-                <div
-                  className="overflow-hidden mx-8 cursor-grab active:cursor-grabbing"
-                  onPointerDown={e => { setPaused(true); setDragStart(e.clientX) }}
-                  onPointerUp={e => {
-                    if (dragStart === null) return
-                    const delta = dragStart - e.clientX
-                    if (delta > 60) next()
-                    else if (delta < -60) prev()
-                    setDragStart(null)
-                    setPaused(false)
-                  }}
-                  onPointerLeave={() => setDragStart(null)}
-                >
-                  <AnimatePresence custom={direction} mode="wait">
-                    <motion.div
-                      key={current}
-                      custom={direction}
-                      variants={slideVariants}
-                      initial="enter"
-                      animate="center"
-                      exit="exit"
-                      transition={{
-                        x: { type: "tween", duration: 0.28, ease: [0.25, 0.46, 0.45, 0.94] },
-                        opacity: { duration: 0.18 },
-                      }}
-                      className="flex items-end justify-center gap-6 md:gap-10 py-4 px-4"
-                      style={{ willChange: "transform, opacity" }}
-                    >
-                      <div className="w-[58%] sm:w-[55%] max-w-[460px]">
-                        <img
-                          src={projects[current].macbook}
-                          alt={`${projects[current].name} desktop`}
-                          className="w-full h-auto object-contain select-none"
-                          draggable={false}
-                        />
-                      </div>
-                      <div className="w-[20%] sm:w-[13%] max-w-[110px] mb-4">
-                        <img
-                          src={projects[current].iphone}
-                          alt={`${projects[current].name} mobile`}
-                          className="w-full h-auto object-contain select-none"
-                          draggable={false}
-                        />
-                      </div>
-                    </motion.div>
-                  </AnimatePresence>
-                </div>
-
-                {/* Project info */}
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={current}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.22, ease: "easeInOut" }}
-                    className="text-center mt-8"
-                  >
-                    <div className="flex items-center justify-center gap-3 mb-2">
-                      <h2 className="font-serif text-[26px] font-normal tracking-tight">
-                        {projects[current].name}
-                      </h2>
-                      <span className="text-[10px] font-bold tracking-[0.1em] uppercase border-2 border-[var(--color-ink)] shadow-[2px_2px_0_var(--color-ink)] px-2.5 py-0.5 rounded">
-                        {projects[current].category}
-                      </span>
-                    </div>
-                    <p className="text-[14px] text-[var(--color-ink-muted)] max-w-[460px] mx-auto mb-4 leading-[1.65]">
-                      {projects[current].description}
-                    </p>
-                    <div className="flex items-center justify-center gap-2 flex-wrap">
-                      {projects[current].tags.map(tag => (
-                        <span
-                          key={tag}
-                          className="text-[11px] font-medium bg-[var(--color-surface)] border border-[var(--color-border)] px-2.5 py-1 rounded text-[var(--color-ink-muted)]"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-
-                {/* Dot indicators */}
-                <div className="flex items-center justify-center gap-2.5 mt-8">
-                  {projects.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setCurrent(i)}
-                      className={`transition-all duration-300 rounded-full border-2 border-[var(--color-ink)] ${
-                        i === current
-                          ? "w-6 h-2.5 bg-[var(--color-ink)]"
-                          : "w-2.5 h-2.5 bg-transparent hover:bg-[var(--color-ink)]/20"
-                      }`}
-                      aria-label={`Go to ${projects[i].name}`}
-                    />
-                  ))}
-                </div>
-
-                {/* Auto-play progress bar */}
-                {!paused && (
-                  <motion.div
-                    key={`${current}-bar`}
-                    className="absolute bottom-0 left-0 h-[3px] bg-[var(--color-ink)]"
-                    initial={{ width: "0%" }}
-                    animate={{ width: "100%" }}
-                    transition={{ duration: 4.5, ease: "linear" }}
-                  />
-                )}
-              </div>
-            </motion.div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {/* Row 1: featured wide + small */}
+              <BentoCard project={projects[0]} className="md:col-span-2" delay={0} />
+              <BentoCard project={projects[1]} delay={0.08} />
+              {/* Row 2: small + wide */}
+              <BentoCard project={projects[2]} delay={0.12} />
+              <BentoCard project={projects[3]} className="md:col-span-2" delay={0.16} />
+              {/* Row 3: full-width with both mockups */}
+              <BentoCard project={projects[4]} wide className="md:col-span-3" delay={0.2} />
+            </div>
           </div>
         </section>
 
-        {/* ─── CTA ─────────────────────────────────────────────────────────── */}
+        {/* CTA */}
         <section className="py-14 md:py-20 px-6 bg-white text-center">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
@@ -327,7 +234,7 @@ export default function PortfolioPage() {
         </section>
       </main>
 
-      {/* ─── Footer ──────────────────────────────────────────────────────────── */}
+      {/* Footer */}
       <footer className="bg-[var(--color-ink)] border-t border-white/[0.08] py-8 px-6">
         <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-3 items-center gap-3 md:gap-4 text-center md:text-left">
           <Link href="/" className="font-serif text-[18px] text-white/90">
@@ -335,17 +242,8 @@ export default function PortfolioPage() {
           </Link>
           <p className="text-[13px] text-white/30 text-center">© 2026 vnbuildr. All rights reserved.</p>
           <div className="flex gap-6 justify-center md:justify-end">
-            <Link href="/" className="text-[13px] text-white/35 hover:text-white/75 transition-colors">
-              Home
-            </Link>
-            <a
-              href="https://wa.me/601112173995"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[13px] text-white/35 hover:text-white/75 transition-colors"
-            >
-              WhatsApp
-            </a>
+            <Link href="/" className="text-[13px] text-white/35 hover:text-white/75 transition-colors">Home</Link>
+            <a href="https://wa.me/601112173995" target="_blank" rel="noopener noreferrer" className="text-[13px] text-white/35 hover:text-white/75 transition-colors">WhatsApp</a>
           </div>
         </div>
       </footer>
