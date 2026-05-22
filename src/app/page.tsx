@@ -18,73 +18,117 @@ const AnimContext = createContext<{ on: boolean; set: (v: boolean) => void }>({
 })
 
 // ─── Nav ──────────────────────────────────────────────────────────────────────
+const NAV_LINKS: [string, string][] = [
+  ["#how",      "How it works"],
+  ["#features", "What you get"],
+  ["#track",    "Build options"],
+  ["#faq",      "FAQ"],
+  ["#contact",  "Contact"],
+]
+
+function AnimToggle({ on, set }: { on: boolean; set: (v: boolean) => void }) {
+  return (
+    <div className="flex items-center gap-2.5 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-full px-3 py-1.5">
+      <span className={`text-[11px] font-semibold tracking-wide transition-colors duration-200 ${!on ? "text-[var(--color-ink)]" : "text-[var(--color-ink-muted)]"}`}>Static</span>
+      <button
+        role="switch"
+        aria-checked={on}
+        onClick={() => set(!on)}
+        className={`relative inline-flex items-center w-10 h-[22px] shrink-0 rounded-full border-2 border-[var(--color-ink)] shadow-[2px_2px_0_var(--color-ink)] cursor-pointer transition-colors duration-200 ${on ? "bg-[var(--color-ink)]" : "bg-white"}`}
+        aria-label={on ? "Switch to static mode" : "Switch to React mode"}
+      >
+        <span className={`block h-[14px] w-[14px] rounded-full border border-[var(--color-ink)] transition-transform duration-200 ${on ? "translate-x-[19px] bg-white" : "translate-x-[1px] bg-[var(--color-ink)]"}`} />
+      </button>
+      <span className={`text-[11px] font-semibold tracking-wide transition-colors duration-200 ${on ? "text-[var(--color-blue)]" : "text-[var(--color-ink-muted)]"}`}>React</span>
+    </div>
+  )
+}
+
 function Nav() {
   const { on, set } = useContext(AnimContext)
+  const [open, setOpen] = useState(false)
+  const close = () => setOpen(false)
+
   return (
     <nav className="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-[var(--color-border)]">
       <div className="max-w-[1100px] mx-auto px-6 h-[60px] flex items-center justify-between">
-        <Link href="/" onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }) }} className="font-serif text-[22px] tracking-tight">
+        {/* Logo */}
+        <Link href="/" onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); close() }} className="font-serif text-[22px] tracking-tight">
           <span className="text-[var(--color-blue)] font-bold">vn</span><em>buildr</em>
         </Link>
+
+        {/* Desktop nav links */}
         <ul className="hidden md:flex items-center gap-8 list-none">
-          {(
-            [
-              ["#how", "How it works"],
-              ["#features", "What you get"],
-              ["#track", "Build options"],
-              ["#faq", "FAQ"],
-              ["#contact", "Contact"],
-            ] as [string, string][]
-          ).map(([href, label]) => (
+          {NAV_LINKS.map(([href, label]) => (
             <li key={href}>
-              <a
-                href={href}
-                className="text-sm text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors"
-              >
-                {label}
-              </a>
+              <a href={href} className="text-sm text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors">{label}</a>
             </li>
           ))}
           <li>
-            <Link href="/portfolio" className="text-sm text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors">
-              Portfolio
-            </Link>
+            <Link href="/portfolio" className="text-sm text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors">Portfolio</Link>
           </li>
         </ul>
-        <div className="flex items-center gap-4">
-          {/* Animation toggle */}
-          <div className="hidden md:flex items-center gap-2.5 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-full px-3 py-1.5">
-            <span className={`text-[11px] font-semibold tracking-wide transition-colors duration-200 ${!on ? "text-[var(--color-ink)]" : "text-[var(--color-ink-muted)]"}`}>
-              Static
-            </span>
-            <button
-              role="switch"
-              aria-checked={on}
-              onClick={() => set(!on)}
-              className={`relative inline-flex items-center w-10 h-[22px] shrink-0 rounded-full border-2 border-[var(--color-ink)] shadow-[2px_2px_0_var(--color-ink)] cursor-pointer transition-colors duration-200 ${on ? "bg-[var(--color-ink)]" : "bg-white"}`}
-              aria-label={on ? "Switch to static mode" : "Switch to React mode"}
-            >
-              <span
-                className={`block h-[14px] w-[14px] rounded-full border border-[var(--color-ink)] transition-transform duration-200 ${on ? "translate-x-[19px] bg-white" : "translate-x-[1px] bg-[var(--color-ink)]"}`}
-              />
-            </button>
-            <span className={`text-[11px] font-semibold tracking-wide transition-colors duration-200 ${on ? "text-[var(--color-blue)]" : "text-[var(--color-ink-muted)]"}`}>
-              React
-            </span>
-          </div>
 
-          <div className="hidden md:block w-px h-5 bg-[var(--color-border)]" />
-
-          <a
-            href="https://wa.me/601112173995?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="whatsapp-glow text-sm font-medium bg-[#25D366] text-white px-5 py-2.5 rounded-full hover:opacity-85 transition-opacity"
-          >
+        {/* Desktop right */}
+        <div className="hidden md:flex items-center gap-4">
+          <AnimToggle on={on} set={set} />
+          <div className="w-px h-5 bg-[var(--color-border)]" />
+          <a href="https://wa.me/601112173995?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page" target="_blank" rel="noopener noreferrer" className="whatsapp-glow text-sm font-medium bg-[#25D366] text-white px-5 py-2.5 rounded-full hover:opacity-85 transition-opacity">
             Get in touch
           </a>
         </div>
+
+        {/* Mobile right: CTA + burger */}
+        <div className="flex md:hidden items-center gap-3">
+          <a href="https://wa.me/601112173995?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page" target="_blank" rel="noopener noreferrer" className="whatsapp-glow text-sm font-medium bg-[#25D366] text-white px-4 py-2 rounded-full hover:opacity-85 transition-opacity">
+            Get in touch
+          </a>
+          <button
+            onClick={() => setOpen(o => !o)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            className="w-9 h-9 flex flex-col items-center justify-center gap-[5px] rounded border-2 border-[var(--color-ink)] shadow-[2px_2px_0_var(--color-ink)] bg-white shrink-0"
+          >
+            <motion.span animate={open ? { rotate: 45, y: 7 }  : { rotate: 0, y: 0 }}  transition={{ duration: 0.2 }} className="block w-[15px] h-[1.5px] bg-[var(--color-ink)] rounded-full origin-center" />
+            <motion.span animate={open ? { opacity: 0 }        : { opacity: 1 }}        transition={{ duration: 0.15 }} className="block w-[15px] h-[1.5px] bg-[var(--color-ink)] rounded-full" />
+            <motion.span animate={open ? { rotate: -45, y: -7 }: { rotate: 0, y: 0 }} transition={{ duration: 0.2 }} className="block w-[15px] h-[1.5px] bg-[var(--color-ink)] rounded-full origin-center" />
+          </button>
+        </div>
       </div>
+
+      {/* Mobile dropdown */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            key="mobile-menu"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            className="md:hidden overflow-hidden bg-white border-b border-[var(--color-border)]"
+          >
+            <div className="px-6 py-4 flex flex-col">
+              {NAV_LINKS.map(([href, label]) => (
+                <a
+                  key={href}
+                  href={href}
+                  onClick={close}
+                  className="text-[15px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] py-3 border-b border-[var(--color-border)] transition-colors"
+                >
+                  {label}
+                </a>
+              ))}
+              <Link href="/portfolio" onClick={close} className="text-[15px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] py-3 border-b border-[var(--color-border)] transition-colors">
+                Portfolio
+              </Link>
+              <div className="pt-4 flex items-center justify-between">
+                <span className="text-[12px] font-semibold text-[var(--color-ink-muted)] uppercase tracking-wide">Animation</span>
+                <AnimToggle on={on} set={set} />
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }
@@ -156,12 +200,11 @@ function Hero() {
         {on && (
           <motion.div
             key="parallax"
-            className="absolute inset-0 pointer-events-none"
+            className="absolute inset-0 pointer-events-none hidden md:block"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="hidden md:block"
           >
             <Floating sensitivity={0.8} easingFactor={0.04}>
               {/* Top-left cluster */}
