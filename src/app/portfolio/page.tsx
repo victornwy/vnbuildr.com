@@ -9,56 +9,46 @@ const projects = [
     id: 1,
     name: "AN Account",
     category: "Consulting",
-    description:
-      "High-converting landing page for a digital banking platform, built around trust signals and lead generation.",
+    description: "High-converting landing page for a digital banking platform, built around trust signals and lead generation.",
     tags: ["React", "Landing Page"],
     macbook: "/portfolio-mockups/an-accounts-macbook.png",
     iphone: "/portfolio-mockups/an-accounts-iphone.png",
-    featured: true,
   },
   {
     id: 2,
     name: "Everbest",
     category: "Engineering",
-    description:
-      "Clean product showcase page engineered for brand elevation and maximum sales conversion.",
+    description: "Clean product showcase page engineered for brand elevation and maximum sales conversion.",
     tags: ["Static HTML", "E-commerce"],
     macbook: "/portfolio-mockups/everbest-macbook.png",
     iphone: "/portfolio-mockups/everbest-iphone.png",
-    featured: false,
   },
   {
     id: 3,
     name: "TopSpace",
     category: "Industrial",
-    description:
-      "Modern SaaS landing page with an animated hero section and a conversion-focused content hierarchy.",
+    description: "Modern SaaS landing page with an animated hero section and a conversion-focused content hierarchy.",
     tags: ["React", "SaaS"],
     macbook: "/portfolio-mockups/top-space-macbook.png",
     iphone: "/portfolio-mockups/topspace-iphone.png",
-    featured: false,
   },
   {
     id: 4,
     name: "Meridian",
     category: "Consulting",
-    description:
-      "Premium consulting firm website built for credibility, with structured copy and direct CTAs.",
+    description: "Premium consulting firm website built for credibility, with structured copy and direct CTAs.",
     tags: ["React", "Consulting"],
     macbook: "/portfolio-mockups/meridian-macbook.png",
     iphone: "/portfolio-mockups/meridian-iphone.png",
-    featured: false,
   },
   {
     id: 5,
     name: "NovaDax",
     category: "Finance",
-    description:
-      "Crypto exchange landing page designed for aggressive user acquisition with trust-building elements.",
+    description: "Crypto exchange landing page designed for aggressive user acquisition with trust-building elements.",
     tags: ["Static HTML", "Finance"],
     macbook: "/portfolio-mockups/novadax-macbook.png",
     iphone: "/portfolio-mockups/novadax-iphone.png",
-    featured: false,
   },
 ]
 
@@ -71,57 +61,42 @@ function ChevronLeft() {
   )
 }
 
-// ─── Bento card ───────────────────────────────────────────────────────────────
-interface BentoCardProps {
-  project: typeof projects[0]
-  className?: string
-  wide?: boolean
-  delay?: number
-}
-
-function BentoCard({ project, className = "", wide = false, delay = 0 }: BentoCardProps) {
-  const { featured } = project
+// ─── Card ─────────────────────────────────────────────────────────────────────
+function ProjectCard({ project, delay = 0 }: { project: typeof projects[0]; delay?: number }) {
   return (
     <motion.div
-      className={`${featured ? "neo-card-blue" : "neo-card"} bg-white flex flex-col overflow-hidden ${className}`}
+      className="neo-card bg-white flex flex-col overflow-hidden"
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ y: -4, transition: { type: "spring", stiffness: 300, damping: 22 } }}
     >
-      {/* Image area */}
-      <div className={`bg-[var(--color-surface)] flex items-end justify-center px-6 pt-6 overflow-hidden flex-1 ${wide ? "min-h-[180px] md:min-h-[260px]" : "min-h-[160px] md:min-h-[210px]"}`}>
-        {wide ? (
-          <div className="flex items-end justify-center gap-4 md:gap-8 w-full">
-            <div className="w-[60%] sm:w-[55%] max-w-[520px]">
-              <img src={project.macbook} alt={`${project.name} desktop`} className="w-full h-auto object-contain select-none" draggable={false} />
-            </div>
-            <div className="w-[18%] sm:w-[12%] max-w-[100px] mb-3">
-              <img src={project.iphone} alt={`${project.name} mobile`} className="w-full h-auto object-contain select-none" draggable={false} />
-            </div>
-          </div>
-        ) : (
+      {/* Mockups */}
+      <div className="bg-[var(--color-surface)] flex items-end justify-center gap-3 px-6 pt-6 min-h-[200px]">
+        <div className="w-[68%]">
           <img
             src={project.macbook}
             alt={`${project.name} desktop`}
             className="w-full h-auto object-contain select-none"
             draggable={false}
           />
-        )}
+        </div>
+        <div className="w-[16%] mb-2">
+          <img
+            src={project.iphone}
+            alt={`${project.name} mobile`}
+            className="w-full h-auto object-contain select-none"
+            draggable={false}
+          />
+        </div>
       </div>
 
       {/* Info */}
-      <div className={`p-5 border-t ${featured ? "border-[var(--color-blue)]/20" : "border-[var(--color-border)]"}`}>
+      <div className="p-5 border-t border-[var(--color-border)]">
         <div className="flex items-start gap-2 mb-1.5">
           <h3 className="font-serif text-[18px] font-normal tracking-tight leading-snug">{project.name}</h3>
-          <span
-            className={`shrink-0 mt-0.5 text-[10px] font-bold tracking-[0.08em] uppercase px-2 py-0.5 rounded border-2 ${
-              featured
-                ? "border-[var(--color-blue)] shadow-[2px_2px_0_var(--color-blue)] text-[var(--color-blue)]"
-                : "border-[var(--color-ink)] shadow-[2px_2px_0_var(--color-ink)] text-[var(--color-ink)]"
-            }`}
-          >
+          <span className="shrink-0 mt-0.5 text-[10px] font-bold tracking-[0.08em] uppercase px-2 py-0.5 rounded border-2 border-[var(--color-ink)] shadow-[2px_2px_0_var(--color-ink)] text-[var(--color-ink)]">
             {project.category}
           </span>
         </div>
@@ -192,18 +167,13 @@ export default function PortfolioPage() {
           </motion.div>
         </section>
 
-        {/* Bento grid */}
+        {/* Grid */}
         <section className="py-12 md:py-16 px-6 bg-[var(--color-surface)]">
           <div className="max-w-[1100px] mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-              {/* Row 1: featured wide + small */}
-              <BentoCard project={projects[0]} className="md:col-span-2" delay={0} />
-              <BentoCard project={projects[1]} delay={0.08} />
-              {/* Row 2: small + wide */}
-              <BentoCard project={projects[2]} delay={0.12} />
-              <BentoCard project={projects[3]} className="md:col-span-2" delay={0.16} />
-              {/* Row 3: full-width with both mockups */}
-              <BentoCard project={projects[4]} wide className="md:col-span-3" delay={0.2} />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {projects.map((project, i) => (
+                <ProjectCard key={project.id} project={project} delay={i * 0.08} />
+              ))}
             </div>
           </div>
         </section>
