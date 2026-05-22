@@ -73,13 +73,15 @@ function ProjectCard({ project, delay = 0 }: { project: typeof projects[0]; dela
       whileHover={{ y: -4, transition: { type: "spring", stiffness: 300, damping: 22 } }}
     >
       {/* Mockups */}
-      <div className="bg-[var(--color-surface)] flex items-end justify-center gap-3 px-6 pt-6 min-h-[200px]">
+      <div className="relative bg-[var(--color-surface)] flex items-end justify-center gap-3 px-6 pt-6 min-h-[200px]">
+        <div className="absolute inset-0 z-10" onContextMenu={e => e.preventDefault()} />
         <div className="w-[68%]">
           <img
             src={project.macbook}
             alt={`${project.name} desktop`}
             className="w-full h-auto object-contain select-none"
             draggable={false}
+            onContextMenu={e => e.preventDefault()}
           />
         </div>
         <div className="w-[16%] mb-2">
@@ -88,6 +90,7 @@ function ProjectCard({ project, delay = 0 }: { project: typeof projects[0]; dela
             alt={`${project.name} mobile`}
             className="w-full h-auto object-contain select-none"
             draggable={false}
+            onContextMenu={e => e.preventDefault()}
           />
         </div>
       </div>
