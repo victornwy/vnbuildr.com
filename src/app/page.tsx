@@ -44,10 +44,26 @@ function AnimToggle({ on, set }: { on: boolean; set: (v: boolean) => void }) {
   )
 }
 
+const NAV_HEIGHT = 60
+
+function scrollToSection(href: string) {
+  const el = document.querySelector(href)
+  if (!el) return
+  const top = el.getBoundingClientRect().top + window.scrollY - NAV_HEIGHT - 8
+  window.scrollTo({ top, behavior: "smooth" })
+}
+
 function Nav() {
   const { on, set } = useContext(AnimContext)
   const [open, setOpen] = useState(false)
+
   const close = () => setOpen(false)
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    close()
+    setTimeout(() => scrollToSection(href), open ? 260 : 0)
+  }
 
   return (
     <nav className="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-[var(--color-border)]">
@@ -61,7 +77,7 @@ function Nav() {
         <ul className="hidden md:flex items-center gap-8 list-none">
           {NAV_LINKS.map(([href, label]) => (
             <li key={href}>
-              <a href={href} className="text-sm text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors">{label}</a>
+              <a href={href} onClick={e => handleNavClick(e, href)} className="text-sm text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors">{label}</a>
             </li>
           ))}
           <li>
@@ -112,7 +128,7 @@ function Nav() {
                 <a
                   key={href}
                   href={href}
-                  onClick={close}
+                  onClick={e => handleNavClick(e, href)}
                   className="text-[15px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] py-3 border-b border-[var(--color-border)] transition-colors"
                 >
                   {label}

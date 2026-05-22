@@ -216,7 +216,7 @@ export default function PortfolioPage() {
                       className="flex items-end justify-center gap-6 md:gap-10 py-4 px-4"
                       style={{ willChange: "transform, opacity" }}
                     >
-                      <div className="w-[80%] sm:w-[55%] max-w-[460px]">
+                      <div className="w-[58%] sm:w-[55%] max-w-[460px]">
                         <img
                           src={projects[current].macbook}
                           alt={`${projects[current].name} desktop`}
@@ -224,7 +224,7 @@ export default function PortfolioPage() {
                           draggable={false}
                         />
                       </div>
-                      <div className="hidden sm:block w-[13%] max-w-[110px] mb-4">
+                      <div className="w-[20%] sm:w-[13%] max-w-[110px] mb-4">
                         <img
                           src={projects[current].iphone}
                           alt={`${projects[current].name} mobile`}
