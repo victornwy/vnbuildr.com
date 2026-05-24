@@ -9,14 +9,14 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "vnbuildr — Landing Pages, Ready in Days",
+  title: "vnbuildr — Custom Landing Page Design & Web Development | Malaysia",
   description:
-    "Done-for-you landing pages built fast. No delays, no bloated agencies. Just clean, converting pages delivered in days.",
+    "High-converting, lightning-fast landing pages engineered for startups, SMEs and scaling brands. Hand-coded in Malaysia. Delivered in 7 days.",
   metadataBase: new URL("https://vnbuildr.com"),
   openGraph: {
-    title: "vnbuildr — Landing Pages, Ready in Days",
+    title: "vnbuildr — Custom Landing Page Design & Web Development | Malaysia",
     description:
-      "Done-for-you landing pages built fast. No delays, no bloated agencies. Just clean, converting pages delivered in days.",
+      "High-converting, lightning-fast landing pages engineered for startups, SMEs and scaling brands. Hand-coded in Malaysia. Delivered in 7 days.",
     url: "https://vnbuildr.com",
     siteName: "vnbuildr",
     images: [
@@ -24,19 +24,51 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "vnbuildr — Landing Pages, Ready in Days",
+        alt: "vnbuildr — Custom Landing Page Design & Web Development",
       },
     ],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "vnbuildr — Landing Pages, Ready in Days",
+    title: "vnbuildr — Custom Landing Page Design & Web Development | Malaysia",
     description:
-      "Done-for-you landing pages built fast. No delays, no bloated agencies. Just clean, converting pages delivered in days.",
+      "High-converting, lightning-fast landing pages engineered for startups, SMEs and scaling brands. Hand-coded in Malaysia. Delivered in 7 days.",
     images: ["/og-image.png"],
   },
 };
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "vnbuildr",
+  "url": "https://vnbuildr.com",
+  "telephone": "+60199195314",
+  "description": "Custom landing page design and web development services for startups, SMEs and scaling brands in Malaysia.",
+  "areaServed": { "@type": "Country", "name": "Malaysia" },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Web Design Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Custom Landing Page Design",
+          "description": "High-converting, hand-coded landing pages built from scratch for startups and SMEs."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Web Development",
+          "description": "Fast, mobile-first web development delivered in 7 days."
+        }
+      }
+    ]
+  }
+}
 
 export default function RootLayout({
   children,
@@ -45,7 +77,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

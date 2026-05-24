@@ -2,14 +2,13 @@
 
 import { useState, createContext, useContext } from "react";
 import Link from "next/link";
-import { motion, LayoutGroup, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import Floating, { FloatingElement } from "@/components/ui/parallax-floating";
 import {
   Code2, PenTool, Layers, Type, Palette,
   MousePointer2, LayoutTemplate, Zap, Smartphone, Globe,
   FileText, Target, RefreshCw,
 } from "lucide-react";
-import { TextRotate } from "@/components/ui/text-rotate";
 
 // ─── Animation toggle context ─────────────────────────────────────────────────
 const AnimContext = createContext<{ on: boolean; set: (v: boolean) => void }>({
@@ -207,7 +206,17 @@ function FadeUp({ children, delay = 0, className }: {
 }
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
-function Hero() {
+interface HeroProps {
+  turnaroundTime?: string
+  headline?: React.ReactNode
+  subheadline?: string
+}
+
+function Hero({
+  turnaroundTime = "7 days",
+  headline,
+  subheadline = "High-converting, lightning-fast landing pages engineered for startups, small medium enterprise (SME) and scaling brands.",
+}: HeroProps) {
   const { on } = useContext(AnimContext)
   return (
     <section className="relative w-full min-h-[calc(100vh-60px)] overflow-hidden flex flex-col items-center justify-center">
@@ -252,35 +261,33 @@ function Hero() {
 
       {/* Centre content */}
       <div className="relative z-10 flex flex-col items-center text-center px-6 w-full max-w-[680px] pointer-events-auto">
+        <motion.div
+          className="mb-5"
+          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
+        >
+          <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] border border-[var(--color-border)] bg-white px-3 py-1.5 rounded-full">
+            <span className="text-[var(--color-blue)]">⚡</span> Delivered in {turnaroundTime}
+          </span>
+        </motion.div>
+
         <motion.h1
           className="font-serif text-[clamp(38px,6vw,72px)] font-normal leading-[1.08] tracking-tight mb-6"
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
         >
-          <span>Your landing page,</span>
-          <br />
-          <LayoutGroup>
-            <motion.span layout className="inline-flex items-baseline gap-2 whitespace-pre">
-              <motion.span layout transition={{ type: "spring", damping: 30, stiffness: 400 }}>
-                ready in{" "}
-              </motion.span>
-              <TextRotate
-                texts={["days.", "a week.", "no time."]}
-                mainClassName="overflow-hidden text-[var(--color-blue)] py-0 pb-1"
-                staggerDuration={0.04}
-                staggerFrom="last"
-                rotationInterval={2800}
-                transition={{ type: "spring", damping: 30, stiffness: 400 }}
-              />
-            </motion.span>
-          </LayoutGroup>
+          {headline ?? (
+            <>
+              Custom Landing Page Design &{" "}
+              <br className="hidden sm:block" />
+              <span className="text-[var(--color-blue)]">Web Development</span> Services
+            </>
+          )}
         </motion.h1>
 
         <motion.p
-          className="text-[clamp(15px,1.8vw,18px)] text-[var(--color-ink-muted)] max-w-[460px] mb-10 leading-[1.65]"
+          className="text-[clamp(15px,1.8vw,18px)] text-[var(--color-ink-muted)] max-w-[520px] mb-10 leading-[1.65]"
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55 }}
         >
-          Done-for-you landing pages designed to convert. No bloated agencies,
-          no endless revisions. Just a page that works — fast.
+          {subheadline}
         </motion.p>
 
         <motion.div
