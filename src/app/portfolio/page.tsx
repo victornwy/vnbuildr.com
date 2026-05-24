@@ -137,7 +137,7 @@ export default function PortfolioPage() {
             <ChevronLeft /> Back to home
           </Link>
           <a
-            href="https://wa.me/601112173995?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page"
+            href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page"
             target="_blank"
             rel="noopener noreferrer"
             className="whatsapp-glow text-sm font-medium bg-[#25D366] text-white px-[18px] py-[9px] rounded-full hover:opacity-85 transition-opacity"
@@ -196,7 +196,7 @@ export default function PortfolioPage() {
               Let&apos;s build your page next.
             </h2>
             <a
-              href="https://wa.me/601112173995?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page"
+              href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page"
               target="_blank"
               rel="noopener noreferrer"
               className="whatsapp-glow inline-flex items-center gap-2 bg-[#25D366] text-white text-[15px] font-medium px-8 py-3.5 rounded-full hover:opacity-85 transition-opacity"
@@ -216,7 +216,7 @@ export default function PortfolioPage() {
           <p className="text-[13px] text-white/30 text-center">© 2026 vnbuildr. All rights reserved.</p>
           <div className="flex gap-6 justify-center md:justify-end">
             <Link href="/" className="text-[13px] text-white/35 hover:text-white/75 transition-colors">Home</Link>
-            <a href="https://wa.me/601112173995" target="_blank" rel="noopener noreferrer" className="text-[13px] text-white/35 hover:text-white/75 transition-colors">WhatsApp</a>
+            <a href="https://wa.me/60199195314" target="_blank" rel="noopener noreferrer" className="text-[13px] text-white/35 hover:text-white/75 transition-colors">WhatsApp</a>
           </div>
         </div>
       </footer>

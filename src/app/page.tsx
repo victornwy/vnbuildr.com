@@ -89,14 +89,14 @@ function Nav() {
         <div className="hidden md:flex items-center gap-4">
           <AnimToggle on={on} set={set} />
           <div className="w-px h-5 bg-[var(--color-border)]" />
-          <a href="https://wa.me/601112173995?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page" target="_blank" rel="noopener noreferrer" className="whatsapp-glow text-sm font-medium bg-[#25D366] text-white px-5 py-2.5 rounded-full hover:opacity-85 transition-opacity">
+          <a href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page" target="_blank" rel="noopener noreferrer" className="whatsapp-glow text-sm font-medium bg-[#25D366] text-white px-5 py-2.5 rounded-full hover:opacity-85 transition-opacity">
             Get in touch
           </a>
         </div>
 
         {/* Mobile right: CTA + burger */}
         <div className="flex md:hidden items-center gap-3">
-          <a href="https://wa.me/601112173995?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page" target="_blank" rel="noopener noreferrer" className="whatsapp-glow text-sm font-medium bg-[#25D366] text-white px-4 py-2 rounded-full hover:opacity-85 transition-opacity">
+          <a href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page" target="_blank" rel="noopener noreferrer" className="whatsapp-glow text-sm font-medium bg-[#25D366] text-white px-4 py-2 rounded-full hover:opacity-85 transition-opacity">
             Get in touch
           </a>
           <button
@@ -288,7 +288,7 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.65 }}
         >
           <a
-            href="https://wa.me/601112173995?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page"
+            href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page"
             target="_blank"
             rel="noopener noreferrer"
             className="whatsapp-glow inline-flex items-center gap-2 bg-[#25D366] text-white text-[15px] font-medium px-6 py-3 rounded-full hover:opacity-85 hover:-translate-y-px transition-all"
@@ -783,7 +783,7 @@ function ContactForm() {
       data.deadline ? `Launch date: ${data.deadline}` : null,
       data.notes    ? `Notes: ${data.notes}`          : null,
     ].filter(Boolean).join("\n")
-    window.open(`https://wa.me/601112173995?text=${encodeURIComponent(msg)}`, "_blank")
+    window.open(`https://wa.me/60199195314?text=${encodeURIComponent(msg)}`, "_blank")
   }
 
   const variants = {
@@ -879,7 +879,7 @@ function Footer() {
         <ul className="flex gap-6 list-none justify-center md:justify-end">
           {(
             [
-              ["https://wa.me/601112173995", "WhatsApp"],
+              ["https://wa.me/60199195314", "WhatsApp"],
               ["mailto:hello@vnbuildr.com", "Email"],
               ["#how", "How it works"],
             ] as [string, string][]
