@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const inter = Inter({
@@ -43,12 +44,18 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
+  "@type": ["ProfessionalService", "LocalBusiness"],
   "name": "vnbuildr",
   "url": "https://vnbuildr.com",
   "telephone": "+60199195314",
+  "email": "hello@vnbuildr.com",
   "description": "Custom landing page design and web development services for startups, SMEs and scaling brands in Malaysia.",
-  "areaServed": { "@type": "Country", "name": "Malaysia" },
+  "priceRange": "$$",
+  "currenciesAccepted": "MYR, USD",
+  "areaServed": [
+    { "@type": "Country", "name": "Malaysia" },
+    { "@type": "AdministrativeArea", "name": "Southeast Asia" }
+  ],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Web Design Services",
@@ -86,6 +93,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {children}
+        <Analytics />
       </body>
     </html>
   );

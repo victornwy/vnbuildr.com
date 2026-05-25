@@ -506,6 +506,68 @@ function Features() {
   );
 }
 
+// ─── Testimonials ─────────────────────────────────────────────────────────────
+// Replace these with real client quotes before going live
+const testimonials = [
+  {
+    quote: "Victor delivered our landing page in 4 days. Clean code, great design, and he even wrote all the copy. We've already seen a noticeable jump in leads since launch.",
+    name: "Amir Hassan",
+    role: "Founder, Nuvio Digital",
+    initials: "AH",
+  },
+  {
+    quote: "We needed a premium-looking page fast for a product launch. vnbuildr nailed the brand feel on the first draft. Zero back-and-forth, zero bloat.",
+    name: "Sarah Lim",
+    role: "Marketing Lead, Brix Studio",
+    initials: "SL",
+  },
+  {
+    quote: "After paying agency rates for months and getting mediocre results, vnbuildr was a breath of fresh air. Fast, affordable, and the code is actually clean.",
+    name: "David Tan",
+    role: "CEO, Anchor Group",
+    initials: "DT",
+  },
+]
+
+function Testimonials() {
+  return (
+    <section className="py-16 md:py-24 px-6 bg-white">
+      <div className="max-w-[1100px] mx-auto">
+        <FadeUp className="mb-14">
+          <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
+            Client results
+          </p>
+          <h2 className="font-serif text-[clamp(30px,4vw,46px)] font-normal tracking-tight leading-[1.1]">
+            What clients say
+          </h2>
+        </FadeUp>
+
+        <FadeUp delay={0.1}>
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
+            {testimonials.map(({ quote, name, role, initials }) => (
+              <div key={name} className="neo-card bg-white p-6 md:p-8 flex flex-col gap-5">
+                <svg width="28" height="20" viewBox="0 0 28 20" fill="none" aria-hidden="true">
+                  <path d="M0 20V12.4C0 9.06667 0.8 6.2 2.4 3.8C4.06667 1.4 6.46667 0.2 9.6 0.2L10.6 2C8.6 2.53333 7 3.66667 5.8 5.4C4.66667 7.06667 4.1 8.93333 4.1 11H9.6V20H0ZM18 20V12.4C18 9.06667 18.8 6.2 20.4 3.8C22.0667 1.4 24.4667 0.2 27.6 0.2L28 2C26 2.53333 24.4 3.66667 23.2 5.4C22.0667 7.06667 21.5 8.93333 21.5 11H27V20H18Z" fill="var(--color-blue)" opacity="0.25"/>
+                </svg>
+                <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.8] flex-1">{quote}</p>
+                <div className="flex items-center gap-3 pt-4 border-t border-[var(--color-border)]">
+                  <div className="w-9 h-9 rounded-full bg-[#eef3ff] border-2 border-[var(--color-blue)] flex items-center justify-center text-[11px] font-bold text-[var(--color-blue)] shrink-0">
+                    {initials}
+                  </div>
+                  <div>
+                    <p className="text-[13px] font-semibold text-[var(--color-ink)] leading-tight">{name}</p>
+                    <p className="text-[12px] text-[var(--color-ink-muted)]">{role}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </FadeUp>
+      </div>
+    </section>
+  )
+}
+
 // ─── Dev Tracks ───────────────────────────────────────────────────────────────
 function DevTracks() {
   const tracks = [
@@ -1146,6 +1208,7 @@ export default function Home() {
         <Hero />
         <HowItWorks />
         <Features />
+        <Testimonials />
         <DevTracks />
         <FAQ />
         <CtaSection />

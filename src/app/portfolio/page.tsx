@@ -78,7 +78,7 @@ function ProjectCard({ project, delay = 0 }: { project: typeof projects[0]; dela
         <div className="w-[68%]">
           <img
             src={project.macbook}
-            alt={`${project.name} desktop`}
+            alt={`${project.name} ${project.category.toLowerCase()} landing page design — vnbuildr web development portfolio`}
             className="w-full h-auto object-contain select-none"
             draggable={false}
             onContextMenu={e => e.preventDefault()}
@@ -87,7 +87,7 @@ function ProjectCard({ project, delay = 0 }: { project: typeof projects[0]; dela
         <div className="w-[16%] mb-2">
           <img
             src={project.iphone}
-            alt={`${project.name} mobile`}
+            alt={`${project.name} mobile view — hand-coded by vnbuildr`}
             className="w-full h-auto object-contain select-none"
             draggable={false}
             onContextMenu={e => e.preventDefault()}
