@@ -997,7 +997,7 @@ function ArrowRight() {
 const faqs: { q: string; a: React.ReactNode }[] = [
   {
     q: "How can you build and deploy a custom website so quickly?",
-    a: "Traditional web agencies spend weeks manually drawing static layouts in Figma before rewriting them from scratch. I bypass this slow bottleneck. By combining advanced AI-assisted software engineering with the world's leading UI design systems, I write clean, production-ready code from day one. This allows me to deliver beautiful, functional websites in days rather than months.",
+    a: "Traditional web agencies spend weeks manually drawing static layouts in Figma before rewriting them from scratch. I work differently — by pairing deep frontend engineering expertise with the world's leading UI design systems, I write clean, production-ready code from day one. This allows me to deliver beautiful, functional websites in days rather than months.",
   },
   {
     q: "How long does it take to complete a website?",
@@ -1036,7 +1036,7 @@ const faqs: { q: string; a: React.ReactNode }[] = [
   },
   {
     q: "Can I remove any design or attribution branding?",
-    a: "No.",
+    a: "No. A small 'Built by vnbuildr' credit is included in the footer of every project. This is a standard part of the agreement and helps support the work. It is subtle, unobtrusive, and does not interfere with your brand — but it is non-negotiable.",
   },
   {
     q: "Can I download the source code or use it to DIY my website later?",
@@ -1055,8 +1055,8 @@ const faqs: { q: string; a: React.ReactNode }[] = [
     a: "No. Every page is hand-crafted using clean, lightweight code frameworks. This ensures your site loads instantly on mobile devices, stays entirely customizable, and never suffers from heavy, broken plugin updates.",
   },
   {
-    q: "Do you handle marketing, copywriting, or SEO optimization?",
-    a: "No. I focus entirely on elite frontend engineering, visual design implementation, and web performance. If your business requires strict search engine marketing or copywriting strategy, please have those finalized before handing the materials over to me for development.",
+    q: "Do you handle marketing or SEO campaigns?",
+    a: "Basic page copywriting is included — I write the headlines, section copy, and CTAs for your landing page as part of every project. What I don't offer is broader marketing strategy, paid ad management, or ongoing SEO campaigns. If you need those, have them planned out before kickoff and I'll make sure the page is built to support them.",
   },
 ];
 
@@ -1123,7 +1123,7 @@ const faqSchema = {
     {
       "@type": "Question",
       "name": "How can you build and deploy a custom website so quickly?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Traditional web agencies spend weeks manually drawing static layouts in Figma before rewriting them from scratch. I bypass this slow bottleneck. By combining advanced AI-assisted software engineering with the world's leading UI design systems, I write clean, production-ready code from day one. This allows me to deliver beautiful, functional websites in days rather than months." },
+      "acceptedAnswer": { "@type": "Answer", "text": "Traditional web agencies spend weeks manually drawing static layouts in Figma before rewriting them from scratch. I work differently — by pairing deep frontend engineering expertise with the world's leading UI design systems, I write clean, production-ready code from day one. This allows me to deliver beautiful, functional websites in days rather than months." },
     },
     {
       "@type": "Question",
@@ -1162,6 +1162,11 @@ const faqSchema = {
     },
     {
       "@type": "Question",
+      "name": "Can I remove any design or attribution branding?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. A small 'Built by vnbuildr' credit is included in the footer of every project. This is a standard part of the agreement and helps support the work. It is subtle, unobtrusive, and does not interfere with your brand — but it is non-negotiable." },
+    },
+    {
+      "@type": "Question",
       "name": "Can I download the source code or use it to DIY my website later?",
       "acceptedAnswer": { "@type": "Answer", "text": "Yes. You receive the full source code upon project completion and final payment. You're free to host it anywhere, modify it, or hand it off to another developer — no lock-in." },
     },
@@ -1182,8 +1187,8 @@ const faqSchema = {
     },
     {
       "@type": "Question",
-      "name": "Do you handle marketing, copywriting, or SEO optimization?",
-      "acceptedAnswer": { "@type": "Answer", "text": "No. I focus entirely on elite frontend engineering, visual design implementation, and web performance. If your business requires strict search engine marketing or copywriting strategy, please have those finalized before handing the materials over to me for development." },
+      "name": "Do you handle marketing or SEO campaigns?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Basic page copywriting is included — I write the headlines, section copy, and CTAs for your landing page as part of every project. What I don't offer is broader marketing strategy, paid ad management, or ongoing SEO campaigns. If you need those, have them planned out before kickoff and I'll make sure the page is built to support them." },
     },
   ],
 }
