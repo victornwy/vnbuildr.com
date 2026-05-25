@@ -336,7 +336,7 @@ function Hero({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 8 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="mt-5 flex items-center gap-2 px-4 py-2 bg-[#eef3ff] border-2 border-[var(--color-blue)] shadow-[3px_3px_0_var(--color-blue)] rounded text-[12px] font-semibold text-[var(--color-blue)]"
+              className="mt-5 flex flex-wrap items-center gap-2 px-4 py-2 bg-[#eef3ff] border-2 border-[var(--color-blue)] shadow-[3px_3px_0_var(--color-blue)] rounded text-[12px] font-semibold text-[var(--color-blue)]"
             >
               <motion.span
                 animate={{ scale: [1, 1.2, 1], opacity: [1, 0.6, 1] }}
@@ -345,7 +345,7 @@ function Hero({
               >
                 <Zap size={12} className="fill-current shrink-0" />
               </motion.span>
-              React mode — fluid animations, premium motion components
+              <span>React mode — fluid animations, premium motion components</span>
             </motion.div>
           ) : (
             <motion.div
@@ -354,10 +354,10 @@ function Hero({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 8 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="mt-5 flex items-center gap-2 px-4 py-2 bg-[var(--color-surface)] border-2 border-[var(--color-ink)] shadow-[3px_3px_0_var(--color-ink)] rounded text-[12px] font-semibold text-[var(--color-ink-muted)]"
+              className="mt-5 flex flex-wrap items-center gap-2 px-4 py-2 bg-[var(--color-surface)] border-2 border-[var(--color-ink)] shadow-[3px_3px_0_var(--color-ink)] rounded text-[12px] font-semibold text-[var(--color-ink-muted)]"
             >
               <span className="w-2 h-2 rounded-full bg-[var(--color-ink-muted)] shrink-0" />
-              Static HTML mode — no animations, instant load, zero dependencies
+              <span>Static HTML mode — no animations, instant load, zero dependencies</span>
             </motion.div>
           )}
         </AnimatePresence>
@@ -948,7 +948,7 @@ function Footer() {
           <span className="text-[var(--color-blue)] font-bold">vn</span><em>buildr</em>
         </Link>
         <p className="text-[13px] text-white/30 text-center">© 2026 vnbuildr. All rights reserved.</p>
-        <ul className="flex gap-6 list-none justify-center md:justify-end">
+        <ul className="flex flex-wrap gap-x-6 gap-y-2 list-none justify-center md:justify-end">
           {(
             [
               ["https://wa.me/60199195314", "WhatsApp"],
