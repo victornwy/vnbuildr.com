@@ -1000,11 +1000,11 @@ function About() {
       <div className="max-w-[1100px] mx-auto">
         <FadeUp>
           <div className="neo-card bg-white overflow-hidden">
-            <div className="grid md:grid-cols-[260px_1fr]">
+            <div className="grid md:grid-cols-[300px_1fr]">
 
               {/* Left: avatar panel */}
-              <div className="bg-[var(--color-surface)] p-8 flex flex-col items-center justify-center gap-4 border-b md:border-b-0 md:border-r border-[var(--color-border)]">
-                <div className="w-28 h-28 rounded-full bg-white border-2 border-[var(--color-ink)] shadow-[3px_3px_0_var(--color-ink)] overflow-hidden flex items-center justify-center">
+              <div className="bg-[var(--color-surface)] p-10 flex flex-col items-center justify-center gap-5 border-b md:border-b-0 md:border-r border-[var(--color-border)]">
+                <div className="w-44 h-44 rounded-full bg-white border-2 border-[var(--color-ink)] shadow-[4px_4px_0_var(--color-ink)] overflow-hidden flex items-center justify-center">
                   <img
                     src="/avatar.png"
                     alt="V — founder of vnbuildr"
@@ -1013,8 +1013,8 @@ function About() {
                   />
                 </div>
                 <div className="text-center">
-                  <p className="font-serif text-[20px] font-normal tracking-tight">V</p>
-                  <p className="text-[12px] text-[var(--color-ink-muted)] mt-0.5">Founder, vnbuildr</p>
+                  <p className="font-serif text-[22px] font-normal tracking-tight">V</p>
+                  <p className="text-[13px] text-[var(--color-ink-muted)] mt-1">Founder, vnbuildr</p>
                 </div>
                 <div className="flex items-center gap-1.5 text-[11px] font-medium text-[var(--color-ink-muted)] bg-white border border-[var(--color-border)] px-3 py-1.5 rounded-full">
                   <svg width="10" height="12" viewBox="0 0 10 12" fill="none" aria-hidden="true">
@@ -1283,8 +1283,8 @@ export default function Home() {
         <Features />
         <Testimonials />
         <DevTracks />
-        <About />
         <FAQ />
+        <About />
         <CtaSection />
       </main>
       <Footer />
