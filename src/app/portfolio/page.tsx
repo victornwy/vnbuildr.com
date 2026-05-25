@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { motion } from "motion/react"
 
 // ─── Project data ─────────────────────────────────────────────────────────────
@@ -62,7 +63,7 @@ function ChevronLeft() {
 }
 
 // ─── Card ─────────────────────────────────────────────────────────────────────
-function ProjectCard({ project, delay = 0 }: { project: typeof projects[0]; delay?: number }) {
+function ProjectCard({ project, delay = 0, priority = false }: { project: typeof projects[0]; delay?: number; priority?: boolean }) {
   return (
     <motion.div
       className="neo-card bg-white flex flex-col overflow-hidden"
@@ -76,21 +77,29 @@ function ProjectCard({ project, delay = 0 }: { project: typeof projects[0]; dela
       <div className="relative bg-[var(--color-surface)] flex items-end justify-center gap-3 px-6 pt-6 min-h-[200px]">
         <div className="absolute inset-0 z-10" onContextMenu={e => e.preventDefault()} />
         <div className="w-[68%]">
-          <img
+          <Image
             src={project.macbook}
             alt={`${project.name} ${project.category.toLowerCase()} landing page design — vnbuildr web development portfolio`}
+            width={1748}
+            height={1068}
             className="w-full h-auto object-contain select-none"
             draggable={false}
             onContextMenu={e => e.preventDefault()}
+            priority={priority}
+            sizes="(max-width: 640px) 68vw, (max-width: 1024px) 34vw, 22vw"
           />
         </div>
         <div className="w-[16%] mb-2">
-          <img
+          <Image
             src={project.iphone}
             alt={`${project.name} mobile view — hand-coded by vnbuildr`}
+            width={539}
+            height={1114}
             className="w-full h-auto object-contain select-none"
             draggable={false}
             onContextMenu={e => e.preventDefault()}
+            priority={priority}
+            sizes="(max-width: 640px) 16vw, (max-width: 1024px) 8vw, 5vw"
           />
         </div>
       </div>
@@ -175,7 +184,7 @@ export default function PortfolioPage() {
           <div className="max-w-[1100px] mx-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {projects.map((project, i) => (
-                <ProjectCard key={project.id} project={project} delay={i * 0.08} />
+                <ProjectCard key={project.id} project={project} delay={i * 0.08} priority={i < 2} />
               ))}
             </div>
           </div>
