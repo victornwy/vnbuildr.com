@@ -511,21 +511,18 @@ function Features() {
 const testimonials = [
   {
     quote: "As a freelance accounting firm, we needed a page that looks professional and gets clients to reach out. vnbuildr delivered exactly that — clean layout, clear messaging, and it was live within the week.",
-    name: "Wei Kiat Lim",
     role: "Founder, AN Account",
-    initials: "WL",
+    initials: "AA",
   },
   {
     quote: "The animated hero was exactly what we had in mind — modern, fast, and it actually explains the product clearly. They structured the whole page around our core value prop without us having to spell it out.",
-    name: "Raj Krishnan",
     role: "Head of Product, TopSpace",
-    initials: "RK",
+    initials: "TS",
   },
   {
     quote: "Our firm needed a site that looked premium and communicated authority instantly. vnbuildr nailed it. Sharp copy, clean visual hierarchy, and it was live well within the week.",
-    name: "Farouk Azman",
     role: "Managing Partner, Meridian",
-    initials: "FA",
+    initials: "M",
   },
 ]
 
@@ -544,8 +541,8 @@ function Testimonials() {
 
         <FadeUp delay={0.1}>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
-            {testimonials.map(({ quote, name, role, initials }) => (
-              <div key={name} className="neo-card bg-white p-6 md:p-8 flex flex-col gap-5">
+            {testimonials.map(({ quote, role, initials }) => (
+              <div key={role} className="neo-card bg-white p-6 md:p-8 flex flex-col gap-5">
                 <svg width="28" height="20" viewBox="0 0 28 20" fill="none" aria-hidden="true">
                   <path d="M0 20V12.4C0 9.06667 0.8 6.2 2.4 3.8C4.06667 1.4 6.46667 0.2 9.6 0.2L10.6 2C8.6 2.53333 7 3.66667 5.8 5.4C4.66667 7.06667 4.1 8.93333 4.1 11H9.6V20H0ZM18 20V12.4C18 9.06667 18.8 6.2 20.4 3.8C22.0667 1.4 24.4667 0.2 27.6 0.2L28 2C26 2.53333 24.4 3.66667 23.2 5.4C22.0667 7.06667 21.5 8.93333 21.5 11H27V20H18Z" fill="var(--color-blue)" opacity="0.25"/>
                 </svg>
@@ -554,10 +551,7 @@ function Testimonials() {
                   <div className="w-9 h-9 rounded-full bg-[#eef3ff] border-2 border-[var(--color-blue)] flex items-center justify-center text-[11px] font-bold text-[var(--color-blue)] shrink-0">
                     {initials}
                   </div>
-                  <div>
-                    <p className="text-[13px] font-semibold text-[var(--color-ink)] leading-tight">{name}</p>
-                    <p className="text-[12px] text-[var(--color-ink-muted)]">{role}</p>
-                  </div>
+                  <p className="text-[13px] font-semibold text-[var(--color-ink)]">{role}</p>
                 </div>
               </div>
             ))}
