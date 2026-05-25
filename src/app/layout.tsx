@@ -23,14 +23,6 @@ export const metadata: Metadata = {
       "High-converting, lightning-fast landing pages engineered for startups, SMEs and scaling brands. Hand-coded in Malaysia. Delivered in 7 days.",
     url: "https://vnbuildr.com",
     siteName: "vnbuildr",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "vnbuildr — Custom Landing Page Design & Web Development",
-      },
-    ],
     type: "website",
   },
   twitter: {
@@ -38,7 +30,6 @@ export const metadata: Metadata = {
     title: "vnbuildr — Custom Landing Page Design & Web Development | Malaysia",
     description:
       "High-converting, lightning-fast landing pages engineered for startups, SMEs and scaling brands. Hand-coded in Malaysia. Delivered in 7 days.",
-    images: ["/og-image.png"],
   },
 };
 
