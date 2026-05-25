@@ -11,7 +11,6 @@ const projects = [
     name: "AN Account",
     category: "Consulting",
     description: "Professional landing page for a freelance accounting firm, built around credibility signals and client lead generation.",
-    tags: ["React", "Landing Page"],
     macbook: "/portfolio-mockups/an-accounts-macbook.png",
     iphone: "/portfolio-mockups/an-accounts-iphone.png",
   },
@@ -20,7 +19,6 @@ const projects = [
     name: "Everbest Link",
     category: "Engineering Services",
     description: "Product and services showcase for a precision wirecut CNC machining firm, built to generate B2B enquiries and communicate technical capability to industrial buyers.",
-    tags: ["Static HTML", "Engineering"],
     macbook: "/portfolio-mockups/everbest-macbook.png",
     iphone: "/portfolio-mockups/everbest-iphone.png",
   },
@@ -29,7 +27,6 @@ const projects = [
     name: "TopSpace Limited",
     category: "Industrial",
     description: "Commercial shelving solutions showcase for a boltless racking and gondola supplier, designed to drive trade enquiries and present product lines to retail and warehouse buyers.",
-    tags: ["React", "Industrial"],
     macbook: "/portfolio-mockups/top-space-macbook.png",
     iphone: "/portfolio-mockups/topspace-iphone.png",
   },
@@ -38,7 +35,6 @@ const projects = [
     name: "Meridian Securities Limited",
     category: "Consulting",
     description: "Trust-first landing page for a securities advisory firm, built around regulatory credibility signals, structured service copy, and direct client acquisition CTAs.",
-    tags: ["React", "Finance"],
     macbook: "/portfolio-mockups/meridian-macbook.png",
     iphone: "/portfolio-mockups/meridian-iphone.png",
   },
@@ -47,7 +43,6 @@ const projects = [
     name: "NovaDax Limited",
     category: "Finance",
     description: "Crypto exchange landing page designed for aggressive user acquisition with trust-building elements.",
-    tags: ["Static HTML", "Finance"],
     macbook: "/portfolio-mockups/novadax-macbook.png",
     iphone: "/portfolio-mockups/novadax-iphone.png",
   },
@@ -112,14 +107,7 @@ function ProjectCard({ project, delay = 0, priority = false }: { project: typeof
             {project.category}
           </span>
         </div>
-        <p className="text-[13px] text-[var(--color-ink-muted)] leading-[1.65] mb-3">{project.description}</p>
-        <div className="flex flex-wrap gap-1.5">
-          {project.tags.map(tag => (
-            <span key={tag} className="text-[11px] font-medium bg-[var(--color-surface)] border border-[var(--color-border)] px-2.5 py-0.5 rounded text-[var(--color-ink-muted)]">
-              {tag}
-            </span>
-          ))}
-        </div>
+        <p className="text-[13px] text-[var(--color-ink-muted)] leading-[1.65]">{project.description}</p>
       </div>
     </motion.div>
   )
