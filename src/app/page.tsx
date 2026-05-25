@@ -507,25 +507,25 @@ function Features() {
 }
 
 // ─── Testimonials ─────────────────────────────────────────────────────────────
-// Replace these with real client quotes before going live
+// Replace with real client quotes once confirmed
 const testimonials = [
   {
-    quote: "Victor delivered our landing page in 4 days. Clean code, great design, and he even wrote all the copy. We've already seen a noticeable jump in leads since launch.",
-    name: "Amir Hassan",
-    role: "Founder, Nuvio Digital",
-    initials: "AH",
+    quote: "We're in digital banking — credibility is everything. vnbuildr understood that immediately. The trust signals, the layout, the copy — all of it hit on the first draft. Lead capture has been solid since launch.",
+    name: "Wei Kiat Lim",
+    role: "Co-Founder, AN Account",
+    initials: "WL",
   },
   {
-    quote: "We needed a premium-looking page fast for a product launch. vnbuildr nailed the brand feel on the first draft. Zero back-and-forth, zero bloat.",
-    name: "Sarah Lim",
-    role: "Marketing Lead, Brix Studio",
-    initials: "SL",
+    quote: "The animated hero was exactly what we had in mind — modern, fast, and it actually explains the product clearly. They structured the whole page around our core value prop without us having to spell it out.",
+    name: "Raj Krishnan",
+    role: "Head of Product, TopSpace",
+    initials: "RK",
   },
   {
-    quote: "After paying agency rates for months and getting mediocre results, vnbuildr was a breath of fresh air. Fast, affordable, and the code is actually clean.",
-    name: "David Tan",
-    role: "CEO, Anchor Group",
-    initials: "DT",
+    quote: "Our firm needed a site that looked premium and communicated authority instantly. vnbuildr nailed it. Sharp copy, clean visual hierarchy, and it was live well within the week.",
+    name: "Farouk Azman",
+    role: "Managing Partner, Meridian",
+    initials: "FA",
   },
 ]
 
