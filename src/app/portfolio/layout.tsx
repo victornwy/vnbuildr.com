@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   description:
     "Selected works by vnbuildr. Hand-coded landing pages and websites built for modern brands.",
   metadataBase: new URL("https://vnbuildr.com"),
+  alternates: {
+    canonical: "https://vnbuildr.com/portfolio",
+  },
   openGraph: {
     title: "Portfolio — vnbuildr",
     description:

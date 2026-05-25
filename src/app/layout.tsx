@@ -13,6 +13,9 @@ export const metadata: Metadata = {
   description:
     "High-converting, lightning-fast landing pages engineered for startups, SMEs and scaling brands. Hand-coded in Malaysia. Delivered in 7 days.",
   metadataBase: new URL("https://vnbuildr.com"),
+  alternates: {
+    canonical: "https://vnbuildr.com",
+  },
   openGraph: {
     title: "vnbuildr — Custom Landing Page Design & Web Development | Malaysia",
     description:

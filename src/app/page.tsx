@@ -1059,11 +1059,88 @@ function FAQ() {
   );
 }
 
+// ─── FAQ schema ───────────────────────────────────────────────────────────────
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How can you build and deploy a custom website so quickly?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Traditional web agencies spend weeks manually drawing static layouts in Figma before rewriting them from scratch. I bypass this slow bottleneck. By combining advanced AI-assisted software engineering with the world's leading UI design systems, I write clean, production-ready code from day one. This allows me to deliver beautiful, functional websites in days rather than months." },
+    },
+    {
+      "@type": "Question",
+      "name": "How long does it take to complete a website?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Pure HTML & CSS Track: 48 hours. React High-Motion Track: 3 to 5 days. Advanced Web Ecosystems: 5 to 7 days. These timelines require your final copy and brand assets to be ready at kickoff." },
+    },
+    {
+      "@type": "Question",
+      "name": "What materials do I need to provide before we start?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Copywriting is included — I write the page copy for you. What helps most is having your high-resolution logo, primary brand colors, and any product photos or graphics ready to share. The more brand context you can give me upfront, the faster we hit the launch timeline." },
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between the React High-Motion and Static HTML/CSS tracks?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The React Track is built for modern brands that want to make an unforgettable visual impression — fluid scroll animations, interactive layout grids, and premium motion components. The Static Track is built for raw performance, absolute simplicity, and local services. It uses zero heavy scripts, meaning your page will load instantly even on weak mobile connections, with absolutely zero monthly software maintenance." },
+    },
+    {
+      "@type": "Question",
+      "name": "Can I provide my own design?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes! If you already have a complete mockup or a Figma blueprint, I can act strictly as your developer. I will translate your static design files into pixel-perfect, clean React/Tailwind or static HTML/CSS code in record time." },
+    },
+    {
+      "@type": "Question",
+      "name": "Will my website be mobile-friendly?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, 100%. Every block I build is engineered to be responsive from the ground up. Your website will adapt fluidly and look premium on smartphones, tablets, and large desktop screens alike." },
+    },
+    {
+      "@type": "Question",
+      "name": "What is your payment term?",
+      "acceptedAnswer": { "@type": "Answer", "text": "I operate on a straightforward 50/50 payment schedule. A 50% non-refundable deposit is required upfront to secure your development window. The remaining 50% balance is due upon project completion, right after you approve the staging link and before final code handover or domain transfer." },
+    },
+    {
+      "@type": "Question",
+      "name": "Can I request a refund?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The initial 50% deposit is non-refundable as it locks in your slot on my calendar and covers the intensive development labor during kickoff. Once coding has commenced, resources are fully committed to your project." },
+    },
+    {
+      "@type": "Question",
+      "name": "Can I download the source code or use it to DIY my website later?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. You receive the full source code upon project completion and final payment. You're free to host it anywhere, modify it, or hand it off to another developer — no lock-in." },
+    },
+    {
+      "@type": "Question",
+      "name": "If I cancel my hosting or contract, do I keep my domain and data?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. You have complete ownership. Because I write raw, native code instead of locking you into a proprietary website builder subscription, you own your source files. Your domain and repository can be hosted absolutely anywhere, anytime, completely independent of me." },
+    },
+    {
+      "@type": "Question",
+      "name": "Do you provide after-sales support?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Every project includes a standard 14-day post-launch support window to fix any unexpected bugs or display glitches. If you need ongoing maintenance, text edits, or periodic updates after that, I offer a predictable monthly support retainer based on your needs." },
+    },
+    {
+      "@type": "Question",
+      "name": "Do you use templates like WordPress, Wix, or Squarespace?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. Every page is hand-crafted using clean, lightweight code frameworks. This ensures your site loads instantly on mobile devices, stays entirely customizable, and never suffers from heavy, broken plugin updates." },
+    },
+    {
+      "@type": "Question",
+      "name": "Do you handle marketing, copywriting, or SEO optimization?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. I focus entirely on elite frontend engineering, visual design implementation, and web performance. If your business requires strict search engine marketing or copywriting strategy, please have those finalized before handing the materials over to me for development." },
+    },
+  ],
+}
+
 // ─── Page root ────────────────────────────────────────────────────────────────
 export default function Home() {
   const [animOn, setAnimOn] = useState(true)
   return (
     <AnimContext.Provider value={{ on: animOn, set: setAnimOn }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <Nav />
       <main>
         <Hero />
