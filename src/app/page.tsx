@@ -993,6 +993,80 @@ function ArrowRight() {
   );
 }
 
+// ─── About ────────────────────────────────────────────────────────────────────
+function About() {
+  return (
+    <section className="py-16 md:py-24 px-6 bg-white">
+      <div className="max-w-[1100px] mx-auto">
+        <FadeUp>
+          <div className="neo-card bg-white overflow-hidden">
+            <div className="grid md:grid-cols-[260px_1fr]">
+
+              {/* Left: avatar panel */}
+              <div className="bg-[var(--color-surface)] p-8 flex flex-col items-center justify-center gap-4 border-b md:border-b-0 md:border-r border-[var(--color-border)]">
+                <div className="w-28 h-28 rounded-full bg-white border-2 border-[var(--color-ink)] shadow-[3px_3px_0_var(--color-ink)] overflow-hidden flex items-center justify-center">
+                  <img
+                    src="/avatar.png"
+                    alt="V — founder of vnbuildr"
+                    className="w-full h-full object-cover"
+                    draggable={false}
+                  />
+                </div>
+                <div className="text-center">
+                  <p className="font-serif text-[20px] font-normal tracking-tight">V</p>
+                  <p className="text-[12px] text-[var(--color-ink-muted)] mt-0.5">Founder, vnbuildr</p>
+                </div>
+                <div className="flex items-center gap-1.5 text-[11px] font-medium text-[var(--color-ink-muted)] bg-white border border-[var(--color-border)] px-3 py-1.5 rounded-full">
+                  <svg width="10" height="12" viewBox="0 0 10 12" fill="none" aria-hidden="true">
+                    <path d="M5 0C3.07 0 1.5 1.57 1.5 3.5c0 2.625 3.5 7 3.5 7s3.5-4.375 3.5-7C8.5 1.57 6.93 0 5 0zm0 4.75a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z" fill="currentColor"/>
+                  </svg>
+                  Kuala Lumpur, Malaysia
+                </div>
+              </div>
+
+              {/* Right: copy */}
+              <div className="p-8 md:p-12 flex flex-col justify-center gap-6">
+                <div>
+                  <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-3">
+                    About
+                  </p>
+                  <h2 className="font-serif text-[clamp(24px,3vw,36px)] font-normal tracking-tight leading-[1.15] mb-5">
+                    The person behind the code
+                  </h2>
+                  <p className="text-[15px] text-[var(--color-ink-muted)] leading-[1.75] mb-3">
+                    I&apos;m V — a self-taught developer based in Kuala Lumpur. I started vnbuildr because I kept seeing the same frustration: businesses were either paying agency prices for slow, bloated work, or settling for DIY builders that looked cheap and converted poorly.
+                  </p>
+                  <p className="text-[15px] text-[var(--color-ink-muted)] leading-[1.75]">
+                    vnbuildr is the alternative. Clean, hand-coded landing pages built fast — at a fraction of the cost. Every project gets my direct attention from brief to launch. No junior handoffs, no account managers, no markup.
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    "Self-taught",
+                    "Based in KL",
+                    "Works globally",
+                    "Direct communication",
+                    "No agency markup",
+                  ].map(tag => (
+                    <span
+                      key={tag}
+                      className="text-[11px] font-medium bg-[var(--color-surface)] border border-[var(--color-border)] px-2.5 py-1 rounded text-[var(--color-ink-muted)]"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </FadeUp>
+      </div>
+    </section>
+  )
+}
+
 // ─── FAQ ──────────────────────────────────────────────────────────────────────
 const faqs: { q: string; a: React.ReactNode }[] = [
   {
@@ -1209,6 +1283,7 @@ export default function Home() {
         <Features />
         <Testimonials />
         <DevTracks />
+        <About />
         <FAQ />
         <CtaSection />
       </main>
