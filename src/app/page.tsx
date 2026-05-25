@@ -510,9 +510,9 @@ function Features() {
 // Replace with real client quotes once confirmed
 const testimonials = [
   {
-    quote: "We're in digital banking — credibility is everything. vnbuildr understood that immediately. The trust signals, the layout, the copy — all of it hit on the first draft. Lead capture has been solid since launch.",
+    quote: "As a freelance accounting firm, we needed a page that looks professional and gets clients to reach out. vnbuildr delivered exactly that — clean layout, clear messaging, and it was live within the week.",
     name: "Wei Kiat Lim",
-    role: "Co-Founder, AN Account",
+    role: "Founder, AN Account",
     initials: "WL",
   },
   {

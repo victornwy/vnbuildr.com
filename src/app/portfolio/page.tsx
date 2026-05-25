@@ -9,7 +9,7 @@ const projects = [
     id: 1,
     name: "AN Account",
     category: "Consulting",
-    description: "High-converting landing page for a digital banking platform, built around trust signals and lead generation.",
+    description: "Professional landing page for a freelance accounting firm, built around credibility signals and client lead generation.",
     tags: ["React", "Landing Page"],
     macbook: "/portfolio-mockups/an-accounts-macbook.png",
     iphone: "/portfolio-mockups/an-accounts-iphone.png",
