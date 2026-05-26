@@ -97,8 +97,9 @@ function Nav() {
 
         {/* Mobile right: CTA + burger */}
         <div className="flex md:hidden items-center gap-3">
-          <a href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page" target="_blank" rel="noopener noreferrer" className="whatsapp-glow text-sm font-medium bg-[#25D366] text-white px-4 py-2 rounded-full hover:opacity-85 transition-opacity">
-            Get in touch
+          <a href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page" target="_blank" rel="noopener noreferrer" className="whatsapp-glow text-sm mobile-landscape:text-xs font-medium bg-[#25D366] text-white px-4 mobile-landscape:px-3 py-2 mobile-landscape:py-1.5 rounded-full hover:opacity-85 transition-opacity">
+            <span className="mobile-landscape:hidden">Get in touch</span>
+            <span className="hidden mobile-landscape:inline">Chat</span>
           </a>
           <button
             onClick={() => setOpen(o => !o)}
@@ -124,21 +125,21 @@ function Nav() {
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
             className="md:hidden overflow-hidden bg-white border-b border-[var(--color-border)]"
           >
-            <div className="px-6 py-4 flex flex-col mobile-landscape:max-h-[calc(100vh-60px)] mobile-landscape:overflow-y-auto">
+            <div className="px-6 py-4 mobile-landscape:py-2 flex flex-col mobile-landscape:grid mobile-landscape:grid-cols-2 mobile-landscape:gap-x-4 mobile-landscape:max-h-[calc(100vh-60px)] mobile-landscape:overflow-y-auto">
               {NAV_LINKS.map(([href, label]) => (
                 <a
                   key={href}
                   href={href}
                   onClick={e => handleNavClick(e, href)}
-                  className="text-[15px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] py-3 border-b border-[var(--color-border)] transition-colors"
+                  className="text-[15px] mobile-landscape:text-[13px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] py-3 mobile-landscape:py-2 border-b border-[var(--color-border)] transition-colors"
                 >
                   {label}
                 </a>
               ))}
-              <Link href="/portfolio" onClick={close} className="text-[15px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] py-3 border-b border-[var(--color-border)] transition-colors">
+              <Link href="/portfolio" onClick={close} className="text-[15px] mobile-landscape:text-[13px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] py-3 mobile-landscape:py-2 border-b border-[var(--color-border)] transition-colors">
                 Portfolio
               </Link>
-              <div className="pt-4 flex items-center justify-between">
+              <div className="pt-4 mobile-landscape:pt-2 mobile-landscape:col-span-2 flex items-center justify-between">
                 <span className="text-[12px] font-semibold text-[var(--color-ink-muted)] uppercase tracking-wide">Animation</span>
                 <AnimToggle on={on} set={set} />
               </div>
