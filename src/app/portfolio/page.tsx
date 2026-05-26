@@ -11,64 +11,56 @@ const projects = [
     name: "AN Account",
     category: "Consulting",
     description: "Professional landing page for a freelance accounting firm, built around credibility signals and client lead generation.",
-    macbook: "/portfolio-mockups/macbook-an-accounts.png",
-    iphone: "/portfolio-mockups/iphone-an-accounts.png",
+    image: "/portfolio-mockups/an-accounts.png",
   },
   {
     id: 2,
     name: "Everbest Link",
-    category: "Engineering Services",
-    description: "Product and services showcase for a precision wirecut CNC machining firm, built to generate B2B enquiries and communicate technical capability to industrial buyers.",
-    macbook: "/portfolio-mockups/macbook-everbest.png",
-    iphone: "/portfolio-mockups/iphone-everbestlink.png",
+    category: "Engineering",
+    description: "Product and services showcase for a precision wirecut CNC machining firm, built to generate B2B enquiries.",
+    image: "/portfolio-mockups/everbestlink.png",
   },
   {
     id: 3,
     name: "TopSpace Limited",
     category: "Industrial",
-    description: "Commercial shelving solutions showcase for a boltless racking and gondola supplier, designed to drive trade enquiries and present product lines to retail and warehouse buyers.",
-    macbook: "/portfolio-mockups/macbook-top-space.png",
-    iphone: "/portfolio-mockups/iphone-topspace.png",
+    description: "Commercial shelving solutions showcase for a boltless racking and gondola supplier, designed to drive trade enquiries.",
+    image: "/portfolio-mockups/topspace.png",
   },
   {
     id: 4,
-    name: "Meridian Securities Limited",
-    category: "Consulting",
-    description: "Trust-first landing page for a securities advisory firm, built around regulatory credibility signals, structured service copy, and direct client acquisition CTAs.",
-    macbook: "/portfolio-mockups/macbook-meridian.png",
-    iphone: "/portfolio-mockups/iphone-meridian.png",
+    name: "Meridian Securities",
+    category: "Finance",
+    description: "Trust-first landing page for a securities advisory firm, built around regulatory credibility and direct client acquisition CTAs.",
+    image: "/portfolio-mockups/meridian.png",
   },
   {
     id: 5,
     name: "NovaDax Limited",
-    category: "Finance",
+    category: "Crypto",
     description: "Crypto exchange landing page designed for aggressive user acquisition with trust-building elements.",
-    macbook: "/portfolio-mockups/macbook-novadax.png",
-    iphone: "/portfolio-mockups/iphone-novadax.png",
+    image: "/portfolio-mockups/novadax.png",
   },
   {
     id: 6,
     name: "Ember & Oak Cafe",
     category: "F&B",
-    description: "Specialty coffee café site built to drive dine-in reservations and online orders, with a warm editorial aesthetic and clear ordering CTAs.",
-    macbook: "/portfolio-mockups/macbook-emberoak.png",
-    iphone: "/portfolio-mockups/iphone-emberoak.png",
+    description: "Specialty coffee café site built to drive dine-in reservations and online orders, with a warm editorial aesthetic.",
+    image: "/portfolio-mockups/emberoak.png",
   },
   {
     id: 7,
     name: "Lumora",
     category: "Digital Products",
-    description: "Digital creative marketplace for courses, presets, templates and wallpapers — designed for instant downloads and a growing creator-focused product catalogue.",
-    macbook: "/portfolio-mockups/macbook-lumora.png",
-    iphone: "/portfolio-mockups/iphone-lumora.png",
+    description: "Digital creative marketplace for courses, presets, templates and wallpapers — designed for instant downloads.",
+    image: "/portfolio-mockups/lumora.png",
   },
   {
     id: 8,
     name: "Ryan Lim",
     category: "Real Estate",
-    description: "Personal brand site for a KL & Selangor property agent, showcasing past projects, client results, and a direct contact form designed to convert buyers and investors into leads.",
-    macbook: "/portfolio-mockups/macbook-ryanlim.png",
-    iphone: "/portfolio-mockups/iphone-ryanlim.png",
+    description: "Personal brand site for a KL & Selangor property agent, showcasing past projects and converting buyers into leads.",
+    image: "/portfolio-mockups/ryanlim.png",
   },
 ]
 
@@ -85,53 +77,38 @@ function ChevronLeft() {
 function ProjectCard({ project, delay = 0, priority = false }: { project: typeof projects[0]; delay?: number; priority?: boolean }) {
   return (
     <motion.div
-      className="neo-card bg-white flex flex-col overflow-hidden"
+      className="neo-card bg-white flex flex-col overflow-hidden group"
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ y: -4, transition: { type: "spring", stiffness: 300, damping: 22 } }}
     >
-      {/* Mockups */}
-      <div className="relative bg-[var(--color-surface)] flex items-end justify-center gap-3 px-6 pt-6 min-h-[200px]">
+      {/* Image */}
+      <div className="relative overflow-hidden">
         <div className="absolute inset-0 z-10" onContextMenu={e => e.preventDefault()} />
-        <div className="w-[64%]">
-          <Image
-            src={project.macbook}
-            alt={`${project.name} ${project.category.toLowerCase()} landing page design — vnbuildr web development portfolio`}
-            width={1748}
-            height={1068}
-            className="w-full h-auto object-contain select-none"
-            draggable={false}
-            onContextMenu={e => e.preventDefault()}
-            priority={priority}
-            sizes="(max-width: 640px) 64vw, (max-width: 1024px) 32vw, 21vw"
-          />
-        </div>
-        <div className="w-[20%] mb-2">
-          <Image
-            src={project.iphone}
-            alt={`${project.name} mobile view — hand-coded by vnbuildr`}
-            width={539}
-            height={1114}
-            className="w-full h-auto object-contain select-none"
-            draggable={false}
-            onContextMenu={e => e.preventDefault()}
-            priority={priority}
-            sizes="(max-width: 640px) 20vw, (max-width: 1024px) 10vw, 7vw"
-          />
-        </div>
+        <Image
+          src={project.image}
+          alt={`${project.name} ${project.category} landing page — vnbuildr web development portfolio`}
+          width={1080}
+          height={1440}
+          className="w-full h-auto object-cover select-none transition-transform duration-500 group-hover:scale-[1.03]"
+          draggable={false}
+          onContextMenu={e => e.preventDefault()}
+          priority={priority}
+          sizes="(max-width: 768px) 45vw, (max-width: 1024px) 30vw, 275px"
+        />
       </div>
 
       {/* Info */}
-      <div className="p-5 border-t border-[var(--color-border)]">
-        <div className="flex items-start gap-2 mb-1.5">
-          <h3 className="font-serif text-[18px] font-normal tracking-tight leading-snug">{project.name}</h3>
-          <span className="shrink-0 mt-0.5 text-[10px] font-bold tracking-[0.08em] uppercase px-2 py-0.5 rounded border-2 border-[var(--color-ink)] shadow-[2px_2px_0_var(--color-ink)] text-[var(--color-ink)]">
+      <div className="p-4 border-t border-[var(--color-border)]">
+        <div className="flex items-start justify-between gap-2 mb-2">
+          <h3 className="font-serif text-[15px] font-normal tracking-tight leading-snug">{project.name}</h3>
+          <span className="shrink-0 text-[9px] font-bold tracking-[0.08em] uppercase px-1.5 py-0.5 rounded border border-[var(--color-ink)] text-[var(--color-ink)]">
             {project.category}
           </span>
         </div>
-        <p className="text-[13px] text-[var(--color-ink-muted)] leading-[1.65]">{project.description}</p>
+        <p className="text-[12px] text-[var(--color-ink-muted)] leading-[1.6] line-clamp-2">{project.description}</p>
       </div>
     </motion.div>
   )
@@ -143,7 +120,7 @@ export default function PortfolioPage() {
     <>
       {/* Nav */}
       <nav className="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-[var(--color-border)]">
-        <div className="max-w-[1100px] mx-auto px-6 h-[60px] flex items-center justify-between">
+        <div className="max-w-[1200px] mx-auto px-6 h-[60px] flex items-center justify-between">
           <Link
             href="/"
             onClick={e => { e.preventDefault(); window.location.href = "/" }}
@@ -193,10 +170,10 @@ export default function PortfolioPage() {
 
         {/* Grid */}
         <section className="py-12 md:py-16 px-6 bg-[var(--color-surface)]">
-          <div className="max-w-[1100px] mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="max-w-[1200px] mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
               {projects.map((project, i) => (
-                <ProjectCard key={project.id} project={project} delay={i * 0.08} priority={i < 2} />
+                <ProjectCard key={project.id} project={project} delay={i * 0.06} priority={i < 4} />
               ))}
             </div>
           </div>
@@ -230,7 +207,7 @@ export default function PortfolioPage() {
 
       {/* Footer */}
       <footer className="bg-[var(--color-ink)] border-t border-white/[0.08] py-8 px-6">
-        <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-3 items-center gap-3 md:gap-4 text-center md:text-left">
+        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-3 items-center gap-3 md:gap-4 text-center md:text-left">
           <Link href="/" className="font-serif text-[18px] text-white/90">
             <span className="text-[var(--color-blue)] font-bold">vn</span><em>buildr</em>
           </Link>
