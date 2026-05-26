@@ -101,7 +101,7 @@ export default function OGImage() {
               fontWeight: 700,
             }}
           >
-            5 projects
+            8 projects
           </div>
         </div>
       </div>
