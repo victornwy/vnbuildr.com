@@ -2,6 +2,7 @@
 
 import { useState, createContext, useContext } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, LayoutGroup, AnimatePresence } from "motion/react";
 import Floating, { FloatingElement } from "@/components/ui/parallax-floating";
 import { TextRotate } from "@/components/ui/text-rotate";
@@ -1007,9 +1008,11 @@ function About() {
               {/* Left: avatar panel */}
               <div className="bg-[var(--color-surface)] p-10 flex flex-col items-center justify-center gap-5 border-b md:border-b-0 md:border-r border-[var(--color-border)]">
                 <div className="w-44 h-44 rounded-full bg-white border-2 border-[var(--color-ink)] shadow-[4px_4px_0_var(--color-ink)] overflow-hidden flex items-center justify-center">
-                  <img
+                  <Image
                     src="/avatar.png"
                     alt="V — founder of vnbuildr"
+                    width={576}
+                    height={576}
                     className="w-full h-full object-cover"
                     draggable={false}
                   />

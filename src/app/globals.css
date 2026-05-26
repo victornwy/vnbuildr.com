@@ -19,7 +19,7 @@
   --color-background: var(--color-bg);
   --color-foreground: var(--color-ink);
   --font-sans: var(--font-inter);
-  --font-display: var(--font-instrument-serif);
+  --font-serif: var(--font-instrument-serif);
 }
 
 html {
