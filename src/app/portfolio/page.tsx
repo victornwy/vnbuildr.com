@@ -95,7 +95,7 @@ function ProjectCard({ project, delay = 0, priority = false }: { project: typeof
       {/* Mockups */}
       <div className="relative bg-[var(--color-surface)] flex items-end justify-center gap-3 px-6 pt-6 min-h-[200px]">
         <div className="absolute inset-0 z-10" onContextMenu={e => e.preventDefault()} />
-        <div className="w-[68%]">
+        <div className="w-[64%]">
           <Image
             src={project.macbook}
             alt={`${project.name} ${project.category.toLowerCase()} landing page design — vnbuildr web development portfolio`}
@@ -105,10 +105,10 @@ function ProjectCard({ project, delay = 0, priority = false }: { project: typeof
             draggable={false}
             onContextMenu={e => e.preventDefault()}
             priority={priority}
-            sizes="(max-width: 640px) 68vw, (max-width: 1024px) 34vw, 22vw"
+            sizes="(max-width: 640px) 64vw, (max-width: 1024px) 32vw, 21vw"
           />
         </div>
-        <div className="w-[16%] mb-2">
+        <div className="w-[20%] mb-2">
           <Image
             src={project.iphone}
             alt={`${project.name} mobile view — hand-coded by vnbuildr`}
@@ -118,7 +118,7 @@ function ProjectCard({ project, delay = 0, priority = false }: { project: typeof
             draggable={false}
             onContextMenu={e => e.preventDefault()}
             priority={priority}
-            sizes="(max-width: 640px) 16vw, (max-width: 1024px) 8vw, 5vw"
+            sizes="(max-width: 640px) 20vw, (max-width: 1024px) 10vw, 7vw"
           />
         </div>
       </div>
