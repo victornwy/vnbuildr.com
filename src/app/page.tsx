@@ -123,7 +123,7 @@ function Nav() {
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
             className="md:hidden overflow-hidden bg-white border-b border-[var(--color-border)]"
           >
-            <div className="px-6 py-4 flex flex-col mobile-landscape:max-h-[calc(100vh-60px)] mobile-landscape:overflow-y-auto">
+            <div className="px-6 py-4 flex flex-col">
               {NAV_LINKS.map(([href, label]) => (
                 <a
                   key={href}
@@ -220,7 +220,7 @@ function Hero({
 }: HeroProps) {
   const { on } = useContext(AnimContext)
   return (
-    <section className="relative w-full min-h-[calc(100vh-60px)] mobile-landscape:min-h-0 mobile-landscape:py-10 overflow-hidden flex flex-col items-center justify-center">
+    <section className="relative w-full min-h-[calc(100vh-60px)] overflow-hidden flex flex-col items-center justify-center">
       {/* Mouse-follow parallax elements — toggled via AnimContext */}
       <AnimatePresence>
         {on && (
@@ -263,14 +263,14 @@ function Hero({
       {/* Centre content */}
       <div className="relative z-10 flex flex-col items-center text-center px-6 w-full max-w-[680px] pointer-events-auto">
         <motion.h1
-          className="text-[11px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-5 mobile-landscape:mb-2"
+          className="text-[11px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-5"
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
         >
           {headline ?? "Custom Landing Page Design & Web Development"}
         </motion.h1>
 
         <motion.p
-          className="font-serif text-[clamp(38px,6vw,72px)] mobile-landscape:text-[clamp(22px,4.5vw,44px)] font-normal leading-[1.08] tracking-tight mb-6 mobile-landscape:mb-3"
+          className="font-serif text-[clamp(38px,6vw,72px)] font-normal leading-[1.08] tracking-tight mb-6"
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
         >
           <span>Your landing page,</span>
@@ -293,7 +293,7 @@ function Hero({
         </motion.p>
 
         <motion.p
-          className="text-[clamp(15px,1.8vw,18px)] text-[var(--color-ink-muted)] max-w-[520px] mb-10 mobile-landscape:mb-4 leading-[1.65]"
+          className="text-[clamp(15px,1.8vw,18px)] text-[var(--color-ink-muted)] max-w-[520px] mb-10 leading-[1.65]"
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55 }}
         >
           {subheadline}
@@ -327,8 +327,7 @@ function Hero({
           Reply within 24 hours · No commitment required
         </motion.p>
 
-        {/* Mode explanation pill — hidden in landscape to save vertical space */}
-        <div className="mobile-landscape:hidden w-full flex justify-center">
+        {/* Mode explanation pill */}
         <AnimatePresence mode="wait">
           {on ? (
             <motion.div
@@ -362,7 +361,6 @@ function Hero({
             </motion.div>
           )}
         </AnimatePresence>
-        </div>
       </div>
     </section>
   );

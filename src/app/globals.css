@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-@custom-variant mobile-landscape (@media (max-height: 500px) and (orientation: landscape));
-
 :root {
   --color-bg:        #ffffff;
   --color-surface:   #f7f6f4;
