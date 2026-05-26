@@ -171,7 +171,7 @@ export default function PortfolioPage() {
         {/* Grid */}
         <section className="py-12 md:py-16 px-6 bg-[var(--color-surface)]">
           <div className="max-w-[1200px] mx-auto">
-            <div className="grid grid-cols-2 landscape:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
+            <div className="grid grid-cols-2 mobile-landscape:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
               {projects.map((project, i) => (
                 <ProjectCard key={project.id} project={project} delay={i * 0.06} priority={i < 4} />
               ))}
