@@ -228,7 +228,7 @@ function Hero({
         {on && (
           <motion.div
             key="parallax"
-            className="absolute inset-0 pointer-events-none hidden md:block"
+            className="absolute inset-0 pointer-events-none hidden md:block mobile-landscape:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
