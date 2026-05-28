@@ -101,10 +101,10 @@ function ProjectCard({ project, delay = 0, priority = false }: { project: typeof
       </div>
 
       {/* Info */}
-      <div className="p-4 border-t border-[var(--color-border)]">
+      <div className="p-4 md:p-5 border-t border-[var(--color-border)]">
         <div className="flex items-start justify-between gap-2 mb-2">
           <h3 className="font-serif text-[15px] font-normal tracking-tight leading-snug">{project.name}</h3>
-          <span className="shrink-0 text-[9px] font-bold tracking-[0.08em] uppercase px-1.5 py-0.5 rounded border border-[var(--color-ink)] text-[var(--color-ink)]">
+          <span className="text-[8px] font-bold tracking-[0.05em] uppercase px-1.5 py-0.5 rounded border border-[var(--color-ink)] text-[var(--color-ink)] leading-tight text-center">
             {project.category}
           </span>
         </div>
@@ -169,9 +169,9 @@ export default function PortfolioPage() {
         </section>
 
         {/* Grid */}
-        <section className="py-12 md:py-16 px-6 bg-[var(--color-surface)]">
+        <section className="py-12 md:py-16 px-4 sm:px-6 bg-[var(--color-surface)]">
           <div className="max-w-[1200px] mx-auto">
-            <div className="grid grid-cols-2 mobile-landscape:grid-cols-4 md:grid-cols-4 gap-4 md:gap-5">
+            <div className="grid grid-cols-2 mobile-landscape:grid-cols-4 md:grid-cols-4 gap-5 md:gap-6">
               {projects.map((project, i) => (
                 <ProjectCard key={project.id} project={project} delay={i * 0.06} priority={i < 4} />
               ))}
