@@ -571,28 +571,28 @@ function DevTracks() {
   const tracks = [
     {
       badge: "Option 1",
-      name: "The High-Motion React Experience",
-      experience: "You are experiencing this exact tier right now. Scroll around this site to feel the fluid transitions and premium layout components.",
-      bestFor: "Modern brands, premium consulting firms, creators, and businesses looking to make an unforgettable visual impression.",
-      stack: "Next.js, React, Tailwind CSS, and advanced interactive motion components.",
+      name: "The Premium Experience",
+      experience: "You're experiencing this right now. Scroll around — the smooth animations, fluid transitions, and polished interactions are all part of this tier.",
+      bestFor: "Modern brands, consultants, creators, and businesses that want to make a strong first impression and stand out from competitors.",
+      stack: "",
       perks: [
-        { title: "Fluid Animations", body: "Smooth scroll-driven reveals, magnetic buttons, and engaging micro-interactions." },
-        { title: "Premium UI Layouts", body: "Clean bento grids, animated hero sections, and modern dark/light styling." },
-        { title: "App-Ready Architecture", body: "High-fidelity code infrastructure ready to scale into a larger app whenever you are ready." },
+        { title: "Smooth animations & motion", body: "Pages that feel alive — scroll reveals, hover effects, and transitions that make visitors stop and take notice." },
+        { title: "Premium look & feel", body: "A refined, modern design that positions your brand as high-quality before a single word is read." },
+        { title: "Built to grow with you", body: "The foundation is solid enough to expand into a full website or add new pages whenever you're ready." },
       ],
       delivery: "3 – 5 Days",
       featured: true,
     },
     {
       badge: "Option 2",
-      name: "The Raw HTML & CSS Static Launch",
-      experience: "Pure, raw performance. Stripped of all heavy scripts to deliver maximum loading speeds and flawless reliability.",
-      bestFor: "Local service providers, simple lead generation pages, event launches, and anyone wanting maximum simplicity with zero maintenance.",
-      stack: "Pure semantic HTML5, clean CSS3, and optional lightweight vanilla JavaScript for basic transitions.",
+      name: "The Fast & Simple Launch",
+      experience: "No frills, no delays. A clean, professional page focused entirely on loading fast and converting visitors — nothing in the way.",
+      bestFor: "Local businesses, service providers, event pages, and anyone who needs a professional online presence up fast without the complexity.",
+      stack: "",
       perks: [
-        { title: "Blazing Fast Speeds", body: "Near-zero file sizes ensure your page loads instantly, even on weak mobile connections." },
-        { title: "Subtle Visual Polish", body: "Clean CSS animations — subtle fade-ins and smooth hover states — without heavy overhead." },
-        { title: "Zero Maintenance", body: "No framework updates, no breaking dependencies. Host it absolutely anywhere for pennies." },
+        { title: "Loads in under a second", body: "Even on a slow mobile connection, your page is up instantly. Slow sites lose customers — this one won't." },
+        { title: "Clean, professional design", body: "Looks sharp and credible without the bells and whistles. Simple done well still converts." },
+        { title: "Zero ongoing maintenance", body: "Nothing to update, nothing to break. Once it's live, it stays live — host it anywhere for next to nothing." },
       ],
       delivery: "48 Hours",
       featured: false,
@@ -616,7 +616,7 @@ function DevTracks() {
         </FadeUp>
 
         <div className="grid md:grid-cols-2 gap-6">
-          {tracks.map(({ badge, name, experience, bestFor, stack, perks, delivery, featured }, idx) => (
+          {tracks.map(({ badge, name, experience, bestFor, perks, delivery, featured }, idx) => (
             <FadeUp key={name} delay={idx * 0.12} className="flex flex-col">
             <div
               className={`bg-white flex flex-col h-full overflow-hidden ${featured ? "neo-card-blue" : "neo-card"}`}
@@ -650,10 +650,6 @@ function DevTracks() {
                 <div>
                   <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-2">Best For</p>
                   <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.65]">{bestFor}</p>
-                </div>
-                <div>
-                  <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-2">Tech Stack</p>
-                  <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.65]">{stack}</p>
                 </div>
                 <div>
                   <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-3">What You Get</p>
