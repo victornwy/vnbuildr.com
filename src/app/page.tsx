@@ -3,7 +3,9 @@
 import { useState, createContext, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion, LayoutGroup, AnimatePresence } from "motion/react";
+import { translations, type Locale, type Translations } from "@/lib/i18n";
 import Floating, { FloatingElement } from "@/components/ui/parallax-floating";
 import { TextRotate } from "@/components/ui/text-rotate";
 import {
@@ -18,14 +20,12 @@ const AnimContext = createContext<{ on: boolean; set: (v: boolean) => void }>({
   set: () => {},
 })
 
-// ─── Nav ──────────────────────────────────────────────────────────────────────
-const NAV_LINKS: [string, string][] = [
-  ["#how",      "How it works"],
-  ["#features", "What you get"],
-  ["#track",    "Build options"],
-  ["#faq",      "FAQ"],
-  ["#contact",  "Contact"],
-]
+// ─── Locale context ───────────────────────────────────────────────────────────
+const LocaleCtx = createContext<{ t: Translations; locale: Locale }>({
+  t: translations.en, locale: "en",
+})
+const useT = () => useContext(LocaleCtx).t
+const useLocale = () => useContext(LocaleCtx).locale
 
 function AnimToggle({ on, set }: { on: boolean; set: (v: boolean) => void }) {
   return (
@@ -56,9 +56,18 @@ function scrollToSection(href: string) {
 
 function Nav() {
   const { on, set } = useContext(AnimContext)
+  const t = useT()
   const [open, setOpen] = useState(false)
 
   const close = () => setOpen(false)
+
+  const NAV_LINKS: [string, string][] = [
+    ["#how",      t.nav.how],
+    ["#features", t.nav.features],
+    ["#track",    t.nav.track],
+    ["#faq",      t.nav.faq],
+    ["#contact",  t.nav.contact],
+  ]
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
@@ -82,24 +91,31 @@ function Nav() {
             </li>
           ))}
           <li>
-            <Link href="/portfolio" className="text-sm text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors">Portfolio</Link>
+            <Link href="/portfolio" className="text-sm text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors">{t.nav.portfolio}</Link>
           </li>
         </ul>
 
         {/* Desktop right */}
         <div className="hidden md:flex mobile-landscape:hidden items-center gap-4">
+          <Link href={t.nav.langHref} className="text-[12px] font-semibold text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors tracking-wide border border-[var(--color-border)] px-2.5 py-1 rounded">
+            {t.nav.langToggle}
+          </Link>
+          <div className="w-px h-5 bg-[var(--color-border)]" />
           <AnimToggle on={on} set={set} />
           <div className="w-px h-5 bg-[var(--color-border)]" />
           <a href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page" target="_blank" rel="noopener noreferrer" className="whatsapp-glow text-sm font-medium bg-[#25D366] text-white px-5 py-2.5 rounded-full hover:opacity-85 transition-opacity">
-            Get in touch
+            {t.nav.getInTouch}
           </a>
         </div>
 
-        {/* Mobile right: CTA + burger */}
-        <div className="flex md:hidden mobile-landscape:flex items-center gap-3">
+        {/* Mobile right: lang + CTA + burger */}
+        <div className="flex md:hidden mobile-landscape:flex items-center gap-2">
+          <Link href={t.nav.langHref} className="text-[11px] font-semibold text-[var(--color-ink-muted)] border border-[var(--color-border)] px-2 py-1 rounded">
+            {t.nav.langToggle}
+          </Link>
           <a href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page" target="_blank" rel="noopener noreferrer" className="whatsapp-glow text-sm mobile-landscape:text-xs font-medium bg-[#25D366] text-white px-4 mobile-landscape:px-3 py-2 mobile-landscape:py-1.5 rounded-full hover:opacity-85 transition-opacity">
-            <span className="mobile-landscape:hidden">Get in touch</span>
-            <span className="hidden mobile-landscape:inline">Chat</span>
+            <span className="mobile-landscape:hidden">{t.nav.getInTouch}</span>
+            <span className="hidden mobile-landscape:inline">{t.nav.chat}</span>
           </a>
           <button
             onClick={() => setOpen(o => !o)}
@@ -137,10 +153,10 @@ function Nav() {
                 </a>
               ))}
               <Link href="/portfolio" onClick={close} className="text-[15px] mobile-landscape:text-[13px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] py-3 mobile-landscape:py-2 border-b border-[var(--color-border)] transition-colors">
-                Portfolio
+                {t.nav.portfolio}
               </Link>
               <div className="pt-4 mobile-landscape:pt-2 mobile-landscape:col-span-2 flex items-center justify-between">
-                <span className="text-[12px] font-semibold text-[var(--color-ink-muted)] uppercase tracking-wide">Animation</span>
+                <span className="text-[12px] font-semibold text-[var(--color-ink-muted)] uppercase tracking-wide">{t.nav.animation}</span>
                 <AnimToggle on={on} set={set} />
               </div>
             </div>
@@ -218,9 +234,10 @@ interface HeroProps {
 function Hero({
   turnaroundTime = "7 days",
   headline,
-  subheadline = "High-converting, lightning-fast landing pages engineered for startups, small medium enterprise (SME) and scaling brands.",
+  subheadline,
 }: HeroProps) {
   const { on } = useContext(AnimContext)
+  const t = useT()
   return (
     <section className="relative w-full min-h-[calc(100vh-60px)] mobile-landscape:min-h-0 mobile-landscape:py-8 overflow-hidden flex flex-col items-center justify-center">
       {/* Mouse-follow parallax elements — toggled via AnimContext */}
@@ -268,28 +285,35 @@ function Hero({
           className="text-[11px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-5 mobile-landscape:mb-2"
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
         >
-          {headline ?? "Custom Landing Page Design & Web Development"}
+          {headline ?? t.hero.label}
         </motion.h1>
 
         <motion.p
           className="font-serif text-[clamp(38px,6vw,72px)] mobile-landscape:text-[clamp(22px,4vw,36px)] font-normal leading-[1.08] tracking-tight mb-6 mobile-landscape:mb-2"
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
         >
-          <span>Your landing page,</span>
+          <span>{t.hero.line1}</span>
           <br />
           <LayoutGroup>
             <motion.span layout className="inline-flex items-baseline gap-2 whitespace-pre">
-              <motion.span layout transition={{ type: "spring", damping: 30, stiffness: 400 }}>
-                ready in{" "}
-              </motion.span>
+              {t.hero.rotatePrefix && (
+                <motion.span layout transition={{ type: "spring", damping: 30, stiffness: 400 }}>
+                  {t.hero.rotatePrefix}
+                </motion.span>
+              )}
               <TextRotate
-                texts={["days.", "a week.", "no time."]}
+                texts={t.hero.rotatingWords}
                 mainClassName="overflow-hidden text-[var(--color-blue)] py-0 pb-1"
                 staggerDuration={0.04}
                 staggerFrom="last"
                 rotationInterval={2800}
                 transition={{ type: "spring", damping: 30, stiffness: 400 }}
               />
+              {t.hero.rotateSuffix && (
+                <motion.span layout transition={{ type: "spring", damping: 30, stiffness: 400 }}>
+                  {t.hero.rotateSuffix}
+                </motion.span>
+              )}
             </motion.span>
           </LayoutGroup>
         </motion.p>
@@ -298,7 +322,7 @@ function Hero({
           className="text-[clamp(15px,1.8vw,18px)] text-[var(--color-ink-muted)] max-w-[520px] mb-10 mobile-landscape:mb-4 leading-[1.65]"
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55 }}
         >
-          {subheadline}
+          {subheadline ?? t.hero.subheadline}
         </motion.p>
 
         <motion.div
@@ -311,14 +335,14 @@ function Hero({
             rel="noopener noreferrer"
             className="whatsapp-glow inline-flex items-center gap-2 bg-[#25D366] text-white text-[15px] font-medium px-6 py-3 rounded-full hover:opacity-85 hover:-translate-y-px transition-all"
           >
-            Chat on WhatsApp
+            {t.hero.primaryCta}
             <ArrowRight />
           </a>
           <a
             href="#how"
             className="inline-flex items-center text-[15px] font-medium px-6 py-3 rounded-full border border-[var(--color-border)] hover:border-[var(--color-ink)] transition-colors"
           >
-            See how it works
+            {t.hero.secondaryCta}
           </a>
         </motion.div>
 
@@ -326,7 +350,7 @@ function Hero({
           className="text-[13px] text-[var(--color-ink-muted)]"
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.75 }}
         >
-          Reply within 24 hours · No commitment required
+          {t.hero.trustLine}
         </motion.p>
 
         {/* Mode explanation pill — hidden on phone landscape to save vertical space */}
@@ -348,7 +372,7 @@ function Hero({
               >
                 <Zap size={12} className="fill-current shrink-0" />
               </motion.span>
-              <span>React mode — fluid animations, premium motion components</span>
+              <span>{t.hero.reactMode}</span>
             </motion.div>
           ) : (
             <motion.div
@@ -360,7 +384,7 @@ function Hero({
               className="mt-5 flex flex-wrap items-center gap-2 px-4 py-2 bg-[var(--color-surface)] border-2 border-[var(--color-ink)] shadow-[3px_3px_0_var(--color-ink)] rounded text-[12px] font-semibold text-[var(--color-ink-muted)]"
             >
               <span className="w-2 h-2 rounded-full bg-[var(--color-ink-muted)] shrink-0" />
-              <span>Static HTML mode — no animations, instant load, zero dependencies</span>
+              <span>{t.hero.staticMode}</span>
             </motion.div>
           )}
         </AnimatePresence>
@@ -372,41 +396,23 @@ function Hero({
 
 // ─── How it works ─────────────────────────────────────────────────────────────
 function HowItWorks() {
-  const steps = [
-    {
-      num: "01",
-      title: "You share the brief",
-      body: "Message me on WhatsApp or email. Tell me about your product, audience, and goal. That's all I need to get started.",
-      time: "Day 1",
-    },
-    {
-      num: "02",
-      title: "I design & build",
-      body: "I write the copy, design the layout, and code a fast, mobile-first page — all tailored to your brand.",
-      time: "Days 2–4",
-    },
-    {
-      num: "03",
-      title: "You review & launch",
-      body: "You get a review round for tweaks. Once you're happy, it's ready to go live — handed off clean and ready to deploy.",
-      time: "Day 3–5",
-    },
-  ];
+  const t = useT()
+  const steps = t.how.steps
 
   return (
     <section id="how" className="py-16 md:py-24 px-6 bg-[var(--color-surface)]">
       <div className="max-w-[1100px] mx-auto">
         <FadeUp className="text-center mb-16">
           <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
-            The process
+            {t.how.label}
           </p>
           <h2 className="font-serif text-[clamp(32px,4.5vw,50px)] font-normal tracking-tight mb-4">
-            From brief to live
-            <br />
-            in three steps
+            {t.how.heading.split("\n").map((line, i) => (
+              <span key={i}>{line}{i === 0 && <br />}</span>
+            ))}
           </h2>
           <p className="text-[17px] text-[var(--color-ink-muted)] max-w-[440px] mx-auto">
-            No handoffs. No project managers. Just direct, focused work with someone who ships.
+            {t.how.subheading}
           </p>
         </FadeUp>
 
@@ -439,53 +445,31 @@ function HowItWorks() {
 
 // ─── Features ─────────────────────────────────────────────────────────────────
 function Features() {
-  const cards: { icon: React.ReactNode; title: string; body: string }[] = [
-    {
-      icon: <Zap size={18} strokeWidth={1.5} />,
-      title: "Fast delivery",
-      body: "Most projects are done in 5–7 days. No agency timelines, no waiting weeks for a first draft.",
-    },
-    {
-      icon: <FileText size={18} strokeWidth={1.5} />,
-      title: "Copywriting included",
-      body: "Conversion-focused copy written from scratch. You don't need to hand over a brief full of buzzwords.",
-    },
-    {
-      icon: <Smartphone size={18} strokeWidth={1.5} />,
-      title: "Mobile-first, always",
-      body: "Every page is built mobile-first and tested across devices. More than half your traffic is on a phone — it shows.",
-    },
-    {
-      icon: <Code2 size={18} strokeWidth={1.5} />,
-      title: "Clean, handoff-ready code",
-      body: "Production-ready HTML/CSS you or your developer can maintain and extend. No lock-in.",
-    },
-    {
-      icon: <Target size={18} strokeWidth={1.5} />,
-      title: "CRO-informed design",
-      body: "Clear CTAs, social proof placement, and a visual hierarchy built around one goal: getting visitors to act.",
-    },
-    {
-      icon: <RefreshCw size={18} strokeWidth={1.5} />,
-      title: "One revision round",
-      body: "A structured feedback round so you can fine-tune the result — without endless back-and-forth.",
-    },
-  ];
+  const t = useT()
+  const icons = [
+    <Zap size={18} strokeWidth={1.5} />,
+    <FileText size={18} strokeWidth={1.5} />,
+    <Smartphone size={18} strokeWidth={1.5} />,
+    <Code2 size={18} strokeWidth={1.5} />,
+    <Target size={18} strokeWidth={1.5} />,
+    <RefreshCw size={18} strokeWidth={1.5} />,
+  ]
+  const cards = t.features.cards.map((c, i) => ({ ...c, icon: icons[i] }))
 
   return (
     <section id="features" className="py-16 md:py-24 px-6 bg-white">
       <div className="max-w-[1100px] mx-auto">
         <FadeUp className="mb-14">
           <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
-            What you get
+            {t.features.label}
           </p>
           <h2 className="font-serif text-[clamp(30px,4vw,46px)] font-normal tracking-tight leading-[1.1] mb-4">
-            Everything a high-converting
-            <br />
-            page needs
+            {t.features.heading.split("\n").map((line, i) => (
+              <span key={i}>{line}{i === 0 && <br />}</span>
+            ))}
           </h2>
           <p className="text-[16px] text-[var(--color-ink-muted)] leading-[1.65] max-w-[440px]">
-            Not just a pretty design. A page engineered to turn visitors into leads.
+            {t.features.subheading}
           </p>
         </FadeUp>
 
@@ -511,41 +495,23 @@ function Features() {
 }
 
 // ─── Testimonials ─────────────────────────────────────────────────────────────
-// Replace with real client quotes once confirmed
-const testimonials = [
-  {
-    quote: "As a freelance accounting firm, we needed a page that looks professional and gets clients to reach out. vnbuildr delivered exactly that — clean layout, clear messaging, and it was live within the week.",
-    role: "Founder, AN Account",
-    initials: "AA",
-  },
-  {
-    quote: "The animated hero was exactly what we had in mind — modern, fast, and it actually explains the product clearly. They structured the whole page around our core value prop without us having to spell it out.",
-    role: "Head of Product, TopSpace",
-    initials: "TS",
-  },
-  {
-    quote: "Our firm needed a site that looked premium and communicated authority instantly. vnbuildr nailed it. Sharp copy, clean visual hierarchy, and it was live well within the week.",
-    role: "Managing Partner, Meridian",
-    initials: "M",
-  },
-]
-
 function Testimonials() {
+  const t = useT()
   return (
     <section className="py-16 md:py-24 px-6 bg-white">
       <div className="max-w-[1100px] mx-auto">
         <FadeUp className="mb-14">
           <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
-            Client results
+            {t.testimonials.label}
           </p>
           <h2 className="font-serif text-[clamp(30px,4vw,46px)] font-normal tracking-tight leading-[1.1]">
-            What clients say
+            {t.testimonials.heading}
           </h2>
         </FadeUp>
 
         <FadeUp delay={0.1}>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
-            {testimonials.map(({ quote, role, initials }) => (
+            {t.testimonials.items.map(({ quote, role, initials }) => (
               <div key={role} className="neo-card bg-white p-6 md:p-8 flex flex-col gap-5">
                 <svg width="28" height="20" viewBox="0 0 28 20" fill="none" aria-hidden="true">
                   <path d="M0 20V12.4C0 9.06667 0.8 6.2 2.4 3.8C4.06667 1.4 6.46667 0.2 9.6 0.2L10.6 2C8.6 2.53333 7 3.66667 5.8 5.4C4.66667 7.06667 4.1 8.93333 4.1 11H9.6V20H0ZM18 20V12.4C18 9.06667 18.8 6.2 20.4 3.8C22.0667 1.4 24.4667 0.2 27.6 0.2L28 2C26 2.53333 24.4 3.66667 23.2 5.4C22.0667 7.06667 21.5 8.93333 21.5 11H27V20H18Z" fill="var(--color-blue)" opacity="0.25"/>
@@ -568,55 +534,28 @@ function Testimonials() {
 
 // ─── Dev Tracks ───────────────────────────────────────────────────────────────
 function DevTracks() {
-  const tracks = [
-    {
-      badge: "Option 1",
-      name: "The Premium Experience",
-      experience: "You're experiencing this right now. Scroll around — the smooth animations, fluid transitions, and polished interactions are all part of this tier.",
-      bestFor: "Modern brands, consultants, creators, and businesses that want to make a strong first impression and stand out from competitors.",
-      stack: "",
-      perks: [
-        { title: "Smooth animations & motion", body: "Pages that feel alive — scroll reveals, hover effects, and transitions that make visitors stop and take notice." },
-        { title: "Premium look & feel", body: "A refined, modern design that positions your brand as high-quality before a single word is read." },
-        { title: "Built to grow with you", body: "The foundation is solid enough to expand into a full website or add new pages whenever you're ready." },
-      ],
-      delivery: "3 – 5 Days",
-      featured: true,
-    },
-    {
-      badge: "Option 2",
-      name: "The Fast & Simple Launch",
-      experience: "No frills, no delays. A clean, professional page focused entirely on loading fast and converting visitors — nothing in the way.",
-      bestFor: "Local businesses, service providers, event pages, and anyone who needs a professional online presence up fast without the complexity.",
-      stack: "",
-      perks: [
-        { title: "Loads in under a second", body: "Even on a slow mobile connection, your page is up instantly. Slow sites lose customers — this one won't." },
-        { title: "Clean, professional design", body: "Looks sharp and credible without the bells and whistles. Simple done well still converts." },
-        { title: "Zero ongoing maintenance", body: "Nothing to update, nothing to break. Once it's live, it stays live — host it anywhere for next to nothing." },
-      ],
-      delivery: "48 Hours",
-      featured: false,
-    },
-  ]
+  const t = useT()
+  const tracks = t.tracks.options.map((o, i) => ({ ...o, featured: i === 0 }))
 
   return (
     <section id="track" className="py-16 md:py-24 px-6 bg-[var(--color-surface)]">
       <div className="max-w-[1100px] mx-auto">
         <FadeUp className="text-center mb-14">
           <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
-            Build options
+            {t.tracks.label}
           </p>
           <h2 className="font-serif text-[clamp(30px,4vw,46px)] font-normal tracking-tight leading-[1.1] mb-4">
-            Choose how we build yours
+            {t.tracks.heading.split("\n").map((line, i) => (
+              <span key={i}>{line}{i === 0 && <br />}</span>
+            ))}
           </h2>
           <p className="text-[16px] text-[var(--color-ink-muted)] max-w-[540px] mx-auto leading-[1.65]">
-            No matter which path you choose, you get raw, hand-crafted code with zero plugin bloat,
-            zero heavy templates, and instant mobile loading speeds.
+            {t.tracks.subheading}
           </p>
         </FadeUp>
 
         <div className="grid md:grid-cols-2 gap-6">
-          {tracks.map(({ badge, name, experience, bestFor, perks, delivery, featured }, idx) => (
+          {tracks.map(({ badge, name, experience, bestFor, bestForLabel, perksLabel, perks, deliveryLabel, delivery, featured }, idx) => (
             <FadeUp key={name} delay={idx * 0.12} className="flex flex-col">
             <div
               className={`bg-white flex flex-col h-full overflow-hidden ${featured ? "neo-card-blue" : "neo-card"}`}
@@ -648,11 +587,11 @@ function DevTracks() {
               {/* Body */}
               <div className="px-5 py-5 md:px-8 md:py-7 space-y-6 flex-1">
                 <div>
-                  <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-2">Best For</p>
+                  <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-2">{bestForLabel}</p>
                   <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.65]">{bestFor}</p>
                 </div>
                 <div>
-                  <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-3">What You Get</p>
+                  <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-3">{perksLabel}</p>
                   <div className="space-y-4">
                     {perks.map(({ title, body }) => (
                       <div key={title} className="flex gap-3">
@@ -680,7 +619,7 @@ function DevTracks() {
                 }`}
               >
                 <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)]">
-                  Delivery Time
+                  {deliveryLabel}
                 </p>
                 <span
                   className={`text-[15px] font-bold tracking-tight ${
@@ -917,18 +856,19 @@ function ContactForm() {
 
 // ─── Final CTA ────────────────────────────────────────────────────────────────
 function CtaSection() {
+  const t = useT()
   return (
     <section id="contact" className="py-16 md:py-24 px-6 bg-[var(--color-ink)]">
       <div className="max-w-[600px] mx-auto">
         <FadeUp className="text-center mb-2">
           <span className="inline-flex items-center gap-1.5 bg-white/10 text-white/55 text-[13px] font-medium px-3 py-1 rounded-full mb-6 before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-[#5c9e6e]">
-            Currently available
+            {t.cta.available}
           </span>
           <h2 className="font-serif text-[clamp(32px,4.5vw,52px)] font-normal text-white tracking-tight leading-[1.05] mb-3">
-            Start your project
+            {t.cta.heading}
           </h2>
           <p className="text-[15px] text-white/45">
-            Fill in the brief below and I&apos;ll respond within 24 hours.
+            {t.cta.subheading}
           </p>
         </FadeUp>
         <FadeUp delay={0.1}>
@@ -941,19 +881,20 @@ function CtaSection() {
 
 // ─── Footer ───────────────────────────────────────────────────────────────────
 function Footer() {
+  const t = useT()
   return (
     <footer className="bg-[var(--color-ink)] border-t border-white/[0.08] py-8 px-6">
       <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-3 items-center gap-3 md:gap-4 text-center md:text-left">
         <Link href="/" onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }) }} className="font-serif text-[18px] text-white/90">
           <span className="text-[var(--color-blue)] font-bold">vn</span><em>buildr</em>
         </Link>
-        <p className="text-[13px] text-white/30 text-center">© 2026 vnbuildr. All rights reserved.</p>
+        <p className="text-[13px] text-white/30 text-center">{t.footer.copyright}</p>
         <ul className="flex flex-wrap gap-x-6 gap-y-2 list-none justify-center md:justify-end">
           {(
             [
-              ["https://wa.me/60199195314", "WhatsApp"],
-              ["mailto:hello@vnbuildr.com", "Email"],
-              ["#how", "How it works"],
+              ["https://wa.me/60199195314", t.footer.links.whatsapp],
+              ["mailto:hello@vnbuildr.com", t.footer.links.email],
+              ["#how", t.footer.links.how],
             ] as [string, string][]
           ).map(([href, label]) => (
             <li key={href}>
@@ -969,7 +910,7 @@ function Footer() {
           ))}
           <li>
             <Link href="/portfolio" className="text-[13px] text-white/35 hover:text-white/75 transition-colors">
-              Portfolio
+              {t.footer.links.portfolio}
             </Link>
           </li>
         </ul>
@@ -995,6 +936,7 @@ function ArrowRight() {
 
 // ─── About ────────────────────────────────────────────────────────────────────
 function About() {
+  const t = useT()
   return (
     <section className="py-16 md:py-24 px-6 bg-white">
       <div className="max-w-[1100px] mx-auto">
@@ -1016,13 +958,13 @@ function About() {
                 </div>
                 <div className="text-center">
                   <p className="font-serif text-[22px] font-normal tracking-tight">V</p>
-                  <p className="text-[13px] text-[var(--color-ink-muted)] mt-1">Founder, vnbuildr</p>
+                  <p className="text-[13px] text-[var(--color-ink-muted)] mt-1">{t.about.role}</p>
                 </div>
                 <div className="flex items-center gap-1.5 text-[11px] font-medium text-[var(--color-ink-muted)] bg-white border border-[var(--color-border)] px-3 py-1.5 rounded-full">
                   <svg width="10" height="12" viewBox="0 0 10 12" fill="none" aria-hidden="true">
                     <path d="M5 0C3.07 0 1.5 1.57 1.5 3.5c0 2.625 3.5 7 3.5 7s3.5-4.375 3.5-7C8.5 1.57 6.93 0 5 0zm0 4.75a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z" fill="currentColor"/>
                   </svg>
-                  Kuala Lumpur, Malaysia
+                  {t.about.location}
                 </div>
               </div>
 
@@ -1030,27 +972,21 @@ function About() {
               <div className="p-8 md:p-12 flex flex-col justify-center gap-6">
                 <div>
                   <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-3">
-                    About
+                    {t.about.label}
                   </p>
                   <h2 className="font-serif text-[clamp(24px,3vw,36px)] font-normal tracking-tight leading-[1.15] mb-5">
-                    The person behind the code
+                    {t.about.heading}
                   </h2>
                   <p className="text-[15px] text-[var(--color-ink-muted)] leading-[1.75] mb-3">
-                    I&apos;m V — a self-taught developer based in Kuala Lumpur. I started vnbuildr because I kept seeing the same frustration: businesses were either paying agency prices for slow, bloated work, or settling for DIY builders that looked cheap and converted poorly.
+                    {t.about.bio1}
                   </p>
                   <p className="text-[15px] text-[var(--color-ink-muted)] leading-[1.75]">
-                    vnbuildr is the alternative. Clean, hand-coded landing pages built fast — at a fraction of the cost. Every project gets my direct attention from brief to launch. No junior handoffs, no account managers, no markup.
+                    {t.about.bio2}
                   </p>
                 </div>
 
                 <div className="flex flex-wrap gap-2">
-                  {[
-                    "Self-taught",
-                    "Based in KL",
-                    "Works globally",
-                    "Direct communication",
-                    "No agency markup",
-                  ].map(tag => (
+                  {t.about.tags.map(tag => (
                     <span
                       key={tag}
                       className="text-[11px] font-medium bg-[var(--color-surface)] border border-[var(--color-border)] px-2.5 py-1 rounded text-[var(--color-ink-muted)]"
@@ -1137,6 +1073,9 @@ const faqs: { q: string; a: React.ReactNode }[] = [
 ];
 
 function FAQ() {
+  const t = useT()
+  const locale = useLocale()
+  const faqItems = locale === "zh" ? t.faq.items : faqs
   const [open, setOpen] = useState<number | null>(null);
 
   return (
@@ -1144,16 +1083,16 @@ function FAQ() {
       <div className="max-w-[720px] mx-auto">
         <FadeUp className="text-center mb-14">
           <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
-            FAQ
+            {t.faq.label}
           </p>
           <h2 className="font-serif text-[clamp(30px,4vw,46px)] font-normal tracking-tight leading-[1.1]">
-            Common questions
+            {t.faq.heading}
           </h2>
         </FadeUp>
 
         <FadeUp delay={0.12}>
         <div className="neo-card overflow-hidden divide-y divide-[var(--color-ink)]/10">
-          {faqs.map(({ q, a }, i) => (
+          {faqItems.map(({ q, a }, i) => (
             <div key={i} className="bg-white">
               <button
                 className="w-full flex items-start justify-between gap-4 px-5 py-4 md:px-8 md:py-5 text-left hover:bg-[var(--color-surface)] transition-colors group"
@@ -1272,24 +1211,29 @@ const faqSchema = {
 // ─── Page root ────────────────────────────────────────────────────────────────
 export default function Home() {
   const [animOn, setAnimOn] = useState(true)
+  const pathname = usePathname()
+  const locale: Locale = pathname.startsWith("/zh") ? "zh" : "en"
+  const t = translations[locale]
   return (
-    <AnimContext.Provider value={{ on: animOn, set: setAnimOn }}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <Nav />
-      <main>
-        <Hero />
-        <HowItWorks />
-        <Features />
-        <Testimonials />
-        <DevTracks />
-        <FAQ />
-        <About />
-        <CtaSection />
-      </main>
-      <Footer />
-    </AnimContext.Provider>
+    <LocaleCtx.Provider value={{ t, locale }}>
+      <AnimContext.Provider value={{ on: animOn, set: setAnimOn }}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+        <Nav />
+        <main>
+          <Hero />
+          <HowItWorks />
+          <Features />
+          <Testimonials />
+          <DevTracks />
+          <FAQ />
+          <About />
+          <CtaSection />
+        </main>
+        <Footer />
+      </AnimContext.Provider>
+    </LocaleCtx.Provider>
   );
 }
