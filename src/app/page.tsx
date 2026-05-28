@@ -75,7 +75,7 @@ function Nav() {
         </Link>
 
         {/* Desktop nav links */}
-        <ul className="hidden md:flex items-center gap-8 list-none">
+        <ul className="hidden md:flex mobile-landscape:hidden items-center gap-8 list-none">
           {NAV_LINKS.map(([href, label]) => (
             <li key={href}>
               <a href={href} onClick={e => handleNavClick(e, href)} className="text-sm text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors">{label}</a>
@@ -87,7 +87,7 @@ function Nav() {
         </ul>
 
         {/* Desktop right */}
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden md:flex mobile-landscape:hidden items-center gap-4">
           <AnimToggle on={on} set={set} />
           <div className="w-px h-5 bg-[var(--color-border)]" />
           <a href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page" target="_blank" rel="noopener noreferrer" className="whatsapp-glow text-sm font-medium bg-[#25D366] text-white px-5 py-2.5 rounded-full hover:opacity-85 transition-opacity">
@@ -96,7 +96,7 @@ function Nav() {
         </div>
 
         {/* Mobile right: CTA + burger */}
-        <div className="flex md:hidden items-center gap-3">
+        <div className="flex md:hidden mobile-landscape:flex items-center gap-3">
           <a href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page" target="_blank" rel="noopener noreferrer" className="whatsapp-glow text-sm mobile-landscape:text-xs font-medium bg-[#25D366] text-white px-4 mobile-landscape:px-3 py-2 mobile-landscape:py-1.5 rounded-full hover:opacity-85 transition-opacity">
             <span className="mobile-landscape:hidden">Get in touch</span>
             <span className="hidden mobile-landscape:inline">Chat</span>
@@ -123,7 +123,7 @@ function Nav() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="md:hidden overflow-hidden bg-white border-b border-[var(--color-border)]"
+            className="md:hidden mobile-landscape:!block overflow-hidden bg-white border-b border-[var(--color-border)]"
           >
             <div className="px-6 py-4 mobile-landscape:py-2 flex flex-col mobile-landscape:grid mobile-landscape:grid-cols-2 mobile-landscape:gap-x-4 mobile-landscape:max-h-[calc(100vh-60px)] mobile-landscape:overflow-y-auto">
               {NAV_LINKS.map(([href, label]) => (
