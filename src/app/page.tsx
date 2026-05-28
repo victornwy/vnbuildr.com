@@ -232,7 +232,7 @@ interface HeroProps {
 }
 
 function Hero({
-  turnaroundTime = "7 days",
+  turnaroundTime: _turnaroundTime = "7 days",
   headline,
   subheadline,
 }: HeroProps) {
@@ -447,12 +447,12 @@ function HowItWorks() {
 function Features() {
   const t = useT()
   const icons = [
-    <Zap size={18} strokeWidth={1.5} />,
-    <FileText size={18} strokeWidth={1.5} />,
-    <Smartphone size={18} strokeWidth={1.5} />,
-    <Code2 size={18} strokeWidth={1.5} />,
-    <Target size={18} strokeWidth={1.5} />,
-    <RefreshCw size={18} strokeWidth={1.5} />,
+    <Zap key="zap" size={18} strokeWidth={1.5} />,
+    <FileText key="filetext" size={18} strokeWidth={1.5} />,
+    <Smartphone key="smartphone" size={18} strokeWidth={1.5} />,
+    <Code2 key="code2" size={18} strokeWidth={1.5} />,
+    <Target key="target" size={18} strokeWidth={1.5} />,
+    <RefreshCw key="refreshcw" size={18} strokeWidth={1.5} />,
   ]
   const cards = t.features.cards.map((c, i) => ({ ...c, icon: icons[i] }))
 
