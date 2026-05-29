@@ -47,13 +47,13 @@ function AnimToggle({ on, set }: { on: boolean; set: (v: boolean) => void }) {
 
 const NAV_HEIGHT = 60
 
-function scrollToSection(href: string) {
+function scrollToSection(href: string, dropdownAdjust = 0) {
   const el = document.querySelector(href)
   if (!el) return
-  const target = el.getBoundingClientRect().top + window.scrollY - NAV_HEIGHT - 8
+  const target = el.getBoundingClientRect().top + window.scrollY - NAV_HEIGHT - 8 - dropdownAdjust
   const start = window.scrollY
   const distance = target - start
-  const duration = 520
+  const duration = 420
   let startTime: number | null = null
 
   function easeInOutCubic(t: number) {
@@ -87,8 +87,10 @@ function Nav() {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
+    const dropdownEl = document.querySelector('[data-nav-dropdown]')
+    const dropdownAdjust = dropdownEl ? (dropdownEl as HTMLElement).scrollHeight : 0
     close()
-    setTimeout(() => scrollToSection(href), open ? 150 : 0)
+    scrollToSection(href, dropdownAdjust)
   }
 
   return (
@@ -140,6 +142,7 @@ function Nav() {
         {open && (
           <motion.div
             key="nav-menu"
+            data-nav-dropdown=""
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
