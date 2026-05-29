@@ -9,6 +9,7 @@ export const metadata: Metadata = {
     languages: {
       "en": "https://vnbuildr.com",
       "zh-Hans": "https://vnbuildr.com/zh",
+      "x-default": "https://vnbuildr.com",
     },
   },
   openGraph: {
