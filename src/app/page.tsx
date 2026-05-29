@@ -566,8 +566,9 @@ function DevTracks() {
         <div className="grid md:grid-cols-2 gap-6">
           {tracks.map(({ badge, name, experience, bestFor, bestForLabel, perksLabel, perks, deliveryLabel, delivery, featured }, idx) => (
             <FadeUp key={name} delay={idx * 0.12} className="flex flex-col">
-            <div
+            <motion.div
               className={`bg-white flex flex-col h-full overflow-hidden ${featured ? "neo-card-blue" : "neo-card"}`}
+              whileHover={{ y: -4, transition: { type: "spring", stiffness: 400, damping: 26 } }}
             >
               {/* Header */}
               <div className={`px-5 pt-6 pb-4 md:px-8 md:pt-8 md:pb-6 border-b ${featured ? "border-[var(--color-blue)]/20" : "border-[var(--color-ink)]/12"}`}>
@@ -638,7 +639,7 @@ function DevTracks() {
                   {delivery}
                 </span>
               </div>
-            </div>
+            </motion.div>
             </FadeUp>
           ))}
         </div>
