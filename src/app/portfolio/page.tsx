@@ -2,7 +2,8 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { motion } from "motion/react"
+import { useState } from "react"
+import { motion, AnimatePresence } from "motion/react"
 
 // ─── Project data ─────────────────────────────────────────────────────────────
 const projects = [
@@ -64,6 +65,9 @@ const projects = [
   },
 ]
 
+const ALL = "All"
+const categories = [ALL, ...Array.from(new Set(projects.map(p => p.category)))]
+
 // ─── Icons ────────────────────────────────────────────────────────────────────
 function ChevronLeft() {
   return (
@@ -74,15 +78,16 @@ function ChevronLeft() {
 }
 
 // ─── Card ─────────────────────────────────────────────────────────────────────
-function ProjectCard({ project, delay = 0, priority = false }: { project: typeof projects[0]; delay?: number; priority?: boolean }) {
+function ProjectCard({ project, priority = false }: { project: typeof projects[0]; priority?: boolean }) {
   return (
     <motion.div
+      layout
       className="neo-card bg-white flex flex-col overflow-hidden group"
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -4, transition: { type: "spring", stiffness: 300, damping: 22 } }}
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 24 } }}
     >
       {/* Image */}
       <div className="relative overflow-hidden">
@@ -116,6 +121,9 @@ function ProjectCard({ project, delay = 0, priority = false }: { project: typeof
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function PortfolioPage() {
+  const [activeFilter, setActiveFilter] = useState(ALL)
+  const filtered = activeFilter === ALL ? projects : projects.filter(p => p.category === activeFilter)
+
   return (
     <>
       {/* Nav */}
@@ -140,7 +148,7 @@ export default function PortfolioPage() {
             rel="noopener noreferrer"
             className="whatsapp-glow text-sm font-medium bg-[#25D366] text-white px-[18px] py-[9px] rounded-full hover:opacity-85 transition-opacity"
           >
-            Get in touch
+            Get started
           </a>
         </div>
       </nav>
@@ -151,7 +159,7 @@ export default function PortfolioPage() {
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
           >
             <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
               Selected works
@@ -171,11 +179,51 @@ export default function PortfolioPage() {
         {/* Grid */}
         <section className="py-12 md:py-16 px-4 sm:px-6 bg-[var(--color-surface)]">
           <div className="max-w-[1200px] mx-auto">
-            <div className="grid grid-cols-2 mobile-landscape:grid-cols-4 md:grid-cols-4 gap-5 md:gap-6">
-              {projects.map((project, i) => (
-                <ProjectCard key={project.id} project={project} delay={i * 0.06} priority={i < 4} />
+
+            {/* Filter buttons */}
+            <motion.div
+              className="flex flex-wrap gap-2 mb-8 justify-center"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {categories.map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveFilter(cat)}
+                  className={`text-[12px] font-semibold tracking-wide px-3.5 py-1.5 rounded border-2 transition-all duration-150 ${
+                    activeFilter === cat
+                      ? "bg-[var(--color-ink)] text-white border-[var(--color-ink)]"
+                      : "bg-white text-[var(--color-ink-muted)] border-[var(--color-border)] hover:border-[var(--color-ink)] hover:text-[var(--color-ink)]"
+                  }`}
+                >
+                  {cat}
+                </button>
               ))}
-            </div>
+            </motion.div>
+
+            {/* Project grid */}
+            <motion.div layout className="grid grid-cols-2 mobile-landscape:grid-cols-4 md:grid-cols-4 gap-5 md:gap-6">
+              <AnimatePresence mode="popLayout">
+                {filtered.map(project => (
+                  <ProjectCard key={project.id} project={project} priority={project.id <= 4} />
+                ))}
+              </AnimatePresence>
+            </motion.div>
+
+            {/* Empty state */}
+            <AnimatePresence>
+              {filtered.length === 0 && (
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="text-center text-[var(--color-ink-muted)] text-[14px] py-16"
+                >
+                  No projects in this category yet.
+                </motion.p>
+              )}
+            </AnimatePresence>
           </div>
         </section>
 
@@ -185,7 +233,7 @@ export default function PortfolioPage() {
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
           >
             <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
               Want one of these?

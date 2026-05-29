@@ -430,6 +430,7 @@ function HowItWorks() {
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ type: "spring", stiffness: 320, damping: 26, delay: i * 0.06 }}
+              whileHover={{ y: -4, transition: { type: "spring", stiffness: 400, damping: 26 } }}
             >
               <div className="w-9 h-9 rounded bg-[var(--color-surface)] border-2 border-[var(--color-ink)] shadow-[2px_2px_0_var(--color-ink)] flex items-center justify-center text-[13px] font-semibold text-[var(--color-ink)] mb-5">
                 {num}
@@ -481,16 +482,17 @@ function Features() {
         <FadeUp delay={0.12}>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
           {cards.map(({ icon, title, body }) => (
-            <div
+            <motion.div
               key={title}
               className="neo-card bg-white p-6 md:p-9"
+              whileHover={{ y: -4, transition: { type: "spring", stiffness: 400, damping: 26 } }}
             >
               <div className="w-[42px] h-[42px] bg-[var(--color-surface)] border-2 border-[var(--color-ink)] shadow-[2px_2px_0_var(--color-ink)] rounded flex items-center justify-center text-[var(--color-ink)] mb-5">
                 {icon}
               </div>
               <h3 className="text-[16px] font-semibold tracking-tight mb-2">{title}</h3>
               <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.65]">{body}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
         </FadeUp>
@@ -517,7 +519,9 @@ function Testimonials() {
         <FadeUp delay={0.1}>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
             {t.testimonials.items.map(({ quote, role, initials }) => (
-              <div key={role} className="neo-card bg-white p-6 md:p-8 flex flex-col gap-5">
+              <motion.div key={role} className="neo-card bg-white p-6 md:p-8 flex flex-col gap-5"
+                whileHover={{ y: -4, transition: { type: "spring", stiffness: 400, damping: 26 } }}
+              >
                 <svg width="28" height="20" viewBox="0 0 28 20" fill="none" aria-hidden="true">
                   <path d="M0 20V12.4C0 9.06667 0.8 6.2 2.4 3.8C4.06667 1.4 6.46667 0.2 9.6 0.2L10.6 2C8.6 2.53333 7 3.66667 5.8 5.4C4.66667 7.06667 4.1 8.93333 4.1 11H9.6V20H0ZM18 20V12.4C18 9.06667 18.8 6.2 20.4 3.8C22.0667 1.4 24.4667 0.2 27.6 0.2L28 2C26 2.53333 24.4 3.66667 23.2 5.4C22.0667 7.06667 21.5 8.93333 21.5 11H27V20H18Z" fill="var(--color-blue)" opacity="0.25"/>
                 </svg>
@@ -528,7 +532,7 @@ function Testimonials() {
                   </div>
                   <p className="text-[13px] font-semibold text-[var(--color-ink)]">{role}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </FadeUp>
