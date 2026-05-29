@@ -50,8 +50,24 @@ const NAV_HEIGHT = 60
 function scrollToSection(href: string) {
   const el = document.querySelector(href)
   if (!el) return
-  const top = el.getBoundingClientRect().top + window.scrollY - NAV_HEIGHT - 8
-  window.scrollTo({ top, behavior: "smooth" })
+  const target = el.getBoundingClientRect().top + window.scrollY - NAV_HEIGHT - 8
+  const start = window.scrollY
+  const distance = target - start
+  const duration = 520
+  let startTime: number | null = null
+
+  function easeInOutCubic(t: number) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
+  }
+
+  function step(ts: number) {
+    if (!startTime) startTime = ts
+    const progress = Math.min((ts - startTime) / duration, 1)
+    window.scrollTo(0, start + distance * easeInOutCubic(progress))
+    if (progress < 1) requestAnimationFrame(step)
+  }
+
+  requestAnimationFrame(step)
 }
 
 function Nav() {
@@ -72,7 +88,7 @@ function Nav() {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
     close()
-    setTimeout(() => scrollToSection(href), open ? 260 : 0)
+    setTimeout(() => scrollToSection(href), open ? 230 : 0)
   }
 
   return (
@@ -206,10 +222,10 @@ function FadeUp({ children, delay = 0, className }: {
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 32 }}
+      initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-64px" }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.42, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
       {children}
@@ -246,27 +262,27 @@ function Hero({
           >
             <Floating sensitivity={0.8} easingFactor={0.04}>
               {/* Top-left cluster */}
-              <FloatingElement depth={2}  className="top-[8%]  left-[3%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.40, type:"spring", stiffness:180, damping:18 }}><IconPill   {...floatingIcons[0]}   /></motion.div></FloatingElement>
-              <FloatingElement depth={1}  className="top-[22%] left-[6%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.52, type:"spring", stiffness:180, damping:18 }}><SymbolPill {...floatingSymbols[0]} /></motion.div></FloatingElement>
-              <FloatingElement depth={3}  className="top-[38%] left-[2%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.65, type:"spring", stiffness:180, damping:18 }}><IconPill   {...floatingIcons[4]}   /></motion.div></FloatingElement>
-              <FloatingElement depth={1.5}className="top-[55%] left-[5%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.73, type:"spring", stiffness:180, damping:18 }}><SymbolPill {...floatingSymbols[3]} /></motion.div></FloatingElement>
+              <FloatingElement depth={2}  className="top-[8%]  left-[3%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.40, type:"spring", stiffness:300, damping:26 }}><IconPill   {...floatingIcons[0]}   /></motion.div></FloatingElement>
+              <FloatingElement depth={1}  className="top-[22%] left-[6%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.52, type:"spring", stiffness:300, damping:26 }}><SymbolPill {...floatingSymbols[0]} /></motion.div></FloatingElement>
+              <FloatingElement depth={3}  className="top-[38%] left-[2%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.65, type:"spring", stiffness:300, damping:26 }}><IconPill   {...floatingIcons[4]}   /></motion.div></FloatingElement>
+              <FloatingElement depth={1.5}className="top-[55%] left-[5%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.73, type:"spring", stiffness:300, damping:26 }}><SymbolPill {...floatingSymbols[3]} /></motion.div></FloatingElement>
 
               {/* Top-right cluster */}
-              <FloatingElement depth={2}  className="top-[6%]  right-[4%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.44, type:"spring", stiffness:180, damping:18 }}><IconPill   {...floatingIcons[1]}   /></motion.div></FloatingElement>
-              <FloatingElement depth={1}  className="top-[20%] right-[7%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.56, type:"spring", stiffness:180, damping:18 }}><SymbolPill {...floatingSymbols[1]} /></motion.div></FloatingElement>
-              <FloatingElement depth={2.5}className="top-[35%] right-[3%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.68, type:"spring", stiffness:180, damping:18 }}><IconPill   {...floatingIcons[6]}   /></motion.div></FloatingElement>
-              <FloatingElement depth={1}  className="top-[52%] right-[6%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.77, type:"spring", stiffness:180, damping:18 }}><SymbolPill {...floatingSymbols[4]} /></motion.div></FloatingElement>
+              <FloatingElement depth={2}  className="top-[6%]  right-[4%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.44, type:"spring", stiffness:300, damping:26 }}><IconPill   {...floatingIcons[1]}   /></motion.div></FloatingElement>
+              <FloatingElement depth={1}  className="top-[20%] right-[7%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.56, type:"spring", stiffness:300, damping:26 }}><SymbolPill {...floatingSymbols[1]} /></motion.div></FloatingElement>
+              <FloatingElement depth={2.5}className="top-[35%] right-[3%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.68, type:"spring", stiffness:300, damping:26 }}><IconPill   {...floatingIcons[6]}   /></motion.div></FloatingElement>
+              <FloatingElement depth={1}  className="top-[52%] right-[6%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.77, type:"spring", stiffness:300, damping:26 }}><SymbolPill {...floatingSymbols[4]} /></motion.div></FloatingElement>
 
               {/* Bottom-left cluster */}
-              <FloatingElement depth={1.5}className="bottom-[22%] left-[4%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.60, type:"spring", stiffness:180, damping:18 }}><IconPill   {...floatingIcons[2]}   /></motion.div></FloatingElement>
-              <FloatingElement depth={2}  className="bottom-[10%] left-[7%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.70, type:"spring", stiffness:180, damping:18 }}><SymbolPill {...floatingSymbols[2]} /></motion.div></FloatingElement>
-              <FloatingElement depth={1}  className="bottom-[8%]  left-[20%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.80, type:"spring", stiffness:180, damping:18 }}><IconPill   {...floatingIcons[8]}   /></motion.div></FloatingElement>
+              <FloatingElement depth={1.5}className="bottom-[22%] left-[4%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.60, type:"spring", stiffness:300, damping:26 }}><IconPill   {...floatingIcons[2]}   /></motion.div></FloatingElement>
+              <FloatingElement depth={2}  className="bottom-[10%] left-[7%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.70, type:"spring", stiffness:300, damping:26 }}><SymbolPill {...floatingSymbols[2]} /></motion.div></FloatingElement>
+              <FloatingElement depth={1}  className="bottom-[8%]  left-[20%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.80, type:"spring", stiffness:300, damping:26 }}><IconPill   {...floatingIcons[8]}   /></motion.div></FloatingElement>
 
               {/* Bottom-right cluster */}
-              <FloatingElement depth={2}  className="bottom-[20%] right-[5%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.62, type:"spring", stiffness:180, damping:18 }}><IconPill   {...floatingIcons[3]}   /></motion.div></FloatingElement>
-              <FloatingElement depth={1.5}className="bottom-[9%]  right-[8%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.72, type:"spring", stiffness:180, damping:18 }}><IconPill   {...floatingIcons[7]}   /></motion.div></FloatingElement>
-              <FloatingElement depth={1}  className="bottom-[7%]  right-[20%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.82, type:"spring", stiffness:180, damping:18 }}><SymbolPill {...floatingSymbols[5]} /></motion.div></FloatingElement>
-              <FloatingElement depth={3}  className="bottom-[18%] right-[22%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.48, type:"spring", stiffness:180, damping:18 }}><IconPill   {...floatingIcons[9]}   /></motion.div></FloatingElement>
+              <FloatingElement depth={2}  className="bottom-[20%] right-[5%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.62, type:"spring", stiffness:300, damping:26 }}><IconPill   {...floatingIcons[3]}   /></motion.div></FloatingElement>
+              <FloatingElement depth={1.5}className="bottom-[9%]  right-[8%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.72, type:"spring", stiffness:300, damping:26 }}><IconPill   {...floatingIcons[7]}   /></motion.div></FloatingElement>
+              <FloatingElement depth={1}  className="bottom-[7%]  right-[20%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.82, type:"spring", stiffness:300, damping:26 }}><SymbolPill {...floatingSymbols[5]} /></motion.div></FloatingElement>
+              <FloatingElement depth={3}  className="bottom-[18%] right-[22%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.48, type:"spring", stiffness:300, damping:26 }}><IconPill   {...floatingIcons[9]}   /></motion.div></FloatingElement>
             </Floating>
           </motion.div>
         )}
@@ -276,14 +292,14 @@ function Hero({
       <div className="relative z-10 flex flex-col items-center text-center px-6 w-full max-w-[680px] pointer-events-auto">
         <motion.h1
           className="text-[11px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-5 mobile-landscape:mb-2"
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
+          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         >
           {headline ?? t.hero.label}
         </motion.h1>
 
         <motion.p
           className="font-serif text-[clamp(38px,6vw,72px)] mobile-landscape:text-[clamp(22px,4vw,36px)] font-normal leading-[1.08] tracking-tight mb-6 mobile-landscape:mb-2"
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}
+          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.28, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         >
           <span>{t.hero.line1}</span>
           <br />
@@ -313,14 +329,14 @@ function Hero({
 
         <motion.p
           className="text-[clamp(15px,1.8vw,18px)] text-[var(--color-ink-muted)] max-w-[520px] mb-10 mobile-landscape:mb-4 leading-[1.65]"
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55 }}
+          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.38, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         >
           {subheadline ?? t.hero.subheadline}
         </motion.p>
 
         <motion.div
           className="flex flex-wrap items-center justify-center gap-3 mb-4"
-          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.65 }}
+          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.46, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         >
           <a
             href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page"
@@ -341,7 +357,7 @@ function Hero({
 
         <motion.p
           className="text-[13px] text-[var(--color-ink-muted)]"
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.75 }}
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.54, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         >
           {t.hero.trustLine}
         </motion.p>
@@ -414,10 +430,10 @@ function HowItWorks() {
             <motion.div
               key={num}
               className="neo-card bg-white p-6 md:p-10"
-              initial={{ opacity: 0, x: i === 0 ? -80 : i === 2 ? 80 : 0, y: i === 1 ? 60 : 0 }}
+              initial={{ opacity: 0, x: i === 0 ? -48 : i === 2 ? 48 : 0, y: i === 1 ? 36 : 0 }}
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ type: "spring", stiffness: 260, damping: 16, delay: i * 0.07 }}
+              transition={{ type: "spring", stiffness: 320, damping: 26, delay: i * 0.06 }}
             >
               <div className="w-9 h-9 rounded bg-[var(--color-surface)] border-2 border-[var(--color-ink)] shadow-[2px_2px_0_var(--color-ink)] flex items-center justify-center text-[13px] font-semibold text-[var(--color-ink)] mb-5">
                 {num}
@@ -820,7 +836,7 @@ function ContactForm() {
       {/* Step content */}
       <AnimatePresence mode="wait" custom={dir}>
         <motion.div key={step} custom={dir} variants={variants} initial="enter" animate="center" exit="exit"
-          transition={{ duration: 0.18, ease: "easeInOut" }}>
+          transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}>
           {step === 1 && <Phase1 d={data} s={setData} />}
           {step === 2 && <Phase2 d={data} s={setData} />}
           {step === 3 && <Phase3 d={data} s={setData} />}
@@ -1107,7 +1123,7 @@ function FAQ() {
               <motion.div
                 initial={false}
                 animate={{ height: open === i ? "auto" : 0, opacity: open === i ? 1 : 0 }}
-                transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+                transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
                 style={{ overflow: "hidden" }}
               >
                 <div className="px-5 pt-3 pb-6 md:px-8 md:pt-4 md:pb-8 text-[14px] text-[var(--color-ink-muted)] leading-[1.85]">
