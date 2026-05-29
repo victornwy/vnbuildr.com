@@ -83,36 +83,29 @@ function Nav() {
           <span className="text-[var(--color-blue)] font-bold">vn</span><em>buildr</em>
         </Link>
 
-        {/* Desktop nav links */}
-        <ul className="hidden md:flex mobile-landscape:hidden items-center gap-8 list-none">
-          {NAV_LINKS.map(([href, label]) => (
-            <li key={href}>
-              <a href={href} onClick={e => handleNavClick(e, href)} className="text-sm text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors">{label}</a>
-            </li>
-          ))}
-          <li>
-            <Link href="/portfolio" className="text-sm text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors">{t.nav.portfolio}</Link>
-          </li>
-        </ul>
-
         {/* Desktop right */}
         <div className="hidden md:flex mobile-landscape:hidden items-center gap-4">
-          <Link href={t.nav.langHref} className="text-[12px] font-semibold text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors tracking-wide border border-[var(--color-border)] px-2.5 py-1 rounded">
-            {t.nav.langToggle}
-          </Link>
+          <Link href="/portfolio" className="text-sm text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors">{t.nav.portfolio}</Link>
           <div className="w-px h-5 bg-[var(--color-border)]" />
           <AnimToggle on={on} set={set} />
           <div className="w-px h-5 bg-[var(--color-border)]" />
           <a href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page" target="_blank" rel="noopener noreferrer" className="whatsapp-glow text-sm font-medium bg-[#25D366] text-white px-5 py-2.5 rounded-full hover:opacity-85 transition-opacity">
             {t.nav.getInTouch}
           </a>
+          <button
+            onClick={() => setOpen(o => !o)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            className="w-9 h-9 flex flex-col items-center justify-center gap-[5px] rounded border-2 border-[var(--color-ink)] shadow-[2px_2px_0_var(--color-ink)] bg-white shrink-0"
+          >
+            <motion.span animate={open ? { rotate: 45, y: 7 }  : { rotate: 0, y: 0 }}  transition={{ duration: 0.2 }} className="block w-[15px] h-[1.5px] bg-[var(--color-ink)] rounded-full origin-center" />
+            <motion.span animate={open ? { opacity: 0 }        : { opacity: 1 }}        transition={{ duration: 0.15 }} className="block w-[15px] h-[1.5px] bg-[var(--color-ink)] rounded-full" />
+            <motion.span animate={open ? { rotate: -45, y: -7 }: { rotate: 0, y: 0 }} transition={{ duration: 0.2 }} className="block w-[15px] h-[1.5px] bg-[var(--color-ink)] rounded-full origin-center" />
+          </button>
         </div>
 
-        {/* Mobile right: lang + CTA + burger */}
+        {/* Mobile right: CTA + burger */}
         <div className="flex md:hidden mobile-landscape:flex items-center gap-2">
-          <Link href={t.nav.langHref} className="text-[11px] font-semibold text-[var(--color-ink-muted)] border border-[var(--color-border)] px-2 py-1 rounded">
-            {t.nav.langToggle}
-          </Link>
           <a href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page" target="_blank" rel="noopener noreferrer" className="whatsapp-glow text-sm mobile-landscape:text-xs font-medium bg-[#25D366] text-white px-4 mobile-landscape:px-3 py-2 mobile-landscape:py-1.5 rounded-full hover:opacity-85 transition-opacity">
             <span className="mobile-landscape:hidden">{t.nav.getInTouch}</span>
             <span className="hidden mobile-landscape:inline">{t.nav.chat}</span>
@@ -130,16 +123,16 @@ function Nav() {
         </div>
       </div>
 
-      {/* Mobile dropdown */}
+      {/* Nav dropdown */}
       <AnimatePresence>
         {open && (
           <motion.div
-            key="mobile-menu"
+            key="nav-menu"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="md:hidden mobile-landscape:!block overflow-hidden bg-white border-b border-[var(--color-border)]"
+            className="overflow-hidden bg-white border-b border-[var(--color-border)]"
           >
             <div className="px-6 py-4 mobile-landscape:py-2 flex flex-col mobile-landscape:grid mobile-landscape:grid-cols-2 mobile-landscape:gap-x-4 mobile-landscape:max-h-[calc(100vh-60px)] mobile-landscape:overflow-y-auto">
               {NAV_LINKS.map(([href, label]) => (
@@ -152,10 +145,10 @@ function Nav() {
                   {label}
                 </a>
               ))}
-              <Link href="/portfolio" onClick={close} className="text-[15px] mobile-landscape:text-[13px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] py-3 mobile-landscape:py-2 border-b border-[var(--color-border)] transition-colors">
+              <Link href="/portfolio" onClick={close} className="md:hidden text-[15px] mobile-landscape:text-[13px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] py-3 mobile-landscape:py-2 border-b border-[var(--color-border)] transition-colors">
                 {t.nav.portfolio}
               </Link>
-              <div className="pt-4 mobile-landscape:pt-2 mobile-landscape:col-span-2 flex items-center justify-between">
+              <div className="md:hidden pt-4 mobile-landscape:pt-2 mobile-landscape:col-span-2 flex items-center justify-between">
                 <span className="text-[12px] font-semibold text-[var(--color-ink-muted)] uppercase tracking-wide">{t.nav.animation}</span>
                 <AnimToggle on={on} set={set} />
               </div>
