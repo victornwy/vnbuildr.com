@@ -12,56 +12,56 @@ const projects = [
     name: "AN Account",
     category: "Corporate B2C",
     description: "Professional landing page for a freelance accounting firm, built around credibility signals and client lead generation.",
-    image: "/portfolio-mockups/an-accounts.png",
+    image: "/vnbuildr-our%20works/AN%20Account.png",
   },
   {
     id: 2,
     name: "Everbest Link",
     category: "Corporate B2B",
     description: "Product and services showcase for a precision wirecut CNC machining firm, built to generate B2B enquiries.",
-    image: "/portfolio-mockups/everbestlink.png",
+    image: "/vnbuildr-our%20works/EverbestLink.png",
   },
   {
     id: 3,
     name: "TopSpace Limited",
     category: "Corporate B2B",
     description: "Commercial shelving solutions showcase for a boltless racking and gondola supplier, designed to drive trade enquiries.",
-    image: "/portfolio-mockups/topspace.png",
+    image: "/vnbuildr-our%20works/TopSpace.png",
   },
   {
     id: 4,
     name: "Meridian Securities",
     category: "Corporate B2B",
     description: "Trust-first landing page for a securities advisory firm, built around regulatory credibility and direct client acquisition CTAs.",
-    image: "/portfolio-mockups/meridian.png",
+    image: "/vnbuildr-our%20works/Meridian.png",
   },
   {
     id: 5,
     name: "NovaDax Limited",
     category: "Corporate B2C",
     description: "Crypto exchange landing page designed for aggressive user acquisition with trust-building elements.",
-    image: "/portfolio-mockups/novadax.png",
+    image: "/vnbuildr-our%20works/Novadax.png",
   },
   {
     id: 6,
     name: "Ember & Oak Cafe",
     category: "Restaurant and Cafe",
     description: "Specialty coffee café site built to drive dine-in reservations and online orders, with a warm editorial aesthetic.",
-    image: "/portfolio-mockups/emberoak.png",
+    image: "/vnbuildr-our%20works/EmberOak.png",
   },
   {
     id: 7,
     name: "Lumora",
     category: "Online Store",
     description: "Digital creative marketplace for courses, presets, templates and wallpapers — designed for instant downloads.",
-    image: "/portfolio-mockups/lumora.png",
+    image: "/vnbuildr-our%20works/Lumora.png",
   },
   {
     id: 8,
     name: "Ryan Lim",
     category: "Personal Brand",
     description: "Personal brand site for a KL & Selangor property agent, showcasing past projects and converting buyers into leads.",
-    image: "/portfolio-mockups/ryanlim.png",
+    image: "/vnbuildr-our%20works/RyanLim.png",
   },
 ]
 
@@ -90,18 +90,17 @@ function ProjectCard({ project, priority = false }: { project: typeof projects[0
       whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 24 } }}
     >
       {/* Image */}
-      <div className="relative overflow-hidden">
+      <div className="relative aspect-video overflow-hidden">
         <div className="absolute inset-0 z-10" onContextMenu={e => e.preventDefault()} />
         <Image
           src={project.image}
           alt={`${project.name} ${project.category} landing page — vnbuildr web development portfolio`}
-          width={1080}
-          height={1440}
-          className="w-full h-auto object-cover select-none transition-transform duration-500 group-hover:scale-[1.03]"
+          fill
+          className="object-cover select-none transition-transform duration-500 group-hover:scale-[1.03]"
           draggable={false}
           onContextMenu={e => e.preventDefault()}
           priority={priority}
-          sizes="(max-width: 768px) 45vw, (max-width: 1024px) 30vw, 275px"
+          sizes="(max-width: 640px) 95vw, (max-width: 1024px) 47vw, 575px"
         />
       </div>
 
@@ -203,7 +202,7 @@ export default function PortfolioPage() {
             </motion.div>
 
             {/* Project grid */}
-            <motion.div layout className="grid grid-cols-2 mobile-landscape:grid-cols-4 md:grid-cols-4 gap-5 md:gap-6">
+            <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
               <AnimatePresence mode="popLayout">
                 {filtered.map(project => (
                   <ProjectCard key={project.id} project={project} priority={project.id <= 4} />
