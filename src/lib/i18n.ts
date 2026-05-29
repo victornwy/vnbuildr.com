@@ -58,8 +58,8 @@ export interface Translations {
 const en: Translations = {
   nav: {
     how: "How it works", features: "What you get", track: "Build options",
-    faq: "FAQ", contact: "Contact", portfolio: "Portfolio",
-    getInTouch: "Get in touch", chat: "Chat",
+    faq: "FAQ", contact: "Contact", portfolio: "View Our Works",
+    getInTouch: "Get started", chat: "Chat",
     langToggle: "中文", langHref: "/zh",
     animation: "Animation", backToHome: "Back to home",
   },

@@ -88,7 +88,7 @@ function Nav() {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
     close()
-    setTimeout(() => scrollToSection(href), open ? 230 : 0)
+    setTimeout(() => scrollToSection(href), open ? 150 : 0)
   }
 
   return (
@@ -101,10 +101,6 @@ function Nav() {
 
         {/* Desktop right */}
         <div className="hidden md:flex mobile-landscape:hidden items-center gap-4">
-          <Link href="/portfolio" className="text-sm text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors">{t.nav.portfolio}</Link>
-          <div className="w-px h-5 bg-[var(--color-border)]" />
-          <AnimToggle on={on} set={set} />
-          <div className="w-px h-5 bg-[var(--color-border)]" />
           <a href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page" target="_blank" rel="noopener noreferrer" className="whatsapp-glow text-sm font-medium bg-[#25D366] text-white px-5 py-2.5 rounded-full hover:opacity-85 transition-opacity">
             {t.nav.getInTouch}
           </a>
@@ -147,7 +143,7 @@ function Nav() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.14, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden bg-white border-b border-[var(--color-border)]"
           >
             <div className="px-6 py-4 mobile-landscape:py-2 flex flex-col mobile-landscape:grid mobile-landscape:grid-cols-2 mobile-landscape:gap-x-4 mobile-landscape:max-h-[calc(100vh-60px)] mobile-landscape:overflow-y-auto">
@@ -161,10 +157,10 @@ function Nav() {
                   {label}
                 </a>
               ))}
-              <Link href="/portfolio" onClick={close} className="md:hidden text-[15px] mobile-landscape:text-[13px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] py-3 mobile-landscape:py-2 border-b border-[var(--color-border)] transition-colors">
+              <Link href="/portfolio" onClick={close} className="text-[15px] mobile-landscape:text-[13px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] py-3 mobile-landscape:py-2 border-b border-[var(--color-border)] transition-colors">
                 {t.nav.portfolio}
               </Link>
-              <div className="md:hidden pt-4 mobile-landscape:pt-2 mobile-landscape:col-span-2 flex items-center justify-between">
+              <div className="pt-4 mobile-landscape:pt-2 mobile-landscape:col-span-2 flex items-center justify-between">
                 <span className="text-[12px] font-semibold text-[var(--color-ink-muted)] uppercase tracking-wide">{t.nav.animation}</span>
                 <AnimToggle on={on} set={set} />
               </div>
