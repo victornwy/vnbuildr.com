@@ -1065,8 +1065,8 @@ const faqs: { q: string; a: React.ReactNode }[] = [
     a: "Copywriting is included — I write the page copy for you. What helps most is having your high-resolution logo, primary brand colors, and any product photos or graphics ready to share. The more brand context you can give me upfront, the faster we hit the launch timeline.",
   },
   {
-    q: 'What is the difference between the "React High-Motion" and "Static HTML/CSS" tracks?',
-    a: "The React Track is built for modern brands that want to make an unforgettable visual impression — fluid scroll animations, interactive layout grids, and premium motion components. (This website is built on this exact track!) The Static Track is built for raw performance, absolute simplicity, and local services. It uses zero heavy scripts, meaning your page will load instantly even on weak mobile connections, with absolutely zero monthly software maintenance.",
+    q: 'What is the difference between "The Premium Experience" and "The Fast & Simple Launch"?',
+    a: 'The Premium Experience is built for modern brands that want to make an unforgettable visual impression — fluid scroll animations, interactive layout grids, and premium motion components. (This website is built on this exact option!) The Fast & Simple Launch is built for raw performance, absolute simplicity, and local services. It uses zero heavy scripts, meaning your page will load instantly even on weak mobile connections, with absolutely zero monthly software maintenance.',
   },
   {
     q: "Can I provide my own design?",
@@ -1190,8 +1190,8 @@ const faqSchema = {
     },
     {
       "@type": "Question",
-      "name": "What is the difference between the React High-Motion and Static HTML/CSS tracks?",
-      "acceptedAnswer": { "@type": "Answer", "text": "The React Track is built for modern brands that want to make an unforgettable visual impression — fluid scroll animations, interactive layout grids, and premium motion components. The Static Track is built for raw performance, absolute simplicity, and local services. It uses zero heavy scripts, meaning your page will load instantly even on weak mobile connections, with absolutely zero monthly software maintenance." },
+      "name": "What is the difference between The Premium Experience and The Fast & Simple Launch?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The Premium Experience is built for modern brands that want to make an unforgettable visual impression — fluid scroll animations, interactive layout grids, and premium motion components. The Fast & Simple Launch is built for raw performance, absolute simplicity, and local services. It uses zero heavy scripts, meaning your page will load instantly even on weak mobile connections, with absolutely zero monthly software maintenance." },
     },
     {
       "@type": "Question",
