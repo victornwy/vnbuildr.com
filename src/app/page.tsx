@@ -88,9 +88,7 @@ function Nav() {
   const close = () => setOpen(false)
 
   const NAV_LINKS: [string, string][] = [
-    ["#how",      t.nav.how],
-    ["#features", t.nav.features],
-    ["#track",    t.nav.track],
+    ["#pricing",  t.nav.pricing],
     ["#faq",      t.nav.faq],
     ["#contact",  t.nav.contact],
   ]
@@ -376,12 +374,12 @@ function Hero({
             {t.hero.primaryCta}
             <ArrowRight />
           </a>
-          <a
-            href="#how"
+          <Link
+            href="/portfolio"
             className="inline-flex items-center text-[15px] font-medium px-6 py-3 rounded-full border border-[var(--color-border)] hover:border-[var(--color-ink)] transition-colors"
           >
-            {t.hero.secondaryCta}
-          </a>
+            View our works
+          </Link>
         </motion.div>
 
         <motion.p
@@ -396,13 +394,241 @@ function Hero({
   );
 }
 
+// ─── Why Website ──────────────────────────────────────────────────────────────
+function WhyWebsite() {
+  const bullets = [
+    "Build SEO authority. Social profiles rarely do.",
+    "Collect leads without paying per click.",
+    "Your data. Your rules. Your brand.",
+    "Works 24/7 — no feed, no algorithm.",
+  ]
+
+  return (
+    <section className="py-16 md:py-24 px-6 bg-[var(--color-surface)]">
+      <div className="max-w-[1100px] mx-auto">
+
+        {/* Centered header */}
+        <FadeUp className="text-center mb-12">
+          <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
+            The myth of social media
+          </p>
+          <h2 className="font-serif text-[clamp(30px,4vw,48px)] font-normal tracking-tight leading-[1.1] mb-5">
+            Social media is rented land.
+            <br />
+            <span className="text-[var(--color-blue)]">Your website is property.</span>
+          </h2>
+          <p className="text-[16px] text-[var(--color-ink-muted)] leading-[1.75] max-w-[520px] mx-auto">
+            Every follower you&apos;ve built on Instagram, TikTok, or LinkedIn lives on someone else&apos;s server — subject to algorithm shifts, account bans, or platform shutdowns beyond your control. Your website is the only digital real estate you truly own.
+          </p>
+        </FadeUp>
+
+        {/* 2×2 bullet grid */}
+        <FadeUp delay={0.1}>
+          <div className="grid sm:grid-cols-2 gap-4 mb-10">
+            {bullets.map((text, i) => (
+              <motion.div
+                key={i}
+                className="neo-card bg-[var(--color-surface)] flex items-center gap-4 px-6 py-5"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: 0.06 + i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
+              >
+                <span className="w-2 h-2 rounded-full bg-[var(--color-blue)] shrink-0" />
+                <p className="text-[15px] font-medium text-[var(--color-ink)] leading-snug">{text}</p>
+              </motion.div>
+            ))}
+          </div>
+          <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.75] border-t border-[var(--color-border)] pt-7 italic text-center max-w-[560px] mx-auto">
+            Social drives the attention. Your website converts it. You need both — but only one is truly yours.
+          </p>
+        </FadeUp>
+
+      </div>
+    </section>
+  )
+}
+
+// ─── Pricing ──────────────────────────────────────────────────────────────────
+function Pricing() {
+  const plans = [
+    {
+      name: "Starter",
+      price: "RM1,299",
+      desc: "A clean, professional single-page site to get your business online fast.",
+      perks: ["1 page", "7 content sections", "2–3 working days", "1 business email", "3 revision rounds"],
+      cta: "Get started",
+      waMsg: "Hi, I'm interested in the Starter package",
+      featured: false,
+    },
+    {
+      name: "Business",
+      price: "RM2,899",
+      desc: "Multi-page site built to grow with your business. Our most popular choice.",
+      perks: ["5 pages", "10–15 content sections", "3–7 working days", "1 business email", "4 revision rounds"],
+      cta: "Get started",
+      waMsg: "Hi, I'm interested in the Business package",
+      featured: true,
+    },
+    {
+      name: "Pro",
+      price: "RM3,799",
+      desc: "A full website for established businesses that need more pages and room to grow.",
+      perks: ["10 pages", "10–15 content sections", "4–8 working days", "2 business emails", "5 revision rounds"],
+      cta: "Chat with us",
+      waMsg: "Hi, I'm interested in the Pro package",
+      featured: false,
+    },
+  ]
+
+  const included = [
+    { title: "SSL secure connection",  desc: "Your site runs on HTTPS. Visitors see a padlock — they know their details are safe." },
+    { title: "Mobile-first design",    desc: "Looks great and works perfectly on phones, tablets, and desktops." },
+    { title: "Online inquiry form",    desc: "A contact form built into your site so customers can reach you directly." },
+    { title: "WhatsApp support",       desc: "Reach me directly on WhatsApp during the project for quick updates and questions." },
+    { title: "Google Maps embed",      desc: "Your business location shown on a live map so customers can find you easily." },
+    { title: "Speed optimisation",     desc: "Pages are built to load fast, even on slow mobile data connections." },
+    { title: "Google Analytics setup", desc: "Track how many people visit your site, where they come from, and what they do." },
+    { title: "Basic SEO setup",        desc: "Page titles, descriptions, and tags set up correctly so Google can find you." },
+  ]
+
+  return (
+    <section id="pricing" className="py-16 md:py-24 px-6 bg-white">
+      <div className="max-w-[1100px] mx-auto">
+
+        <FadeUp className="text-center mb-14">
+          <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
+            Packages · Malaysia
+          </p>
+          <h2 className="font-serif text-[clamp(30px,4vw,48px)] font-normal tracking-tight leading-[1.1] mb-4">
+            Website &amp; landing page pricing.
+            <br />
+            <span className="text-[var(--color-blue)]">Simple. Transparent. No hidden fees.</span>
+          </h2>
+          <p className="text-[16px] text-[var(--color-ink-muted)] max-w-[460px] mx-auto leading-[1.65]">
+            Pick the package that fits your business. All packages include the same core features.
+          </p>
+        </FadeUp>
+
+        {/* 3 main cards */}
+        <FadeUp delay={0.08}>
+          <div className="grid sm:grid-cols-3 gap-5 mb-5">
+            {plans.map(({ name, price, desc, perks, cta, waMsg, featured }, i) => (
+              <motion.div
+                key={name}
+                className={`flex flex-col bg-white overflow-hidden ${featured ? "neo-card-blue" : "neo-card"}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
+              >
+                {/* Header */}
+                <div className={`px-6 pt-6 pb-5 border-b ${featured ? "border-[var(--color-blue)]/20" : "border-[var(--color-border)]"}`}>
+                  {featured && (
+                    <span className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-[0.06em] uppercase bg-[#eef3ff] text-[var(--color-blue)] px-2.5 py-1 rounded-full mb-3">
+                      Most Popular
+                    </span>
+                  )}
+                  <h3 className="font-serif text-[20px] font-normal tracking-tight mb-2">{name}</h3>
+                  <p className="font-serif text-[34px] font-normal tracking-tight leading-none mb-3">{price}</p>
+                  <p className="text-[13px] text-[var(--color-ink-muted)] leading-[1.6]">{desc}</p>
+                </div>
+
+                {/* Differentiators */}
+                <div className="px-6 py-5 flex-1 space-y-3">
+                  {perks.map((item) => (
+                    <div key={item} className="flex items-center gap-2.5">
+                      <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true" className={featured ? "text-[var(--color-blue)] shrink-0" : "text-[var(--color-ink)] shrink-0"}>
+                        <path d="M2.5 7.5L6 11l6.5-7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                      <span className="text-[14px] text-[var(--color-ink)]">{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTA */}
+                <div className="px-6 pb-6">
+                  <a
+                    href={`https://wa.me/60199195314?text=${encodeURIComponent(waMsg)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`w-full flex items-center justify-center gap-2 text-[14px] font-medium py-3 rounded-full hover:opacity-85 transition-opacity ${
+                      featured ? "bg-[var(--color-blue)] text-white" : "bg-[var(--color-ink)] text-white"
+                    }`}
+                  >
+                    {cta}
+                    <ArrowRight />
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </FadeUp>
+
+        {/* Custom — full-width banner */}
+        <FadeUp delay={0.16}>
+          <motion.div
+            className="neo-card bg-white"
+            whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
+          >
+            <div className="grid md:grid-cols-[1fr_auto] gap-6 p-6 md:p-8 items-center">
+              <div>
+                <div className="flex flex-wrap items-center gap-3 mb-2">
+                  <span className="text-[11px] font-bold tracking-[0.06em] uppercase bg-[var(--color-surface)] text-[var(--color-ink-muted)] px-2.5 py-1 rounded-full border border-[var(--color-border)]">Custom</span>
+                  <span className="font-serif text-[26px] font-normal tracking-tight">From RM3,999</span>
+                </div>
+                <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.7] max-w-[560px]">
+                  Need something bigger? We build fully custom websites with 10–25 pages, unique design from scratch, 5 business emails, and up to 7 revision rounds. Delivery in 8–15 working days.
+                </p>
+              </div>
+              <a
+                href={`https://wa.me/60199195314?text=${encodeURIComponent("Hi, I'd like to discuss a Custom website")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-[14px] font-medium bg-[var(--color-ink)] text-white px-6 py-3 rounded-full hover:opacity-85 transition-opacity whitespace-nowrap shrink-0"
+              >
+                Let&apos;s discuss
+                <ArrowRight />
+              </a>
+            </div>
+          </motion.div>
+        </FadeUp>
+
+        {/* All-plans inclusions */}
+        <FadeUp delay={0.2}>
+          <div className="mt-6 p-6 rounded-lg border border-[var(--color-border)] bg-white">
+            <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-4">Included in all packages</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              {included.map(({ title, desc }) => (
+                <div key={title} className="flex gap-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-blue)] shrink-0 mt-[6px]" />
+                  <div>
+                    <p className="text-[13px] font-semibold text-[var(--color-ink)] leading-snug">{title}</p>
+                    <p className="text-[12px] text-[var(--color-ink-muted)] leading-[1.6] mt-0.5">{desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="text-[12px] text-[var(--color-ink-muted)] mt-5 pt-4 border-t border-[var(--color-border)]">
+              * Domain and hosting are not included. These are separate costs paid to your chosen provider.
+            </p>
+          </div>
+        </FadeUp>
+
+      </div>
+    </section>
+  )
+}
+
 // ─── How it works ─────────────────────────────────────────────────────────────
 function HowItWorks() {
   const t = useT()
   const steps = t.how.steps
 
   return (
-    <section id="how" className="py-16 md:py-24 px-6 bg-[var(--color-surface)]">
+    <section id="how" className="py-16 md:py-24 px-6 bg-white">
       <div className="max-w-[1100px] mx-auto">
         <FadeUp className="text-center mb-16">
           <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
@@ -460,7 +686,7 @@ function Features() {
   const cards = t.features.cards.map((c, i) => ({ ...c, icon: icons[i] }))
 
   return (
-    <section id="features" className="py-16 md:py-24 px-6 bg-white">
+    <section id="features" className="py-16 md:py-24 px-6 bg-[var(--color-surface)]">
       <div className="max-w-[1100px] mx-auto">
         <FadeUp className="mb-14">
           <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
@@ -502,7 +728,7 @@ function Features() {
 function Testimonials() {
   const t = useT()
   return (
-    <section className="py-16 md:py-24 px-6 bg-white">
+    <section className="py-16 md:py-24 px-6 bg-[var(--color-surface)]">
       <div className="max-w-[1100px] mx-auto">
         <FadeUp className="mb-14">
           <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
@@ -538,325 +764,95 @@ function Testimonials() {
   )
 }
 
-// ─── Dev Tracks ───────────────────────────────────────────────────────────────
-function DevTracks() {
-  const t = useT()
-  const tracks = t.tracks.options.map((o, i) => ({ ...o, featured: i === 0 }))
+// ─── Contact form ─────────────────────────────────────────────────────────────
+const FIELD = "w-full bg-white/[0.08] border-2 border-white/20 rounded px-4 py-3 text-white text-[14px] placeholder:text-white/30 outline-none focus:border-white/50 transition-colors"
+const LABEL = "block text-[13px] font-medium text-white/55 mb-2"
+
+function ContactForm() {
+  const [name,     setName]     = useState("")
+  const [phone,    setPhone]    = useState("")
+  const [business, setBusiness] = useState("")
+  const [pkg,      setPkg]      = useState("")
+  const [message,  setMessage]  = useState("")
+
+  const packages = ["Starter", "Business", "Pro", "Custom", "Not sure yet"]
+  const canSubmit = name.trim() && phone.trim() && business.trim()
+
+  const submit = () => {
+    const lines = [
+      "Hi, I'd like to start a project with vnbuildr.",
+      "",
+      `Name: ${name}`,
+      `WhatsApp: ${phone}`,
+      `Business: ${business}`,
+      pkg     ? `Package: ${pkg}`       : null,
+      message ? `Message: ${message}`   : null,
+    ].filter(Boolean).join("\n")
+    window.open(`https://wa.me/60199195314?text=${encodeURIComponent(lines)}`, "_blank")
+  }
 
   return (
-    <section id="track" className="py-16 md:py-24 px-6 bg-[var(--color-surface)]">
-      <div className="max-w-[1100px] mx-auto">
-        <FadeUp className="text-center mb-14">
-          <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
-            {t.tracks.label}
-          </p>
-          <h2 className="font-serif text-[clamp(30px,4vw,46px)] font-normal tracking-tight leading-[1.1] mb-4">
-            {t.tracks.heading.split("\n").map((line, i) => (
-              <span key={i}>{line}{i === 0 && <br />}</span>
-            ))}
-          </h2>
-          <p className="text-[16px] text-[var(--color-ink-muted)] max-w-[540px] mx-auto leading-[1.65]">
-            {t.tracks.subheading}
-          </p>
-        </FadeUp>
+    <div className="mt-10 space-y-5 text-left">
+      <div className="grid sm:grid-cols-2 gap-5">
+        <div>
+          <label className={LABEL}>Your name</label>
+          <input type="text" placeholder="First & last name" value={name} onChange={e => setName(e.target.value)} className={FIELD} />
+        </div>
+        <div>
+          <label className={LABEL}>WhatsApp number</label>
+          <input type="tel" placeholder="+60 12-345 6789" value={phone} onChange={e => setPhone(e.target.value)} className={FIELD} />
+        </div>
+      </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {tracks.map(({ badge, name, experience, bestFor, bestForLabel, perksLabel, perks, deliveryLabel, delivery, featured }, idx) => (
-            <FadeUp key={name} delay={idx * 0.12} className="flex flex-col">
-            <motion.div
-              className={`bg-white flex flex-col h-full overflow-hidden ${featured ? "neo-card-blue" : "neo-card"}`}
-              whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
+      <div>
+        <label className={LABEL}>Business name</label>
+        <input type="text" placeholder="Your company or project" value={business} onChange={e => setBusiness(e.target.value)} className={FIELD} />
+      </div>
+
+      <div>
+        <label className={LABEL}>Which package are you interested in? <span className="text-white/30 font-normal">(optional)</span></label>
+        <div className="flex flex-wrap gap-2 mt-1">
+          {packages.map(p => (
+            <button
+              key={p}
+              type="button"
+              onClick={() => setPkg(pkg === p ? "" : p)}
+              className={`text-[13px] font-medium px-4 py-2 rounded-full border-2 transition-all duration-150 ${
+                pkg === p
+                  ? "bg-white text-[var(--color-ink)] border-white"
+                  : "bg-transparent text-white/55 border-white/20 hover:border-white/40 hover:text-white/80"
+              }`}
             >
-              {/* Header */}
-              <div className={`px-5 pt-6 pb-4 md:px-8 md:pt-8 md:pb-6 border-b ${featured ? "border-[var(--color-blue)]/20" : "border-[var(--color-ink)]/12"}`}>
-                <span
-                  className={`inline-flex items-center gap-1.5 text-[11px] font-bold tracking-[0.08em] uppercase px-2.5 py-1 rounded-full mb-4 ${
-                    featured
-                      ? "bg-[#eef3ff] text-[var(--color-blue)]"
-                      : "bg-[var(--color-surface)] text-[var(--color-ink-muted)]"
-                  }`}
-                >
-                  {featured && (
-                    <motion.span
-                      animate={{ scale: [1, 1.25, 1], opacity: [1, 0.7, 1] }}
-                      transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-                      className="flex items-center"
-                    >
-                      <Zap size={11} className="shrink-0 fill-current" />
-                    </motion.span>
-                  )}
-                  {badge}
-                </span>
-                <h3 className="font-serif text-[22px] font-normal tracking-tight mb-2">{name}</h3>
-                <p className="text-[13px] italic text-[var(--color-ink-muted)] leading-[1.65]">{experience}</p>
-              </div>
-
-              {/* Body */}
-              <div className="px-5 py-5 md:px-8 md:py-7 space-y-6 flex-1">
-                <div>
-                  <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-2">{bestForLabel}</p>
-                  <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.65]">{bestFor}</p>
-                </div>
-                <div>
-                  <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-3">{perksLabel}</p>
-                  <div className="space-y-4">
-                    {perks.map(({ title, body }) => (
-                      <div key={title} className="flex gap-3">
-                        <span
-                          className={`mt-2 shrink-0 w-1.5 h-1.5 rounded-full ${
-                            featured ? "bg-[var(--color-blue)]" : "bg-[var(--color-ink-muted)]"
-                          }`}
-                        />
-                        <div>
-                          <p className="text-[14px] font-semibold text-[var(--color-ink)] mb-0.5">{title}</p>
-                          <p className="text-[13px] text-[var(--color-ink-muted)] leading-[1.65]">{body}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Footer */}
-              <div
-                className={`px-5 py-4 md:px-8 md:py-5 border-t flex items-center justify-between ${
-                  featured
-                    ? "border-[var(--color-blue)]/20 bg-[#f5f8ff]"
-                    : "border-[var(--color-ink)]/12 bg-[var(--color-surface)]"
-                }`}
-              >
-                <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)]">
-                  {deliveryLabel}
-                </p>
-                <span
-                  className={`text-[15px] font-bold tracking-tight ${
-                    featured ? "text-[var(--color-blue)]" : "text-[var(--color-ink)]"
-                  }`}
-                >
-                  {delivery}
-                </span>
-              </div>
-            </motion.div>
-            </FadeUp>
+              {p}
+            </button>
           ))}
         </div>
       </div>
-    </section>
-  )
-}
 
-// ─── Contact form ─────────────────────────────────────────────────────────────
-interface FormData {
-  name: string; email: string; business: string
-  scope: string; track: string
-  assets: string[]
-  budget: string; deadline: string; notes: string
-}
-
-const FIELD = "w-full bg-white/[0.08] border-2 border-white/20 rounded px-4 py-3 text-white text-[14px] placeholder:text-white/30 outline-none focus:border-white/50 transition-colors shadow-[3px_3px_0_rgba(255,255,255,0.1)]"
-const LABEL = "block text-[13px] font-medium text-white/55 mb-2"
-
-function RadioCard({ label, sub, checked, onClick }: { label: string; sub?: string; checked: boolean; onClick: () => void }) {
-  return (
-    <button type="button" onClick={onClick}
-      className={`w-full flex items-start gap-3 p-4 rounded border-2 text-left transition-all duration-150 ${checked ? "border-white/35 bg-white/[0.10] shadow-[3px_3px_0_rgba(255,255,255,0.15)]" : "border-white/15 bg-white/[0.04] hover:bg-white/[0.07] hover:border-white/25"}`}>
-      <span className={`mt-0.5 shrink-0 w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${checked ? "border-[#25D366]" : "border-white/25"}`}>
-        {checked && <span className="w-1.5 h-1.5 rounded-full bg-[#25D366]" />}
-      </span>
-      <span>
-        <span className="block text-[14px] font-medium text-white leading-snug">{label}</span>
-        {sub && <span className="block text-[12px] text-white/40 mt-0.5 leading-relaxed">{sub}</span>}
-      </span>
-    </button>
-  )
-}
-
-function CheckCard({ label, sub, checked, onClick }: { label: string; sub?: string; checked: boolean; onClick: () => void }) {
-  return (
-    <button type="button" onClick={onClick}
-      className={`w-full flex items-start gap-3 p-4 rounded border-2 text-left transition-all duration-150 ${checked ? "border-white/35 bg-white/[0.10] shadow-[3px_3px_0_rgba(255,255,255,0.15)]" : "border-white/15 bg-white/[0.04] hover:bg-white/[0.07] hover:border-white/25"}`}>
-      <span className={`mt-0.5 shrink-0 w-4 h-4 rounded border flex items-center justify-center transition-all ${checked ? "border-[#25D366] bg-[#25D366]" : "border-white/25 bg-transparent"}`}>
-        {checked && <svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5l2.5 2.5 4.5-5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>}
-      </span>
-      <span>
-        <span className="block text-[14px] font-medium text-white leading-snug">{label}</span>
-        {sub && <span className="block text-[12px] text-white/40 mt-0.5 leading-relaxed">{sub}</span>}
-      </span>
-    </button>
-  )
-}
-
-function Phase1({ d, s }: { d: FormData; s: React.Dispatch<React.SetStateAction<FormData>> }) {
-  return (
-    <div className="space-y-4">
-      <div><label className={LABEL}>Your name</label>
-        <input type="text" placeholder="First & last name" value={d.name} onChange={e => s(f => ({ ...f, name: e.target.value }))} className={FIELD} /></div>
-      <div><label className={LABEL}>Email address</label>
-        <input type="email" placeholder="Where I'll send quotes and code reviews" value={d.email} onChange={e => s(f => ({ ...f, email: e.target.value }))} className={FIELD} /></div>
-      <div><label className={LABEL}>Business or project name</label>
-        <input type="text" placeholder="Your company or project" value={d.business} onChange={e => s(f => ({ ...f, business: e.target.value }))} className={FIELD} /></div>
-    </div>
-  )
-}
-
-function Phase2({ d, s }: { d: FormData; s: React.Dispatch<React.SetStateAction<FormData>> }) {
-  const scopes = [
-    { v: "Single-Page Landing Page", sub: "Maps to quick-build options" },
-    { v: "Multi-Page Static Website (2–5 pages)", sub: undefined },
-    { v: "Advanced App-Ready Web Ecosystem", sub: undefined },
-  ]
-  const tracks = [
-    { v: "React High-Motion Experience", sub: "Fluid transitions, animated components, premium layout interactions — like this site." },
-    { v: "Pure HTML & CSS Launch", sub: "Ultra-lightweight raw code, near-instant loading speeds, zero maintenance overhead." },
-  ]
-  return (
-    <div className="space-y-6">
       <div>
-        <label className={LABEL}>Primary project scope</label>
-        <div className="space-y-2.5">{scopes.map(({ v, sub }) => <RadioCard key={v} label={v} sub={sub} checked={d.scope === v} onClick={() => s(f => ({ ...f, scope: v }))} />)}</div>
-      </div>
-      <div>
-        <label className={LABEL}>Development track</label>
-        <div className="space-y-2.5">{tracks.map(({ v, sub }) => <RadioCard key={v} label={v} sub={sub} checked={d.track === v} onClick={() => s(f => ({ ...f, track: v }))} />)}</div>
-      </div>
-    </div>
-  )
-}
-
-function Phase3({ d, s }: { d: FormData; s: React.Dispatch<React.SetStateAction<FormData>> }) {
-  const opts = [
-    { v: "Final Written Content / Copy", sub: "The exact wording, headlines, and text for the page." },
-    { v: "Brand Identity", sub: "High-resolution logos, brand fonts, and primary colors." },
-    { v: "Media Assets", sub: "Team photos, product screenshots, or graphics." },
-    { v: "Figma Layout Design", sub: "Complete static page blueprints (if hiring strictly as a developer)." },
-    { v: "None yet — I need help structuring my layout strategy", sub: undefined },
-  ]
-  const toggle = (v: string) => s(f => ({ ...f, assets: f.assets.includes(v) ? f.assets.filter(a => a !== v) : [...f.assets, v] }))
-  return (
-    <div>
-      <label className={LABEL}>Which assets do you have ready? <span className="text-white/30 font-normal">Select all that apply</span></label>
-      <div className="space-y-2.5 mt-2">{opts.map(({ v, sub }) => <CheckCard key={v} label={v} sub={sub} checked={d.assets.includes(v)} onClick={() => toggle(v)} />)}</div>
-    </div>
-  )
-}
-
-function Phase4({ d, s }: { d: FormData; s: React.Dispatch<React.SetStateAction<FormData>> }) {
-  const budgets = [
-    { v: "$300 – $600 USD", sub: "Static Single Page" },
-    { v: "$700 – $1,200 USD", sub: "Static Multi-Page" },
-    { v: "$1,200 – $1,800 USD", sub: "Premium React Single Page" },
-    { v: "$2,500+ USD", sub: "Advanced Next.js Architecture" },
-  ]
-  return (
-    <div className="space-y-6">
-      <div>
-        <label className={LABEL}>Target budget range</label>
-        <div className="space-y-2.5">{budgets.map(({ v, sub }) => <RadioCard key={v} label={v} sub={sub} checked={d.budget === v} onClick={() => s(f => ({ ...f, budget: v }))} />)}</div>
-      </div>
-      <div><label className={LABEL}>Target launch date <span className="text-white/30 font-normal">(optional)</span></label>
-        <input type="text" placeholder="e.g. End of July 2025" value={d.deadline} onChange={e => s(f => ({ ...f, deadline: e.target.value }))} className={FIELD} /></div>
-      <div><label className={LABEL}>Anything else I should know? <span className="text-white/30 font-normal">(optional)</span></label>
-        <textarea placeholder="Specific integrations, custom features, or context…" value={d.notes} onChange={e => s(f => ({ ...f, notes: e.target.value }))} className={`${FIELD} resize-none`} rows={3} /></div>
-    </div>
-  )
-}
-
-const STEPS = [
-  { n: 1, label: "Contact" },
-  { n: 2, label: "Scope" },
-  { n: 3, label: "Assets" },
-  { n: 4, label: "Budget" },
-] as const
-
-function ContactForm() {
-  const [step, setStep] = useState(1)
-  const [dir,  setDir]  = useState(1)
-  const [data, setData] = useState<FormData>({ name: "", email: "", business: "", scope: "", track: "", assets: [], budget: "", deadline: "", notes: "" })
-
-  const canNext = () => {
-    if (step === 1) return !!(data.name.trim() && data.email.trim() && data.business.trim())
-    if (step === 2) return !!(data.scope && data.track)
-    if (step === 3) return true
-    return !!data.budget
-  }
-
-  const go = (n: number) => { setDir(n > step ? 1 : -1); setStep(n) }
-
-  const submit = () => {
-    const assets = data.assets.length ? data.assets.map(a => `  • ${a}`).join("\n") : "  • None ready yet"
-    const msg = [
-      "New Project Inquiry — vnbuildr",
-      "",
-      `Name: ${data.name}`,
-      `Email: ${data.email}`,
-      `Business: ${data.business}`,
-      "",
-      `Scope: ${data.scope}`,
-      `Track: ${data.track}`,
-      "",
-      "Assets ready:",
-      assets,
-      "",
-      `Budget: ${data.budget}`,
-      data.deadline ? `Launch date: ${data.deadline}` : null,
-      data.notes    ? `Notes: ${data.notes}`          : null,
-    ].filter(Boolean).join("\n")
-    window.open(`https://wa.me/60199195314?text=${encodeURIComponent(msg)}`, "_blank")
-  }
-
-  const variants = {
-    enter:  (d: number) => ({ x: d * 28, opacity: 0 }),
-    center: { x: 0, opacity: 1 },
-    exit:   (d: number) => ({ x: d * -28, opacity: 0 }),
-  }
-
-  return (
-    <div className="mt-10 text-left">
-      {/* Stepper */}
-      <div className="flex items-center mb-8">
-        {STEPS.map((p, i) => (
-          <div key={p.n} className={`flex items-center ${i < STEPS.length - 1 ? "flex-1" : ""}`}>
-            <div className="flex items-center gap-2 shrink-0">
-              <div className={`w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold transition-all duration-300 ${step > p.n ? "bg-[#25D366] text-white" : step === p.n ? "bg-white text-[var(--color-ink)]" : "bg-white/10 text-white/30"}`}>
-                {step > p.n
-                  ? <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                  : p.n}
-              </div>
-              <span className={`text-[12px] font-medium hidden sm:block transition-colors duration-300 ${step >= p.n ? "text-white/65" : "text-white/25"}`}>{p.label}</span>
-            </div>
-            {i < STEPS.length - 1 && (
-              <div className={`flex-1 mx-3 h-px transition-all duration-500 ${step > p.n ? "bg-[#25D366]/50" : "bg-white/10"}`} />
-            )}
-          </div>
-        ))}
+        <label className={LABEL}>Anything you&apos;d like to share? <span className="text-white/30 font-normal">(optional)</span></label>
+        <textarea
+          placeholder="Tell me about your business, what you need, or any questions…"
+          value={message}
+          onChange={e => setMessage(e.target.value)}
+          className={`${FIELD} resize-none`}
+          rows={3}
+        />
       </div>
 
-      {/* Step content */}
-      <AnimatePresence mode="wait" custom={dir}>
-        <motion.div key={step} custom={dir} variants={variants} initial="enter" animate="center" exit="exit"
-          transition={{ duration: 0.16, ease: [0.22, 1, 0.36, 1] }}>
-          {step === 1 && <Phase1 d={data} s={setData} />}
-          {step === 2 && <Phase2 d={data} s={setData} />}
-          {step === 3 && <Phase3 d={data} s={setData} />}
-          {step === 4 && <Phase4 d={data} s={setData} />}
-        </motion.div>
-      </AnimatePresence>
+      <button
+        type="button"
+        onClick={() => canSubmit && submit()}
+        disabled={!canSubmit}
+        className="w-full whatsapp-glow flex items-center justify-center gap-2 bg-[#25D366] text-white text-[15px] font-semibold py-3.5 rounded-full hover:opacity-85 transition-all disabled:opacity-25 disabled:cursor-not-allowed"
+      >
+        Send via WhatsApp
+        <ArrowRight />
+      </button>
 
-      {/* Navigation */}
-      <div className="flex items-center justify-between mt-8 pt-6 border-t border-white/[0.08]">
-        {step > 1
-          ? <button type="button" onClick={() => go(step - 1)} className="text-[13px] text-white/40 hover:text-white/70 transition-colors">← Back</button>
-          : <div />}
-        {step < 4
-          ? <button type="button" onClick={() => canNext() && go(step + 1)} disabled={!canNext()}
-              className="px-6 py-2.5 rounded-full bg-white text-[var(--color-ink)] text-[13px] font-semibold hover:opacity-85 transition-all disabled:opacity-25 disabled:cursor-not-allowed">
-              Continue →
-            </button>
-          : <button type="button" onClick={() => canNext() && submit()} disabled={!canNext()}
-              className="px-6 py-2.5 rounded-full bg-[#25D366] text-white text-[13px] font-semibold hover:opacity-85 transition-all disabled:opacity-25 disabled:cursor-not-allowed">
-              Send via WhatsApp →
-            </button>}
-      </div>
+      <p className="text-[12px] text-white/25 text-center pt-1">
+        I&apos;ll reply within 24 hours · No commitment required
+      </p>
     </div>
   )
 }
@@ -945,7 +941,7 @@ function ArrowRight() {
 function About() {
   const t = useT()
   return (
-    <section className="py-16 md:py-24 px-6 bg-white">
+    <section className="py-16 md:py-24 px-6 bg-[var(--color-surface)]">
       <div className="max-w-[1100px] mx-auto">
         <FadeUp>
           <div className="neo-card bg-white overflow-hidden">
@@ -1019,23 +1015,28 @@ const faqs: { q: string; a: React.ReactNode }[] = [
     a: "Traditional web agencies spend weeks manually drawing static layouts in Figma before rewriting them from scratch. I work differently — by pairing deep frontend engineering expertise with the world's leading UI design systems, I write clean, production-ready code from day one. This allows me to deliver beautiful, functional websites in days rather than months.",
   },
   {
+    q: "How much does a website cost in Malaysia?",
+    a: "Website design in Malaysia typically ranges from RM1,000 to RM10,000+ depending on scope and the provider. At vnbuildr, packages start at RM1,299 for a single-page landing page (Starter), RM2,899 for a 5-page business website (Business), RM3,799 for a 10-page site (Pro), and from RM3,999 for fully custom builds. Domain registration and hosting are separate costs — typically RM50–RM300 per year depending on your provider.",
+  },
+  {
+    q: "What is a landing page? Is it the same as a website?",
+    a: "A landing page is a single, focused web page built around one goal — usually to capture a lead, promote an offer, or get someone to contact you. A full website has multiple pages (Home, About, Services, Portfolio, Contact, etc.) and covers your entire business. A landing page is faster to build, more affordable, and more effective when you have one clear message. Many businesses start with a landing page and grow into a full website over time. At vnbuildr, our Starter package is a polished single-page site, while Business and Pro packages cover multi-page websites.",
+  },
+  {
     q: "How long does it take to complete a website?",
     a: (
       <span className="flex flex-col gap-3">
-        <span>· Pure HTML &amp; CSS Track: <strong>48 hours</strong></span>
-        <span>· React High-Motion Track: <strong>3 to 5 days</strong></span>
-        <span>· Advanced Web Ecosystems: <strong>5 to 7 days</strong></span>
-        <span className="mt-2 opacity-70">These timelines require your final copy and brand assets to be ready at kickoff.</span>
+        <span>· Starter (1 page): <strong>2–3 working days</strong></span>
+        <span>· Business (5 pages): <strong>3–7 working days</strong></span>
+        <span>· Pro (10 pages): <strong>4–8 working days</strong></span>
+        <span>· Custom (10–25 pages): <strong>8–15 working days</strong></span>
+        <span className="mt-2 opacity-70">These timelines require your content and brand assets to be ready at kickoff.</span>
       </span>
     ),
   },
   {
     q: "What materials do I need to provide before we start?",
     a: "Copywriting is included — I write the page copy for you. What helps most is having your high-resolution logo, primary brand colors, and any product photos or graphics ready to share. The more brand context you can give me upfront, the faster we hit the launch timeline.",
-  },
-  {
-    q: 'What is the difference between "The Premium Experience" and "The Fast & Simple Launch"?',
-    a: 'The Premium Experience is built for modern brands that want to make an unforgettable visual impression — fluid scroll animations, interactive layout grids, and premium motion components. (This website is built on this exact option!) The Fast & Simple Launch is built for raw performance, absolute simplicity, and local services. It uses zero heavy scripts, meaning your page will load instantly even on weak mobile connections, with absolutely zero monthly software maintenance.',
   },
   {
     q: "Can I provide my own design?",
@@ -1086,7 +1087,7 @@ function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-16 md:py-24 px-6 bg-[var(--color-surface)]">
+    <section id="faq" className="py-16 md:py-24 px-6 bg-white">
       <div className="max-w-[720px] mx-auto">
         <FadeUp className="text-center mb-14">
           <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
@@ -1149,18 +1150,23 @@ const faqSchema = {
     },
     {
       "@type": "Question",
+      "name": "How much does a website cost in Malaysia?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Website design in Malaysia typically ranges from RM1,000 to RM10,000+ depending on scope. At vnbuildr, packages start at RM1,299 for a single-page landing page (Starter), RM2,899 for a 5-page business website (Business), RM3,799 for a 10-page site (Pro), and from RM3,999 for fully custom builds. Domain and hosting are separate costs." },
+    },
+    {
+      "@type": "Question",
+      "name": "What is a landing page? Is it the same as a website?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A landing page is a single, focused web page built around one goal — usually to capture a lead, promote an offer, or get someone to contact you. A full website has multiple pages covering your entire business. A landing page is faster to build, more affordable, and more effective when you have one clear message. Many businesses start with a landing page and grow into a full website over time." },
+    },
+    {
+      "@type": "Question",
       "name": "How long does it take to complete a website?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Pure HTML & CSS Track: 48 hours. React High-Motion Track: 3 to 5 days. Advanced Web Ecosystems: 5 to 7 days. These timelines require your final copy and brand assets to be ready at kickoff." },
+      "acceptedAnswer": { "@type": "Answer", "text": "Starter (1 page): 2–3 working days. Business (5 pages): 3–7 working days. Pro (10 pages): 4–8 working days. Custom (10–25 pages): 8–15 working days. These timelines require your content and brand assets to be ready at kickoff." },
     },
     {
       "@type": "Question",
       "name": "What materials do I need to provide before we start?",
       "acceptedAnswer": { "@type": "Answer", "text": "Copywriting is included — I write the page copy for you. What helps most is having your high-resolution logo, primary brand colors, and any product photos or graphics ready to share. The more brand context you can give me upfront, the faster we hit the launch timeline." },
-    },
-    {
-      "@type": "Question",
-      "name": "What is the difference between The Premium Experience and The Fast & Simple Launch?",
-      "acceptedAnswer": { "@type": "Answer", "text": "The Premium Experience is built for modern brands that want to make an unforgettable visual impression — fluid scroll animations, interactive layout grids, and premium motion components. The Fast & Simple Launch is built for raw performance, absolute simplicity, and local services. It uses zero heavy scripts, meaning your page will load instantly even on weak mobile connections, with absolutely zero monthly software maintenance." },
     },
     {
       "@type": "Question",
@@ -1239,12 +1245,13 @@ export default function Home() {
         <Nav />
         <main>
           <Hero />
+          <WhyWebsite />
           <HowItWorks />
           <Features />
+          <Pricing />
           <Testimonials />
-          <DevTracks />
-          <FAQ />
           <About />
+          <FAQ />
           <CtaSection />
         </main>
         <AnimatePresence>

@@ -10,26 +10,40 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "vnbuildr — Custom Landing Page Design & Web Development | Malaysia",
+  title: "vnbuildr — Custom Website & Landing Page Design | Malaysia",
   description:
-    "High-converting, lightning-fast landing pages engineered for startups, SMEs and scaling brands. Hand-coded in Malaysia. Delivered in 7 days.",
+    "Freelance web designer in Kuala Lumpur. Custom landing pages and business websites for Malaysian SMEs — from RM1,299, hand-coded, mobile-first, delivered in as little as 2 working days.",
+  keywords: [
+    "landing page design Malaysia",
+    "web designer KL",
+    "freelance web designer Malaysia",
+    "affordable website design Malaysia",
+    "small business website Malaysia",
+    "website design price Malaysia",
+    "custom landing page Malaysia",
+    "web development Kuala Lumpur",
+    "website designer Kuala Lumpur",
+    "SME website Malaysia",
+    "landing page cost Malaysia",
+    "business website Malaysia",
+  ],
   metadataBase: new URL("https://vnbuildr.com"),
   alternates: {
     canonical: "https://vnbuildr.com",
   },
   openGraph: {
-    title: "vnbuildr — Custom Landing Page Design & Web Development | Malaysia",
+    title: "vnbuildr — Custom Website & Landing Page Design | Malaysia",
     description:
-      "High-converting, lightning-fast landing pages engineered for startups, SMEs and scaling brands. Hand-coded in Malaysia. Delivered in 7 days.",
+      "Freelance web designer in Kuala Lumpur. Custom landing pages and business websites for Malaysian SMEs — from RM1,299, hand-coded, mobile-first, delivered in as little as 2 working days.",
     url: "https://vnbuildr.com",
     siteName: "vnbuildr",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "vnbuildr — Custom Landing Page Design & Web Development | Malaysia",
+    title: "vnbuildr — Custom Website & Landing Page Design | Malaysia",
     description:
-      "High-converting, lightning-fast landing pages engineered for startups, SMEs and scaling brands. Hand-coded in Malaysia. Delivered in 7 days.",
+      "Freelance web designer in Kuala Lumpur. Custom landing pages and business websites for Malaysian SMEs — from RM1,299, hand-coded, mobile-first, delivered in as little as 2 working days.",
   },
 };
 
@@ -40,31 +54,52 @@ const jsonLd = {
   "url": "https://vnbuildr.com",
   "telephone": "+60199195314",
   "email": "hello@vnbuildr.com",
-  "description": "Custom landing page design and web development services for startups, SMEs and scaling brands in Malaysia.",
-  "priceRange": "$$",
+  "description": "Freelance web designer in Kuala Lumpur specialising in custom landing pages and business websites for Malaysian SMEs. Packages from RM1,299, delivered in 2–15 working days.",
+  "priceRange": "RM1,299 – RM3,999+",
   "currenciesAccepted": "MYR, USD",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Kuala Lumpur",
+    "addressCountry": "MY"
+  },
   "areaServed": [
     { "@type": "Country", "name": "Malaysia" },
     { "@type": "AdministrativeArea", "name": "Southeast Asia" }
   ],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
-    "name": "Web Design Services",
+    "name": "Website Design Services Malaysia",
     "itemListElement": [
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Custom Landing Page Design",
-          "description": "High-converting, hand-coded landing pages built from scratch for startups and SMEs."
+          "name": "Starter Landing Page",
+          "description": "Single-page landing page for Malaysian businesses. Hand-coded, mobile-first. RM1,299, delivered in 2–3 working days."
         }
       },
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Web Development",
-          "description": "Fast, mobile-first web development delivered in 7 days."
+          "name": "Business Website",
+          "description": "5-page business website for Malaysian SMEs. Hand-coded, mobile-first. RM2,899, delivered in 3–7 working days."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Pro Website",
+          "description": "10-page professional website for established Malaysian businesses. RM3,799, delivered in 4–8 working days."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Custom Website",
+          "description": "Fully custom websites with 10–25 pages for Malaysian businesses. From RM3,999, delivered in 8–15 working days."
         }
       }
     ]
