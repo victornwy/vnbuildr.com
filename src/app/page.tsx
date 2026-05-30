@@ -47,10 +47,10 @@ function AnimToggle({ on, set }: { on: boolean; set: (v: boolean) => void }) {
 
 const NAV_HEIGHT = 60
 
-function scrollToSection(href: string, dropdownAdjust = 0) {
+function scrollToSection(href: string) {
   const el = document.querySelector(href)
   if (!el) return
-  const target = el.getBoundingClientRect().top + window.scrollY - NAV_HEIGHT - 8 - dropdownAdjust
+  const target = el.getBoundingClientRect().top + window.scrollY - NAV_HEIGHT - 8
   const start = window.scrollY
   const distance = target - start
   const duration = 420
@@ -87,10 +87,8 @@ function Nav() {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
-    const dropdownEl = document.querySelector('[data-nav-dropdown]')
-    const dropdownAdjust = dropdownEl ? (dropdownEl as HTMLElement).scrollHeight : 0
     close()
-    scrollToSection(href, dropdownAdjust)
+    scrollToSection(href)
   }
 
   return (
@@ -106,16 +104,47 @@ function Nav() {
           <a href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page" target="_blank" rel="noopener noreferrer" className="whatsapp-glow text-sm font-medium bg-[#25D366] text-white px-5 py-2.5 rounded-full hover:opacity-85 transition-opacity">
             {t.nav.getInTouch}
           </a>
-          <button
-            onClick={() => setOpen(o => !o)}
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-            className="w-9 h-9 flex flex-col items-center justify-center gap-[5px] rounded border-2 border-[var(--color-ink)] shadow-[2px_2px_0_var(--color-ink)] bg-white shrink-0"
-          >
-            <motion.span animate={open ? { rotate: 45, y: 7 }  : { rotate: 0, y: 0 }}  transition={{ duration: 0.2 }} className="block w-[15px] h-[1.5px] bg-[var(--color-ink)] rounded-full origin-center" />
-            <motion.span animate={open ? { opacity: 0 }        : { opacity: 1 }}        transition={{ duration: 0.15 }} className="block w-[15px] h-[1.5px] bg-[var(--color-ink)] rounded-full" />
-            <motion.span animate={open ? { rotate: -45, y: -7 }: { rotate: 0, y: 0 }} transition={{ duration: 0.2 }} className="block w-[15px] h-[1.5px] bg-[var(--color-ink)] rounded-full origin-center" />
-          </button>
+          <div className="relative">
+            <button
+              onClick={() => setOpen(o => !o)}
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              className="w-9 h-9 flex flex-col items-center justify-center gap-[5px] rounded border-2 border-[var(--color-ink)] shadow-[2px_2px_0_var(--color-ink)] bg-white shrink-0"
+            >
+              <motion.span animate={open ? { rotate: 45, y: 7 }  : { rotate: 0, y: 0 }}  transition={{ duration: 0.2 }} className="block w-[15px] h-[1.5px] bg-[var(--color-ink)] rounded-full origin-center" />
+              <motion.span animate={open ? { opacity: 0 }        : { opacity: 1 }}        transition={{ duration: 0.15 }} className="block w-[15px] h-[1.5px] bg-[var(--color-ink)] rounded-full" />
+              <motion.span animate={open ? { rotate: -45, y: -7 }: { rotate: 0, y: 0 }} transition={{ duration: 0.2 }} className="block w-[15px] h-[1.5px] bg-[var(--color-ink)] rounded-full origin-center" />
+            </button>
+            <AnimatePresence>
+              {open && (
+                <motion.div
+                  key="nav-menu-desktop"
+                  initial={{ opacity: 0, scale: 0.96, y: -6 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.96, y: -6 }}
+                  transition={{ duration: 0.14, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute top-[calc(100%+8px)] right-0 w-52 bg-white neo-card overflow-hidden z-[60]"
+                >
+                  <div className="py-1.5">
+                    {NAV_LINKS.map(([href, label]) => (
+                      <a key={href} href={href} onClick={e => handleNavClick(e, href)}
+                        className="block text-[14px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] hover:bg-[var(--color-surface)] px-4 py-2.5 transition-colors">
+                        {label}
+                      </a>
+                    ))}
+                    <Link href="/portfolio" onClick={close}
+                      className="block text-[14px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] hover:bg-[var(--color-surface)] px-4 py-2.5 transition-colors">
+                      {t.nav.portfolio}
+                    </Link>
+                    <div className="border-t border-[var(--color-border)] mt-1 px-4 pt-2.5 pb-3">
+                      <span className="text-[10px] font-semibold text-[var(--color-ink-muted)] uppercase tracking-wider block mb-2">{t.nav.animation}</span>
+                      <AnimToggle on={on} set={set} />
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
 
         {/* Mobile right: CTA + burger */}
@@ -124,53 +153,49 @@ function Nav() {
             <span className="mobile-landscape:hidden">{t.nav.getInTouch}</span>
             <span className="hidden mobile-landscape:inline">{t.nav.chat}</span>
           </a>
-          <button
-            onClick={() => setOpen(o => !o)}
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-            className="w-9 h-9 flex flex-col items-center justify-center gap-[5px] rounded border-2 border-[var(--color-ink)] shadow-[2px_2px_0_var(--color-ink)] bg-white shrink-0"
-          >
-            <motion.span animate={open ? { rotate: 45, y: 7 }  : { rotate: 0, y: 0 }}  transition={{ duration: 0.2 }} className="block w-[15px] h-[1.5px] bg-[var(--color-ink)] rounded-full origin-center" />
-            <motion.span animate={open ? { opacity: 0 }        : { opacity: 1 }}        transition={{ duration: 0.15 }} className="block w-[15px] h-[1.5px] bg-[var(--color-ink)] rounded-full" />
-            <motion.span animate={open ? { rotate: -45, y: -7 }: { rotate: 0, y: 0 }} transition={{ duration: 0.2 }} className="block w-[15px] h-[1.5px] bg-[var(--color-ink)] rounded-full origin-center" />
-          </button>
+          <div className="relative">
+            <button
+              onClick={() => setOpen(o => !o)}
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              className="w-9 h-9 flex flex-col items-center justify-center gap-[5px] rounded border-2 border-[var(--color-ink)] shadow-[2px_2px_0_var(--color-ink)] bg-white shrink-0"
+            >
+              <motion.span animate={open ? { rotate: 45, y: 7 }  : { rotate: 0, y: 0 }}  transition={{ duration: 0.2 }} className="block w-[15px] h-[1.5px] bg-[var(--color-ink)] rounded-full origin-center" />
+              <motion.span animate={open ? { opacity: 0 }        : { opacity: 1 }}        transition={{ duration: 0.15 }} className="block w-[15px] h-[1.5px] bg-[var(--color-ink)] rounded-full" />
+              <motion.span animate={open ? { rotate: -45, y: -7 }: { rotate: 0, y: 0 }} transition={{ duration: 0.2 }} className="block w-[15px] h-[1.5px] bg-[var(--color-ink)] rounded-full origin-center" />
+            </button>
+            <AnimatePresence>
+              {open && (
+                <motion.div
+                  key="nav-menu-mobile"
+                  initial={{ opacity: 0, scale: 0.96, y: -6 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.96, y: -6 }}
+                  transition={{ duration: 0.14, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute top-[calc(100%+8px)] right-0 w-52 bg-white neo-card overflow-hidden z-[60]"
+                >
+                  <div className="py-1.5">
+                    {NAV_LINKS.map(([href, label]) => (
+                      <a key={href} href={href} onClick={e => handleNavClick(e, href)}
+                        className="block text-[14px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] hover:bg-[var(--color-surface)] px-4 py-2.5 transition-colors">
+                        {label}
+                      </a>
+                    ))}
+                    <Link href="/portfolio" onClick={close}
+                      className="block text-[14px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] hover:bg-[var(--color-surface)] px-4 py-2.5 transition-colors">
+                      {t.nav.portfolio}
+                    </Link>
+                    <div className="border-t border-[var(--color-border)] mt-1 px-4 pt-2.5 pb-3">
+                      <span className="text-[10px] font-semibold text-[var(--color-ink-muted)] uppercase tracking-wider block mb-2">{t.nav.animation}</span>
+                      <AnimToggle on={on} set={set} />
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
       </div>
-
-      {/* Nav dropdown */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            key="nav-menu"
-            data-nav-dropdown=""
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.14, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden bg-white border-b border-[var(--color-border)]"
-          >
-            <div className="px-6 py-4 mobile-landscape:py-2 flex flex-col mobile-landscape:grid mobile-landscape:grid-cols-2 mobile-landscape:gap-x-4 mobile-landscape:max-h-[calc(100vh-60px)] mobile-landscape:overflow-y-auto">
-              {NAV_LINKS.map(([href, label]) => (
-                <a
-                  key={href}
-                  href={href}
-                  onClick={e => handleNavClick(e, href)}
-                  className="text-[15px] mobile-landscape:text-[13px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] py-3 mobile-landscape:py-2 border-b border-[var(--color-border)] transition-colors"
-                >
-                  {label}
-                </a>
-              ))}
-              <Link href="/portfolio" onClick={close} className="text-[15px] mobile-landscape:text-[13px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] py-3 mobile-landscape:py-2 border-b border-[var(--color-border)] transition-colors">
-                {t.nav.portfolio}
-              </Link>
-              <div className="pt-4 mobile-landscape:pt-2 mobile-landscape:col-span-2 flex items-center justify-between">
-                <span className="text-[12px] font-semibold text-[var(--color-ink-muted)] uppercase tracking-wide">{t.nav.animation}</span>
-                <AnimToggle on={on} set={set} />
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </nav>
   );
 }
