@@ -16,11 +16,6 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://vnbuildr.com"),
   alternates: {
     canonical: "https://vnbuildr.com",
-    languages: {
-      "en": "https://vnbuildr.com",
-      "zh-Hans": "https://vnbuildr.com/zh",
-      "x-default": "https://vnbuildr.com",
-    },
   },
   openGraph: {
     title: "vnbuildr — Custom Landing Page Design & Web Development | Malaysia",

@@ -1,23 +1,12 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "vnbuildr — 自定义着陆页设计与网站开发 | 马来西亚",
-  description: "为初创公司、中小型企业及成长型品牌精心打造高转化率、极致快速的着陆页。手工编码，驻地马来西亚，7天交付。",
-  metadataBase: new URL("https://vnbuildr.com"),
   alternates: {
-    canonical: "https://vnbuildr.com/zh",
-    languages: {
-      "en": "https://vnbuildr.com",
-      "zh-Hans": "https://vnbuildr.com/zh",
-      "x-default": "https://vnbuildr.com",
-    },
+    canonical: "https://vnbuildr.com",
   },
-  openGraph: {
-    title: "vnbuildr — 自定义着陆页设计与网站开发 | 马来西亚",
-    description: "为初创公司、中小型企业及成长型品牌精心打造高转化率、极致快速的着陆页。手工编码，驻地马来西亚，7天交付。",
-    url: "https://vnbuildr.com/zh",
-    siteName: "vnbuildr",
-    type: "website",
+  robots: {
+    index: false,
+    follow: false,
   },
 }
 
