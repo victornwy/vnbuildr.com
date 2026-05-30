@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, createContext, useContext } from "react";
+import { useState, useEffect, createContext, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -54,7 +54,7 @@ function scrollToSection(href: string) {
   const target = el.getBoundingClientRect().top + window.scrollY - NAV_HEIGHT - 8
   const start = window.scrollY
   const distance = target - start
-  const duration = 420
+  const duration = 620
   let startTime: number | null = null
 
   function easeInOutCubic(t: number) {
@@ -75,6 +75,15 @@ function Nav() {
   const { on, set } = useContext(AnimContext)
   const t = useT()
   const [open, setOpen] = useState(false)
+  const [navScrollY, setNavScrollY] = useState(0)
+
+  useEffect(() => {
+    const onScroll = () => setNavScrollY(window.scrollY)
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
+  const navBgOpacity = Math.min(navScrollY / 100, 1)
 
   const close = () => setOpen(false)
 
@@ -93,8 +102,12 @@ function Nav() {
   }
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-[var(--color-border)]">
-      <div className="max-w-[1100px] mx-auto px-6 h-[60px] flex items-center justify-between">
+    <nav className="fixed top-0 z-50 w-full">
+      <div
+        className="absolute inset-0 bg-white/90 backdrop-blur-md border-b border-[var(--color-border)] pointer-events-none"
+        style={{ opacity: navBgOpacity }}
+      />
+      <div className="relative max-w-[1100px] mx-auto px-6 h-[60px] flex items-center justify-between">
         {/* Logo */}
         <Link href="/" onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); close() }} className="font-serif text-[22px] tracking-tight">
           <span className="text-[var(--color-blue)] font-bold">vn</span><em>buildr</em>
@@ -123,7 +136,7 @@ function Nav() {
                   initial={{ opacity: 0, scale: 0.96, y: -6 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.96, y: -6 }}
-                  transition={{ duration: 0.14, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
                   className="absolute top-[calc(100%+8px)] right-0 w-52 bg-white neo-card overflow-hidden z-[60]"
                 >
                   <div className="py-1.5">
@@ -172,7 +185,7 @@ function Nav() {
                   initial={{ opacity: 0, scale: 0.96, y: -6 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.96, y: -6 }}
-                  transition={{ duration: 0.14, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
                   className="absolute top-[calc(100%+8px)] right-0 w-52 bg-white neo-card overflow-hidden z-[60]"
                 >
                   <div className="py-1.5">
@@ -202,41 +215,39 @@ function Nav() {
 }
 
 const floatingIcons = [
-  { icon: Code2,          label: "Clean code",      delay: 0.5,  rotate: "-rotate-[6deg]",  bg: "bg-[#eef3ff]", color: "text-[var(--color-blue)]" },
-  { icon: PenTool,        label: "Vector design",   delay: 0.65, rotate: "rotate-[4deg]",   bg: "bg-[#f0ede8]", color: "text-[var(--color-ink)]"  },
+  { icon: Code2,          label: "Clean code",      delay: 0.5,  rotate: "-rotate-[11deg]", bg: "bg-[#eef3ff]", color: "text-[var(--color-blue)]" },
+  { icon: PenTool,        label: "Vector design",   delay: 0.65, rotate: "rotate-[14deg]",  bg: "bg-[#f0ede8]", color: "text-[var(--color-ink)]"  },
   { icon: Layers,         label: "Layouts",         delay: 0.8,  rotate: "-rotate-[3deg]",  bg: "bg-[#eef3ff]", color: "text-[var(--color-blue)]" },
-  { icon: Type,           label: "Typography",      delay: 0.95, rotate: "rotate-[5deg]",   bg: "bg-[#f0ede8]", color: "text-[var(--color-ink)]"  },
-  { icon: Palette,        label: "Brand colours",   delay: 1.1,  rotate: "-rotate-[5deg]",  bg: "bg-[#eef3ff]", color: "text-[var(--color-blue)]" },
-  { icon: MousePointer2,  label: "UX / CRO",        delay: 1.2,  rotate: "rotate-[3deg]",   bg: "bg-[#f0ede8]", color: "text-[var(--color-ink)]"  },
-  { icon: LayoutTemplate, label: "Responsive",      delay: 0.7,  rotate: "rotate-[6deg]",   bg: "bg-[#eef3ff]", color: "text-[var(--color-blue)]" },
-  { icon: Zap,            label: "Fast delivery",   delay: 0.9,  rotate: "-rotate-[4deg]",  bg: "bg-[#f0ede8]", color: "text-[var(--color-ink)]"  },
-  { icon: Smartphone,     label: "Mobile-first",    delay: 1.05, rotate: "rotate-[7deg]",   bg: "bg-[#eef3ff]", color: "text-[var(--color-blue)]" },
-  { icon: Globe,          label: "Ready to launch", delay: 1.15, rotate: "-rotate-[3deg]",  bg: "bg-[#f0ede8]", color: "text-[var(--color-ink)]"  },
+  { icon: Type,           label: "Typography",      delay: 0.95, rotate: "rotate-[17deg]",  bg: "bg-[#f0ede8]", color: "text-[var(--color-ink)]"  },
+  { icon: Palette,        label: "Brand colours",   delay: 1.1,  rotate: "-rotate-[8deg]",  bg: "bg-[#eef3ff]", color: "text-[var(--color-blue)]" },
+  { icon: MousePointer2,  label: "UX / CRO",        delay: 1.2,  rotate: "rotate-[5deg]",   bg: "bg-[#f0ede8]", color: "text-[var(--color-ink)]"  },
+  { icon: LayoutTemplate, label: "Responsive",      delay: 0.7,  rotate: "-rotate-[16deg]", bg: "bg-[#eef3ff]", color: "text-[var(--color-blue)]" },
+  { icon: Zap,            label: "Fast delivery",   delay: 0.9,  rotate: "rotate-[9deg]",   bg: "bg-[#f0ede8]", color: "text-[var(--color-ink)]"  },
+  { icon: Smartphone,     label: "Mobile-first",    delay: 1.05, rotate: "-rotate-[4deg]",  bg: "bg-[#eef3ff]", color: "text-[var(--color-blue)]" },
+  { icon: Globe,          label: "Ready to launch", delay: 1.15, rotate: "rotate-[12deg]",  bg: "bg-[#f0ede8]", color: "text-[var(--color-ink)]"  },
 ];
 
 const floatingSymbols = [
-  { symbol: ";",   label: "Semicolon",  delay: 0.55, rotate: "rotate-[5deg]",   bg: "bg-[#f0ede8]", color: "text-[var(--color-ink)]"  },
-  { symbol: "{ }", label: "Block",      delay: 0.72, rotate: "-rotate-[4deg]",  bg: "bg-[#eef3ff]", color: "text-[var(--color-blue)]" },
-  { symbol: "( )", label: "Params",     delay: 0.88, rotate: "rotate-[3deg]",   bg: "bg-[#eef3ff]", color: "text-[var(--color-blue)]" },
-  { symbol: "==",  label: "Compare",    delay: 0.62, rotate: "-rotate-[5deg]",  bg: "bg-[#f0ede8]", color: "text-[var(--color-ink)]"  },
-  { symbol: "!=",  label: "Not equal",  delay: 0.92, rotate: "rotate-[6deg]",   bg: "bg-[#eef3ff]", color: "text-[var(--color-blue)]" },
-  { symbol: '""',  label: "String",     delay: 1.05, rotate: "-rotate-[3deg]",  bg: "bg-[#f0ede8]", color: "text-[var(--color-ink)]"  },
+  { symbol: ";",   label: "Semicolon",  delay: 0.55, rotate: "-rotate-[13deg]", bg: "bg-[#f0ede8]", color: "text-[var(--color-ink)]"  },
+  { symbol: "{ }", label: "Block",      delay: 0.72, rotate: "rotate-[8deg]",   bg: "bg-[#eef3ff]", color: "text-[var(--color-blue)]" },
+  { symbol: "( )", label: "Params",     delay: 0.88, rotate: "-rotate-[6deg]",  bg: "bg-[#eef3ff]", color: "text-[var(--color-blue)]" },
+  { symbol: "==",  label: "Compare",    delay: 0.62, rotate: "rotate-[15deg]",  bg: "bg-[#f0ede8]", color: "text-[var(--color-ink)]"  },
+  { symbol: "!=",  label: "Not equal",  delay: 0.92, rotate: "-rotate-[10deg]", bg: "bg-[#eef3ff]", color: "text-[var(--color-blue)]" },
+  { symbol: '""',  label: "String",     delay: 1.05, rotate: "rotate-[18deg]",  bg: "bg-[#f0ede8]", color: "text-[var(--color-ink)]"  },
 ];
 
-function IconPill({ icon: Icon, label, rotate, bg, color }: Omit<typeof floatingIcons[0], "delay">) {
+function IconPill({ icon: Icon, rotate, bg, color }: Omit<typeof floatingIcons[0], "delay" | "label">) {
   return (
-    <div className={`flex items-center gap-2 ${bg} ${rotate} px-3 py-2 rounded-xl shadow-md border border-[var(--color-border)] cursor-default select-none`}>
+    <div className={`flex items-center justify-center ${bg} ${rotate} p-2.5 rounded-xl shadow-md border border-[var(--color-border)] cursor-default select-none`}>
       <Icon size={16} className={`${color} shrink-0`} />
-      <span className={`text-[12px] font-medium ${color} whitespace-nowrap`}>{label}</span>
     </div>
   );
 }
 
-function SymbolPill({ symbol, label, rotate, bg, color }: Omit<typeof floatingSymbols[0], "delay">) {
+function SymbolPill({ symbol, rotate, bg, color }: Omit<typeof floatingSymbols[0], "delay" | "label">) {
   return (
-    <div className={`flex items-center gap-2 ${bg} ${rotate} px-3 py-2 rounded-xl shadow-md border border-[var(--color-border)] cursor-default select-none`}>
-      <span className={`text-[13px] font-mono font-bold ${color} shrink-0 min-w-[18px] text-center leading-none`}>{symbol}</span>
-      <span className={`text-[12px] font-medium ${color} whitespace-nowrap`}>{label}</span>
+    <div className={`flex items-center justify-center ${bg} ${rotate} p-2.5 rounded-xl shadow-md border border-[var(--color-border)] cursor-default select-none`}>
+      <span className={`text-[13px] font-mono font-bold ${color} leading-none`}>{symbol}</span>
     </div>
   );
 }
@@ -247,10 +258,10 @@ function FadeUp({ children, delay = 0, className }: {
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 18 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-64px" }}
-      transition={{ duration: 0.42, delay, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
       {children}
@@ -273,7 +284,7 @@ function Hero({
   const { on } = useContext(AnimContext)
   const t = useT()
   return (
-    <section className="relative w-full min-h-[calc(100vh-60px)] mobile-landscape:min-h-0 mobile-landscape:py-8 overflow-hidden flex flex-col items-center justify-center">
+    <section className="relative w-full min-h-screen pt-[60px] mobile-landscape:min-h-0 mobile-landscape:py-8 overflow-hidden flex flex-col items-center justify-center">
       <AuroraBackground />
       {/* Mouse-follow parallax elements — toggled via AnimContext */}
       <AnimatePresence>
@@ -284,31 +295,23 @@ function Hero({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.7 }}
           >
             <Floating sensitivity={0.8} easingFactor={0.04}>
-              {/* Top-left cluster */}
-              <FloatingElement depth={2}  className="top-[8%]  left-[3%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.40, type:"spring", stiffness:300, damping:26 }}><IconPill   {...floatingIcons[0]}   /></motion.div></FloatingElement>
-              <FloatingElement depth={1}  className="top-[22%] left-[6%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.52, type:"spring", stiffness:300, damping:26 }}><SymbolPill {...floatingSymbols[0]} /></motion.div></FloatingElement>
-              <FloatingElement depth={3}  className="top-[38%] left-[2%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.65, type:"spring", stiffness:300, damping:26 }}><IconPill   {...floatingIcons[4]}   /></motion.div></FloatingElement>
-              <FloatingElement depth={1.5}className="top-[55%] left-[5%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.73, type:"spring", stiffness:300, damping:26 }}><SymbolPill {...floatingSymbols[3]} /></motion.div></FloatingElement>
+              {/* Left side — uneven vertical spread, not mirrored */}
+              <FloatingElement depth={2.5} className="top-[5%]   left-[15%]"><motion.div initial={{ opacity:0, scale:0.88 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.38, type:"spring", stiffness:220, damping:32 }}><IconPill   {...floatingIcons[0]}   /></motion.div></FloatingElement>
+              <FloatingElement depth={1}   className="top-[21%]  left-[7%]"> <motion.div initial={{ opacity:0, scale:0.88 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.55, type:"spring", stiffness:220, damping:32 }}><SymbolPill {...floatingSymbols[0]} /></motion.div></FloatingElement>
+              <FloatingElement depth={3}   className="top-[51%]  left-[11%]"><motion.div initial={{ opacity:0, scale:0.88 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.71, type:"spring", stiffness:220, damping:32 }}><IconPill   {...floatingIcons[4]}   /></motion.div></FloatingElement>
+              <FloatingElement depth={1.5} className="top-[68%]  left-[5%]"> <motion.div initial={{ opacity:0, scale:0.88 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.63, type:"spring", stiffness:220, damping:32 }}><IconPill   {...floatingIcons[6]}   /></motion.div></FloatingElement>
+              <FloatingElement depth={2}   className="bottom-[5%] left-[18%]"><motion.div initial={{ opacity:0, scale:0.88 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.80, type:"spring", stiffness:220, damping:32 }}><SymbolPill {...floatingSymbols[2]} /></motion.div></FloatingElement>
 
-              {/* Top-right cluster */}
-              <FloatingElement depth={2}  className="top-[6%]  right-[4%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.44, type:"spring", stiffness:300, damping:26 }}><IconPill   {...floatingIcons[1]}   /></motion.div></FloatingElement>
-              <FloatingElement depth={1}  className="top-[20%] right-[7%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.56, type:"spring", stiffness:300, damping:26 }}><SymbolPill {...floatingSymbols[1]} /></motion.div></FloatingElement>
-              <FloatingElement depth={2.5}className="top-[35%] right-[3%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.68, type:"spring", stiffness:300, damping:26 }}><IconPill   {...floatingIcons[6]}   /></motion.div></FloatingElement>
-              <FloatingElement depth={1}  className="top-[52%] right-[6%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.77, type:"spring", stiffness:300, damping:26 }}><SymbolPill {...floatingSymbols[4]} /></motion.div></FloatingElement>
-
-              {/* Bottom-left cluster */}
-              <FloatingElement depth={1.5}className="bottom-[22%] left-[4%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.60, type:"spring", stiffness:300, damping:26 }}><IconPill   {...floatingIcons[2]}   /></motion.div></FloatingElement>
-              <FloatingElement depth={2}  className="bottom-[10%] left-[7%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.70, type:"spring", stiffness:300, damping:26 }}><SymbolPill {...floatingSymbols[2]} /></motion.div></FloatingElement>
-              <FloatingElement depth={1}  className="bottom-[8%]  left-[20%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.80, type:"spring", stiffness:300, damping:26 }}><IconPill   {...floatingIcons[8]}   /></motion.div></FloatingElement>
-
-              {/* Bottom-right cluster */}
-              <FloatingElement depth={2}  className="bottom-[20%] right-[5%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.62, type:"spring", stiffness:300, damping:26 }}><IconPill   {...floatingIcons[3]}   /></motion.div></FloatingElement>
-              <FloatingElement depth={1.5}className="bottom-[9%]  right-[8%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.72, type:"spring", stiffness:300, damping:26 }}><IconPill   {...floatingIcons[7]}   /></motion.div></FloatingElement>
-              <FloatingElement depth={1}  className="bottom-[7%]  right-[20%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.82, type:"spring", stiffness:300, damping:26 }}><SymbolPill {...floatingSymbols[5]} /></motion.div></FloatingElement>
-              <FloatingElement depth={3}  className="bottom-[18%] right-[22%]"><motion.div initial={{ opacity:0, scale:0.8 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.48, type:"spring", stiffness:300, damping:26 }}><IconPill   {...floatingIcons[9]}   /></motion.div></FloatingElement>
+              {/* Right side — different rhythm from left */}
+              <FloatingElement depth={1.5} className="top-[13%]  right-[9%]"> <motion.div initial={{ opacity:0, scale:0.88 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.44, type:"spring", stiffness:220, damping:32 }}><IconPill   {...floatingIcons[1]}   /></motion.div></FloatingElement>
+              <FloatingElement depth={3}   className="top-[34%]  right-[15%]"><motion.div initial={{ opacity:0, scale:0.88 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.60, type:"spring", stiffness:220, damping:32 }}><SymbolPill {...floatingSymbols[1]} /></motion.div></FloatingElement>
+              <FloatingElement depth={1}   className="top-[56%]  right-[7%]"> <motion.div initial={{ opacity:0, scale:0.88 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.48, type:"spring", stiffness:220, damping:32 }}><IconPill   {...floatingIcons[3]}   /></motion.div></FloatingElement>
+              <FloatingElement depth={2.5} className="top-[74%]  right-[13%]"><motion.div initial={{ opacity:0, scale:0.88 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.74, type:"spring", stiffness:220, damping:32 }}><SymbolPill {...floatingSymbols[5]} /></motion.div></FloatingElement>
+              <FloatingElement depth={1.5} className="bottom-[4%] right-[8%]"> <motion.div initial={{ opacity:0, scale:0.88 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.87, type:"spring", stiffness:220, damping:32 }}><IconPill   {...floatingIcons[5]}   /></motion.div></FloatingElement>
+              <FloatingElement depth={2}   className="bottom-[18%] right-[4%]"><motion.div initial={{ opacity:0, scale:0.88 }} animate={{ opacity:1, scale:1 }} transition={{ delay:0.67, type:"spring", stiffness:220, damping:32 }}><IconPill   {...floatingIcons[9]}   /></motion.div></FloatingElement>
             </Floating>
           </motion.div>
         )}
@@ -318,14 +321,14 @@ function Hero({
       <div className="relative z-10 flex flex-col items-center text-center px-6 w-full max-w-[680px] pointer-events-auto">
         <motion.h1
           className="text-[11px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-5 mobile-landscape:mb-2"
-          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
           {headline ?? t.hero.label}
         </motion.h1>
 
         <motion.p
           className="font-serif text-[clamp(38px,6vw,72px)] mobile-landscape:text-[clamp(22px,4vw,36px)] font-normal leading-[1.08] tracking-tight mb-6 mobile-landscape:mb-2"
-          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.28, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.28, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
           <span>{t.hero.line1}</span>
           <br />
@@ -355,14 +358,14 @@ function Hero({
 
         <motion.p
           className="text-[clamp(15px,1.8vw,18px)] text-[var(--color-ink-muted)] max-w-[520px] mb-10 mobile-landscape:mb-4 leading-[1.65]"
-          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.38, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.38, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
           {subheadline ?? t.hero.subheadline}
         </motion.p>
 
         <motion.div
           className="flex flex-wrap items-center justify-center gap-3 mb-4"
-          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.46, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.46, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
           <a
             href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page"
@@ -383,47 +386,11 @@ function Hero({
 
         <motion.p
           className="text-[13px] text-[var(--color-ink-muted)]"
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.54, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.54, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
           {t.hero.trustLine}
         </motion.p>
 
-        {/* Mode explanation pill — hidden on phone landscape to save vertical space */}
-        <div className="mobile-landscape:hidden w-full flex justify-center">
-        <AnimatePresence mode="wait">
-          {on ? (
-            <motion.div
-              key="react-mode"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 8 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              className="mt-5 flex flex-wrap items-center gap-2 px-4 py-2 bg-[#eef3ff] border-2 border-[var(--color-blue)] shadow-[3px_3px_0_var(--color-blue)] rounded text-[12px] font-semibold text-[var(--color-blue)]"
-            >
-              <motion.span
-                animate={{ scale: [1, 1.2, 1], opacity: [1, 0.6, 1] }}
-                transition={{ duration: 1.8, repeat: Infinity }}
-                className="flex items-center"
-              >
-                <Zap size={12} className="fill-current shrink-0" />
-              </motion.span>
-              <span>{t.hero.reactMode}</span>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="static-mode"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 8 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              className="mt-5 flex flex-wrap items-center gap-2 px-4 py-2 bg-[var(--color-surface)] border-2 border-[var(--color-ink)] shadow-[3px_3px_0_var(--color-ink)] rounded text-[12px] font-semibold text-[var(--color-ink-muted)]"
-            >
-              <span className="w-2 h-2 rounded-full bg-[var(--color-ink-muted)] shrink-0" />
-              <span>{t.hero.staticMode}</span>
-            </motion.div>
-          )}
-        </AnimatePresence>
-        </div>
       </div>
     </section>
   );
@@ -459,8 +426,8 @@ function HowItWorks() {
               initial={{ opacity: 0, x: i === 0 ? -48 : i === 2 ? 48 : 0, y: i === 1 ? 36 : 0 }}
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ type: "spring", stiffness: 320, damping: 26, delay: i * 0.06 }}
-              whileHover={{ y: -4, transition: { type: "spring", stiffness: 400, damping: 26 } }}
+              transition={{ type: "spring", stiffness: 260, damping: 32, delay: i * 0.1 }}
+              whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
             >
               <div className="w-9 h-9 rounded bg-[var(--color-surface)] border-2 border-[var(--color-ink)] shadow-[2px_2px_0_var(--color-ink)] flex items-center justify-center text-[13px] font-semibold text-[var(--color-ink)] mb-5">
                 {num}
@@ -515,7 +482,7 @@ function Features() {
             <motion.div
               key={title}
               className="neo-card bg-white p-6 md:p-9"
-              whileHover={{ y: -4, transition: { type: "spring", stiffness: 400, damping: 26 } }}
+              whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
             >
               <div className="w-[42px] h-[42px] bg-[var(--color-surface)] border-2 border-[var(--color-ink)] shadow-[2px_2px_0_var(--color-ink)] rounded flex items-center justify-center text-[var(--color-ink)] mb-5">
                 {icon}
@@ -550,7 +517,7 @@ function Testimonials() {
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
             {t.testimonials.items.map(({ quote, role, initials }) => (
               <motion.div key={role} className="neo-card bg-white p-6 md:p-8 flex flex-col gap-5"
-                whileHover={{ y: -4, transition: { type: "spring", stiffness: 400, damping: 26 } }}
+                whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
               >
                 <svg width="28" height="20" viewBox="0 0 28 20" fill="none" aria-hidden="true">
                   <path d="M0 20V12.4C0 9.06667 0.8 6.2 2.4 3.8C4.06667 1.4 6.46667 0.2 9.6 0.2L10.6 2C8.6 2.53333 7 3.66667 5.8 5.4C4.66667 7.06667 4.1 8.93333 4.1 11H9.6V20H0ZM18 20V12.4C18 9.06667 18.8 6.2 20.4 3.8C22.0667 1.4 24.4667 0.2 27.6 0.2L28 2C26 2.53333 24.4 3.66667 23.2 5.4C22.0667 7.06667 21.5 8.93333 21.5 11H27V20H18Z" fill="var(--color-blue)" opacity="0.25"/>
@@ -598,7 +565,7 @@ function DevTracks() {
             <FadeUp key={name} delay={idx * 0.12} className="flex flex-col">
             <motion.div
               className={`bg-white flex flex-col h-full overflow-hidden ${featured ? "neo-card-blue" : "neo-card"}`}
-              whileHover={{ y: -4, transition: { type: "spring", stiffness: 400, damping: 26 } }}
+              whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
             >
               {/* Header */}
               <div className={`px-5 pt-6 pb-4 md:px-8 md:pt-8 md:pb-6 border-b ${featured ? "border-[var(--color-blue)]/20" : "border-[var(--color-ink)]/12"}`}>
@@ -1254,6 +1221,14 @@ export default function Home() {
   const pathname = usePathname()
   const locale: Locale = pathname.startsWith("/zh") ? "zh" : "en"
   const t = translations[locale]
+
+  const [showTop, setShowTop] = useState(false)
+  useEffect(() => {
+    const onScroll = () => setShowTop(window.scrollY > 400)
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
   return (
     <LocaleCtx.Provider value={{ t, locale }}>
       <AnimContext.Provider value={{ on: animOn, set: setAnimOn }}>
@@ -1272,6 +1247,25 @@ export default function Home() {
           <About />
           <CtaSection />
         </main>
+        <AnimatePresence>
+          {showTop && (
+            <motion.button
+              key="back-to-top"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              initial={{ opacity: 0, scale: 0.8, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.8, y: 12 }}
+              transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ y: -3, transition: { type: "spring", stiffness: 400, damping: 20 } }}
+              aria-label="Back to top"
+              className="fixed bottom-6 right-6 z-50 w-10 h-10 flex items-center justify-center bg-[var(--color-ink)] text-white border-2 border-[var(--color-ink)] shadow-[3px_3px_0_var(--color-ink)] rounded-full"
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M7 11V3M3 7l4-4 4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </motion.button>
+          )}
+        </AnimatePresence>
         <Footer />
       </AnimContext.Provider>
     </LocaleCtx.Provider>
