@@ -8,6 +8,7 @@ import { motion, LayoutGroup, AnimatePresence } from "motion/react";
 import { translations, type Locale, type Translations } from "@/lib/i18n";
 import Floating, { FloatingElement } from "@/components/ui/parallax-floating";
 import { TextRotate } from "@/components/ui/text-rotate";
+import { AuroraBackground } from "@/components/ui/aurora-background";
 import {
   Code2, PenTool, Layers, Type, Palette,
   MousePointer2, LayoutTemplate, Zap, Smartphone, Globe,
@@ -273,6 +274,7 @@ function Hero({
   const t = useT()
   return (
     <section className="relative w-full min-h-[calc(100vh-60px)] mobile-landscape:min-h-0 mobile-landscape:py-8 overflow-hidden flex flex-col items-center justify-center">
+      <AuroraBackground />
       {/* Mouse-follow parallax elements — toggled via AnimContext */}
       <AnimatePresence>
         {on && (
