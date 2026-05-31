@@ -397,10 +397,22 @@ function Hero({
 // ─── Why Website ──────────────────────────────────────────────────────────────
 function WhyWebsite() {
   const bullets = [
-    "Build SEO authority. Social profiles rarely do.",
-    "Collect leads without paying per click.",
-    "Your data. Your rules. Your brand.",
-    "Works 24/7 — no feed, no algorithm.",
+    {
+      text: "Build SEO authority. Social profiles rarely do.",
+      icon: <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><polyline points="2,14 6,9 10,12 16,4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><polyline points="12,4 16,4 16,8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>,
+    },
+    {
+      text: "Collect leads without paying per click.",
+      icon: <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="7" stroke="currentColor" strokeWidth="1.5"/><circle cx="9" cy="9" r="3.5" stroke="currentColor" strokeWidth="1.5"/><circle cx="9" cy="9" r="1.2" fill="currentColor"/></svg>,
+    },
+    {
+      text: "Your data. Your rules. Your brand.",
+      icon: <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M9 1.5L2.5 5v4.5C2.5 13.5 5.5 16 9 17c3.5-1 6.5-3.5 6.5-7.5V5L9 1.5z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>,
+    },
+    {
+      text: "Works 24/7 — no feed, no algorithm.",
+      icon: <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="7" stroke="currentColor" strokeWidth="1.5"/><path d="M9 5.5V9l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>,
+    },
   ]
 
   return (
@@ -425,7 +437,7 @@ function WhyWebsite() {
         {/* 2×2 bullet grid */}
         <FadeUp delay={0.1}>
           <div className="grid sm:grid-cols-2 gap-4 mb-10">
-            {bullets.map((text, i) => (
+            {bullets.map(({ text, icon }, i) => (
               <motion.div
                 key={i}
                 className="neo-card bg-[var(--color-surface)] flex items-center gap-4 px-6 py-5"
@@ -435,7 +447,7 @@ function WhyWebsite() {
                 transition={{ duration: 0.5, delay: 0.06 + i * 0.07, ease: [0.22, 1, 0.36, 1] }}
                 whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
               >
-                <span className="w-2 h-2 rounded-full bg-[var(--color-blue)] shrink-0" />
+                <span className="text-[var(--color-blue)] shrink-0">{icon}</span>
                 <p className="text-[15px] font-medium text-[var(--color-ink)] leading-snug">{text}</p>
               </motion.div>
             ))}
@@ -483,14 +495,46 @@ function Pricing() {
   ]
 
   const included = [
-    { title: "SSL secure connection",  desc: "Your site runs on HTTPS. Visitors see a padlock — they know their details are safe." },
-    { title: "Mobile-first design",    desc: "Looks great and works perfectly on phones, tablets, and desktops." },
-    { title: "Online inquiry form",    desc: "A contact form built into your site so customers can reach you directly." },
-    { title: "WhatsApp support",       desc: "Reach me directly on WhatsApp during the project for quick updates and questions." },
-    { title: "Google Maps embed",      desc: "Your business location shown on a live map so customers can find you easily." },
-    { title: "Speed optimisation",     desc: "Pages are built to load fast, even on slow mobile data connections." },
-    { title: "Google Analytics setup", desc: "Track how many people visit your site, where they come from, and what they do." },
-    { title: "Basic SEO setup",        desc: "Page titles, descriptions, and tags set up correctly so Google can find you." },
+    {
+      title: "SSL secure connection",
+      desc: "Your site runs on HTTPS. Visitors see a padlock — they know their details are safe.",
+      icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><rect x="2.5" y="6.5" width="10" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M5 6.5V4.5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>,
+    },
+    {
+      title: "Mobile-first design",
+      desc: "Looks great and works perfectly on phones, tablets, and desktops.",
+      icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><rect x="3.5" y="1" width="8" height="13" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><circle cx="7.5" cy="11.5" r="0.75" fill="currentColor"/></svg>,
+    },
+    {
+      title: "Online inquiry form",
+      desc: "A contact form built into your site so customers can reach you directly.",
+      icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><rect x="1" y="3" width="13" height="9" rx="1" stroke="currentColor" strokeWidth="1.5"/><path d="M1 4l6.5 5L14 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>,
+    },
+    {
+      title: "WhatsApp support",
+      desc: "Reach me directly on WhatsApp during the project for quick updates and questions.",
+      icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M1.5 2C1.5 1.7 1.7 1.5 2 1.5h11c.3 0 .5.2.5.5v8c0 .3-.2.5-.5.5H5l-3.5 3.5V2z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>,
+    },
+    {
+      title: "Google Maps embed",
+      desc: "Your business location shown on a live map so customers can find you easily.",
+      icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M7.5 1C5 1 3 3 3 5.5 3 9 7.5 14 7.5 14S12 9 12 5.5C12 3 10 1 7.5 1z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><circle cx="7.5" cy="5.5" r="1.5" stroke="currentColor" strokeWidth="1.5"/></svg>,
+    },
+    {
+      title: "Speed optimisation",
+      desc: "Pages are built to load fast, even on slow mobile data connections.",
+      icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M8.5 1L3 8.5h4.5L6.5 14 12 6.5H7.5L8.5 1z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>,
+    },
+    {
+      title: "Google Analytics setup",
+      desc: "Track how many people visit your site, where they come from, and what they do.",
+      icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 12V7M6.5 12V4M10.5 12V8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/><path d="M1 12h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>,
+    },
+    {
+      title: "Basic SEO setup",
+      desc: "Page titles, descriptions, and tags set up correctly so Google can find you.",
+      icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" strokeWidth="1.5"/><path d="M10 10L14 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>,
+    },
   ]
 
   return (
@@ -601,9 +645,9 @@ function Pricing() {
           <div className="mt-6 p-6 rounded-lg border border-[var(--color-border)] bg-white">
             <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-4">Included in all packages</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              {included.map(({ title, desc }) => (
+              {included.map(({ title, desc, icon }) => (
                 <div key={title} className="flex gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-blue)] shrink-0 mt-[6px]" />
+                  <span className="text-[var(--color-blue)] shrink-0 mt-[1px]">{icon}</span>
                   <div>
                     <p className="text-[13px] font-semibold text-[var(--color-ink)] leading-snug">{title}</p>
                     <p className="text-[12px] text-[var(--color-ink-muted)] leading-[1.6] mt-0.5">{desc}</p>
