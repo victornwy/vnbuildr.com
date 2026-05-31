@@ -422,15 +422,15 @@ function WhyWebsite() {
         {/* Centered header */}
         <FadeUp className="text-center mb-12">
           <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
-            The myth of social media
+            Posting everyday, still no enquiries?
           </p>
           <h2 className="font-serif text-[clamp(30px,4vw,48px)] font-normal tracking-tight leading-[1.1] mb-5">
-            Social media is rented land.
+            10,000 followers. Zero leads.
             <br />
-            <span className="text-[var(--color-blue)]">Your website is property.</span>
+            <span className="text-[var(--color-blue)]">Sound familiar?</span>
           </h2>
           <p className="text-[16px] text-[var(--color-ink-muted)] leading-[1.75] max-w-[520px] mx-auto">
-            Every follower you&apos;ve built on Instagram, TikTok, or LinkedIn lives on someone else&apos;s server — subject to algorithm shifts, account bans, or platform shutdowns beyond your control. Your website is the only digital real estate you truly own.
+            Social media is designed to keep people scrolling — not to send them to you. You can post every day and still get no enquiries, because the platform decides who sees your content. A website puts you in control: your leads, your data, your brand, on your own terms.
           </p>
         </FadeUp>
 
@@ -453,7 +453,7 @@ function WhyWebsite() {
             ))}
           </div>
           <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.75] border-t border-[var(--color-border)] pt-7 italic text-center max-w-[560px] mx-auto">
-            Social drives the attention. Your website converts it. You need both — but only one is truly yours.
+            Social brings the eyeballs. Your website converts them into customers.
           </p>
         </FadeUp>
 
@@ -464,155 +464,159 @@ function WhyWebsite() {
 
 // ─── Pricing ──────────────────────────────────────────────────────────────────
 function Pricing() {
+  const [hoveredPlan, setHoveredPlan] = useState<number | null>(null)
+
+  const colBg = (j: number) =>
+    plans[j].featured
+      ? hoveredPlan === j ? "bg-[#d4e4ff]" : "bg-[#eef3ff]"
+      : hoveredPlan === j ? "bg-[#f4f7ff]" : "bg-white"
+
   const plans = [
-    {
-      name: "Starter",
-      price: "RM1,299",
-      desc: "A clean, professional single-page site to get your business online fast.",
-      perks: ["1 page", "7 content sections", "2–3 working days", "1 business email", "3 revision rounds"],
-      cta: "Get started",
-      waMsg: "Hi, I'm interested in the Starter package",
-      featured: false,
-    },
-    {
-      name: "Business",
-      price: "RM2,899",
-      desc: "Multi-page site built to grow with your business. Our most popular choice.",
-      perks: ["5 pages", "10–15 content sections", "3–7 working days", "1 business email", "4 revision rounds"],
-      cta: "Get started",
-      waMsg: "Hi, I'm interested in the Business package",
-      featured: true,
-    },
-    {
-      name: "Pro",
-      price: "RM3,799",
-      desc: "A full website for established businesses that need more pages and room to grow.",
-      perks: ["10 pages", "10–15 content sections", "4–8 working days", "2 business emails", "5 revision rounds"],
-      cta: "Chat with us",
-      waMsg: "Hi, I'm interested in the Pro package",
-      featured: false,
-    },
+    { name: "Starter",  type: "Landing Page",      price: "RM1,299", cta: "Get started",  waMsg: "Hi, I'm interested in the Starter package",  featured: false },
+    { name: "Business", type: "Multi-page Website", price: "RM2,899", cta: "Get started",  waMsg: "Hi, I'm interested in the Business package", featured: true  },
+    { name: "Pro",      type: "Multi-page Website", price: "RM3,799", cta: "Chat with us", waMsg: "Hi, I'm interested in the Pro package",      featured: false },
+  ]
+
+  const rows = [
+    { label: "Pages",           values: ["1",        "5",        "10"]       },
+    { label: "Delivery",        values: ["2–3 days", "3–7 days", "4–8 days"] },
+    { label: "Revision rounds", values: ["3",        "4",        "5"]        },
+    { label: "Business emails", values: ["1",        "1",        "2"]        },
   ]
 
   const included = [
-    {
-      title: "SSL secure connection",
-      desc: "Your site runs on HTTPS. Visitors see a padlock — they know their details are safe.",
-      icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><rect x="2.5" y="6.5" width="10" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M5 6.5V4.5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>,
-    },
-    {
-      title: "Mobile-first design",
-      desc: "Looks great and works perfectly on phones, tablets, and desktops.",
-      icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><rect x="3.5" y="1" width="8" height="13" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><circle cx="7.5" cy="11.5" r="0.75" fill="currentColor"/></svg>,
-    },
-    {
-      title: "Online inquiry form",
-      desc: "A contact form built into your site so customers can reach you directly.",
-      icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><rect x="1" y="3" width="13" height="9" rx="1" stroke="currentColor" strokeWidth="1.5"/><path d="M1 4l6.5 5L14 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>,
-    },
-    {
-      title: "WhatsApp support",
-      desc: "Reach me directly on WhatsApp during the project for quick updates and questions.",
-      icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M1.5 2C1.5 1.7 1.7 1.5 2 1.5h11c.3 0 .5.2.5.5v8c0 .3-.2.5-.5.5H5l-3.5 3.5V2z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>,
-    },
-    {
-      title: "Google Maps embed",
-      desc: "Your business location shown on a live map so customers can find you easily.",
-      icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M7.5 1C5 1 3 3 3 5.5 3 9 7.5 14 7.5 14S12 9 12 5.5C12 3 10 1 7.5 1z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><circle cx="7.5" cy="5.5" r="1.5" stroke="currentColor" strokeWidth="1.5"/></svg>,
-    },
-    {
-      title: "Speed optimisation",
-      desc: "Pages are built to load fast, even on slow mobile data connections.",
-      icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M8.5 1L3 8.5h4.5L6.5 14 12 6.5H7.5L8.5 1z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>,
-    },
-    {
-      title: "Google Analytics setup",
-      desc: "Track how many people visit your site, where they come from, and what they do.",
-      icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 12V7M6.5 12V4M10.5 12V8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/><path d="M1 12h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>,
-    },
-    {
-      title: "Basic SEO setup",
-      desc: "Page titles, descriptions, and tags set up correctly so Google can find you.",
-      icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" strokeWidth="1.5"/><path d="M10 10L14 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>,
-    },
+    { title: "SSL secure connection",  icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><rect x="2.5" y="6.5" width="10" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M5 6.5V4.5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg> },
+    { title: "Mobile-first design",    icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><rect x="3.5" y="1" width="8" height="13" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><circle cx="7.5" cy="11.5" r="0.75" fill="currentColor"/></svg> },
+    { title: "Online inquiry form",    icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><rect x="1" y="3" width="13" height="9" rx="1" stroke="currentColor" strokeWidth="1.5"/><path d="M1 4l6.5 5L14 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg> },
+    { title: "WhatsApp support",       icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M1.5 2C1.5 1.7 1.7 1.5 2 1.5h11c.3 0 .5.2.5.5v8c0 .3-.2.5-.5.5H5l-3.5 3.5V2z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg> },
+    { title: "Google Maps embed",      icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M7.5 1C5 1 3 3 3 5.5 3 9 7.5 14 7.5 14S12 9 12 5.5C12 3 10 1 7.5 1z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><circle cx="7.5" cy="5.5" r="1.5" stroke="currentColor" strokeWidth="1.5"/></svg> },
+    { title: "Speed optimisation",     icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M8.5 1L3 8.5h4.5L6.5 14 12 6.5H7.5L8.5 1z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg> },
+    { title: "Google Analytics setup", icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 12V7M6.5 12V4M10.5 12V8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/><path d="M1 12h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg> },
+    { title: "Basic SEO setup",        icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" strokeWidth="1.5"/><path d="M10 10L14 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg> },
   ]
 
   return (
     <section id="pricing" className="py-16 md:py-24 px-6 bg-white">
       <div className="max-w-[1100px] mx-auto">
 
-        <FadeUp className="text-center mb-14">
-          <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
-            Packages · Malaysia
-          </p>
+        <FadeUp className="text-center mb-10">
+          <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">Packages</p>
           <h2 className="font-serif text-[clamp(30px,4vw,48px)] font-normal tracking-tight leading-[1.1] mb-4">
-            Website &amp; landing page pricing.
+            Simple, transparent pricing.
             <br />
-            <span className="text-[var(--color-blue)]">Simple. Transparent. No hidden fees.</span>
+            <span className="text-[var(--color-blue)]">No hidden fees.</span>
           </h2>
-          <p className="text-[16px] text-[var(--color-ink-muted)] max-w-[460px] mx-auto leading-[1.65]">
-            Pick the package that fits your business. All packages include the same core features.
-          </p>
         </FadeUp>
 
-        {/* 3 main cards */}
-        <FadeUp delay={0.08}>
-          <div className="grid sm:grid-cols-3 gap-5 mb-5">
-            {plans.map(({ name, price, desc, perks, cta, waMsg, featured }, i) => (
-              <motion.div
-                key={name}
-                className={`flex flex-col bg-white overflow-hidden ${featured ? "neo-card-blue" : "neo-card"}`}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
-              >
+        {/* Swipe hint — mobile only */}
+        <div className="flex items-center justify-center gap-1.5 mb-2 md:hidden">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--color-ink-muted)]">
+            <path d="M5 9l-3 3 3 3"/><path d="M19 9l3 3-3 3"/><line x1="2" y1="12" x2="22" y2="12"/>
+          </svg>
+          <span className="text-[11px] text-[var(--color-ink-muted)]">Swipe to compare plans</span>
+        </div>
+
+        {/* Unified pricing table */}
+        <FadeUp delay={0.06}>
+          <div className="neo-card overflow-hidden mb-5 relative">
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[420px]">
+
                 {/* Header */}
-                <div className={`px-6 pt-6 pb-5 border-b ${featured ? "border-[var(--color-blue)]/20" : "border-[var(--color-border)]"}`}>
-                  {featured && (
-                    <span className="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-[0.06em] uppercase bg-[#eef3ff] text-[var(--color-blue)] px-2.5 py-1 rounded-full mb-3">
-                      Most Popular
-                    </span>
-                  )}
-                  <h3 className="font-serif text-[20px] font-normal tracking-tight mb-2">{name}</h3>
-                  <p className="font-serif text-[34px] font-normal tracking-tight leading-none mb-3">{price}</p>
-                  <p className="text-[13px] text-[var(--color-ink-muted)] leading-[1.6]">{desc}</p>
-                </div>
+                <thead>
+                  <tr className="border-b-2 border-[var(--color-ink)]">
+                    <th className="px-3 py-4 md:px-6 md:py-6 text-left align-middle w-[22%] border-r border-[var(--color-border)] bg-[var(--color-surface)]">
+                      <p className="text-[10px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-2 hidden md:block">What&apos;s the difference?</p>
+                      <p className="text-[12px] text-[var(--color-ink-muted)] leading-[1.75] hidden md:block">
+                        <span className="font-semibold text-[var(--color-ink)]">Landing page</span> — one focused page for one goal.<br />
+                        <span className="font-semibold text-[var(--color-ink)]">Website</span> — multiple pages for your full business.
+                      </p>
+                    </th>
+                    {plans.map(({ name, type, price, featured }, i) => (
+                      <th
+                        key={name}
+                        className={`px-3 py-4 md:px-5 md:py-6 text-center align-middle cursor-default transition-colors duration-300 ${i < plans.length - 1 ? "border-r border-[var(--color-border)]" : ""} ${featured ? "bg-[var(--color-blue)]" : hoveredPlan === i ? "bg-[#f4f7ff]" : "bg-white"}`}
+                        onMouseEnter={() => setHoveredPlan(i)}
+                        onMouseLeave={() => setHoveredPlan(null)}
+                      >
+                        {featured && (
+                          <span className="inline-flex items-center text-[10px] font-bold tracking-[0.06em] uppercase bg-white/20 text-white px-2.5 py-1 rounded-full mb-2">
+                            Most Popular
+                          </span>
+                        )}
+                        <p className={`font-serif text-[15px] md:text-[20px] font-normal tracking-tight mb-0.5 ${featured ? "text-white" : ""}`}>{name}</p>
+                        <p className={`text-[9px] md:text-[10px] font-semibold tracking-[0.05em] uppercase mb-2 md:mb-3 ${featured ? "text-white/60" : "text-[var(--color-ink-muted)]"}`}>{type}</p>
+                        <p className={`font-serif text-[26px] md:text-[38px] font-normal tracking-tight leading-none ${featured ? "text-white" : ""}`}>{price}</p>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
 
-                {/* Differentiators */}
-                <div className="px-6 py-5 flex-1 space-y-3">
-                  {perks.map((item) => (
-                    <div key={item} className="flex items-center gap-2.5">
-                      <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true" className={featured ? "text-[var(--color-blue)] shrink-0" : "text-[var(--color-ink)] shrink-0"}>
-                        <path d="M2.5 7.5L6 11l6.5-7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                      <span className="text-[14px] text-[var(--color-ink)]">{item}</span>
-                    </div>
+                {/* Data rows */}
+                <tbody>
+                  {rows.map(({ label, values }, i) => (
+                    <motion.tr
+                      key={label}
+                      className="border-b border-[var(--color-border)]"
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-20px" }}
+                      transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      <td className="px-3 py-3 md:px-6 md:py-4 text-[11px] md:text-[13px] text-[var(--color-ink-muted)] border-r border-[var(--color-border)] bg-[var(--color-surface)]">{label}</td>
+                      {values.map((v, j) => (
+                        <td
+                          key={j}
+                          className={`text-center px-2 py-3 md:px-5 md:py-4 text-[12px] md:text-[14px] transition-colors duration-300 ${j < values.length - 1 ? "border-r border-[var(--color-border)]" : ""} ${plans[j].featured ? `${colBg(j)} text-[var(--color-blue)] font-semibold` : `${colBg(j)} text-[var(--color-ink)]`}`}
+                          onMouseEnter={() => setHoveredPlan(j)}
+                          onMouseLeave={() => setHoveredPlan(null)}
+                        >
+                          {v}
+                        </td>
+                      ))}
+                    </motion.tr>
                   ))}
-                </div>
+                </tbody>
 
-                {/* CTA */}
-                <div className="px-6 pb-6">
-                  <a
-                    href={`https://wa.me/60199195314?text=${encodeURIComponent(waMsg)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`w-full flex items-center justify-center gap-2 text-[14px] font-medium py-3 rounded-full hover:opacity-85 transition-opacity ${
-                      featured ? "bg-[var(--color-blue)] text-white" : "bg-[var(--color-ink)] text-white"
-                    }`}
-                  >
-                    {cta}
-                    <ArrowRight />
-                  </a>
-                </div>
-              </motion.div>
-            ))}
+                {/* CTA row */}
+                <tfoot>
+                  <tr>
+                    <td className="px-3 py-4 md:px-6 md:py-5 border-r border-[var(--color-border)] bg-[var(--color-surface)]" />
+                    {plans.map(({ name, cta, waMsg, featured }, i) => (
+                      <td
+                        key={name}
+                        className={`px-2 py-4 md:px-4 md:py-5 text-center transition-colors duration-300 ${i < plans.length - 1 ? "border-r border-[var(--color-border)]" : ""} ${colBg(i)}`}
+                        onMouseEnter={() => setHoveredPlan(i)}
+                        onMouseLeave={() => setHoveredPlan(null)}
+                      >
+                        <motion.a
+                          href={`https://wa.me/60199195314?text=${encodeURIComponent(waMsg)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          whileHover={{ scale: 1.04, y: -2 }}
+                          whileTap={{ scale: 0.97 }}
+                          transition={{ type: "spring", stiffness: 380, damping: 22 }}
+                          className={`inline-flex items-center justify-center gap-1.5 w-full text-[11px] md:text-[13px] font-medium py-2.5 md:py-3 rounded-full ${
+                            featured ? "bg-[var(--color-blue)] text-white" : "bg-[var(--color-ink)] text-white"
+                          }`}
+                        >
+                          {cta}
+                          <ArrowRight />
+                        </motion.a>
+                      </td>
+                    ))}
+                  </tr>
+                </tfoot>
+
+              </table>
+            </div>
+            {/* Right-edge fade — signals more content to scroll on mobile */}
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white/90 to-transparent md:hidden" />
           </div>
         </FadeUp>
 
         {/* Custom — full-width banner */}
-        <FadeUp delay={0.16}>
+        <FadeUp delay={0.12}>
           <motion.div
             className="neo-card bg-white"
             whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
@@ -627,35 +631,35 @@ function Pricing() {
                   Need something bigger? We build fully custom websites with 10–25 pages, unique design from scratch, 5 business emails, and up to 7 revision rounds. Delivery in 8–15 working days.
                 </p>
               </div>
-              <a
+              <motion.a
                 href={`https://wa.me/60199195314?text=${encodeURIComponent("Hi, I'd like to discuss a Custom website")}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-[14px] font-medium bg-[var(--color-ink)] text-white px-6 py-3 rounded-full hover:opacity-85 transition-opacity whitespace-nowrap shrink-0"
+                whileHover={{ scale: 1.04, y: -2 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: "spring", stiffness: 380, damping: 22 }}
+                className="inline-flex items-center gap-2 text-[14px] font-medium bg-[var(--color-ink)] text-white px-6 py-3 rounded-full whitespace-nowrap shrink-0"
               >
                 Let&apos;s discuss
                 <ArrowRight />
-              </a>
+              </motion.a>
             </div>
           </motion.div>
         </FadeUp>
 
         {/* All-plans inclusions */}
-        <FadeUp delay={0.2}>
-          <div className="mt-6 p-6 rounded-lg border border-[var(--color-border)] bg-white">
-            <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-4">Included in all packages</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              {included.map(({ title, desc, icon }) => (
-                <div key={title} className="flex gap-3">
-                  <span className="text-[var(--color-blue)] shrink-0 mt-[1px]">{icon}</span>
-                  <div>
-                    <p className="text-[13px] font-semibold text-[var(--color-ink)] leading-snug">{title}</p>
-                    <p className="text-[12px] text-[var(--color-ink-muted)] leading-[1.6] mt-0.5">{desc}</p>
-                  </div>
+        <FadeUp delay={0.16}>
+          <div className="mt-5 px-5 py-4 rounded-lg border border-[var(--color-border)] bg-white">
+            <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-3">Included in all packages</p>
+            <div className="flex flex-wrap gap-x-6 gap-y-2.5">
+              {included.map(({ title, icon }) => (
+                <div key={title} className="flex items-center gap-1.5">
+                  <span className="text-[var(--color-blue)] shrink-0">{icon}</span>
+                  <span className="text-[12px] text-[var(--color-ink)]">{title}</span>
                 </div>
               ))}
             </div>
-            <p className="text-[12px] text-[var(--color-ink-muted)] mt-5 pt-4 border-t border-[var(--color-border)]">
+            <p className="text-[12px] text-[var(--color-ink-muted)] mt-4 pt-3 border-t border-[var(--color-border)]">
               * Domain and hosting are not included. These are separate costs paid to your chosen provider.
             </p>
           </div>

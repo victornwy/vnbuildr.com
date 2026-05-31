@@ -38,12 +38,14 @@ export const metadata: Metadata = {
     url: "https://vnbuildr.com",
     siteName: "vnbuildr",
     type: "website",
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "vnbuildr — Custom websites & landing pages for small businesses" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "vnbuildr — Custom Website & Landing Page Design | Malaysia",
     description:
       "Freelance web designer in Kuala Lumpur. Custom landing pages and business websites for Malaysian SMEs — from RM1,299, hand-coded, mobile-first, delivered in as little as 2 working days.",
+    images: ["/og-image.jpg"],
   },
 };
 
