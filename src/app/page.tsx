@@ -9,6 +9,7 @@ import { translations, type Locale, type Translations } from "@/lib/i18n";
 import Floating, { FloatingElement } from "@/components/ui/parallax-floating";
 import { TextRotate } from "@/components/ui/text-rotate";
 import { AuroraBackground } from "@/components/ui/aurora-background";
+import { FooterSection } from "@/components/ui/footer-section";
 import {
   Code2, PenTool, Layers, Type, Palette,
   MousePointer2, LayoutTemplate, Zap, Smartphone, Globe,
@@ -930,45 +931,6 @@ function CtaSection() {
   );
 }
 
-// ─── Footer ───────────────────────────────────────────────────────────────────
-function Footer() {
-  const t = useT()
-  return (
-    <footer className="bg-[var(--color-ink)] border-t border-white/[0.08] py-8 px-6">
-      <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-3 items-center gap-3 md:gap-4 text-center md:text-left">
-        <Link href="/" onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }) }} className="font-serif text-[18px] text-white/90">
-          <span className="text-[var(--color-blue)] font-bold">vn</span><em>buildr</em>
-        </Link>
-        <p className="text-[13px] text-white/30 text-center">{t.footer.copyright}</p>
-        <ul className="flex flex-wrap gap-x-6 gap-y-2 list-none justify-center md:justify-end">
-          {(
-            [
-              ["https://wa.me/60199195314", t.footer.links.whatsapp],
-              ["mailto:hello@vnbuildr.com", t.footer.links.email],
-              ["#how", t.footer.links.how],
-            ] as [string, string][]
-          ).map(([href, label]) => (
-            <li key={href}>
-              <a
-                href={href}
-                target={href.startsWith("http") ? "_blank" : undefined}
-                rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="text-[13px] text-white/35 hover:text-white/75 transition-colors"
-              >
-                {label}
-              </a>
-            </li>
-          ))}
-          <li>
-            <Link href="/portfolio" className="text-[13px] text-white/35 hover:text-white/75 transition-colors">
-              {t.footer.links.portfolio}
-            </Link>
-          </li>
-        </ul>
-      </div>
-    </footer>
-  );
-}
 
 // ─── Shared ───────────────────────────────────────────────────────────────────
 function ArrowRight() {
@@ -1321,7 +1283,7 @@ export default function Home() {
             </motion.button>
           )}
         </AnimatePresence>
-        <Footer />
+        <FooterSection />
       </AnimContext.Provider>
     </LocaleCtx.Provider>
   );
