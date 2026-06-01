@@ -666,6 +666,66 @@ function Pricing() {
           </div>
         </FadeUp>
 
+        {/* Monthly Maintenance */}
+        <FadeUp delay={0.20}>
+          <div className="mt-10">
+            <div className="text-center mb-6">
+              <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-3">Optional add-on</p>
+              <h3 className="font-serif text-[clamp(22px,3vw,36px)] font-normal tracking-tight leading-[1.1]">
+                Monthly maintenance,
+                <br />
+                <span className="text-[var(--color-blue)]">billed annually.</span>
+              </h3>
+              <p className="text-[14px] text-[var(--color-ink-muted)] mt-3 max-w-[440px] mx-auto leading-[1.65]">
+                Email hosting, domain renewals, and minor updates — handled for you. Pay once a year, no monthly invoices.
+              </p>
+            </div>
+
+            <div className="neo-card overflow-hidden">
+              <div className="grid grid-cols-3 divide-x divide-[var(--color-border)]">
+                {[
+                  { plan: "Starter",  annual: "RM899",   monthly: "RM75/mo",  waMsg: "Hi, I'd like to add the Starter maintenance plan" },
+                  { plan: "Business", annual: "RM1,399", monthly: "RM117/mo", waMsg: "Hi, I'd like to add the Business maintenance plan", featured: true },
+                  { plan: "Pro",      annual: "RM1,799", monthly: "RM150/mo", waMsg: "Hi, I'd like to add the Pro maintenance plan" },
+                ].map(({ plan, annual, monthly, waMsg, featured }) => (
+                  <div key={plan} className={`flex flex-col p-4 md:p-7 ${featured ? "bg-[var(--color-surface)]" : "bg-white"}`}>
+                    <p className="text-[10px] md:text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-2">{plan}</p>
+                    <p className="font-serif text-[26px] md:text-[34px] font-normal tracking-tight leading-none">{annual}</p>
+                    <p className="text-[11px] text-[var(--color-ink-muted)] mt-1 mb-5">{monthly}</p>
+                    <ul className="space-y-2 mb-6 flex-1">
+                      {[
+                        "Business email hosting",
+                        "Domain renewal mgmt",
+                        "Minor updates (2×/mo)",
+                        "Uptime monitoring",
+                      ].map(item => (
+                        <li key={item} className="flex items-start gap-1.5 text-[11px] md:text-[12px] text-[var(--color-ink-muted)]">
+                          <svg className="mt-[2px] shrink-0 text-[var(--color-blue)]" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                    <motion.a
+                      href={`https://wa.me/60199195314?text=${encodeURIComponent(waMsg)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.03, y: -2 }}
+                      whileTap={{ scale: 0.97 }}
+                      transition={{ type: "spring", stiffness: 380, damping: 22 }}
+                      className="inline-flex items-center justify-center gap-1.5 text-[11px] md:text-[13px] font-medium py-2.5 rounded-full bg-[var(--color-ink)] text-white"
+                    >
+                      Add to {plan}
+                      <ArrowRight />
+                    </motion.a>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </FadeUp>
+
       </div>
     </section>
   )
