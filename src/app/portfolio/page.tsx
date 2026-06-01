@@ -4,6 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { useState } from "react"
 import { motion, AnimatePresence } from "motion/react"
+import { FooterSection } from "@/components/ui/footer-section"
 
 // ─── Project data ─────────────────────────────────────────────────────────────
 const projects = [
@@ -252,19 +253,7 @@ export default function PortfolioPage() {
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-[var(--color-ink)] border-t border-white/[0.08] py-8 px-6">
-        <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-3 items-center gap-3 md:gap-4 text-center md:text-left">
-          <Link href="/" className="font-serif text-[18px] text-white/90">
-            <span className="text-[var(--color-blue)] font-bold">vn</span><em>buildr</em>
-          </Link>
-          <p className="text-[13px] text-white/30 text-center">© 2026 vnbuildr. All rights reserved.</p>
-          <div className="flex gap-6 justify-center md:justify-end">
-            <Link href="/" className="text-[13px] text-white/35 hover:text-white/75 transition-colors">Home</Link>
-            <a href="https://wa.me/60199195314" target="_blank" rel="noopener noreferrer" className="text-[13px] text-white/35 hover:text-white/75 transition-colors">WhatsApp</a>
-          </div>
-        </div>
-      </footer>
+      <FooterSection />
     </>
   )
 }
