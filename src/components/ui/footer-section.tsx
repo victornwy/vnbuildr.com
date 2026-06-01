@@ -29,6 +29,13 @@ function IconFacebook({ className }: { className?: string }) {
     </svg>
   );
 }
+function IconRedNote({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.5h-2v-5H9.5v-2H11V8h2v1.5h1.5v2H13v5z"/>
+    </svg>
+  );
+}
 
 interface FooterLink {
   title: string;
@@ -80,9 +87,9 @@ const footerSections: FooterSection[] = [
     label: 'Follow',
     links: [
       // Replace # with your actual social URLs when ready
-      { title: 'Instagram', href: '#', icon: IconInstagram },
-      { title: 'LinkedIn',  href: '#', icon: IconLinkedIn  },
-      { title: 'Facebook',  href: '#', icon: IconFacebook  },
+      { title: 'Instagram', href: 'https://www.instagram.com/vnbuildr/',                          external: true, icon: IconInstagram },
+      { title: 'Facebook',  href: 'https://www.facebook.com/profile.php?id=61590036136359',       external: true, icon: IconFacebook  },
+      { title: 'RedNote',   href: 'https://xhslink.com/m/3wQseBxD3r1',                            external: true, icon: IconRedNote   },
     ],
   },
 ];

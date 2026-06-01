@@ -64,6 +64,11 @@ const jsonLd = {
     "addressLocality": "Kuala Lumpur",
     "addressCountry": "MY"
   },
+  "sameAs": [
+    "https://www.instagram.com/vnbuildr/",
+    "https://www.facebook.com/profile.php?id=61590036136359",
+    "https://xhslink.com/m/3wQseBxD3r1"
+  ],
   "areaServed": [
     { "@type": "Country", "name": "Malaysia" },
     { "@type": "AdministrativeArea", "name": "Southeast Asia" }
