@@ -652,7 +652,7 @@ function Pricing() {
         <FadeUp delay={0.16}>
           <div className="mt-5 px-5 py-4 rounded-lg border border-[var(--color-border)] bg-white">
             <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-3">Included in all packages</p>
-            <div className="flex flex-wrap gap-x-6 gap-y-2.5">
+            <div className="grid grid-cols-2 gap-x-4 gap-y-2.5">
               {included.map(({ title, icon }) => (
                 <div key={title} className="flex items-center gap-1.5">
                   <span className="text-[var(--color-blue)] shrink-0">{icon}</span>
