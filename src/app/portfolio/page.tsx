@@ -14,6 +14,7 @@ const projects = [
     category: "Automotive",
     description: "Multi-brand automotive workshop site built to drive service bookings, showcasing expertise across continental, Japanese, and electric vehicles.",
     image: "/our-works/CarGoGarage.png",
+    url: "https://vnbuildr-car-go-garage.pages.dev",
   },
   {
     id: 1,
@@ -21,6 +22,7 @@ const projects = [
     category: "Corporate B2C",
     description: "Professional landing page for a freelance accounting firm, built around credibility signals and client lead generation.",
     image: "/our-works/an-account.png",
+    url: "https://vnbuildr-an-accounts.pages.dev",
   },
   {
     id: 2,
@@ -28,6 +30,7 @@ const projects = [
     category: "Corporate B2B",
     description: "Product and services showcase for a precision wirecut CNC machining firm, built to generate B2B enquiries.",
     image: "/our-works/everbest-link.png",
+    url: "https://vnbuildr-everbest.pages.dev",
   },
   {
     id: 3,
@@ -35,6 +38,7 @@ const projects = [
     category: "Corporate B2B",
     description: "Commercial shelving solutions showcase for a boltless racking and gondola supplier, designed to drive trade enquiries.",
     image: "/our-works/topspace.png",
+    url: "https://vnbuildr-top-space.pages.dev",
   },
   {
     id: 4,
@@ -42,6 +46,7 @@ const projects = [
     category: "Corporate B2B",
     description: "Trust-first landing page for a securities advisory firm, built around regulatory credibility and direct client acquisition CTAs.",
     image: "/our-works/meridian.png",
+    url: "https://vnbuildr-meridian.pages.dev",
   },
   {
     id: 5,
@@ -49,6 +54,7 @@ const projects = [
     category: "Corporate B2C",
     description: "Crypto exchange landing page designed for aggressive user acquisition with trust-building elements.",
     image: "/our-works/novadax.png",
+    url: "https://vnbuildr-exchange.pages.dev",
   },
   {
     id: 6,
@@ -56,6 +62,7 @@ const projects = [
     category: "Restaurant and Cafe",
     description: "Specialty coffee café site built to drive dine-in reservations and online orders, with a warm editorial aesthetic.",
     image: "/our-works/ember-oak.png",
+    url: "https://vnbuildr-cafe.pages.dev",
   },
   {
     id: 7,
@@ -63,6 +70,7 @@ const projects = [
     category: "Online Store",
     description: "Digital creative marketplace for courses, presets, templates and wallpapers — designed for instant downloads.",
     image: "/our-works/lumora.png",
+    url: "https://vnbuildr-lumora.pages.dev",
   },
   {
     id: 8,
@@ -70,6 +78,7 @@ const projects = [
     category: "Personal Brand",
     description: "Personal brand site for a KL & Selangor property agent, showcasing past projects and converting buyers into leads.",
     image: "/our-works/ryan-lim.png",
+    url: "https://vnbuildr-property-agent.pages.dev",
   },
 ]
 
@@ -88,9 +97,12 @@ function ChevronLeft() {
 // ─── Card ─────────────────────────────────────────────────────────────────────
 function ProjectCard({ project, priority = false }: { project: typeof projects[0]; priority?: boolean }) {
   return (
-    <motion.div
+    <motion.a
+      href={project.url}
+      target="_blank"
+      rel="noopener noreferrer"
       layout
-      className="neo-card bg-white flex flex-col overflow-hidden group"
+      className="neo-card bg-white flex flex-col overflow-hidden group cursor-pointer"
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
@@ -110,6 +122,15 @@ function ProjectCard({ project, priority = false }: { project: typeof projects[0
           priority={priority}
           sizes="(max-width: 640px) 95vw, (max-width: 1024px) 47vw, 575px"
         />
+        {/* Visit site overlay */}
+        <div className="absolute inset-0 z-20 flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          <span className="flex items-center gap-1.5 bg-white/95 backdrop-blur-sm text-[var(--color-ink)] text-[11px] font-semibold tracking-wide uppercase px-3.5 py-1.5 rounded-full shadow-md translate-y-2 group-hover:translate-y-0 transition-transform duration-200">
+            Visit Site
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+              <path d="M2 9L9 2M9 2H4M9 2V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </span>
+        </div>
       </div>
 
       {/* Info */}
@@ -122,7 +143,7 @@ function ProjectCard({ project, priority = false }: { project: typeof projects[0
         </div>
         <p className="text-[12px] text-[var(--color-ink-muted)] leading-[1.6] line-clamp-2">{project.description}</p>
       </div>
-    </motion.div>
+    </motion.a>
   )
 }
 
