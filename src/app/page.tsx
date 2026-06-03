@@ -473,16 +473,17 @@ function Pricing() {
       : hoveredPlan === j ? "bg-[#f4f7ff]" : "bg-white"
 
   const plans = [
-    { name: "Starter",  type: "Landing Page",      price: "RM1,299", cta: "Get started",  waMsg: "Hi, I'm interested in the Starter package",  featured: false },
-    { name: "Business", type: "Multi-page Website", price: "RM2,899", cta: "Get started",  waMsg: "Hi, I'm interested in the Business package", featured: true  },
-    { name: "Pro",      type: "Multi-page Website", price: "RM3,799", cta: "Chat with us", waMsg: "Hi, I'm interested in the Pro package",      featured: false },
+    { name: "Landing Page",      type: "Single-page Website", price: "RM999",   cta: "Get started",  waMsg: "Hi, I'm interested in the Landing Page package",      featured: false },
+    { name: "Business Website",  type: "Multi-page Website",  price: "RM2,899", cta: "Get started",  waMsg: "Hi, I'm interested in the Business Website package",  featured: false },
+    { name: "Corporate Website", type: "Custom Multi-page",   price: "RM3,799", cta: "Get started",  waMsg: "Hi, I'm interested in the Corporate Website package", featured: true  },
+    { name: "E-Commerce",        type: "Online Store",         price: "RM9,999", cta: "Chat with us", waMsg: "Hi, I'm interested in the E-Commerce Website package", featured: false },
   ]
 
   const rows = [
-    { label: "Pages",           values: ["1",        "5",        "10"]       },
-    { label: "Delivery",        values: ["2–3 days", "3–7 days", "4–8 days"] },
-    { label: "Revision rounds", values: ["3",        "4",        "5"]        },
-    { label: "Business emails", values: ["1",        "1",        "2"]        },
+    { label: "Timeline",        values: ["1–2 weeks", "2–3 weeks", "3–5 weeks", "4–8 weeks"] },
+    { label: "Pages",           values: ["1",         "5+",        "10+",        "Custom"]    },
+    { label: "Revision rounds", values: ["3",         "4",         "5",          "6"]         },
+    { label: "Business emails", values: ["1",         "2",         "3",          "3"]         },
   ]
 
   const included = [
@@ -529,8 +530,10 @@ function Pricing() {
                     <th className="px-3 py-4 md:px-6 md:py-6 text-left align-middle w-[22%] border-r border-[var(--color-border)] bg-[var(--color-surface)]">
                       <p className="text-[10px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-2 hidden md:block">What&apos;s the difference?</p>
                       <p className="text-[12px] text-[var(--color-ink-muted)] leading-[1.75] hidden md:block">
-                        <span className="font-semibold text-[var(--color-ink)]">Landing page</span> — one focused page for one goal.<br />
-                        <span className="font-semibold text-[var(--color-ink)]">Website</span> — multiple pages for your full business.
+                        <span className="font-semibold text-[var(--color-ink)]">Landing page</span> — one page, one goal.<br />
+                        <span className="font-semibold text-[var(--color-ink)]">Business</span> — multi-page, lead gen ready.<br />
+                        <span className="font-semibold text-[var(--color-ink)]">Corporate</span> — brand authority &amp; SEO.<br />
+                        <span className="font-semibold text-[var(--color-ink)]">E-Commerce</span> — full online store.
                       </p>
                     </th>
                     {plans.map(({ name, type, price, featured }, i) => (
@@ -625,15 +628,16 @@ function Pricing() {
             <div className="grid md:grid-cols-[1fr_auto] gap-6 p-6 md:p-8 items-center">
               <div>
                 <div className="flex flex-wrap items-center gap-3 mb-2">
-                  <span className="text-[11px] font-bold tracking-[0.06em] uppercase bg-[var(--color-surface)] text-[var(--color-ink-muted)] px-2.5 py-1 rounded-full border border-[var(--color-border)]">Custom</span>
-                  <span className="font-serif text-[26px] font-normal tracking-tight">From RM3,999</span>
+                  <span className="text-[11px] font-bold tracking-[0.06em] uppercase bg-[var(--color-surface)] text-[var(--color-ink-muted)] px-2.5 py-1 rounded-full border border-[var(--color-border)]">Custom / Complex</span>
+                  <span className="font-serif text-[26px] font-normal tracking-tight">Custom Quote</span>
+                  <span className="text-[12px] text-[var(--color-ink-muted)] italic">Est. 6–12 weeks</span>
                 </div>
                 <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.7] max-w-[560px]">
-                  Need something bigger? We build fully custom websites with 10–25 pages, unique design from scratch, 5 business emails, and up to 7 revision rounds. Delivery in 8–15 working days.
+                  Bespoke builds for complex requirements — membership portals, booking systems, API integrations, and multi-language platforms. Scoped and priced individually based on your needs.
                 </p>
               </div>
               <motion.a
-                href={`https://wa.me/60199195314?text=${encodeURIComponent("Hi, I'd like to discuss a Custom website")}`}
+                href={`https://wa.me/60199195314?text=${encodeURIComponent("Hi, I'd like to discuss a Custom / Complex website")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.04, y: -2 }}
@@ -684,9 +688,9 @@ function Pricing() {
             <div className="neo-card overflow-hidden">
               <div className="grid grid-cols-3 divide-x divide-[var(--color-border)]">
                 {[
-                  { plan: "Starter",  annual: "RM899",   monthly: "RM75/mo",  waMsg: "Hi, I'd like to add the Starter maintenance plan" },
-                  { plan: "Business", annual: "RM1,399", monthly: "RM117/mo", waMsg: "Hi, I'd like to add the Business maintenance plan", featured: true },
-                  { plan: "Pro",      annual: "RM1,799", monthly: "RM150/mo", waMsg: "Hi, I'd like to add the Pro maintenance plan" },
+                  { plan: "Landing Page",      annual: "RM899",   monthly: "RM75/mo",  waMsg: "Hi, I'd like to add the Landing Page maintenance plan" },
+                  { plan: "Business Website",  annual: "RM1,399", monthly: "RM117/mo", waMsg: "Hi, I'd like to add the Business Website maintenance plan", featured: true },
+                  { plan: "Corporate Website", annual: "RM1,799", monthly: "RM150/mo", waMsg: "Hi, I'd like to add the Corporate Website maintenance plan" },
                 ].map(({ plan, annual, monthly, waMsg, featured }) => (
                   <div key={plan} className={`flex flex-col p-4 md:p-7 ${featured ? "bg-[var(--color-surface)]" : "bg-white"}`}>
                     <p className="text-[10px] md:text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-2">{plan}</p>
@@ -884,7 +888,7 @@ function ContactForm() {
   const [pkg,      setPkg]      = useState("")
   const [message,  setMessage]  = useState("")
 
-  const packages = ["Starter", "Business", "Pro", "Custom", "Not sure yet"]
+  const packages = ["Landing Page", "Business Website", "Corporate Website", "E-Commerce", "Custom / Complex", "Not sure yet"]
   const canSubmit = name.trim() && phone.trim() && business.trim()
 
   const submit = () => {
