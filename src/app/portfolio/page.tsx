@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import { FooterSection } from "@/components/ui/footer-section"
 
@@ -96,18 +96,43 @@ function ChevronLeft() {
 
 // ─── Card ─────────────────────────────────────────────────────────────────────
 function ProjectCard({ project, priority = false }: { project: typeof projects[0]; priority?: boolean }) {
+  const cardRef = useRef<HTMLAnchorElement>(null)
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const card = cardRef.current
+    if (!card) return
+    const rect = card.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    const rotateX = (y - rect.height / 2) / 14
+    const rotateY = (rect.width / 2 - x) / 14
+    card.style.transition = "transform 0.05s ease"
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`
+  }
+
+  const handleMouseLeave = () => {
+    const card = cardRef.current
+    if (!card) return
+    card.style.transition = "transform 0.4s ease"
+    card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)"
+  }
+
   return (
-    <motion.a
-      href={project.url}
-      target="_blank"
-      rel="noopener noreferrer"
+    <motion.div
       layout
-      className="neo-card bg-white flex flex-col overflow-hidden group cursor-pointer"
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 24 } }}
+    >
+    <a
+      ref={cardRef}
+      href={project.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="neo-card bg-white flex flex-col overflow-hidden group cursor-pointer"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
     >
       {/* Image */}
       <div className="relative aspect-video overflow-hidden">
@@ -143,7 +168,8 @@ function ProjectCard({ project, priority = false }: { project: typeof projects[0
         </div>
         <p className="text-[12px] text-[var(--color-ink-muted)] leading-[1.6] line-clamp-2">{project.description}</p>
       </div>
-    </motion.a>
+    </a>
+    </motion.div>
   )
 }
 
