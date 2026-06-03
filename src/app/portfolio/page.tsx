@@ -9,6 +9,13 @@ import { FooterSection } from "@/components/ui/footer-section"
 // ─── Project data ─────────────────────────────────────────────────────────────
 const projects = [
   {
+    id: 9,
+    name: "CarGo Garage",
+    category: "Automotive",
+    description: "Multi-brand automotive workshop site built to drive service bookings, showcasing expertise across continental, Japanese, and electric vehicles.",
+    image: "/our-works/CarGoGarage.png",
+  },
+  {
     id: 1,
     name: "AN Account",
     category: "Corporate B2C",
@@ -205,8 +212,8 @@ export default function PortfolioPage() {
             {/* Project grid */}
             <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
               <AnimatePresence mode="popLayout">
-                {filtered.map(project => (
-                  <ProjectCard key={project.id} project={project} priority={project.id <= 4} />
+                {filtered.map((project, i) => (
+                  <ProjectCard key={project.id} project={project} priority={i < 4} />
                 ))}
               </AnimatePresence>
             </motion.div>
