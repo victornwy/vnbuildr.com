@@ -510,16 +510,60 @@ function Pricing() {
           </h2>
         </FadeUp>
 
-        {/* Swipe hint — mobile only */}
-        <div className="flex items-center justify-center gap-1.5 mb-2 md:hidden">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--color-ink-muted)]">
-            <path d="M5 9l-3 3 3 3"/><path d="M19 9l3 3-3 3"/><line x1="2" y1="12" x2="22" y2="12"/>
-          </svg>
-          <span className="text-[11px] text-[var(--color-ink-muted)]">Swipe to compare plans</span>
+        {/* Mobile pricing cards */}
+        <div className="flex flex-col gap-4 mb-5 lg:hidden">
+          {plans.map((plan, i) => (
+            <motion.div
+              key={plan.name}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-20px" }}
+              transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+              className="neo-card overflow-hidden"
+            >
+              <div className={`px-5 py-5 ${plan.featured ? "bg-[var(--color-blue)]" : "bg-white"}`}>
+                {plan.featured && (
+                  <span className="inline-flex items-center text-[10px] font-bold tracking-[0.06em] uppercase bg-white/20 text-white px-2.5 py-1 rounded-full mb-2">
+                    Most Popular
+                  </span>
+                )}
+                <div className="flex items-end justify-between gap-3">
+                  <div>
+                    <p className={`font-serif text-[20px] font-normal tracking-tight mb-0.5 ${plan.featured ? "text-white" : ""}`}>{plan.name}</p>
+                    <p className={`text-[10px] font-semibold tracking-[0.05em] uppercase ${plan.featured ? "text-white/60" : "text-[var(--color-ink-muted)]"}`}>{plan.type}</p>
+                  </div>
+                  <p className={`font-serif text-[28px] font-normal tracking-tight leading-none ${plan.featured ? "text-white" : ""}`}>{plan.price}</p>
+                </div>
+              </div>
+              <div className="px-5 py-2 divide-y divide-[var(--color-border)]">
+                {rows.map(({ label, values }) => (
+                  <div key={label} className="flex items-center justify-between py-2.5 text-[13px]">
+                    <span className="text-[var(--color-ink-muted)]">{label}</span>
+                    <span className="font-medium text-[var(--color-ink)]">{values[i]}</span>
+                  </div>
+                ))}
+              </div>
+              <div className="px-5 pb-5 pt-1">
+                <motion.a
+                  href={`https://wa.me/60199195314?text=${encodeURIComponent(plan.waMsg)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileTap={{ scale: 0.97 }}
+                  transition={{ type: "spring", stiffness: 380, damping: 22 }}
+                  className={`inline-flex items-center justify-center gap-1.5 w-full text-[13px] font-medium py-3 rounded-full ${
+                    plan.featured ? "bg-[var(--color-blue)] text-white" : "bg-[var(--color-ink)] text-white"
+                  }`}
+                >
+                  {plan.cta}
+                  <ArrowRight />
+                </motion.a>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
-        {/* Unified pricing table */}
-        <FadeUp delay={0.06}>
+        {/* Unified pricing table — desktop */}
+        <FadeUp delay={0.06} className="hidden lg:block">
           <div className="neo-card overflow-hidden mb-5 relative">
             <div className="overflow-x-auto">
               <table className="w-full min-w-[420px]">
@@ -614,8 +658,6 @@ function Pricing() {
 
               </table>
             </div>
-            {/* Right-edge fade — signals more content to scroll on mobile */}
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-white/90 to-transparent md:hidden" />
           </div>
         </FadeUp>
 
@@ -686,12 +728,12 @@ function Pricing() {
             </div>
 
             <div className="neo-card overflow-hidden">
-              <div className="grid grid-cols-3 divide-x divide-[var(--color-border)]">
+              <div className="grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 divide-x-0 lg:divide-x divide-[var(--color-border)]">
                 {[
-                  { plan: "Landing Page",      annual: "RM899",   monthly: "RM75/mo",  waMsg: "Hi, I'd like to add the Landing Page maintenance plan" },
-                  { plan: "Business Website",  annual: "RM1,399", monthly: "RM117/mo", waMsg: "Hi, I'd like to add the Business Website maintenance plan", featured: true },
-                  { plan: "Corporate Website", annual: "RM1,799", monthly: "RM150/mo", waMsg: "Hi, I'd like to add the Corporate Website maintenance plan" },
-                ].map(({ plan, annual, monthly, waMsg, featured }) => (
+                  { plan: "Landing Page",      annual: "RM899",   monthly: "RM75/mo",  waMsg: "Hi, I'd like to add the Landing Page maintenance plan", cta: "Add this plan" },
+                  { plan: "Business Website",  annual: "RM1,399", monthly: "RM117/mo", waMsg: "Hi, I'd like to add the Business Website maintenance plan", featured: true, cta: "Add this plan" },
+                  { plan: "Corporate Website", annual: "RM1,799", monthly: "RM150/mo", waMsg: "Hi, I'd like to add the Corporate Website maintenance plan", cta: "Add this plan" },
+                ].map(({ plan, annual, monthly, waMsg, featured, cta }) => (
                   <div key={plan} className={`flex flex-col p-4 md:p-7 ${featured ? "bg-[var(--color-surface)]" : "bg-white"}`}>
                     <p className="text-[10px] md:text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-2">{plan}</p>
                     <p className="font-serif text-[26px] md:text-[34px] font-normal tracking-tight leading-none">{annual}</p>
@@ -718,9 +760,9 @@ function Pricing() {
                       whileHover={{ scale: 1.03, y: -2 }}
                       whileTap={{ scale: 0.97 }}
                       transition={{ type: "spring", stiffness: 380, damping: 22 }}
-                      className="inline-flex items-center justify-center gap-1.5 text-[11px] md:text-[13px] font-medium py-2.5 rounded-full bg-[var(--color-ink)] text-white"
+                      className="inline-flex items-center justify-center gap-1.5 text-[11px] md:text-[13px] font-medium py-2.5 rounded-full bg-[var(--color-ink)] text-white whitespace-nowrap"
                     >
-                      Add to {plan}
+                      {cta}
                       <ArrowRight />
                     </motion.a>
                   </div>
