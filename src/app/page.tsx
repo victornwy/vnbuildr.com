@@ -3,9 +3,8 @@
 import { useState, useEffect, createContext, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { motion, LayoutGroup, AnimatePresence } from "motion/react";
-import { translations, type Locale, type Translations } from "@/lib/i18n";
+import { translations } from "@/lib/i18n";
 import Floating, { FloatingElement } from "@/components/ui/parallax-floating";
 import { TextRotate } from "@/components/ui/text-rotate";
 import { AuroraBackground } from "@/components/ui/aurora-background";
@@ -13,7 +12,7 @@ import { FooterSection } from "@/components/ui/footer-section";
 import {
   Code2, PenTool, Layers, Type, Palette,
   MousePointer2, LayoutTemplate, Zap, Smartphone, Globe,
-  FileText, Target, RefreshCw,
+  Target, RefreshCw,
 } from "lucide-react";
 
 // ─── Animation toggle context ─────────────────────────────────────────────────
@@ -22,12 +21,7 @@ const AnimContext = createContext<{ on: boolean; set: (v: boolean) => void }>({
   set: () => {},
 })
 
-// ─── Locale context ───────────────────────────────────────────────────────────
-const LocaleCtx = createContext<{ t: Translations; locale: Locale }>({
-  t: translations.en, locale: "en",
-})
-const useT = () => useContext(LocaleCtx).t
-const useLocale = () => useContext(LocaleCtx).locale
+const useT = () => translations
 
 function AnimToggle({ on, set }: { on: boolean; set: (v: boolean) => void }) {
   return (
@@ -89,7 +83,7 @@ function Nav() {
   const close = () => setOpen(false)
 
   const NAV_LINKS: [string, string][] = [
-    ["#pricing",  t.nav.pricing],
+    ["/pricing",  t.nav.pricing],
     ["#faq",      t.nav.faq],
     ["#contact",  t.nav.contact],
   ]
@@ -140,10 +134,17 @@ function Nav() {
                 >
                   <div className="py-1.5">
                     {NAV_LINKS.map(([href, label]) => (
-                      <a key={href} href={href} onClick={e => handleNavClick(e, href)}
-                        className="block text-[14px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] hover:bg-[var(--color-surface)] px-4 py-2.5 transition-colors">
-                        {label}
-                      </a>
+                      href.startsWith("#") ? (
+                        <a key={href} href={href} onClick={e => handleNavClick(e, href)}
+                          className="block text-[14px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] hover:bg-[var(--color-surface)] px-4 py-2.5 transition-colors">
+                          {label}
+                        </a>
+                      ) : (
+                        <Link key={href} href={href} onClick={close}
+                          className="block text-[14px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] hover:bg-[var(--color-surface)] px-4 py-2.5 transition-colors">
+                          {label}
+                        </Link>
+                      )
                     ))}
                     <Link href="/portfolio" onClick={close}
                       className="block text-[14px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] hover:bg-[var(--color-surface)] px-4 py-2.5 transition-colors">
@@ -189,10 +190,17 @@ function Nav() {
                 >
                   <div className="py-1.5">
                     {NAV_LINKS.map(([href, label]) => (
-                      <a key={href} href={href} onClick={e => handleNavClick(e, href)}
-                        className="block text-[14px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] hover:bg-[var(--color-surface)] px-4 py-2.5 transition-colors">
-                        {label}
-                      </a>
+                      href.startsWith("#") ? (
+                        <a key={href} href={href} onClick={e => handleNavClick(e, href)}
+                          className="block text-[14px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] hover:bg-[var(--color-surface)] px-4 py-2.5 transition-colors">
+                          {label}
+                        </a>
+                      ) : (
+                        <Link key={href} href={href} onClick={close}
+                          className="block text-[14px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] hover:bg-[var(--color-surface)] px-4 py-2.5 transition-colors">
+                          {label}
+                        </Link>
+                      )
                     ))}
                     <Link href="/portfolio" onClick={close}
                       className="block text-[14px] font-medium text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] hover:bg-[var(--color-surface)] px-4 py-2.5 transition-colors">
@@ -465,36 +473,26 @@ function WhyWebsite() {
 
 // ─── Pricing ──────────────────────────────────────────────────────────────────
 function Pricing() {
-  const [hoveredPlan, setHoveredPlan] = useState<number | null>(null)
-
-  const colBg = (j: number) =>
-    plans[j].featured
-      ? hoveredPlan === j ? "bg-[#d4e4ff]" : "bg-[#eef3ff]"
-      : hoveredPlan === j ? "bg-[#f4f7ff]" : "bg-white"
-
-  const plans = [
-    { name: "Landing Page",      type: "Single-page Website", price: "RM999",   cta: "Get started",  waMsg: "Hi, I'm interested in the Landing Page package",      featured: false },
-    { name: "Business Website",  type: "Multi-page Website",  price: "RM2,899", cta: "Get started",  waMsg: "Hi, I'm interested in the Business Website package",  featured: false },
-    { name: "Corporate Website", type: "Custom Multi-page",   price: "RM3,799", cta: "Get started",  waMsg: "Hi, I'm interested in the Corporate Website package", featured: true  },
-    { name: "E-Commerce",        type: "Online Store",         price: "RM9,999", cta: "Chat with us", waMsg: "Hi, I'm interested in the E-Commerce Website package", featured: false },
-  ]
-
-  const rows = [
-    { label: "Timeline",        values: ["1–2 weeks", "2–3 weeks", "3–5 weeks", "4–8 weeks"] },
-    { label: "Pages",           values: ["1",         "5+",        "10+",        "Custom"]    },
-    { label: "Revision rounds", values: ["3",         "4",         "5",          "6"]         },
-    { label: "Business emails", values: ["1",         "2",         "3",          "3"]         },
-  ]
-
-  const included = [
-    { title: "SSL secure connection",  icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><rect x="2.5" y="6.5" width="10" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M5 6.5V4.5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg> },
-    { title: "Mobile-first design",    icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><rect x="3.5" y="1" width="8" height="13" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><circle cx="7.5" cy="11.5" r="0.75" fill="currentColor"/></svg> },
-    { title: "Online inquiry form",    icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><rect x="1" y="3" width="13" height="9" rx="1" stroke="currentColor" strokeWidth="1.5"/><path d="M1 4l6.5 5L14 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg> },
-    { title: "WhatsApp support",       icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M1.5 2C1.5 1.7 1.7 1.5 2 1.5h11c.3 0 .5.2.5.5v8c0 .3-.2.5-.5.5H5l-3.5 3.5V2z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg> },
-    { title: "Google Maps embed",      icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M7.5 1C5 1 3 3 3 5.5 3 9 7.5 14 7.5 14S12 9 12 5.5C12 3 10 1 7.5 1z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><circle cx="7.5" cy="5.5" r="1.5" stroke="currentColor" strokeWidth="1.5"/></svg> },
-    { title: "Speed optimisation",     icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M8.5 1L3 8.5h4.5L6.5 14 12 6.5H7.5L8.5 1z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg> },
-    { title: "Google Analytics setup", icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2.5 12V7M6.5 12V4M10.5 12V8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/><path d="M1 12h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg> },
-    { title: "Basic SEO setup",        icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" strokeWidth="1.5"/><path d="M10 10L14 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg> },
+  const servicePricing = [
+    {
+      name: "Funnel Design",
+      price: "From RM2,499",
+      desc: "Multi-step funnel — offer page, lead capture, thank-you/upsell — built to guide one visitor all the way to a sale.",
+      waMsg: "Hi, I'm interested in Funnel Design",
+    },
+    {
+      name: "Website Redesign & Enhancement",
+      price: "From RM1,499",
+      desc: "Refresh an existing site — new design, faster load times, fixes to the parts that confuse visitors.",
+      waMsg: "Hi, I'm interested in Website Redesign & Enhancement",
+      featured: true,
+    },
+    {
+      name: "Build From Scratch",
+      price: "From RM999",
+      desc: "No website yet? Full build from design to launch — pick your scope below.",
+      waMsg: "Hi, I'm interested in a Build From Scratch website",
+    },
   ]
 
   return (
@@ -502,7 +500,7 @@ function Pricing() {
       <div className="max-w-[1100px] mx-auto">
 
         <FadeUp className="text-center mb-10">
-          <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">Packages</p>
+          <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">Pricing</p>
           <h2 className="font-serif text-[clamp(30px,4vw,48px)] font-normal tracking-tight leading-[1.1] mb-4">
             Simple, transparent pricing.
             <br />
@@ -510,155 +508,47 @@ function Pricing() {
           </h2>
         </FadeUp>
 
-        {/* Mobile pricing cards */}
-        <div className="flex flex-col gap-4 mb-5 lg:hidden">
-          {plans.map((plan, i) => (
-            <motion.div
-              key={plan.name}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-20px" }}
-              transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
-              className="neo-card overflow-hidden"
-            >
-              <div className={`px-5 py-5 ${plan.featured ? "bg-[var(--color-blue)]" : "bg-white"}`}>
-                {plan.featured && (
-                  <span className="inline-flex items-center text-[10px] font-bold tracking-[0.06em] uppercase bg-white/20 text-white px-2.5 py-1 rounded-full mb-2">
-                    Most Popular
-                  </span>
-                )}
-                <div className="flex items-end justify-between gap-3">
-                  <div>
-                    <p className={`font-serif text-[20px] font-normal tracking-tight mb-0.5 ${plan.featured ? "text-white" : ""}`}>{plan.name}</p>
-                    <p className={`text-[10px] font-semibold tracking-[0.05em] uppercase ${plan.featured ? "text-white/60" : "text-[var(--color-ink-muted)]"}`}>{plan.type}</p>
-                  </div>
-                  <p className={`font-serif text-[28px] font-normal tracking-tight leading-none ${plan.featured ? "text-white" : ""}`}>{plan.price}</p>
-                </div>
-              </div>
-              <div className="px-5 py-2 divide-y divide-[var(--color-border)]">
-                {rows.map(({ label, values }) => (
-                  <div key={label} className="flex items-center justify-between py-2.5 text-[13px]">
-                    <span className="text-[var(--color-ink-muted)]">{label}</span>
-                    <span className="font-medium text-[var(--color-ink)]">{values[i]}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="px-5 pb-5 pt-1">
+        {/* Service-based pricing cards */}
+        <FadeUp delay={0.04} className="mb-12">
+          <div className="grid md:grid-cols-3 gap-5">
+            {servicePricing.map(({ name, price, desc, waMsg, featured }, i) => (
+              <motion.div
+                key={name}
+                className={`neo-card p-6 md:p-7 flex flex-col ${featured ? "bg-[var(--color-blue)]" : "bg-white"}`}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-30px" }}
+                transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
+              >
+                <p className={`font-serif text-[19px] font-normal tracking-tight mb-1 ${featured ? "text-white" : ""}`}>{name}</p>
+                <p className={`font-serif text-[26px] font-normal tracking-tight mb-3 ${featured ? "text-white" : "text-[var(--color-blue)]"}`}>{price}</p>
+                <p className={`text-[13px] leading-[1.65] mb-6 flex-1 ${featured ? "text-white/85" : "text-[var(--color-ink-muted)]"}`}>{desc}</p>
                 <motion.a
-                  href={`https://wa.me/60199195314?text=${encodeURIComponent(plan.waMsg)}`}
+                  href={`https://wa.me/60199195314?text=${encodeURIComponent(waMsg)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   whileTap={{ scale: 0.97 }}
                   transition={{ type: "spring", stiffness: 380, damping: 22 }}
                   className={`inline-flex items-center justify-center gap-1.5 w-full text-[13px] font-medium py-3 rounded-full ${
-                    plan.featured ? "bg-[var(--color-blue)] text-white" : "bg-[var(--color-ink)] text-white"
+                    featured ? "bg-white text-[var(--color-blue)]" : "bg-[var(--color-ink)] text-white"
                   }`}
                 >
-                  {plan.cta}
+                  Chat with us
                   <ArrowRight />
                 </motion.a>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Unified pricing table — desktop */}
-        <FadeUp delay={0.06} className="hidden lg:block">
-          <div className="neo-card overflow-hidden mb-5 relative">
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[420px]">
-
-                {/* Header */}
-                <thead>
-                  <tr className="border-b-2 border-[var(--color-ink)]">
-                    <th className="px-3 py-4 md:px-6 md:py-6 text-left align-middle w-[22%] border-r border-[var(--color-border)] bg-[var(--color-surface)]">
-                      <p className="text-[10px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-2 hidden md:block">What&apos;s the difference?</p>
-                      <p className="text-[12px] text-[var(--color-ink-muted)] leading-[1.75] hidden md:block">
-                        <span className="font-semibold text-[var(--color-ink)]">Landing page</span> — one page, one goal.<br />
-                        <span className="font-semibold text-[var(--color-ink)]">Business</span> — multi-page, lead gen ready.<br />
-                        <span className="font-semibold text-[var(--color-ink)]">Corporate</span> — brand authority &amp; SEO.<br />
-                        <span className="font-semibold text-[var(--color-ink)]">E-Commerce</span> — full online store.
-                      </p>
-                    </th>
-                    {plans.map(({ name, type, price, featured }, i) => (
-                      <th
-                        key={name}
-                        className={`px-3 py-4 md:px-5 md:py-6 text-center align-middle cursor-default transition-colors duration-300 ${i < plans.length - 1 ? "border-r border-[var(--color-border)]" : ""} ${featured ? "bg-[var(--color-blue)]" : hoveredPlan === i ? "bg-[#f4f7ff]" : "bg-white"}`}
-                        onMouseEnter={() => setHoveredPlan(i)}
-                        onMouseLeave={() => setHoveredPlan(null)}
-                      >
-                        {featured && (
-                          <span className="inline-flex items-center text-[10px] font-bold tracking-[0.06em] uppercase bg-white/20 text-white px-2.5 py-1 rounded-full mb-2">
-                            Most Popular
-                          </span>
-                        )}
-                        <p className={`font-serif text-[15px] md:text-[20px] font-normal tracking-tight mb-0.5 ${featured ? "text-white" : ""}`}>{name}</p>
-                        <p className={`text-[9px] md:text-[10px] font-semibold tracking-[0.05em] uppercase mb-2 md:mb-3 ${featured ? "text-white/60" : "text-[var(--color-ink-muted)]"}`}>{type}</p>
-                        <p className={`font-serif text-[26px] md:text-[38px] font-normal tracking-tight leading-none ${featured ? "text-white" : ""}`}>{price}</p>
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-
-                {/* Data rows */}
-                <tbody>
-                  {rows.map(({ label, values }, i) => (
-                    <motion.tr
-                      key={label}
-                      className="border-b border-[var(--color-border)]"
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-20px" }}
-                      transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
-                    >
-                      <td className="px-3 py-3 md:px-6 md:py-4 text-[11px] md:text-[13px] text-[var(--color-ink-muted)] border-r border-[var(--color-border)] bg-[var(--color-surface)]">{label}</td>
-                      {values.map((v, j) => (
-                        <td
-                          key={j}
-                          className={`text-center px-2 py-3 md:px-5 md:py-4 text-[12px] md:text-[14px] transition-colors duration-300 ${j < values.length - 1 ? "border-r border-[var(--color-border)]" : ""} ${plans[j].featured ? `${colBg(j)} text-[var(--color-blue)] font-semibold` : `${colBg(j)} text-[var(--color-ink)]`}`}
-                          onMouseEnter={() => setHoveredPlan(j)}
-                          onMouseLeave={() => setHoveredPlan(null)}
-                        >
-                          {v}
-                        </td>
-                      ))}
-                    </motion.tr>
-                  ))}
-                </tbody>
-
-                {/* CTA row */}
-                <tfoot>
-                  <tr>
-                    <td className="px-3 py-4 md:px-6 md:py-5 border-r border-[var(--color-border)] bg-[var(--color-surface)]" />
-                    {plans.map(({ name, cta, waMsg, featured }, i) => (
-                      <td
-                        key={name}
-                        className={`px-2 py-4 md:px-4 md:py-5 text-center transition-colors duration-300 ${i < plans.length - 1 ? "border-r border-[var(--color-border)]" : ""} ${colBg(i)}`}
-                        onMouseEnter={() => setHoveredPlan(i)}
-                        onMouseLeave={() => setHoveredPlan(null)}
-                      >
-                        <motion.a
-                          href={`https://wa.me/60199195314?text=${encodeURIComponent(waMsg)}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          whileHover={{ scale: 1.04, y: -2 }}
-                          whileTap={{ scale: 0.97 }}
-                          transition={{ type: "spring", stiffness: 380, damping: 22 }}
-                          className={`inline-flex items-center justify-center gap-1.5 w-full text-[11px] md:text-[13px] font-medium py-2.5 md:py-3 rounded-full ${
-                            featured ? "bg-[var(--color-blue)] text-white" : "bg-[var(--color-ink)] text-white"
-                          }`}
-                        >
-                          {cta}
-                          <ArrowRight />
-                        </motion.a>
-                      </td>
-                    ))}
-                  </tr>
-                </tfoot>
-
-              </table>
-            </div>
+              </motion.div>
+            ))}
           </div>
+        </FadeUp>
+
+        <FadeUp className="text-center mb-12">
+          <p className="text-[14px] text-[var(--color-ink-muted)]">
+            Build From Scratch scope ranges from a single landing page to a full online store.{" "}
+            <Link href="/pricing" className="font-medium text-[var(--color-blue)] hover:underline">
+              See full pricing &amp; package details →
+            </Link>
+          </p>
         </FadeUp>
 
         {/* Custom — full-width banner */}
@@ -692,84 +582,6 @@ function Pricing() {
               </motion.a>
             </div>
           </motion.div>
-        </FadeUp>
-
-        {/* All-plans inclusions */}
-        <FadeUp delay={0.16}>
-          <div className="mt-5 px-5 py-4 rounded-lg border border-[var(--color-border)] bg-white">
-            <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-3">Included in all packages</p>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-2.5">
-              {included.map(({ title, icon }) => (
-                <div key={title} className="flex items-center gap-1.5">
-                  <span className="text-[var(--color-blue)] shrink-0">{icon}</span>
-                  <span className="text-[12px] text-[var(--color-ink)]">{title}</span>
-                </div>
-              ))}
-            </div>
-            <p className="text-[12px] text-[var(--color-ink-muted)] mt-4 pt-3 border-t border-[var(--color-border)]">
-              * Domain and hosting are not included. These are separate costs paid to your chosen provider.
-            </p>
-          </div>
-        </FadeUp>
-
-        {/* Monthly Maintenance */}
-        <FadeUp delay={0.20}>
-          <div className="mt-10">
-            <div className="text-center mb-6">
-              <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-3">Optional add-on</p>
-              <h3 className="font-serif text-[clamp(22px,3vw,36px)] font-normal tracking-tight leading-[1.1]">
-                Monthly maintenance,
-                <br />
-                <span className="text-[var(--color-blue)]">billed annually.</span>
-              </h3>
-              <p className="text-[14px] text-[var(--color-ink-muted)] mt-3 max-w-[440px] mx-auto leading-[1.65]">
-                Email hosting, domain renewals, and minor updates — handled for you. Pay once a year, no monthly invoices.
-              </p>
-            </div>
-
-            <div className="neo-card overflow-hidden">
-              <div className="grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 divide-x-0 lg:divide-x divide-[var(--color-border)]">
-                {[
-                  { plan: "Landing Page",      annual: "RM899",   monthly: "RM75/mo",  waMsg: "Hi, I'd like to add the Landing Page maintenance plan", cta: "Add this plan" },
-                  { plan: "Business Website",  annual: "RM1,399", monthly: "RM117/mo", waMsg: "Hi, I'd like to add the Business Website maintenance plan", featured: true, cta: "Add this plan" },
-                  { plan: "Corporate Website", annual: "RM1,799", monthly: "RM150/mo", waMsg: "Hi, I'd like to add the Corporate Website maintenance plan", cta: "Add this plan" },
-                ].map(({ plan, annual, monthly, waMsg, featured, cta }) => (
-                  <div key={plan} className={`flex flex-col p-4 md:p-7 ${featured ? "bg-[var(--color-surface)]" : "bg-white"}`}>
-                    <p className="text-[10px] md:text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-2">{plan}</p>
-                    <p className="font-serif text-[26px] md:text-[34px] font-normal tracking-tight leading-none">{annual}</p>
-                    <p className="text-[11px] text-[var(--color-ink-muted)] mt-1 mb-5">{monthly}</p>
-                    <ul className="space-y-2 mb-6 flex-1">
-                      {[
-                        "Business email hosting",
-                        "Domain renewal mgmt",
-                        "Minor updates (2×/mo)",
-                        "Uptime monitoring",
-                      ].map(item => (
-                        <li key={item} className="flex items-start gap-1.5 text-[11px] md:text-[12px] text-[var(--color-ink-muted)]">
-                          <svg className="mt-[2px] shrink-0 text-[var(--color-blue)]" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                            <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                    <motion.a
-                      href={`https://wa.me/60199195314?text=${encodeURIComponent(waMsg)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.03, y: -2 }}
-                      whileTap={{ scale: 0.97 }}
-                      transition={{ type: "spring", stiffness: 380, damping: 22 }}
-                      className="inline-flex items-center justify-center gap-1.5 text-[11px] md:text-[13px] font-medium py-2.5 rounded-full bg-[var(--color-ink)] text-white whitespace-nowrap"
-                    >
-                      {cta}
-                      <ArrowRight />
-                    </motion.a>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
         </FadeUp>
 
       </div>
@@ -831,12 +643,9 @@ function HowItWorks() {
 function Features() {
   const t = useT()
   const icons = [
-    <Zap key="zap" size={18} strokeWidth={1.5} />,
-    <FileText key="filetext" size={18} strokeWidth={1.5} />,
-    <Smartphone key="smartphone" size={18} strokeWidth={1.5} />,
-    <Code2 key="code2" size={18} strokeWidth={1.5} />,
     <Target key="target" size={18} strokeWidth={1.5} />,
     <RefreshCw key="refreshcw" size={18} strokeWidth={1.5} />,
+    <Code2 key="code2" size={18} strokeWidth={1.5} />,
   ]
   const cards = t.features.cards.map((c, i) => ({ ...c, icon: icons[i] }))
 
@@ -859,7 +668,7 @@ function Features() {
 
         <FadeUp delay={0.12}>
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
-          {cards.map(({ icon, title, body }) => (
+          {cards.map(({ icon, title, body, bestFor }) => (
             <motion.div
               key={title}
               className="neo-card bg-white p-6 md:p-9"
@@ -869,7 +678,8 @@ function Features() {
                 {icon}
               </div>
               <h3 className="text-[16px] font-semibold tracking-tight mb-2">{title}</h3>
-              <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.65]">{body}</p>
+              <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.65] mb-4">{body}</p>
+              <p className="text-[12px] font-semibold text-[var(--color-blue)]">{bestFor}</p>
             </motion.div>
           ))}
         </div>
@@ -930,7 +740,7 @@ function ContactForm() {
   const [pkg,      setPkg]      = useState("")
   const [message,  setMessage]  = useState("")
 
-  const packages = ["Landing Page", "Business Website", "Corporate Website", "E-Commerce", "Custom / Complex", "Not sure yet"]
+  const packages = ["Landing Page", "Business Website", "E-Commerce", "Custom / Complex", "Not sure yet"]
   const canSubmit = name.trim() && phone.trim() && business.trim()
 
   const submit = () => {
@@ -1132,20 +942,20 @@ const faqs: { q: string; a: React.ReactNode }[] = [
   },
   {
     q: "How much does a website cost in Malaysia?",
-    a: "Website design in Malaysia typically ranges from RM1,000 to RM10,000+ depending on scope and the provider. At vnbuildr, packages start at RM1,299 for a single-page landing page (Starter), RM2,899 for a 5-page business website (Business), RM3,799 for a 10-page site (Pro), and from RM3,999 for fully custom builds. Domain registration and hosting are separate costs — typically RM50–RM300 per year depending on your provider.",
+    a: "Website design in Malaysia typically ranges from RM1,000 to RM10,000+ depending on scope and the provider. At vnbuildr, a Website Redesign & Enhancement starts from RM1,499, a Funnel Design starts from RM2,499, and Build From Scratch websites start at RM999 for a single-page landing page, from RM2,899 for a 5–10+ page business website, and RM9,999 for an online store. Domain registration and hosting are separate costs — typically RM50–RM300 per year depending on your provider.",
   },
   {
     q: "What is a landing page? Is it the same as a website?",
-    a: "A landing page is a single, focused web page built around one goal — usually to capture a lead, promote an offer, or get someone to contact you. A full website has multiple pages (Home, About, Services, Portfolio, Contact, etc.) and covers your entire business. A landing page is faster to build, more affordable, and more effective when you have one clear message. Many businesses start with a landing page and grow into a full website over time. At vnbuildr, our Starter package is a polished single-page site, while Business and Pro packages cover multi-page websites.",
+    a: "A landing page is a single, focused web page built around one goal — usually to capture a lead, promote an offer, or get someone to contact you. A full website has multiple pages (Home, About, Services, Portfolio, Contact, etc.) and covers your entire business. A landing page is faster to build, more affordable, and more effective when you have one clear message. Many businesses start with a landing page and grow into a full website over time. At vnbuildr, our Landing Page package is a polished single-page site, while our Business Website package covers multi-page websites.",
   },
   {
     q: "How long does it take to complete a website?",
     a: (
       <span className="flex flex-col gap-3">
-        <span>· Starter (1 page): <strong>2–3 working days</strong></span>
-        <span>· Business (5 pages): <strong>3–7 working days</strong></span>
-        <span>· Pro (10 pages): <strong>4–8 working days</strong></span>
-        <span>· Custom (10–25 pages): <strong>8–15 working days</strong></span>
+        <span>· Landing Page (1 page): <strong>1–2 weeks</strong></span>
+        <span>· Business Website (5–10+ pages): <strong>2–5 weeks</strong></span>
+        <span>· E-Commerce: <strong>4–8 weeks</strong></span>
+        <span>· Custom / Complex: <strong>6–12 weeks</strong></span>
         <span className="mt-2 opacity-70">These timelines require your content and brand assets to be ready at kickoff.</span>
       </span>
     ),
@@ -1157,6 +967,10 @@ const faqs: { q: string; a: React.ReactNode }[] = [
   {
     q: "Can I provide my own design?",
     a: "Yes! If you already have a complete mockup or a Figma blueprint, I can act strictly as your developer. I will translate your static design files into pixel-perfect, clean React/Tailwind or static HTML/CSS code in record time.",
+  },
+  {
+    q: "Do you design logos or brand identities?",
+    a: "Not quite — I stick to web design and development. Logos and brand identity are a different skill set, so I leave that to the specialists. If you already have a logo and brand colors, I'll build your entire site around them. If you don't have one yet, let me know and I can point you to designers I trust, or build a clean, typography-led page while you sort your branding out separately.",
   },
   {
     q: "Will my website be mobile-friendly?",
@@ -1194,12 +1008,15 @@ const faqs: { q: string; a: React.ReactNode }[] = [
     q: "Do you handle marketing or SEO campaigns?",
     a: "Basic page copywriting is included — I write the headlines, section copy, and CTAs for your landing page as part of every project. What I don't offer is broader marketing strategy, paid ad management, or ongoing SEO campaigns. If you need those, have them planned out before kickoff and I'll make sure the page is built to support them.",
   },
+  {
+    q: "What's not included?",
+    a: "A few things sit outside every package: professional copywriting and content writing (I write the basic page copy — headlines, section copy, CTAs — but not blog posts, brand messaging, or long-form content), photography and custom illustrations (bring your own photos and graphics, or I can suggest stock imagery), and professional or ongoing SEO campaigns (basic on-page SEO setup is included, not keyword strategy or continuous optimization).",
+  },
 ];
 
 function FAQ() {
   const t = useT()
-  const locale = useLocale()
-  const faqItems = locale === "zh" ? t.faq.items : faqs
+  const faqItems = faqs
   const [open, setOpen] = useState<number | null>(null);
 
   return (
@@ -1267,7 +1084,7 @@ const faqSchema = {
     {
       "@type": "Question",
       "name": "How much does a website cost in Malaysia?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Website design in Malaysia typically ranges from RM1,000 to RM10,000+ depending on scope. At vnbuildr, packages start at RM1,299 for a single-page landing page (Starter), RM2,899 for a 5-page business website (Business), RM3,799 for a 10-page site (Pro), and from RM3,999 for fully custom builds. Domain and hosting are separate costs." },
+      "acceptedAnswer": { "@type": "Answer", "text": "Website design in Malaysia typically ranges from RM1,000 to RM10,000+ depending on scope. At vnbuildr, a Website Redesign & Enhancement starts from RM1,499, a Funnel Design starts from RM2,499, and Build From Scratch websites start at RM999 for a single-page landing page, from RM2,899 for a 5–10+ page business website, and RM9,999 for an online store. Domain and hosting are separate costs." },
     },
     {
       "@type": "Question",
@@ -1277,7 +1094,7 @@ const faqSchema = {
     {
       "@type": "Question",
       "name": "How long does it take to complete a website?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Starter (1 page): 2–3 working days. Business (5 pages): 3–7 working days. Pro (10 pages): 4–8 working days. Custom (10–25 pages): 8–15 working days. These timelines require your content and brand assets to be ready at kickoff." },
+      "acceptedAnswer": { "@type": "Answer", "text": "Landing Page (1 page): 1–2 weeks. Business Website (5–10+ pages): 2–5 weeks. E-Commerce: 4–8 weeks. Custom / Complex: 6–12 weeks. These timelines require your content and brand assets to be ready at kickoff." },
     },
     {
       "@type": "Question",
@@ -1288,6 +1105,11 @@ const faqSchema = {
       "@type": "Question",
       "name": "Can I provide my own design?",
       "acceptedAnswer": { "@type": "Answer", "text": "Yes! If you already have a complete mockup or a Figma blueprint, I can act strictly as your developer. I will translate your static design files into pixel-perfect, clean React/Tailwind or static HTML/CSS code in record time." },
+    },
+    {
+      "@type": "Question",
+      "name": "Do you design logos or brand identities?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Not quite — I stick to web design and development. Logos and brand identity are a different skill set, so I leave that to the specialists. If you already have a logo and brand colors, I'll build your entire site around them. If you don't have one yet, let me know and I can point you to designers I trust, or build a clean, typography-led page while you sort your branding out separately." },
     },
     {
       "@type": "Question",
@@ -1334,15 +1156,17 @@ const faqSchema = {
       "name": "Do you handle marketing or SEO campaigns?",
       "acceptedAnswer": { "@type": "Answer", "text": "Basic page copywriting is included — I write the headlines, section copy, and CTAs for your landing page as part of every project. What I don't offer is broader marketing strategy, paid ad management, or ongoing SEO campaigns. If you need those, have them planned out before kickoff and I'll make sure the page is built to support them." },
     },
+    {
+      "@type": "Question",
+      "name": "What's not included?",
+      "acceptedAnswer": { "@type": "Answer", "text": "A few things sit outside every package: professional copywriting and content writing (I write the basic page copy — headlines, section copy, CTAs — but not blog posts, brand messaging, or long-form content), photography and custom illustrations (bring your own photos and graphics, or I can suggest stock imagery), and professional or ongoing SEO campaigns (basic on-page SEO setup is included, not keyword strategy or continuous optimization)." },
+    },
   ],
 }
 
 // ─── Page root ────────────────────────────────────────────────────────────────
 export default function Home() {
   const [animOn, setAnimOn] = useState(true)
-  const pathname = usePathname()
-  const locale: Locale = pathname.startsWith("/zh") ? "zh" : "en"
-  const t = translations[locale]
 
   const [showTop, setShowTop] = useState(false)
   useEffect(() => {
@@ -1352,45 +1176,43 @@ export default function Home() {
   }, [])
 
   return (
-    <LocaleCtx.Provider value={{ t, locale }}>
-      <AnimContext.Provider value={{ on: animOn, set: setAnimOn }}>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-        <Nav />
-        <main>
-          <Hero />
-          <WhyWebsite />
-          <HowItWorks />
-          <Features />
-          <Pricing />
-          <Testimonials />
-          <About />
-          <FAQ />
-          <CtaSection />
-        </main>
-        <AnimatePresence>
-          {showTop && (
-            <motion.button
-              key="back-to-top"
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              initial={{ opacity: 0, scale: 0.8, y: 12 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.8, y: 12 }}
-              transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              whileHover={{ y: -3, transition: { type: "spring", stiffness: 400, damping: 20 } }}
-              aria-label="Back to top"
-              className="fixed bottom-6 right-6 z-50 w-10 h-10 flex items-center justify-center bg-[var(--color-ink)] text-white border-2 border-[var(--color-ink)] shadow-[3px_3px_0_var(--color-ink)] rounded-full"
-            >
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M7 11V3M3 7l4-4 4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </motion.button>
-          )}
-        </AnimatePresence>
-        <FooterSection />
-      </AnimContext.Provider>
-    </LocaleCtx.Provider>
+    <AnimContext.Provider value={{ on: animOn, set: setAnimOn }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <Nav />
+      <main>
+        <Hero />
+        <WhyWebsite />
+        <HowItWorks />
+        <Features />
+        <Pricing />
+        <Testimonials />
+        <About />
+        <FAQ />
+        <CtaSection />
+      </main>
+      <AnimatePresence>
+        {showTop && (
+          <motion.button
+            key="back-to-top"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            initial={{ opacity: 0, scale: 0.8, y: 12 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 12 }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            whileHover={{ y: -3, transition: { type: "spring", stiffness: 400, damping: 20 } }}
+            aria-label="Back to top"
+            className="fixed bottom-6 right-6 z-50 w-10 h-10 flex items-center justify-center bg-[var(--color-ink)] text-white border-2 border-[var(--color-ink)] shadow-[3px_3px_0_var(--color-ink)] rounded-full"
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M7 11V3M3 7l4-4 4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </motion.button>
+        )}
+      </AnimatePresence>
+      <FooterSection />
+    </AnimContext.Provider>
   );
 }

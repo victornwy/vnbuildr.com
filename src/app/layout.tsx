@@ -13,7 +13,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "vnbuildr — Custom Website & Landing Page Design | Malaysia",
   description:
-    "Freelance web designer in Kuala Lumpur. Custom landing pages and business websites for Malaysian SMEs — from RM1,299, hand-coded, mobile-first, delivered in as little as 2 working days.",
+    "Freelance web designer in Kuala Lumpur. Funnel design, website redesigns, and custom-built websites for Malaysian SMEs — from RM999, mobile-first, delivered in as little as 2 working days.",
   keywords: [
     "landing page design Malaysia",
     "web designer KL",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "vnbuildr — Custom Website & Landing Page Design | Malaysia",
     description:
-      "Freelance web designer in Kuala Lumpur. Custom landing pages and business websites for Malaysian SMEs — from RM1,299, hand-coded, mobile-first, delivered in as little as 2 working days.",
+      "Freelance web designer in Kuala Lumpur. Funnel design, website redesigns, and custom-built websites for Malaysian SMEs — from RM999, mobile-first, delivered in as little as 2 working days.",
     url: "https://vnbuildr.com",
     siteName: "vnbuildr",
     type: "website",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "vnbuildr — Custom Website & Landing Page Design | Malaysia",
     description:
-      "Freelance web designer in Kuala Lumpur. Custom landing pages and business websites for Malaysian SMEs — from RM1,299, hand-coded, mobile-first, delivered in as little as 2 working days.",
+      "Freelance web designer in Kuala Lumpur. Funnel design, website redesigns, and custom-built websites for Malaysian SMEs — from RM999, mobile-first, delivered in as little as 2 working days.",
     images: ["/og-image.jpg"],
   },
 };
@@ -57,8 +57,8 @@ const jsonLd = {
   "url": "https://vnbuildr.com",
   "telephone": "+60199195314",
   "email": "hello@vnbuildr.com",
-  "description": "Freelance web designer in Kuala Lumpur specialising in custom landing pages and business websites for Malaysian SMEs. Packages from RM1,299, delivered in 2–15 working days.",
-  "priceRange": "RM1,299 – RM3,999+",
+  "description": "Freelance web designer in Kuala Lumpur specialising in funnel design, website redesigns, and custom-built websites for Malaysian SMEs. From RM999, delivered in 2–15 working days.",
+  "priceRange": "RM999 – RM9,999+",
   "currenciesAccepted": "MYR, USD",
   "address": {
     "@type": "PostalAddress",
@@ -82,32 +82,40 @@ const jsonLd = {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Starter Landing Page",
-          "description": "Single-page landing page for Malaysian businesses. Hand-coded, mobile-first. RM1,299, delivered in 2–3 working days."
+          "name": "Funnel Design",
+          "description": "Multi-step sales funnel — offer page, lead capture, thank-you/upsell — for Malaysian businesses. From RM2,499."
         }
       },
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Business Website",
-          "description": "5-page business website for Malaysian SMEs. Hand-coded, mobile-first. RM2,899, delivered in 3–7 working days."
+          "name": "Website Redesign & Enhancement",
+          "description": "Redesign and enhancement for an existing website — new design, faster load times, UX fixes. From RM1,499."
         }
       },
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Pro Website",
-          "description": "10-page professional website for established Malaysian businesses. RM3,799, delivered in 4–8 working days."
+          "name": "Landing Page (Build From Scratch)",
+          "description": "Single-page landing page for Malaysian businesses. Mobile-first. RM999, delivered in 1–2 weeks."
         }
       },
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Custom Website",
-          "description": "Fully custom websites with 10–25 pages for Malaysian businesses. From RM3,999, delivered in 8–15 working days."
+          "name": "Business Website (Build From Scratch)",
+          "description": "5–10+ page business website for Malaysian SMEs. Mobile-first. From RM2,899, delivered in 2–5 weeks."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "E-Commerce Website (Build From Scratch)",
+          "description": "Full online store for Malaysian businesses. RM9,999, delivered in 4–8 weeks."
         }
       }
     ]
