@@ -671,14 +671,14 @@ function Features() {
           {cards.map(({ icon, title, body, bestFor }) => (
             <motion.div
               key={title}
-              className="neo-card bg-white p-6 md:p-9"
+              className="neo-card bg-white p-6 md:p-9 flex flex-col"
               whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
             >
               <div className="w-[42px] h-[42px] bg-[var(--color-surface)] border-2 border-[var(--color-ink)] shadow-[2px_2px_0_var(--color-ink)] rounded flex items-center justify-center text-[var(--color-ink)] mb-5">
                 {icon}
               </div>
               <h3 className="text-[16px] font-semibold tracking-tight mb-2">{title}</h3>
-              <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.65] mb-4">{body}</p>
+              <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.65] mb-4 flex-1">{body}</p>
               <p className="text-[12px] font-semibold text-[var(--color-blue)]">{bestFor}</p>
             </motion.div>
           ))}
@@ -740,7 +740,7 @@ function ContactForm() {
   const [pkg,      setPkg]      = useState("")
   const [message,  setMessage]  = useState("")
 
-  const packages = ["Landing Page", "Business Website", "E-Commerce", "Custom / Complex", "Not sure yet"]
+  const packages = ["Funnel Design", "Website Redesign & Enhancement", "Landing Page", "Business Website", "E-Commerce", "Custom / Complex", "Not sure yet"]
   const canSubmit = name.trim() && phone.trim() && business.trim()
 
   const submit = () => {

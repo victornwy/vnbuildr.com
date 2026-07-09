@@ -9,6 +9,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      url: "https://vnbuildr.com/pricing",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
       url: "https://vnbuildr.com/portfolio",
       lastModified: new Date(),
       changeFrequency: "monthly",

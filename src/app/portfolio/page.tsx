@@ -182,7 +182,7 @@ export default function PortfolioPage() {
     <>
       {/* Nav */}
       <nav className="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-[var(--color-border)]">
-        <div className="max-w-[1200px] mx-auto px-6 h-[60px] flex items-center justify-between">
+        <div className="max-w-[1100px] mx-auto px-6 h-[60px] flex items-center justify-between">
           <Link
             href="/"
             onClick={e => { e.preventDefault(); window.location.href = "/" }}
@@ -232,7 +232,7 @@ export default function PortfolioPage() {
 
         {/* Grid */}
         <section className="py-12 md:py-16 px-4 sm:px-6 bg-[var(--color-surface)]">
-          <div className="max-w-[1200px] mx-auto">
+          <div className="max-w-[1100px] mx-auto">
 
             {/* Filter buttons */}
             <motion.div

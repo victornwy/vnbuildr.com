@@ -50,8 +50,8 @@ export const translations: Translations = {
     label: "Custom Landing Page Design & Web Development",
     line1: "Your landing page,",
     rotatePrefix: "ready in ", rotateSuffix: "",
-    rotatingWords: ["days.", "a week.", "no time."],
-    subheadline: "High-converting, lightning-fast landing pages engineered for startups, small medium enterprise (SME) and scaling brands.",
+    rotatingWords: ["a week.", "no time.", "fast."],
+    subheadline: "A website that turns visitors into enquiries — so you stop chasing leads and start growing on autopilot.",
     primaryCta: "Chat on WhatsApp", secondaryCta: "See how it works",
     trustLine: "Reply within 24 hours · No commitment required",
     reactMode: "React mode — fluid animations, premium motion components",
@@ -63,8 +63,8 @@ export const translations: Translations = {
     subheading: "No handoffs. No project managers. Just direct, focused work with someone who ships.",
     steps: [
       { num: "01", title: "You share the brief", body: "Message me on WhatsApp or email. Tell me about your product, audience, and goal. That's all I need to get started.", time: "Day 1" },
-      { num: "02", title: "I design & build", body: "I write the copy, design the layout, and code a fast, mobile-first page — all tailored to your brand.", time: "Days 2–4" },
-      { num: "03", title: "You review & launch", body: "You get revision rounds for tweaks. Once you're happy, it's ready to go live — handed off clean and ready to deploy.", time: "Day 3–5" },
+      { num: "02", title: "I design & build", body: "I write the copy, design the layout, and code a fast, mobile-first page — all tailored to your brand.", time: "Day 2 onward" },
+      { num: "03", title: "You review & launch", body: "You get revision rounds for tweaks. Once you're happy, it's ready to go live — handed off clean and ready to deploy.", time: "From 1 week" },
     ],
   },
   features: {
@@ -72,9 +72,9 @@ export const translations: Translations = {
     heading: "What I can build\nfor you",
     subheading: "Three ways to work together, depending on where you're starting from.",
     cards: [
-      { title: "Funnel Design", body: "Turn one visitor into a paying customer, step by step. I map out that path — offer page, signup step, thank-you page — and build it so nobody drops off along the way.", bestFor: "Best for: businesses running ads" },
-      { title: "Website Redesign & Enhancement", body: "Already have a site? If it looks outdated, loads slow, or isn't bringing in enquiries, I can refresh the design, speed it up, and fix what's confusing visitors — without tearing down what you've already built.", bestFor: "Best for: rebrands, slow sites, low enquiries" },
-      { title: "Build From Scratch", body: "No website yet? I handle everything — design, writing, setup — from the first sketch to the moment it's live. Tell me about your business, I'll turn it into a site that gets people to reach out.", bestFor: "Best for: new businesses, no site yet" },
+      { title: "Funnel Design", body: "A steady stream of enquiries instead of one-off visits. I build the path from ad click to paying customer — offer page, signup step, thank-you page — so leads keep coming in without you chasing them.", bestFor: "Best for: businesses running ads" },
+      { title: "Website Redesign & Enhancement", body: "The enquiries your traffic should already be bringing you. If your site looks outdated, loads slow, or visitors leave without contacting you, I fix what's costing you leads — without tearing down what you've already built.", bestFor: "Best for: rebrands, slow sites, low enquiries" },
+      { title: "Build From Scratch", body: "A professional online presence that brings in enquiries from day one. I handle everything — design, writing, setup — so you're not stitching it together yourself or waiting months to launch.", bestFor: "Best for: new businesses, no site yet" },
     ],
   },
   testimonials: {

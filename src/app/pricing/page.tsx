@@ -63,7 +63,7 @@ export default function PricingPage() {
     <>
       {/* Nav */}
       <nav className="sticky top-0 z-50 bg-white/85 backdrop-blur-md border-b border-[var(--color-border)]">
-        <div className="max-w-[1200px] mx-auto px-6 h-[60px] flex items-center justify-between">
+        <div className="max-w-[1100px] mx-auto px-6 h-[60px] flex items-center justify-between">
           <Link href="/" className="font-serif text-[22px] tracking-tight">
             <span className="text-[var(--color-blue)] font-bold">vn</span><em>buildr</em>
           </Link>

@@ -13,7 +13,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "vnbuildr — Custom Website & Landing Page Design | Malaysia",
   description:
-    "Freelance web designer in Kuala Lumpur. Funnel design, website redesigns, and custom-built websites for Malaysian SMEs — from RM999, mobile-first, delivered in as little as 2 working days.",
+    "Freelance web designer in Kuala Lumpur. Funnel design, website redesigns, and custom-built websites for Malaysian SMEs — from RM999, mobile-first, delivered in as little as 1 week.",
   keywords: [
     "landing page design Malaysia",
     "web designer KL",
@@ -27,6 +27,12 @@ export const metadata: Metadata = {
     "SME website Malaysia",
     "landing page cost Malaysia",
     "business website Malaysia",
+    "sales funnel design Malaysia",
+    "funnel design Malaysia",
+    "website redesign Malaysia",
+    "website revamp Malaysia",
+    "ecommerce website Malaysia",
+    "website designer Malaysia",
   ],
   metadataBase: new URL("https://vnbuildr.com"),
   alternates: {
@@ -35,7 +41,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "vnbuildr — Custom Website & Landing Page Design | Malaysia",
     description:
-      "Freelance web designer in Kuala Lumpur. Funnel design, website redesigns, and custom-built websites for Malaysian SMEs — from RM999, mobile-first, delivered in as little as 2 working days.",
+      "Freelance web designer in Kuala Lumpur. Funnel design, website redesigns, and custom-built websites for Malaysian SMEs — from RM999, mobile-first, delivered in as little as 1 week.",
     url: "https://vnbuildr.com",
     siteName: "vnbuildr",
     type: "website",
@@ -45,7 +51,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "vnbuildr — Custom Website & Landing Page Design | Malaysia",
     description:
-      "Freelance web designer in Kuala Lumpur. Funnel design, website redesigns, and custom-built websites for Malaysian SMEs — from RM999, mobile-first, delivered in as little as 2 working days.",
+      "Freelance web designer in Kuala Lumpur. Funnel design, website redesigns, and custom-built websites for Malaysian SMEs — from RM999, mobile-first, delivered in as little as 1 week.",
     images: ["/og-image.jpg"],
   },
 };
@@ -57,7 +63,7 @@ const jsonLd = {
   "url": "https://vnbuildr.com",
   "telephone": "+60199195314",
   "email": "hello@vnbuildr.com",
-  "description": "Freelance web designer in Kuala Lumpur specialising in funnel design, website redesigns, and custom-built websites for Malaysian SMEs. From RM999, delivered in 2–15 working days.",
+  "description": "Freelance web designer in Kuala Lumpur specialising in funnel design, website redesigns, and custom-built websites for Malaysian SMEs. From RM999, delivered in 1–12 weeks depending on scope.",
   "priceRange": "RM999 – RM9,999+",
   "currenciesAccepted": "MYR, USD",
   "address": {
