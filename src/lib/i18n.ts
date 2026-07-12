@@ -2,7 +2,7 @@ export interface FaqItem { q: string; a: string }
 
 export interface Translations {
   nav: {
-    faq: string; contact: string; portfolio: string; pricing: string
+    faq: string; contact: string; portfolio: string; pricing: string; blog: string
     getInTouch: string; chat: string
     animation: string
   }
@@ -42,7 +42,7 @@ export interface Translations {
 // ─── English ──────────────────────────────────────────────────────────────────
 export const translations: Translations = {
   nav: {
-    faq: "FAQ", contact: "Contact", portfolio: "View Our Works", pricing: "Pricing",
+    faq: "FAQ", contact: "Contact", portfolio: "View Our Works", pricing: "Pricing", blog: "Blog",
     getInTouch: "Get started", chat: "Chat",
     animation: "Animation",
   },

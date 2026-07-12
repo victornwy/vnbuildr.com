@@ -85,6 +85,7 @@ function Nav() {
 
   const NAV_LINKS: [string, string][] = [
     ["/pricing",  t.nav.pricing],
+    ["/blog",     t.nav.blog],
     ["#faq",      t.nav.faq],
     ["#contact",  t.nav.contact],
   ]
