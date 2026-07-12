@@ -79,7 +79,7 @@ vn buildr
 
 | Channel | Value |
 |---|---|
-| WhatsApp | +6011-1217 3995 · `wa.me/601112173995` |
+| WhatsApp | +6019-919 5314 · `wa.me/60199195314` |
 | Email | hello@vnbuildr.com |
 
 ---

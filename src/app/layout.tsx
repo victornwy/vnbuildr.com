@@ -20,6 +20,7 @@ export const metadata: Metadata = {
     "freelance web designer Malaysia",
     "affordable website design Malaysia",
     "small business website Malaysia",
+    "custom website design Malaysia for small business",
     "website design price Malaysia",
     "custom landing page Malaysia",
     "web development Kuala Lumpur",

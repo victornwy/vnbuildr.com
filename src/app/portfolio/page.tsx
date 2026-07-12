@@ -4,6 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { useState, useRef } from "react"
 import { motion, AnimatePresence } from "motion/react"
+import { track } from "@vercel/analytics"
 import { FooterSection } from "@/components/ui/footer-section"
 
 // ─── Project data ─────────────────────────────────────────────────────────────
@@ -200,6 +201,7 @@ export default function PortfolioPage() {
             href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => track("whatsapp_click", { location: "nav_portfolio" })}
             className="whatsapp-glow text-sm font-medium bg-[#25D366] text-white px-[18px] py-[9px] rounded-full hover:opacity-85 transition-opacity"
           >
             Get started
@@ -299,6 +301,7 @@ export default function PortfolioPage() {
               href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => track("whatsapp_click", { location: "final_cta_portfolio" })}
               className="whatsapp-glow inline-flex items-center gap-2 bg-[#25D366] text-white text-[15px] font-medium px-8 py-3.5 rounded-full hover:opacity-85 transition-opacity"
             >
               Chat on WhatsApp

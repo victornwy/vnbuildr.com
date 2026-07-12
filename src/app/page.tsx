@@ -4,6 +4,7 @@ import { useState, useEffect, createContext, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, LayoutGroup, AnimatePresence } from "motion/react";
+import { track } from "@vercel/analytics";
 import { translations } from "@/lib/i18n";
 import Floating, { FloatingElement } from "@/components/ui/parallax-floating";
 import { TextRotate } from "@/components/ui/text-rotate";
@@ -108,7 +109,7 @@ function Nav() {
 
         {/* Desktop right */}
         <div className="hidden md:flex mobile-landscape:hidden items-center gap-4">
-          <a href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page" target="_blank" rel="noopener noreferrer" className="whatsapp-glow text-sm font-medium bg-[#25D366] text-white px-5 py-2.5 rounded-full hover:opacity-85 transition-opacity">
+          <a href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page" target="_blank" rel="noopener noreferrer" onClick={() => track("whatsapp_click", { location: "nav_desktop" })} className="whatsapp-glow text-sm font-medium bg-[#25D366] text-white px-5 py-2.5 rounded-full hover:opacity-85 transition-opacity">
             {t.nav.getInTouch}
           </a>
           <div className="relative">
@@ -163,7 +164,7 @@ function Nav() {
 
         {/* Mobile right: CTA + burger */}
         <div className="flex md:hidden mobile-landscape:flex items-center gap-2">
-          <a href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page" target="_blank" rel="noopener noreferrer" className="whatsapp-glow text-sm mobile-landscape:text-xs font-medium bg-[#25D366] text-white px-4 mobile-landscape:px-3 py-2 mobile-landscape:py-1.5 rounded-full hover:opacity-85 transition-opacity">
+          <a href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page" target="_blank" rel="noopener noreferrer" onClick={() => track("whatsapp_click", { location: "nav_mobile" })} className="whatsapp-glow text-sm mobile-landscape:text-xs font-medium bg-[#25D366] text-white px-4 mobile-landscape:px-3 py-2 mobile-landscape:py-1.5 rounded-full hover:opacity-85 transition-opacity">
             <span className="mobile-landscape:hidden">{t.nav.getInTouch}</span>
             <span className="hidden mobile-landscape:inline">{t.nav.chat}</span>
           </a>
@@ -378,6 +379,7 @@ function Hero({
             href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => track("whatsapp_click", { location: "hero_primary" })}
             className="whatsapp-glow inline-flex items-center gap-2 bg-[#25D366] text-white text-[15px] font-medium px-6 py-3 rounded-full hover:opacity-85 hover:-translate-y-px transition-all"
           >
             {t.hero.primaryCta}
@@ -528,6 +530,7 @@ function Pricing() {
                   href={`https://wa.me/60199195314?text=${encodeURIComponent(waMsg)}`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => track("whatsapp_click", { location: "pricing_card_home", package: name })}
                   whileTap={{ scale: 0.97 }}
                   transition={{ type: "spring", stiffness: 380, damping: 22 }}
                   className={`inline-flex items-center justify-center gap-1.5 w-full text-[13px] font-medium py-3 rounded-full ${
@@ -572,6 +575,7 @@ function Pricing() {
                 href={`https://wa.me/60199195314?text=${encodeURIComponent("Hi, I'd like to discuss a Custom / Complex website")}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => track("whatsapp_click", { location: "custom_quote_home" })}
                 whileHover={{ scale: 1.04, y: -2 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 380, damping: 22 }}
@@ -753,6 +757,7 @@ function ContactForm() {
       pkg     ? `Package: ${pkg}`       : null,
       message ? `Message: ${message}`   : null,
     ].filter(Boolean).join("\n")
+    track("whatsapp_click", { location: "contact_form", package: pkg || "not_specified" })
     window.open(`https://wa.me/60199195314?text=${encodeURIComponent(lines)}`, "_blank")
   }
 
@@ -1014,6 +1019,21 @@ const faqs: { q: string; a: React.ReactNode }[] = [
   },
 ];
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(({ q, a }) => ({
+    "@type": "Question",
+    "name": q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": typeof a === "string"
+        ? a
+        : "Landing Page (1 page): 1–2 weeks. Business Website (5–10+ pages): 2–5 weeks. E-Commerce: 4–8 weeks. Custom / Complex: 6–12 weeks. These timelines require your content and brand assets to be ready at kickoff.",
+    },
+  })),
+}
+
 function FAQ() {
   const t = useT()
   const faqItems = faqs
@@ -1021,6 +1041,10 @@ function FAQ() {
 
   return (
     <section id="faq" className="py-16 md:py-24 px-6 bg-white">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <div className="max-w-[720px] mx-auto">
         <FadeUp className="text-center mb-14">
           <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">

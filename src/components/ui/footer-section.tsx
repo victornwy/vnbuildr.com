@@ -3,6 +3,7 @@ import React from 'react';
 import type { ComponentProps, ReactNode } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import Link from 'next/link';
+import { track } from '@vercel/analytics';
 // Social brand SVGs (lucide-react doesn't include brand icons)
 function IconInstagram({ className }: { className?: string }) {
   return (
@@ -126,6 +127,7 @@ export function FooterSection() {
                           href={link.href}
                           target={link.external ? '_blank' : undefined}
                           rel={link.external ? 'noopener noreferrer' : undefined}
+                          onClick={link.href.includes('wa.me') ? () => track('whatsapp_click', { location: 'footer' }) : undefined}
                           className="inline-flex items-center gap-1.5 text-[13px] text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors duration-200"
                         >
                           {link.icon && <link.icon className="size-3.5 shrink-0" />}

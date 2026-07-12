@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { motion } from "motion/react"
+import { track } from "@vercel/analytics"
 import { FooterSection } from "@/components/ui/footer-section"
 
 function ChevronLeft() {
@@ -77,6 +78,7 @@ export default function PricingPage() {
             href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20website"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => track("whatsapp_click", { location: "nav_pricing" })}
             className="whatsapp-glow text-sm font-medium bg-[#25D366] text-white px-[18px] py-[9px] rounded-full hover:opacity-85 transition-opacity"
           >
             Get started
@@ -147,6 +149,7 @@ export default function PricingPage() {
                       href={`https://wa.me/60199195314?text=${encodeURIComponent(plan.waMsg)}`}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => track("whatsapp_click", { location: "pricing_card", package: plan.name })}
                       whileHover={{ scale: 1.03, y: -2 }}
                       whileTap={{ scale: 0.97 }}
                       transition={{ type: "spring", stiffness: 380, damping: 22 }}
@@ -186,6 +189,7 @@ export default function PricingPage() {
                   href={`https://wa.me/60199195314?text=${encodeURIComponent("Hi, I'd like to discuss a Custom / Complex website")}`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => track("whatsapp_click", { location: "custom_quote_pricing" })}
                   whileHover={{ scale: 1.04, y: -2 }}
                   whileTap={{ scale: 0.97 }}
                   transition={{ type: "spring", stiffness: 380, damping: 22 }}
@@ -259,6 +263,7 @@ export default function PricingPage() {
                         href={`https://wa.me/60199195314?text=${encodeURIComponent(waMsg)}`}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() => track("whatsapp_click", { location: "maintenance_plan", package: plan })}
                         whileHover={{ scale: 1.03, y: -2 }}
                         whileTap={{ scale: 0.97 }}
                         transition={{ type: "spring", stiffness: 380, damping: 22 }}
