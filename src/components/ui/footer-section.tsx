@@ -57,6 +57,7 @@ const footerSections: FooterSection[] = [
     label: 'Quick Links',
     links: [
       { title: 'Portfolio',    href: '/portfolio' },
+      { title: 'Blog',         href: '/blog' },
       { title: 'How It Works', href: '/#how' },
       { title: 'Pricing',      href: '/#pricing' },
       { title: 'FAQ',          href: '/#faq' },
