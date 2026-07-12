@@ -3,7 +3,9 @@ import React from 'react';
 import type { ComponentProps, ReactNode } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { track } from '@vercel/analytics';
+import { scrollToSection } from '@/lib/scroll';
 // Social brand SVGs (lucide-react doesn't include brand icons)
 function IconInstagram({ className }: { className?: string }) {
   return (
@@ -90,6 +92,20 @@ const footerSections: FooterSection[] = [
 ];
 
 export function FooterSection() {
+  const pathname = usePathname();
+
+  const handleLinkClick = (link: FooterLink) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (link.href.includes('wa.me')) {
+      track('whatsapp_click', { location: 'footer' });
+      return;
+    }
+    const hashIndex = link.href.indexOf('#');
+    if (hashIndex !== -1 && pathname === '/') {
+      e.preventDefault();
+      scrollToSection(link.href.slice(hashIndex));
+    }
+  };
+
   return (
     <footer className="relative w-full border-t border-[var(--color-border)] bg-[var(--color-surface)] px-6 py-12 lg:py-16">
       <div className="max-w-[1100px] mx-auto">
@@ -128,7 +144,7 @@ export function FooterSection() {
                           href={link.href}
                           target={link.external ? '_blank' : undefined}
                           rel={link.external ? 'noopener noreferrer' : undefined}
-                          onClick={link.href.includes('wa.me') ? () => track('whatsapp_click', { location: 'footer' }) : undefined}
+                          onClick={handleLinkClick(link)}
                           className="inline-flex items-center gap-1.5 text-[13px] text-[var(--color-ink-muted)] hover:text-[var(--color-ink)] transition-colors duration-200"
                         >
                           {link.icon && <link.icon className="size-3.5 shrink-0" />}
