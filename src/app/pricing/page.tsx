@@ -53,6 +53,19 @@ const included = [
   { title: "Basic SEO setup",        icon: <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" strokeWidth="1.5"/><path d="M10 10L14 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg> },
 ]
 
+const otherServices = [
+  {
+    name: "Website Redesign & Enhancement", price: "From RM1,499", timeline: "Est. 1–3 weeks",
+    desc: "Refresh an existing site — new design, faster load times, fixes to the parts that confuse visitors — without tearing down what you've already built.",
+    waMsg: "Hi, I'm interested in Website Redesign & Enhancement", trackLocation: "pricing_redesign",
+  },
+  {
+    name: "Funnel Design", price: "From RM2,499", timeline: "Est. 2–4 weeks",
+    desc: "Multi-step funnel — offer page, lead capture, thank-you/upsell — built to guide one visitor all the way to a sale, instead of a one-off visit.",
+    waMsg: "Hi, I'm interested in Funnel Design", trackLocation: "pricing_funnel",
+  },
+]
+
 const maintenance = [
   { plan: "Landing Page",     annual: "RM899",   monthly: "RM75/mo",  waMsg: "Hi, I'd like to add the Landing Page maintenance plan", cta: "Add this plan" },
   { plan: "Business Website", annual: "RM1,399", monthly: "RM117/mo", waMsg: "Hi, I'd like to add the Business Website maintenance plan", featured: true, cta: "Add this plan" },
@@ -119,49 +132,6 @@ function ScopeGrid({ items, trackLocation }: { items: ScopePlan[]; trackLocation
         </motion.div>
       ))}
     </div>
-  )
-}
-
-function SingleTierBanner({
-  tag, name, price, timeline, desc, waMsg, trackLocation,
-}: {
-  tag: string; name: string; price: string; timeline: string; desc: string; waMsg: string; trackLocation: string
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-20px" }}
-      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="neo-card bg-white"
-      whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
-    >
-      <div className="grid md:grid-cols-[1fr_auto] gap-6 p-6 md:p-8 items-center">
-        <div>
-          <div className="flex flex-wrap items-center gap-3 mb-2">
-            <span className="text-[11px] font-bold tracking-[0.06em] uppercase bg-[var(--color-surface)] text-[var(--color-ink-muted)] px-2.5 py-1 rounded-full border border-[var(--color-border)]">{tag}</span>
-            <span className="font-serif text-[26px] font-normal tracking-tight">{price}</span>
-            <span className="text-[12px] text-[var(--color-ink-muted)] italic">{timeline}</span>
-          </div>
-          <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.7] max-w-[560px]">
-            {desc}
-          </p>
-        </div>
-        <motion.a
-          href={`https://wa.me/60199195314?text=${encodeURIComponent(waMsg)}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => track("whatsapp_click", { location: trackLocation, package: name })}
-          whileHover={{ scale: 1.04, y: -2 }}
-          whileTap={{ scale: 0.97 }}
-          transition={{ type: "spring", stiffness: 380, damping: 22 }}
-          className="inline-flex items-center gap-2 text-[14px] font-medium bg-[var(--color-ink)] text-white px-6 py-3 rounded-full whitespace-nowrap shrink-0"
-        >
-          Chat with us
-          <ArrowRight />
-        </motion.a>
-      </div>
-    </motion.div>
   )
 }
 
@@ -234,40 +204,27 @@ export default function PricingPage() {
             <SectionHeading eyebrow="From RM999" title="Build From Scratch" accent="Pick your scope." />
             <ScopeGrid items={plans} trackLocation="pricing_card" />
 
-            {/* Custom — full-width banner */}
+            {/* Custom — inline text row, no box */}
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-20px" }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="neo-card bg-white"
-              whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
+              className="flex flex-wrap items-center justify-center gap-2 text-center text-[14px] text-[var(--color-ink-muted)] py-1"
             >
-              <div className="grid md:grid-cols-[1fr_auto] gap-6 p-6 md:p-8 items-center">
-                <div>
-                  <div className="flex flex-wrap items-center gap-3 mb-2">
-                    <span className="text-[11px] font-bold tracking-[0.06em] uppercase bg-[var(--color-surface)] text-[var(--color-ink-muted)] px-2.5 py-1 rounded-full border border-[var(--color-border)]">Custom / Complex</span>
-                    <span className="font-serif text-[26px] font-normal tracking-tight">Custom Quote</span>
-                    <span className="text-[12px] text-[var(--color-ink-muted)] italic">Est. 6–12 weeks</span>
-                  </div>
-                  <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.7] max-w-[560px]">
-                    Bespoke builds for complex requirements — membership portals, booking systems, API integrations, and multi-language platforms. Scoped and priced individually based on your needs.
-                  </p>
-                </div>
-                <motion.a
-                  href={`https://wa.me/60199195314?text=${encodeURIComponent("Hi, I'd like to discuss a Custom / Complex website")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => track("whatsapp_click", { location: "custom_quote_pricing" })}
-                  whileHover={{ scale: 1.04, y: -2 }}
-                  whileTap={{ scale: 0.97 }}
-                  transition={{ type: "spring", stiffness: 380, damping: 22 }}
-                  className="inline-flex items-center gap-2 text-[14px] font-medium bg-[var(--color-ink)] text-white px-6 py-3 rounded-full whitespace-nowrap shrink-0"
-                >
-                  Let&apos;s discuss
-                  <ArrowRight />
-                </motion.a>
-              </div>
+              <span>
+                Need something more complex — membership portals, bookings, API integrations? Est. 6–12 weeks, scoped individually.
+              </span>
+              <a
+                href={`https://wa.me/60199195314?text=${encodeURIComponent("Hi, I'd like to discuss a Custom / Complex website")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => track("whatsapp_click", { location: "custom_quote_pricing" })}
+                className="inline-flex items-center gap-1 font-medium text-[var(--color-ink)] underline decoration-[var(--color-border)] hover:decoration-[var(--color-ink)] underline-offset-2 whitespace-nowrap"
+              >
+                Let&apos;s discuss
+                <ArrowRight />
+              </a>
             </motion.div>
 
             {/* All-plans inclusions */}
@@ -299,7 +256,7 @@ export default function PricingPage() {
                 Email hosting, domain renewals, and minor updates — handled for you. Pay once a year, no monthly invoices.
               </p>
 
-              <div className="neo-card overflow-hidden">
+              <div className="rounded-lg border border-[var(--color-border)] overflow-hidden">
                 <div className="grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 divide-x-0 lg:divide-x divide-[var(--color-border)]">
                   {maintenance.map(({ plan, annual, monthly, waMsg, featured, cta }) => (
                     <div key={plan} className={`flex flex-col p-4 md:p-7 ${featured ? "bg-[var(--color-surface)]" : "bg-white"}`}>
@@ -340,36 +297,43 @@ export default function PricingPage() {
               </div>
             </div>
 
-            {/* Website Redesign & Enhancement */}
-            <div className="mb-5">
-              <SectionHeading eyebrow="From RM1,499" title="Website Redesign" accent="& Enhancement." />
-            </div>
-            <div className="mb-16">
-              <SingleTierBanner
-                tag="Website Redesign & Enhancement"
-                name="Website Redesign & Enhancement"
-                price="From RM1,499"
-                timeline="Est. 1–3 weeks"
-                desc="Refresh an existing site — new design, faster load times, fixes to the parts that confuse visitors — without tearing down what you've already built."
-                waMsg="Hi, I'm interested in Website Redesign & Enhancement"
-                trackLocation="pricing_redesign"
-              />
-            </div>
-
-            {/* Funnel Design */}
-            <div className="mb-5">
-              <SectionHeading eyebrow="From RM2,499" title="Funnel Design" accent="One visitor, guided to a sale." />
-            </div>
-            <div className="mb-16">
-              <SingleTierBanner
-                tag="Funnel Design"
-                name="Funnel Design"
-                price="From RM2,499"
-                timeline="Est. 2–4 weeks"
-                desc="Multi-step funnel — offer page, lead capture, thank-you/upsell — built to guide one visitor all the way to a sale, instead of a one-off visit."
-                waMsg="Hi, I'm interested in Funnel Design"
-                trackLocation="pricing_funnel"
-              />
+            {/* Other Services */}
+            <SectionHeading eyebrow="Other services" title="Already have a site," accent="or need more than a build?" />
+            <div className="mb-16 rounded-lg border border-[var(--color-border)] overflow-hidden bg-white">
+              <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[var(--color-border)]">
+                {otherServices.map((service, i) => (
+                  <motion.div
+                    key={service.name}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-20px" }}
+                    transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                    className="p-6 md:p-8"
+                  >
+                    <div className="flex flex-wrap items-center gap-3 mb-2">
+                      <span className="font-serif text-[22px] font-normal tracking-tight">{service.name}</span>
+                      <span className="text-[12px] text-[var(--color-ink-muted)] italic">{service.timeline}</span>
+                    </div>
+                    <p className="font-serif text-[24px] font-normal tracking-tight mb-3">{service.price}</p>
+                    <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.7] mb-5">
+                      {service.desc}
+                    </p>
+                    <motion.a
+                      href={`https://wa.me/60199195314?text=${encodeURIComponent(service.waMsg)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => track("whatsapp_click", { location: service.trackLocation, package: service.name })}
+                      whileHover={{ scale: 1.03, y: -2 }}
+                      whileTap={{ scale: 0.97 }}
+                      transition={{ type: "spring", stiffness: 380, damping: 22 }}
+                      className="inline-flex items-center gap-2 text-[13px] font-medium bg-[var(--color-ink)] text-white px-5 py-2.5 rounded-full whitespace-nowrap"
+                    >
+                      Chat with us
+                      <ArrowRight />
+                    </motion.a>
+                  </motion.div>
+                ))}
+              </div>
             </div>
 
           </div>
