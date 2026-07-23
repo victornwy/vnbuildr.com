@@ -49,9 +49,9 @@ const footerSections: FooterSection[] = [
   {
     label: 'Services',
     links: [
-      { title: 'Funnel Design',                    href: '/#pricing' },
-      { title: 'Website Redesign & Enhancement',    href: '/#pricing' },
       { title: 'Build From Scratch',                href: '/#pricing' },
+      { title: 'Website Redesign & Enhancement',    href: '/#pricing' },
+      { title: 'Funnel Design',                    href: '/#pricing' },
       { title: 'Custom / Complex',                  href: '/#pricing' },
     ],
   },
