@@ -311,7 +311,7 @@ function Hero({
           {headline ?? t.hero.label}
         </motion.h1>
 
-        <motion.p
+        <motion.div
           className="font-serif text-[clamp(38px,6vw,72px)] mobile-landscape:text-[clamp(22px,4vw,36px)] font-normal leading-[1.08] tracking-tight mb-6 mobile-landscape:mb-2"
           initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.28, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
@@ -339,7 +339,7 @@ function Hero({
               )}
             </motion.span>
           </LayoutGroup>
-        </motion.p>
+        </motion.div>
 
         <motion.p
           className="text-[clamp(15px,1.8vw,18px)] text-[var(--color-ink-muted)] max-w-[520px] mb-10 mobile-landscape:mb-4 leading-[1.65]"
@@ -454,10 +454,10 @@ function WhyWebsite() {
 function Pricing() {
   const servicePricing = [
     {
-      name: "Funnel Design",
-      price: "From RM2,499",
-      desc: "Multi-step funnel — offer page, lead capture, thank-you/upsell — built to guide one visitor all the way to a sale.",
-      waMsg: "Hi, I'm interested in Funnel Design",
+      name: "Build From Scratch",
+      price: "From RM999",
+      desc: "No website yet? Full build from design to launch — pick your scope below.",
+      waMsg: "Hi, I'm interested in a Build From Scratch website",
     },
     {
       name: "Website Redesign & Enhancement",
@@ -467,10 +467,10 @@ function Pricing() {
       featured: true,
     },
     {
-      name: "Build From Scratch",
-      price: "From RM999",
-      desc: "No website yet? Full build from design to launch — pick your scope below.",
-      waMsg: "Hi, I'm interested in a Build From Scratch website",
+      name: "Funnel Design",
+      price: "From RM2,499",
+      desc: "Multi-step funnel — offer page, lead capture, thank-you/upsell — built to guide one visitor all the way to a sale.",
+      waMsg: "Hi, I'm interested in Funnel Design",
     },
   ]
 
@@ -624,9 +624,9 @@ function HowItWorks() {
 function Features() {
   const t = useT()
   const icons = [
-    <Target key="target" size={18} strokeWidth={1.5} />,
-    <RefreshCw key="refreshcw" size={18} strokeWidth={1.5} />,
     <Code2 key="code2" size={18} strokeWidth={1.5} />,
+    <RefreshCw key="refreshcw" size={18} strokeWidth={1.5} />,
+    <Target key="target" size={18} strokeWidth={1.5} />,
   ]
   const cards = t.features.cards.map((c, i) => ({ ...c, icon: icons[i] }))
 

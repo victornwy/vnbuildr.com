@@ -59,6 +59,125 @@ const maintenance = [
   { plan: "E-Commerce",       annual: "RM1,799", monthly: "RM150/mo", waMsg: "Hi, I'd like to add the E-Commerce maintenance plan", cta: "Add this plan" },
 ]
 
+interface ScopePlan {
+  name: string; type: string; price: string; blurb: string
+  specs: Record<string, string>
+  cta: string; waMsg: string; featured: boolean
+}
+
+function ScopeGrid({ items, trackLocation }: { items: ScopePlan[]; trackLocation: string }) {
+  return (
+    <div className="grid md:grid-cols-3 gap-5 mb-5">
+      {items.map((plan, i) => (
+        <motion.div
+          key={plan.name}
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-30px" }}
+          transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+          whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
+          className={`neo-card overflow-hidden flex flex-col ${plan.featured ? "md:-translate-y-2" : ""}`}
+        >
+          <div className={`px-6 py-6 ${plan.featured ? "bg-[var(--color-blue)]" : "bg-white"}`}>
+            {plan.featured ? (
+              <span className="inline-flex items-center text-[10px] font-bold tracking-[0.06em] uppercase bg-white/20 text-white px-2.5 py-1 rounded-full mb-3">
+                Most Popular
+              </span>
+            ) : (
+              <span className="inline-block h-[22px] mb-3" aria-hidden="true" />
+            )}
+            <p className={`font-serif text-[22px] font-normal tracking-tight mb-0.5 ${plan.featured ? "text-white" : ""}`}>{plan.name}</p>
+            <p className={`text-[10px] font-semibold tracking-[0.05em] uppercase mb-4 ${plan.featured ? "text-white/60" : "text-[var(--color-ink-muted)]"}`}>{plan.type}</p>
+            <p className={`font-serif text-[36px] font-normal tracking-tight leading-none mb-2 ${plan.featured ? "text-white" : ""}`}>{plan.price}</p>
+            <p className={`text-[13px] ${plan.featured ? "text-white/75" : "text-[var(--color-ink-muted)]"}`}>{plan.blurb}</p>
+          </div>
+          <div className="px-6 py-4 divide-y divide-[var(--color-border)] bg-[var(--color-surface)] flex-1">
+            {Object.entries(plan.specs).map(([label, value]) => (
+              <div key={label} className="flex items-center justify-between py-2.5 text-[13px]">
+                <span className="text-[var(--color-ink-muted)]">{label}</span>
+                <span className="font-medium text-[var(--color-ink)]">{value}</span>
+              </div>
+            ))}
+          </div>
+          <div className="px-6 pb-6 pt-4 bg-[var(--color-surface)]">
+            <motion.a
+              href={`https://wa.me/60199195314?text=${encodeURIComponent(plan.waMsg)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => track("whatsapp_click", { location: trackLocation, package: plan.name })}
+              whileHover={{ scale: 1.03, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 380, damping: 22 }}
+              className={`inline-flex items-center justify-center gap-1.5 w-full text-[13px] font-medium py-3 rounded-full ${
+                plan.featured ? "bg-[var(--color-blue)] text-white" : "bg-[var(--color-ink)] text-white"
+              }`}
+            >
+              {plan.cta}
+              <ArrowRight />
+            </motion.a>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  )
+}
+
+function SingleTierBanner({
+  tag, name, price, timeline, desc, waMsg, trackLocation,
+}: {
+  tag: string; name: string; price: string; timeline: string; desc: string; waMsg: string; trackLocation: string
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-20px" }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      className="neo-card bg-white"
+      whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
+    >
+      <div className="grid md:grid-cols-[1fr_auto] gap-6 p-6 md:p-8 items-center">
+        <div>
+          <div className="flex flex-wrap items-center gap-3 mb-2">
+            <span className="text-[11px] font-bold tracking-[0.06em] uppercase bg-[var(--color-surface)] text-[var(--color-ink-muted)] px-2.5 py-1 rounded-full border border-[var(--color-border)]">{tag}</span>
+            <span className="font-serif text-[26px] font-normal tracking-tight">{price}</span>
+            <span className="text-[12px] text-[var(--color-ink-muted)] italic">{timeline}</span>
+          </div>
+          <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.7] max-w-[560px]">
+            {desc}
+          </p>
+        </div>
+        <motion.a
+          href={`https://wa.me/60199195314?text=${encodeURIComponent(waMsg)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => track("whatsapp_click", { location: trackLocation, package: name })}
+          whileHover={{ scale: 1.04, y: -2 }}
+          whileTap={{ scale: 0.97 }}
+          transition={{ type: "spring", stiffness: 380, damping: 22 }}
+          className="inline-flex items-center gap-2 text-[14px] font-medium bg-[var(--color-ink)] text-white px-6 py-3 rounded-full whitespace-nowrap shrink-0"
+        >
+          Chat with us
+          <ArrowRight />
+        </motion.a>
+      </div>
+    </motion.div>
+  )
+}
+
+function SectionHeading({ eyebrow, title, accent }: { eyebrow: string; title: string; accent: string }) {
+  return (
+    <div className="text-center mb-6">
+      <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-3">{eyebrow}</p>
+      <h2 className="font-serif text-[clamp(22px,3vw,36px)] font-normal tracking-tight leading-[1.1]">
+        {title}
+        <br />
+        <span className="text-[var(--color-blue)]">{accent}</span>
+      </h2>
+    </div>
+  )
+}
+
 export default function PricingPage() {
   return (
     <>
@@ -95,15 +214,15 @@ export default function PricingPage() {
             transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
           >
             <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
-              Build From Scratch
+              Pricing
             </p>
             <h1 className="font-serif text-[clamp(32px,4.5vw,54px)] font-normal tracking-tight leading-[1.1] mb-5">
-              Pick your scope.
+              Full pricing for every service.
               <br />
-              <span className="text-[var(--color-blue)]">Full pricing, no surprises.</span>
+              <span className="text-[var(--color-blue)]">No hidden fees.</span>
             </h1>
-            <p className="text-[16px] text-[var(--color-ink-muted)] max-w-[460px] mx-auto leading-[1.65]">
-              Every package below includes what&apos;s listed further down this page. Pick what fits your business, or chat with us if you&apos;re not sure.
+            <p className="text-[16px] text-[var(--color-ink-muted)] max-w-[500px] mx-auto leading-[1.65]">
+              Website builds, redesigns, and funnels — ordered from lowest to highest. Pick what fits your business, or chat with us if you&apos;re not sure.
             </p>
           </motion.div>
         </section>
@@ -111,59 +230,9 @@ export default function PricingPage() {
         <section className="pb-16 md:pb-24 px-6 bg-white">
           <div className="max-w-[1100px] mx-auto">
 
-            {/* Scope cards */}
-            <div className="grid md:grid-cols-3 gap-5 mb-5">
-              {plans.map((plan, i) => (
-                <motion.div
-                  key={plan.name}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-30px" }}
-                  transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
-                  whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
-                  className={`neo-card overflow-hidden flex flex-col ${plan.featured ? "md:-translate-y-2" : ""}`}
-                >
-                  <div className={`px-6 py-6 ${plan.featured ? "bg-[var(--color-blue)]" : "bg-white"}`}>
-                    {plan.featured ? (
-                      <span className="inline-flex items-center text-[10px] font-bold tracking-[0.06em] uppercase bg-white/20 text-white px-2.5 py-1 rounded-full mb-3">
-                        Most Popular
-                      </span>
-                    ) : (
-                      <span className="inline-block h-[22px] mb-3" aria-hidden="true" />
-                    )}
-                    <p className={`font-serif text-[22px] font-normal tracking-tight mb-0.5 ${plan.featured ? "text-white" : ""}`}>{plan.name}</p>
-                    <p className={`text-[10px] font-semibold tracking-[0.05em] uppercase mb-4 ${plan.featured ? "text-white/60" : "text-[var(--color-ink-muted)]"}`}>{plan.type}</p>
-                    <p className={`font-serif text-[36px] font-normal tracking-tight leading-none mb-2 ${plan.featured ? "text-white" : ""}`}>{plan.price}</p>
-                    <p className={`text-[13px] ${plan.featured ? "text-white/75" : "text-[var(--color-ink-muted)]"}`}>{plan.blurb}</p>
-                  </div>
-                  <div className="px-6 py-4 divide-y divide-[var(--color-border)] bg-[var(--color-surface)] flex-1">
-                    {Object.entries(plan.specs).map(([label, value]) => (
-                      <div key={label} className="flex items-center justify-between py-2.5 text-[13px]">
-                        <span className="text-[var(--color-ink-muted)]">{label}</span>
-                        <span className="font-medium text-[var(--color-ink)]">{value}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="px-6 pb-6 pt-4 bg-[var(--color-surface)]">
-                    <motion.a
-                      href={`https://wa.me/60199195314?text=${encodeURIComponent(plan.waMsg)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => track("whatsapp_click", { location: "pricing_card", package: plan.name })}
-                      whileHover={{ scale: 1.03, y: -2 }}
-                      whileTap={{ scale: 0.97 }}
-                      transition={{ type: "spring", stiffness: 380, damping: 22 }}
-                      className={`inline-flex items-center justify-center gap-1.5 w-full text-[13px] font-medium py-3 rounded-full ${
-                        plan.featured ? "bg-[var(--color-blue)] text-white" : "bg-[var(--color-ink)] text-white"
-                      }`}
-                    >
-                      {plan.cta}
-                      <ArrowRight />
-                    </motion.a>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            {/* Build From Scratch */}
+            <SectionHeading eyebrow="From RM999" title="Build From Scratch" accent="Pick your scope." />
+            <ScopeGrid items={plans} trackLocation="pricing_card" />
 
             {/* Custom — full-width banner */}
             <motion.div
@@ -209,7 +278,7 @@ export default function PricingPage() {
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               className="mt-5 px-5 py-4 rounded-lg border border-[var(--color-border)] bg-white"
             >
-              <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-3">Included in all packages</p>
+              <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-3">Included in every website package</p>
               <div className="grid grid-cols-2 gap-x-4 gap-y-2.5">
                 {included.map(({ title, icon }) => (
                   <div key={title} className="flex items-center gap-1.5">
@@ -224,18 +293,11 @@ export default function PricingPage() {
             </motion.div>
 
             {/* Monthly Maintenance */}
-            <div className="mt-10">
-              <div className="text-center mb-6">
-                <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-3">Optional add-on</p>
-                <h2 className="font-serif text-[clamp(22px,3vw,36px)] font-normal tracking-tight leading-[1.1]">
-                  Monthly maintenance,
-                  <br />
-                  <span className="text-[var(--color-blue)]">billed annually.</span>
-                </h2>
-                <p className="text-[14px] text-[var(--color-ink-muted)] mt-3 max-w-[440px] mx-auto leading-[1.65]">
-                  Email hosting, domain renewals, and minor updates — handled for you. Pay once a year, no monthly invoices.
-                </p>
-              </div>
+            <div className="mt-10 mb-16">
+              <SectionHeading eyebrow="Optional add-on" title="Monthly maintenance," accent="billed annually." />
+              <p className="text-[14px] text-[var(--color-ink-muted)] -mt-3 mb-6 max-w-[440px] mx-auto leading-[1.65] text-center">
+                Email hosting, domain renewals, and minor updates — handled for you. Pay once a year, no monthly invoices.
+              </p>
 
               <div className="neo-card overflow-hidden">
                 <div className="grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 divide-x-0 lg:divide-x divide-[var(--color-border)]">
@@ -276,6 +338,38 @@ export default function PricingPage() {
                   ))}
                 </div>
               </div>
+            </div>
+
+            {/* Website Redesign & Enhancement */}
+            <div className="mb-5">
+              <SectionHeading eyebrow="From RM1,499" title="Website Redesign" accent="& Enhancement." />
+            </div>
+            <div className="mb-16">
+              <SingleTierBanner
+                tag="Website Redesign & Enhancement"
+                name="Website Redesign & Enhancement"
+                price="From RM1,499"
+                timeline="Est. 1–3 weeks"
+                desc="Refresh an existing site — new design, faster load times, fixes to the parts that confuse visitors — without tearing down what you've already built."
+                waMsg="Hi, I'm interested in Website Redesign & Enhancement"
+                trackLocation="pricing_redesign"
+              />
+            </div>
+
+            {/* Funnel Design */}
+            <div className="mb-5">
+              <SectionHeading eyebrow="From RM2,499" title="Funnel Design" accent="One visitor, guided to a sale." />
+            </div>
+            <div className="mb-16">
+              <SingleTierBanner
+                tag="Funnel Design"
+                name="Funnel Design"
+                price="From RM2,499"
+                timeline="Est. 2–4 weeks"
+                desc="Multi-step funnel — offer page, lead capture, thank-you/upsell — built to guide one visitor all the way to a sale, instead of a one-off visit."
+                waMsg="Hi, I'm interested in Funnel Design"
+                trackLocation="pricing_funnel"
+              />
             </div>
 
           </div>

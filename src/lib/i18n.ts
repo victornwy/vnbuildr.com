@@ -72,9 +72,9 @@ export const translations: Translations = {
     heading: "What I can build\nfor you",
     subheading: "Three ways to work together, depending on where you're starting from.",
     cards: [
-      { title: "Funnel Design", body: "A steady stream of enquiries instead of one-off visits. I build the path from ad click to paying customer — offer page, signup step, thank-you page — so leads keep coming in without you chasing them.", bestFor: "Best for: businesses running ads" },
-      { title: "Website Redesign & Enhancement", body: "The enquiries your traffic should already be bringing you. If your site looks outdated, loads slow, or visitors leave without contacting you, I fix what's costing you leads — without tearing down what you've already built.", bestFor: "Best for: rebrands, slow sites, low enquiries" },
       { title: "Build From Scratch", body: "A professional online presence that brings in enquiries from day one. I handle everything — design, writing, setup — so you're not stitching it together yourself or waiting months to launch.", bestFor: "Best for: new businesses, no site yet" },
+      { title: "Website Redesign & Enhancement", body: "The enquiries your traffic should already be bringing you. If your site looks outdated, loads slow, or visitors leave without contacting you, I fix what's costing you leads — without tearing down what you've already built.", bestFor: "Best for: rebrands, slow sites, low enquiries" },
+      { title: "Funnel Design", body: "A steady stream of enquiries instead of one-off visits. I build the path from ad click to paying customer — offer page, signup step, thank-you page — so leads keep coming in without you chasing them.", bestFor: "Best for: businesses running ads" },
     ],
   },
   testimonials: {
