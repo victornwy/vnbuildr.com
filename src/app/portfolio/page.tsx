@@ -10,10 +10,24 @@ import { FooterSection } from "@/components/ui/footer-section"
 // ─── Project data ─────────────────────────────────────────────────────────────
 const projects = [
   {
+    id: 10,
+    name: "Chart & Craft",
+    category: "Online Store",
+    description: "WordPress digital product store for trading education resources, built with WooCommerce checkout and Stripe payments.",
+    goal: "Sell digital products through a clear product-to-checkout path.",
+    stack: "WordPress · WooCommerce · Stripe",
+    evidence: "Payment-ready funnel from landing page to secure checkout.",
+    image: "/our-works/chart-craft.png",
+    imageFit: "contain",
+  },
+  {
     id: 9,
     name: "CarGo Garage",
     category: "Automotive",
     description: "Multi-brand automotive workshop site built to drive service bookings, showcasing expertise across continental, Japanese, and electric vehicles.",
+    goal: "Turn mobile visitors into WhatsApp service bookings.",
+    stack: "Automotive landing page",
+    evidence: "Service-focused CTAs, vehicle categories, and trust signals.",
     image: "/our-works/CarGoGarage.png",
     url: "https://vnbuildr-car-go-garage.pages.dev",
   },
@@ -22,6 +36,9 @@ const projects = [
     name: "AN Account",
     category: "Corporate B2C",
     description: "Professional landing page for a freelance accounting firm, built around credibility signals and client lead generation.",
+    goal: "Convert visitors into accounting and tax enquiries.",
+    stack: "Professional services landing page",
+    evidence: "Credibility-first layout with direct lead capture paths.",
     image: "/our-works/an-account.png",
     url: "https://vnbuildr-an-accounts.pages.dev",
   },
@@ -30,6 +47,9 @@ const projects = [
     name: "Everbest Link",
     category: "Corporate B2B",
     description: "Product and services showcase for a precision wirecut CNC machining firm, built to generate B2B enquiries.",
+    goal: "Generate qualified precision machining enquiries.",
+    stack: "B2B product showcase",
+    evidence: "Trade-buyer messaging with clear service discovery.",
     image: "/our-works/everbest-link.png",
     url: "https://vnbuildr-everbest.pages.dev",
   },
@@ -38,6 +58,9 @@ const projects = [
     name: "TopSpace Limited",
     category: "Corporate B2B",
     description: "Commercial shelving solutions showcase for a boltless racking and gondola supplier, designed to drive trade enquiries.",
+    goal: "Help retail and warehouse buyers request shelving quotes.",
+    stack: "B2B catalogue landing page",
+    evidence: "Product categories and enquiry CTAs structured for buyers.",
     image: "/our-works/topspace.png",
     url: "https://vnbuildr-top-space.pages.dev",
   },
@@ -46,6 +69,9 @@ const projects = [
     name: "Meridian Securities",
     category: "Corporate B2B",
     description: "Trust-first landing page for a securities advisory firm, built around regulatory credibility and direct client acquisition CTAs.",
+    goal: "Build trust quickly for high-value advisory enquiries.",
+    stack: "Finance landing page",
+    evidence: "Authority-led messaging and direct acquisition CTAs.",
     image: "/our-works/meridian.png",
     url: "https://vnbuildr-meridian.pages.dev",
   },
@@ -54,6 +80,9 @@ const projects = [
     name: "NovaDax Limited",
     category: "Corporate B2C",
     description: "Crypto exchange landing page designed for aggressive user acquisition with trust-building elements.",
+    goal: "Move crypto-curious visitors toward account signup.",
+    stack: "Acquisition landing page",
+    evidence: "Benefit-led sections, trust cues, and signup prompts.",
     image: "/our-works/novadax.png",
     url: "https://vnbuildr-exchange.pages.dev",
   },
@@ -62,6 +91,9 @@ const projects = [
     name: "Ember & Oak Cafe",
     category: "Restaurant and Cafe",
     description: "Specialty coffee café site built to drive dine-in reservations and online orders, with a warm editorial aesthetic.",
+    goal: "Turn local discovery into reservations and online orders.",
+    stack: "Restaurant landing page",
+    evidence: "Menu, ambience, and ordering paths surfaced early.",
     image: "/our-works/ember-oak.png",
     url: "https://vnbuildr-cafe.pages.dev",
   },
@@ -70,6 +102,9 @@ const projects = [
     name: "Lumora",
     category: "Online Store",
     description: "Digital creative marketplace for courses, presets, templates and wallpapers — designed for instant downloads.",
+    goal: "Sell downloadable creative assets with minimal friction.",
+    stack: "Digital marketplace",
+    evidence: "Product-led layout designed around instant downloads.",
     image: "/our-works/lumora.png",
     url: "https://vnbuildr-lumora.pages.dev",
   },
@@ -78,6 +113,9 @@ const projects = [
     name: "Ryan Lim",
     category: "Personal Brand",
     description: "Personal brand site for a KL & Selangor property agent, showcasing past projects and converting buyers into leads.",
+    goal: "Convert property searchers into buyer and seller leads.",
+    stack: "Personal brand landing page",
+    evidence: "Project credibility and contact CTAs built into the flow.",
     image: "/our-works/ryan-lim.png",
     url: "https://vnbuildr-property-agent.pages.dev",
   },
@@ -97,9 +135,11 @@ function ChevronLeft() {
 
 // ─── Card ─────────────────────────────────────────────────────────────────────
 function ProjectCard({ project, priority = false }: { project: typeof projects[0]; priority?: boolean }) {
-  const cardRef = useRef<HTMLAnchorElement>(null)
+  const cardRef = useRef<HTMLElement>(null)
+  const hasUrl = Boolean(project.url)
+  const imageFit = project.imageFit === "contain" ? "object-contain bg-black" : "object-cover"
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     const card = cardRef.current
     if (!card) return
     const rect = card.getBoundingClientRect()
@@ -118,6 +158,17 @@ function ProjectCard({ project, priority = false }: { project: typeof projects[0
     card.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)"
   }
 
+  const visitProject = () => {
+    if (!project.url) return
+    window.open(project.url, "_blank", "noopener,noreferrer")
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
+    if (!hasUrl || (e.key !== "Enter" && e.key !== " ")) return
+    e.preventDefault()
+    visitProject()
+  }
+
   return (
     <motion.div
       layout
@@ -126,12 +177,13 @@ function ProjectCard({ project, priority = false }: { project: typeof projects[0
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
     >
-    <a
+    <article
       ref={cardRef}
-      href={project.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="neo-card bg-white flex flex-col overflow-hidden group cursor-pointer"
+      role={hasUrl ? "link" : undefined}
+      tabIndex={hasUrl ? 0 : undefined}
+      className={`neo-card bg-white flex flex-col overflow-hidden group ${hasUrl ? "cursor-pointer" : "cursor-default"}`}
+      onClick={visitProject}
+      onKeyDown={handleKeyDown}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
@@ -142,7 +194,7 @@ function ProjectCard({ project, priority = false }: { project: typeof projects[0
           src={project.image}
           alt={`${project.name} ${project.category} landing page — vnbuildr web development portfolio`}
           fill
-          className="object-cover select-none transition-transform duration-500 group-hover:scale-[1.03]"
+          className={`${imageFit} select-none transition-transform duration-500 group-hover:scale-[1.03]`}
           draggable={false}
           onContextMenu={e => e.preventDefault()}
           priority={priority}
@@ -150,12 +202,18 @@ function ProjectCard({ project, priority = false }: { project: typeof projects[0
         />
         {/* Visit site overlay */}
         <div className="absolute inset-0 z-20 flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-          <span className="flex items-center gap-1.5 bg-white/95 backdrop-blur-sm text-[var(--color-ink)] text-[11px] font-semibold tracking-wide uppercase px-3.5 py-1.5 rounded-full shadow-md translate-y-2 group-hover:translate-y-0 transition-transform duration-200">
-            Visit Site
-            <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
-              <path d="M2 9L9 2M9 2H4M9 2V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </span>
+          {hasUrl ? (
+            <span className="flex items-center gap-1.5 bg-white/95 backdrop-blur-sm text-[var(--color-ink)] text-[11px] font-semibold tracking-wide uppercase px-3.5 py-1.5 rounded-full shadow-md translate-y-2 group-hover:translate-y-0 transition-transform duration-200">
+              Visit Site
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+                <path d="M2 9L9 2M9 2H4M9 2V7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </span>
+          ) : (
+            <span className="flex items-center gap-1.5 bg-white/95 backdrop-blur-sm text-[var(--color-ink)] text-[11px] font-semibold tracking-wide uppercase px-3.5 py-1.5 rounded-full shadow-md translate-y-2 group-hover:translate-y-0 transition-transform duration-200">
+              Case Study
+            </span>
+          )}
         </div>
       </div>
 
@@ -168,8 +226,20 @@ function ProjectCard({ project, priority = false }: { project: typeof projects[0
           </span>
         </div>
         <p className="text-[12px] text-[var(--color-ink-muted)] leading-[1.6] line-clamp-2">{project.description}</p>
+        <div className="mt-4 grid gap-2 border-t border-[var(--color-border)] pt-3">
+          {[
+            ["Goal", project.goal],
+            ["Scope", project.stack],
+            ["Proof", project.evidence],
+          ].map(([label, value]) => (
+            <div key={label} className="grid grid-cols-[44px_1fr] gap-2 text-[11px] leading-snug">
+              <span className="font-bold uppercase tracking-[0.06em] text-[var(--color-blue)]">{label}</span>
+              <span className="text-[var(--color-ink-muted)]">{value}</span>
+            </div>
+          ))}
+        </div>
       </div>
-    </a>
+    </article>
     </motion.div>
   )
 }
@@ -226,8 +296,8 @@ export default function PortfolioPage() {
               <span className="text-[var(--color-blue)]">Designed to impress.</span>
             </h1>
             <p className="text-[17px] text-[var(--color-ink-muted)] max-w-[460px] mx-auto leading-[1.65]">
-              Every project is hand-coded from scratch — no templates, no bloat.
-              Just clean, fast, converting pages.
+              Every project is built around a clear business goal — leads, bookings, sales, or paid checkout.
+              Clean visuals are just the start.
             </p>
           </motion.div>
         </section>
