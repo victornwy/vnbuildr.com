@@ -11,24 +11,25 @@ import { FooterSection } from "@/components/ui/footer-section"
 const projects = [
   {
     id: 10,
-    name: "Chart & Craft",
+    name: "Chart & Chain",
     category: "Online Store",
     description: "WordPress digital product store for trading education resources, built with WooCommerce checkout and Stripe payments.",
     goal: "Sell digital products through a clear product-to-checkout path.",
     stack: "WordPress · WooCommerce · Stripe",
     evidence: "Payment-ready funnel from landing page to secure checkout.",
-    image: "/our-works/chart-craft.png",
+    image: "/our-works/chart-and-chain-browser.png",
     imageFit: "contain",
+    url: "https://chart-and-chain.pages.dev",
   },
   {
     id: 9,
     name: "CarGo Garage",
-    category: "Automotive",
+    category: "Corporate B2C",
     description: "Multi-brand automotive workshop site built to drive service bookings, showcasing expertise across continental, Japanese, and electric vehicles.",
     goal: "Turn mobile visitors into WhatsApp service bookings.",
     stack: "Automotive landing page",
     evidence: "Service-focused CTAs, vehicle categories, and trust signals.",
-    image: "/our-works/CarGoGarage.png",
+    image: "/our-works/cargo-browser.png",
     url: "https://vnbuildr-car-go-garage.pages.dev",
   },
   {
@@ -39,7 +40,7 @@ const projects = [
     goal: "Convert visitors into accounting and tax enquiries.",
     stack: "Professional services landing page",
     evidence: "Credibility-first layout with direct lead capture paths.",
-    image: "/our-works/an-account.png",
+    image: "/our-works/an-account-browser.png",
     url: "https://vnbuildr-an-accounts.pages.dev",
   },
   {
@@ -50,7 +51,7 @@ const projects = [
     goal: "Generate qualified precision machining enquiries.",
     stack: "B2B product showcase",
     evidence: "Trade-buyer messaging with clear service discovery.",
-    image: "/our-works/everbest-link.png",
+    image: "/our-works/everbest-link-browser.png",
     url: "https://vnbuildr-everbest.pages.dev",
   },
   {
@@ -61,7 +62,7 @@ const projects = [
     goal: "Help retail and warehouse buyers request shelving quotes.",
     stack: "B2B catalogue landing page",
     evidence: "Product categories and enquiry CTAs structured for buyers.",
-    image: "/our-works/topspace.png",
+    image: "/our-works/topspace-browser.png",
     url: "https://vnbuildr-top-space.pages.dev",
   },
   {
@@ -72,7 +73,7 @@ const projects = [
     goal: "Build trust quickly for high-value advisory enquiries.",
     stack: "Finance landing page",
     evidence: "Authority-led messaging and direct acquisition CTAs.",
-    image: "/our-works/meridian.png",
+    image: "/our-works/meridian-browser.png",
     url: "https://vnbuildr-meridian.pages.dev",
   },
   {
@@ -83,7 +84,7 @@ const projects = [
     goal: "Move crypto-curious visitors toward account signup.",
     stack: "Acquisition landing page",
     evidence: "Benefit-led sections, trust cues, and signup prompts.",
-    image: "/our-works/novadax.png",
+    image: "/our-works/novadax-browser.png",
     url: "https://vnbuildr-exchange.pages.dev",
   },
   {
@@ -94,19 +95,8 @@ const projects = [
     goal: "Turn local discovery into reservations and online orders.",
     stack: "Restaurant landing page",
     evidence: "Menu, ambience, and ordering paths surfaced early.",
-    image: "/our-works/ember-oak.png",
+    image: "/our-works/ember-oak-browser.png",
     url: "https://vnbuildr-cafe.pages.dev",
-  },
-  {
-    id: 7,
-    name: "Lumora",
-    category: "Online Store",
-    description: "Digital creative marketplace for courses, presets, templates and wallpapers — designed for instant downloads.",
-    goal: "Sell downloadable creative assets with minimal friction.",
-    stack: "Digital marketplace",
-    evidence: "Product-led layout designed around instant downloads.",
-    image: "/our-works/lumora.png",
-    url: "https://vnbuildr-lumora.pages.dev",
   },
   {
     id: 8,
@@ -116,13 +106,19 @@ const projects = [
     goal: "Convert property searchers into buyer and seller leads.",
     stack: "Personal brand landing page",
     evidence: "Project credibility and contact CTAs built into the flow.",
-    image: "/our-works/ryan-lim.png",
+    image: "/our-works/ryan-lim-browser.png",
     url: "https://vnbuildr-property-agent.pages.dev",
   },
 ]
 
 const ALL = "All"
 const categories = [ALL, ...Array.from(new Set(projects.map(p => p.category)))]
+const groupedProjects = categories
+  .filter(cat => cat !== ALL)
+  .map(category => ({
+    category,
+    projects: projects.filter(project => project.category === category),
+  }))
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
 function ChevronLeft() {
@@ -137,7 +133,7 @@ function ChevronLeft() {
 function ProjectCard({ project, priority = false }: { project: typeof projects[0]; priority?: boolean }) {
   const cardRef = useRef<HTMLElement>(null)
   const hasUrl = Boolean(project.url)
-  const imageFit = project.imageFit === "contain" ? "object-contain bg-black" : "object-cover"
+  const imageFit = project.imageFit === "cover" ? "object-cover" : "object-contain"
 
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     const card = cardRef.current
@@ -189,11 +185,11 @@ function ProjectCard({ project, priority = false }: { project: typeof projects[0
       onMouseLeave={handleMouseLeave}
     >
       {/* Image */}
-      <div className="relative aspect-video overflow-hidden">
+      <div className="relative aspect-[4/3] overflow-hidden bg-[#f6f6f3]">
         <div className="absolute inset-0 z-10" onContextMenu={e => e.preventDefault()} />
         <Image
           src={project.image}
-          alt={`${project.name} ${project.category} landing page — vnbuildr web development portfolio`}
+          alt={`${project.name} website screenshot`}
           fill
           className={`${imageFit} select-none transition-transform duration-500 group-hover:scale-[1.03]`}
           draggable={false}
@@ -249,6 +245,9 @@ function ProjectCard({ project, priority = false }: { project: typeof projects[0
 export default function PortfolioPage() {
   const [activeFilter, setActiveFilter] = useState(ALL)
   const filtered = activeFilter === ALL ? projects : projects.filter(p => p.category === activeFilter)
+  const visibleGroups = activeFilter === ALL
+    ? groupedProjects
+    : groupedProjects.filter(group => group.category === activeFilter)
 
   return (
     <>
@@ -329,14 +328,37 @@ export default function PortfolioPage() {
               ))}
             </motion.div>
 
-            {/* Project grid */}
-            <motion.div layout className="grid auto-rows-fr grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              <AnimatePresence mode="popLayout">
-                {filtered.map((project, i) => (
-                  <ProjectCard key={project.id} project={project} priority={i < 4} />
-                ))}
-              </AnimatePresence>
-            </motion.div>
+            {/* Project groups */}
+            <div className="space-y-10 md:space-y-12">
+              {visibleGroups.map(group => (
+                <motion.section
+                  key={group.category}
+                  layout
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <div className="mb-4 flex items-end justify-between gap-4 border-b border-[var(--color-border)] pb-3">
+                    <div>
+                      <p className="text-[10px] font-bold tracking-[0.12em] uppercase text-[var(--color-blue)]">
+                        {group.projects.length} {group.projects.length === 1 ? "project" : "projects"}
+                      </p>
+                      <h2 className="mt-1 font-serif text-[26px] font-normal tracking-tight text-[var(--color-ink)]">
+                        {group.category}
+                      </h2>
+                    </div>
+                  </div>
+
+                  <motion.div layout className="grid auto-rows-fr grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <AnimatePresence mode="popLayout">
+                      {group.projects.map((project, i) => (
+                        <ProjectCard key={project.id} project={project} priority={i < 4 && activeFilter === ALL} />
+                      ))}
+                    </AnimatePresence>
+                  </motion.div>
+                </motion.section>
+              ))}
+            </div>
 
             {/* Empty state */}
             <AnimatePresence>
