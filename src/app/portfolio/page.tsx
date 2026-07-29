@@ -172,6 +172,7 @@ function ProjectCard({ project, priority = false }: { project: typeof projects[0
   return (
     <motion.div
       layout
+      className="h-full"
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
@@ -181,7 +182,7 @@ function ProjectCard({ project, priority = false }: { project: typeof projects[0
       ref={cardRef}
       role={hasUrl ? "link" : undefined}
       tabIndex={hasUrl ? 0 : undefined}
-      className={`neo-card bg-white flex flex-col overflow-hidden group ${hasUrl ? "cursor-pointer" : "cursor-default"}`}
+      className={`neo-card bg-white h-full flex flex-col overflow-hidden group ${hasUrl ? "cursor-pointer" : "cursor-default"}`}
       onClick={visitProject}
       onKeyDown={handleKeyDown}
       onMouseMove={handleMouseMove}
@@ -198,7 +199,7 @@ function ProjectCard({ project, priority = false }: { project: typeof projects[0
           draggable={false}
           onContextMenu={e => e.preventDefault()}
           priority={priority}
-          sizes="(max-width: 640px) 95vw, (max-width: 1024px) 47vw, 575px"
+          sizes="(max-width: 640px) 95vw, (max-width: 1024px) 47vw, 350px"
         />
         {/* Visit site overlay */}
         <div className="absolute inset-0 z-20 flex items-end justify-center pb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -218,7 +219,7 @@ function ProjectCard({ project, priority = false }: { project: typeof projects[0
       </div>
 
       {/* Info */}
-      <div className="p-4 md:p-5 border-t border-[var(--color-border)]">
+      <div className="p-4 md:p-5 border-t border-[var(--color-border)] flex flex-1 flex-col">
         <div className="flex items-start justify-between gap-2 mb-2">
           <h3 className="font-serif text-[15px] font-normal tracking-tight leading-snug">{project.name}</h3>
           <span className="text-[8px] font-bold tracking-[0.05em] uppercase px-1.5 py-0.5 rounded border border-[var(--color-ink)] text-[var(--color-ink)] leading-tight text-center">
@@ -226,7 +227,7 @@ function ProjectCard({ project, priority = false }: { project: typeof projects[0
           </span>
         </div>
         <p className="text-[12px] text-[var(--color-ink-muted)] leading-[1.6] line-clamp-2">{project.description}</p>
-        <div className="mt-4 grid gap-2 border-t border-[var(--color-border)] pt-3">
+        <div className="mt-auto grid gap-2 border-t border-[var(--color-border)] pt-3">
           {[
             ["Goal", project.goal],
             ["Scope", project.stack],
@@ -329,7 +330,7 @@ export default function PortfolioPage() {
             </motion.div>
 
             {/* Project grid */}
-            <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
+            <motion.div layout className="grid auto-rows-fr grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               <AnimatePresence mode="popLayout">
                 {filtered.map((project, i) => (
                   <ProjectCard key={project.id} project={project} priority={i < 4} />
