@@ -10,6 +10,18 @@ import { FooterSection } from "@/components/ui/footer-section"
 // ─── Project data ─────────────────────────────────────────────────────────────
 const projects = [
   {
+    id: 11,
+    name: "Lumora",
+    category: "Online Store",
+    description: "Digital product storefront for courses, presets, templates, and wallpapers, with live catalogue data and external checkout.",
+    goal: "Sell downloadable creative assets through a focused product-to-checkout journey.",
+    stack: "Static storefront · Supabase · Lemon Squeezy",
+    evidence: "Live product discovery, filtering, product pages, and purchase-ready calls to action.",
+    image: "/our-works/lumora.png",
+    imageFit: "contain",
+    url: "https://vnbuildr-digital-store.pages.dev",
+  },
+  {
     id: 10,
     name: "Chart & Chain",
     category: "Online Store",
