@@ -652,6 +652,7 @@ function Features() {
           {cards.map(({ icon, title, body, bestFor }) => (
             <motion.div
               key={title}
+              id={title === "Website Redesign & Enhancement" ? "free-review" : undefined}
               className="neo-card bg-white p-6 md:p-9 flex flex-col"
               whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
             >
@@ -660,7 +661,24 @@ function Features() {
               </div>
               <h3 className="text-[16px] font-semibold tracking-tight mb-2">{title}</h3>
               <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.65] mb-4 flex-1">{body}</p>
-              <p className="text-[12px] font-semibold text-[var(--color-blue)]">{bestFor}</p>
+              <p className="text-[12px] font-semibold text-[var(--color-blue)] mb-4">{bestFor}</p>
+              {title === "Website Redesign & Enhancement" && (
+                <div className="pt-4 border-t border-[var(--color-border)]">
+                  <p className="text-[13px] text-[var(--color-ink-muted)] leading-[1.6] mb-3">
+                    Not sure if your site needs work? Get a free 5-minute review — no obligation.
+                  </p>
+                  <a
+                    href="https://wa.me/60199195314?text=Hi%2C%20I%27d%20like%20a%20free%20review%20of%20my%20current%20website"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => track("whatsapp_click", { location: "free_review_home" })}
+                    className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[var(--color-blue)] hover:underline"
+                  >
+                    Get my free review
+                    <ArrowRight />
+                  </a>
+                </div>
+              )}
             </motion.div>
           ))}
         </div>
