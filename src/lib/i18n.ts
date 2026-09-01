@@ -97,7 +97,7 @@ export const translations: Translations = {
   about: {
     label: "About", heading: "The person behind the code",
     bio1: "I'm V — a self-taught developer based in Kuala Lumpur. I started vnbuildr because I kept seeing the same frustration: businesses were either paying agency prices for slow, bloated work, or settling for DIY builders that looked cheap and converted poorly.",
-    bio2: "vnbuildr is the alternative. Clean, hand-coded landing pages built fast — at a fraction of the cost. Every project gets my direct attention from brief to launch. No junior handoffs, no account managers, no markup.",
+    bio2: "vnbuildr is the alternative. Clean, custom-built landing pages built fast — at a fraction of the cost. Every project gets my direct attention from brief to launch. No junior handoffs, no account managers, no markup.",
     location: "Kuala Lumpur, Malaysia", role: "Founder, vnbuildr",
     tags: ["Self-taught", "Based in KL", "Works globally", "Direct communication", "No agency markup"],
   },

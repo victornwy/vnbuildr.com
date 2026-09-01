@@ -670,6 +670,66 @@ function Features() {
   );
 }
 
+// ─── Is This For You ──────────────────────────────────────────────────────────
+function IsThisForYou() {
+  const bullets = [
+    "You're running ads or paying for traffic, but it's not turning into WhatsApp messages or leads.",
+    "Your current site looks outdated or broken on phones, and visitors leave before they even scroll.",
+    "You want one clean link to send customers on WhatsApp — instead of a messy Instagram profile.",
+  ]
+
+  return (
+    <section className="py-16 md:py-24 px-6 bg-white">
+      <div className="max-w-[720px] mx-auto text-center">
+        <FadeUp>
+          <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
+            Not sure yet?
+          </p>
+          <h2 className="font-serif text-[clamp(30px,4vw,46px)] font-normal tracking-tight leading-[1.1] mb-10">
+            This is for you if...
+          </h2>
+        </FadeUp>
+
+        <FadeUp delay={0.08}>
+          <div className="space-y-4 mb-10 text-left">
+            {bullets.map((text, i) => (
+              <motion.div
+                key={i}
+                className="neo-card bg-white flex items-start gap-4 px-6 py-5"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: 0.06 + i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
+              >
+                <span className="shrink-0 mt-0.5 text-[var(--color-blue)]">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                    <path d="M3 9.5l4 4 8-9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </span>
+                <p className="text-[15px] font-medium text-[var(--color-ink)] leading-snug">{text}</p>
+              </motion.div>
+            ))}
+          </div>
+        </FadeUp>
+
+        <FadeUp delay={0.2}>
+          <a
+            href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => track("whatsapp_click", { location: "is_this_for_you" })}
+            className="whatsapp-glow inline-flex items-center gap-2 text-[14px] font-medium bg-[#25D366] text-white px-6 py-3 rounded-full hover:opacity-85 transition-opacity"
+          >
+            Sound familiar? Let&apos;s fix it
+            <ArrowRight />
+          </a>
+        </FadeUp>
+      </div>
+    </section>
+  )
+}
+
 // ─── Testimonials ─────────────────────────────────────────────────────────────
 function Testimonials() {
   const t = useT()
@@ -920,7 +980,7 @@ function About() {
 const faqs: { q: string; a: React.ReactNode }[] = [
   {
     q: "How can you build and deploy a custom website so quickly?",
-    a: "Traditional web agencies spend weeks manually drawing static layouts in Figma before rewriting them from scratch. I work differently — by pairing deep frontend engineering expertise with the world's leading UI design systems, I write clean, production-ready code from day one. This allows me to deliver beautiful, functional websites in days rather than months.",
+    a: "Most agencies spend weeks sketching mockups before anyone even starts building — then rebuild everything again in code. I skip that detour: I design and build at the same time, using the same clean, professional building blocks the best web teams use. That's how a beautiful, working website gets to you in days, not months.",
   },
   {
     q: "How much does a website cost in Malaysia?",
@@ -948,7 +1008,7 @@ const faqs: { q: string; a: React.ReactNode }[] = [
   },
   {
     q: "Can I provide my own design?",
-    a: "Yes! If you already have a complete mockup or a Figma blueprint, I can act strictly as your developer. I will translate your static design files into pixel-perfect, clean React/Tailwind or static HTML/CSS code in record time.",
+    a: "Yes! If you already have a complete design or mockup, I can build exactly that — pixel by pixel. I'll turn your design files into a fast, fully working website in record time.",
   },
   {
     q: "Do you design logos or brand identities?",
@@ -976,7 +1036,7 @@ const faqs: { q: string; a: React.ReactNode }[] = [
   },
   {
     q: "If I cancel my hosting or contract, do I keep my domain and data?",
-    a: "Yes. You have complete ownership. Because I write raw, native code instead of locking you into a proprietary website builder subscription, you own your source files. Your domain and repository data can be hosted absolutely anywhere, anytime, completely independent of me.",
+    a: "Yes. You have complete ownership. Because I build with clean, standard code instead of locking you into a website-builder subscription, everything — your website files, your domain — is yours. You can host it anywhere, anytime, completely independent of me.",
   },
   {
     q: "Do you provide after-sales support?",
@@ -984,7 +1044,7 @@ const faqs: { q: string; a: React.ReactNode }[] = [
   },
   {
     q: "Do you use templates like WordPress, Wix, or Squarespace?",
-    a: "No. Every page is hand-crafted using clean, lightweight code frameworks. This ensures your site loads instantly on mobile devices, stays entirely customizable, and never suffers from heavy, broken plugin updates.",
+    a: "No. Every page is built from scratch, by hand — not assembled from a template. That means it loads instantly on mobile, stays fully customizable to your brand, and never breaks because of a bloated plugin update you didn't ask for.",
   },
   {
     q: "Do you handle marketing or SEO campaigns?",
@@ -1188,6 +1248,7 @@ export default function Home() {
         <WhyWebsite />
         <HowItWorks />
         <Features />
+        <IsThisForYou />
         <Pricing />
         <Testimonials />
         <About />
