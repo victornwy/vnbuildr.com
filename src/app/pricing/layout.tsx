@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "Pricing — vnbuildr | Funnel, Redesign & Website Packages Malaysia",
   description:
-    "Full pricing for vnbuildr's services — Funnel Design from RM2,499, Website Redesign & Enhancement from RM1,499, and Build From Scratch packages (Landing Page, Business Website, E-Commerce) from RM999 — plus what's included and optional maintenance plans.",
+    "Full pricing for vnbuildr's services — Funnel Design from RM1,250, Website Redesign & Enhancement from RM750, and Build From Scratch packages (Landing Page, Business Website, E-Commerce) from RM500 — plus what's included and optional maintenance plans.",
   metadataBase: new URL("https://vnbuildr.com"),
   alternates: {
     canonical: "https://vnbuildr.com/pricing",

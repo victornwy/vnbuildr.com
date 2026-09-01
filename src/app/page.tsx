@@ -455,20 +455,20 @@ function Pricing() {
   const servicePricing = [
     {
       name: "Build From Scratch",
-      price: "From RM999",
+      price: "From RM500",
       desc: "No website yet? Full build from design to launch — pick your scope below.",
       waMsg: "Hi, I'm interested in a Build From Scratch website",
     },
     {
       name: "Website Redesign & Enhancement",
-      price: "From RM1,499",
+      price: "From RM750",
       desc: "Refresh an existing site — new design, faster load times, fixes to the parts that confuse visitors.",
       waMsg: "Hi, I'm interested in Website Redesign & Enhancement",
       featured: true,
     },
     {
       name: "Funnel Design",
-      price: "From RM2,499",
+      price: "From RM1,250",
       desc: "Multi-step funnel — offer page, lead capture, thank-you/upsell — built to guide one visitor all the way to a sale.",
       waMsg: "Hi, I'm interested in Funnel Design",
     },
@@ -984,7 +984,7 @@ const faqs: { q: string; a: React.ReactNode }[] = [
   },
   {
     q: "How much does a website cost in Malaysia?",
-    a: "Website design in Malaysia typically ranges from RM1,000 to RM10,000+ depending on scope and the provider. At vnbuildr, a Website Redesign & Enhancement starts from RM1,499, a Funnel Design starts from RM2,499, and Build From Scratch websites start at RM999 for a single-page landing page, from RM2,899 for a 5–10+ page business website, and RM9,999 for an online store. Domain registration and hosting are separate costs — typically RM50–RM300 per year depending on your provider.",
+    a: "Website design in Malaysia typically ranges from RM1,000 to RM10,000+ depending on scope and the provider. At vnbuildr, a Website Redesign & Enhancement starts from RM750, a Funnel Design starts from RM1,250, and Build From Scratch websites start at RM500 for a single-page landing page, from RM1,450 for a 5–10+ page business website, and RM5,000 for an online store. Domain registration and hosting are separate costs — typically RM50–RM300 per year depending on your provider.",
   },
   {
     q: "What is a landing page? Is it the same as a website?",
@@ -1145,7 +1145,7 @@ const faqSchema = {
     {
       "@type": "Question",
       "name": "How much does a website cost in Malaysia?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Website design in Malaysia typically ranges from RM1,000 to RM10,000+ depending on scope. At vnbuildr, a Website Redesign & Enhancement starts from RM1,499, a Funnel Design starts from RM2,499, and Build From Scratch websites start at RM999 for a single-page landing page, from RM2,899 for a 5–10+ page business website, and RM9,999 for an online store. Domain and hosting are separate costs." },
+      "acceptedAnswer": { "@type": "Answer", "text": "Website design in Malaysia typically ranges from RM1,000 to RM10,000+ depending on scope. At vnbuildr, a Website Redesign & Enhancement starts from RM750, a Funnel Design starts from RM1,250, and Build From Scratch websites start at RM500 for a single-page landing page, from RM1,450 for a 5–10+ page business website, and RM5,000 for an online store. Domain and hosting are separate costs." },
     },
     {
       "@type": "Question",

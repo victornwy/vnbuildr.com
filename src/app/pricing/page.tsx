@@ -23,19 +23,19 @@ function ArrowRight() {
 
 const plans = [
   {
-    name: "Landing Page", type: "Single-page Website", price: "RM999",
+    name: "Landing Page", type: "Single-page Website", price: "RM500",
     blurb: "One page, one goal.",
     specs: { Timeline: "1–2 weeks", Pages: "1", "Revision rounds": "3", "Business emails": "1" },
     cta: "Get started", waMsg: "Hi, I'm interested in the Landing Page package", featured: false,
   },
   {
-    name: "Business Website", type: "Multi-page Website", price: "From RM2,899",
+    name: "Business Website", type: "Multi-page Website", price: "From RM1,450",
     blurb: "Multi-page, lead gen & brand authority.",
     specs: { Timeline: "2–5 weeks", Pages: "5–10+", "Revision rounds": "4–5", "Business emails": "2–3" },
     cta: "Get started", waMsg: "Hi, I'm interested in the Business Website package", featured: true,
   },
   {
-    name: "E-Commerce", type: "Online Store", price: "RM9,999",
+    name: "E-Commerce", type: "Online Store", price: "RM5,000",
     blurb: "Full online store.",
     specs: { Timeline: "4–8 weeks", Pages: "Custom", "Revision rounds": "6", "Business emails": "3" },
     cta: "Chat with us", waMsg: "Hi, I'm interested in the E-Commerce Website package", featured: false,
@@ -55,21 +55,21 @@ const included = [
 
 const otherServices = [
   {
-    name: "Website Redesign & Enhancement", price: "From RM1,499", timeline: "Est. 1–3 weeks",
+    name: "Website Redesign & Enhancement", price: "From RM750", timeline: "Est. 1–3 weeks",
     desc: "Refresh an existing site — new design, faster load times, fixes to the parts that confuse visitors — without tearing down what you've already built.",
     waMsg: "Hi, I'm interested in Website Redesign & Enhancement", trackLocation: "pricing_redesign",
   },
   {
-    name: "Funnel Design", price: "From RM2,499", timeline: "Est. 2–4 weeks",
+    name: "Funnel Design", price: "From RM1,250", timeline: "Est. 2–4 weeks",
     desc: "Multi-step funnel — offer page, lead capture, thank-you/upsell — built to guide one visitor all the way to a sale, instead of a one-off visit.",
     waMsg: "Hi, I'm interested in Funnel Design", trackLocation: "pricing_funnel",
   },
 ]
 
 const maintenance = [
-  { plan: "Landing Page",     annual: "RM899",   monthly: "RM75/mo",  waMsg: "Hi, I'd like to add the Landing Page maintenance plan", cta: "Add this plan" },
-  { plan: "Business Website", annual: "RM1,399", monthly: "RM117/mo", waMsg: "Hi, I'd like to add the Business Website maintenance plan", featured: true, cta: "Add this plan" },
-  { plan: "E-Commerce",       annual: "RM1,799", monthly: "RM150/mo", waMsg: "Hi, I'd like to add the E-Commerce maintenance plan", cta: "Add this plan" },
+  { plan: "Landing Page",     annual: "RM450",   monthly: "RM38/mo",  waMsg: "Hi, I'd like to add the Landing Page maintenance plan", cta: "Add this plan" },
+  { plan: "Business Website", annual: "RM700",   monthly: "RM59/mo", waMsg: "Hi, I'd like to add the Business Website maintenance plan", featured: true, cta: "Add this plan" },
+  { plan: "E-Commerce",       annual: "RM900",   monthly: "RM75/mo", waMsg: "Hi, I'd like to add the E-Commerce maintenance plan", cta: "Add this plan" },
 ]
 
 interface ScopePlan {
@@ -201,7 +201,7 @@ export default function PricingPage() {
           <div className="max-w-[1100px] mx-auto">
 
             {/* Build From Scratch */}
-            <SectionHeading eyebrow="From RM999" title="Build From Scratch" accent="Pick your scope." />
+            <SectionHeading eyebrow="From RM500" title="Build From Scratch" accent="Pick your scope." />
             <ScopeGrid items={plans} trackLocation="pricing_card" />
 
             {/* Custom — inline text row, no box */}
