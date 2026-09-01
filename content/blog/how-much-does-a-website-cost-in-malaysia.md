@@ -30,7 +30,7 @@ Ask five people and you'll get five answers — RM500 from a Fiverr freelancer, 
 |---|---|---|
 | DIY / AI builder (Wix, Framer) | RM0–RM50/month | A subscription, not a purchase — stops working if you stop paying |
 | Freelancer, template-based | RM500–RM2,000 | Fast, cheap, but built on a theme you don't fully control |
-| Freelancer, custom-coded | RM999–RM9,999+ | Built around your brand, code you own outright |
+| Freelancer, custom-coded | RM500–RM5,000+ | Built around your brand, code you own outright |
 | Agency | RM5,000–RM30,000+ | Same output as a skilled freelancer, priced for account management overhead |
 
 If you're weighing an AI builder against a custom build specifically, I wrote a [full comparison here](/blog/ai-website-builders-vs-custom-website-malaysia).
@@ -39,7 +39,7 @@ If you're weighing an AI builder against a custom build specifically, I wrote a 
 
 - **Domain registration** — roughly RM50–RM100/year, separate from the build
 - **Hosting** — free if bundled with your build (I include Cloudflare hosting in every project), otherwise RM100–RM300/year
-- **Ongoing maintenance** — text edits, small fixes, uptime monitoring; expect RM75–RM150/month if you want a retainer instead of paying per request
+- **Ongoing maintenance** — text edits, small fixes, uptime monitoring; expect RM38–RM75/month if you want a retainer instead of paying per request
 - **Copywriting, if not included** — budget separately if your freelancer or agency doesn't write the page copy for you
 - **Payment gateway fees** — for e-commerce, expect a per-transaction cut on top of the build cost
 
@@ -61,7 +61,7 @@ A few red flags either direction:
 
 ## What This Actually Costs With vnbuildr
 
-For reference, my own pricing: a landing page starts at RM999, a full business website from RM2,899, and an e-commerce store from RM9,999 — all hosted on Cloudflare with SSL and CDN included, no subscription required after launch. Full breakdown, including maintenance plans, is on the [pricing page](/pricing).
+For reference, my own pricing: a landing page starts at RM500, a full business website from RM1,450, and an e-commerce store from RM5,000 — all hosted on Cloudflare with SSL and CDN included, no subscription required after launch. Full breakdown, including maintenance plans, is on the [pricing page](/pricing).
 
 ## Ready for an Accurate Number?
 

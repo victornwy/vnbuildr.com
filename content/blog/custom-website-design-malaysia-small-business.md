@@ -1,6 +1,6 @@
 ---
 title: "Custom Website Design Malaysia for Small Business | vnbuildr"
-description: "Get a fast, secure, custom-built website for your Malaysian SME. Mobile-first design, Cloudflare hosting, and pricing from RM999. See what's actually included."
+description: "Get a fast, secure, custom-built website for your Malaysian SME. Mobile-first design, Cloudflare hosting, and pricing from RM500. See what's actually included."
 slug: "custom-website-design-malaysia-for-small-business"
 date: "2026-07-12"
 keywords:
@@ -73,11 +73,11 @@ Pricing depends on scope, not guesswork:
 
 | Project type | Starting price | Typical timeline |
 |---|---|---|
-| Landing page (single page) | RM999 | 1–2 weeks |
-| Sales funnel (offer + capture + thank-you) | RM2,499 | 2–4 weeks |
-| Business website (5–10+ pages) | RM2,899 | 2–5 weeks |
-| Website redesign / enhancement | RM1,499 | 1–3 weeks |
-| E-commerce store | RM9,999 | 4–8 weeks |
+| Landing page (single page) | RM500 | 1–2 weeks |
+| Sales funnel (offer + capture + thank-you) | RM1,250 | 2–4 weeks |
+| Business website (5–10+ pages) | RM1,450 | 2–5 weeks |
+| Website redesign / enhancement | RM750 | 1–3 weeks |
+| E-commerce store | RM5,000 | 4–8 weeks |
 
 Most small business owners looking for a "custom website" land in the Business Website tier — enough pages to cover services, about, and contact properly, without the complexity (or cost) of a full online store.
 

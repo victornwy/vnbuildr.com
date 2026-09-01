@@ -75,7 +75,7 @@ Being honest here: if you're testing whether a business idea has demand before s
 
 ## The Real Cost Comparison
 
-An AI builder subscription looks cheap month to month, but many Malaysian SMEs end up rebuilding within a year once they need real SEO, faster load times, or a design that doesn't look templated — and that rebuild costs more than starting with a custom build would have. A landing page built properly from the start is RM999, a full business website from RM2,899, both hosted on Cloudflare with SSL and CDN included, no subscription required after launch.
+An AI builder subscription looks cheap month to month, but many Malaysian SMEs end up rebuilding within a year once they need real SEO, faster load times, or a design that doesn't look templated — and that rebuild costs more than starting with a custom build would have. A landing page built properly from the start is RM500, a full business website from RM1,450, both hosted on Cloudflare with SSL and CDN included, no subscription required after launch.
 
 ## Ready to Build the Real Thing?
 
