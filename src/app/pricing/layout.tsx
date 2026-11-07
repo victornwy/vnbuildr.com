@@ -1,9 +1,9 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Pricing — vnbuildr | Funnel, Redesign & Website Packages Malaysia",
+  title: "Website Packages & Pricing — vnbuildr Malaysia",
   description:
-    "Full pricing for vnbuildr's services — Funnel Design from RM1,250, Website Redesign & Enhancement from RM750, and Build From Scratch packages (Landing Page, Business Website, E-Commerce) from RM500 — plus what's included and optional maintenance plans.",
+    "Compare three clear website packages for Malaysian SMEs: Landing Page RM1,299, Business Website RM3,499, and Website + Automation from RM5,999.",
   metadataBase: new URL("https://vnbuildr.com"),
   alternates: {
     canonical: "https://vnbuildr.com/pricing",
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Pricing — vnbuildr",
     description:
-      "Full pricing for vnbuildr's Funnel Design, Website Redesign & Enhancement, and Build From Scratch packages — Landing Page, Business Website, and E-Commerce.",
+      "Compare Landing Page, Business Website, and Website + Automation packages for Malaysian SMEs.",
     url: "https://vnbuildr.com/pricing",
     siteName: "vnbuildr",
     type: "website",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Pricing — vnbuildr",
     description:
-      "Full pricing for vnbuildr's Funnel Design, Website Redesign & Enhancement, and Build From Scratch packages.",
+      "Clear pricing for Landing Page, Business Website, and Website + Automation packages.",
     images: ["/og-image.jpg"],
   },
 }

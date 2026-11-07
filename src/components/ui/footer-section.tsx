@@ -49,10 +49,11 @@ const footerSections: FooterSection[] = [
   {
     label: 'Services',
     links: [
-      { title: 'Build From Scratch',                href: '/#pricing' },
-      { title: 'Website Redesign & Enhancement',    href: '/#pricing' },
-      { title: 'Funnel Design',                    href: '/#pricing' },
-      { title: 'Custom / Complex',                  href: '/#pricing' },
+      { title: 'Landing Page',           href: '/#pricing' },
+      { title: 'Business Website',       href: '/#pricing' },
+      { title: 'Website + Automation',   href: '/#pricing' },
+      { title: 'Free Website Review',    href: '/#free-review' },
+      { title: 'E-Commerce & Custom',    href: '/pricing' },
     ],
   },
   {
