@@ -81,13 +81,9 @@ interface ScopePlan {
 function ScopeGrid({ items }: { items: ScopePlan[] }) {
   return (
     <div className="grid md:grid-cols-3 gap-5 mb-5">
-      {items.map((plan, i) => (
+      {items.map(plan => (
         <motion.div
           key={plan.name}
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-30px" }}
-          transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
           whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
           className={`neo-card overflow-hidden flex flex-col ${plan.featured ? "md:-translate-y-2" : ""}`}
         >
@@ -106,9 +102,9 @@ function ScopeGrid({ items }: { items: ScopePlan[] }) {
           </div>
           <div className="px-6 py-4 divide-y divide-[var(--color-border)] bg-[var(--color-surface)] flex-1">
             {Object.entries(plan.specs).map(([label, value]) => (
-              <div key={label} className="flex items-center justify-between py-2.5 text-[13px]">
-                <span className="text-[var(--color-ink-muted)]">{label}</span>
-                <span className="font-medium text-[var(--color-ink)]">{value}</span>
+              <div key={label} className="grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.4fr)] items-start gap-4 py-2.5 text-[13px]">
+                <span className="text-[var(--color-ink-muted)] leading-[1.45]">{label}</span>
+                <span className="font-medium text-right text-[var(--color-ink)] leading-[1.45]">{value}</span>
               </div>
             ))}
           </div>
@@ -121,7 +117,9 @@ function ScopeGrid({ items }: { items: ScopePlan[] }) {
 function SectionHeading({ eyebrow, title, accent }: { eyebrow: string; title: string; accent: string }) {
   return (
     <div className="text-center mb-6">
-      <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-3">{eyebrow}</p>
+      {eyebrow ? (
+        <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-3">{eyebrow}</p>
+      ) : null}
       <h2 className="font-serif text-[clamp(22px,3vw,36px)] font-normal tracking-tight leading-[1.1]">
         {title}
         <br />
@@ -160,12 +158,8 @@ export default function PricingPage() {
 
       <main>
         {/* Hero */}
-        <section className="py-14 md:py-20 px-6 text-center bg-white">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
-          >
+        <section className="pt-12 pb-8 md:pt-16 md:pb-10 px-6 text-center bg-white">
+          <div>
             <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
               Pricing
             </p>
@@ -174,17 +168,14 @@ export default function PricingPage() {
               <br />
               <span className="text-[var(--color-blue)]">needs right now.</span>
             </h1>
-            <p className="text-[16px] text-[var(--color-ink-muted)] max-w-[500px] mx-auto leading-[1.65]">
-              Three clear packages based on the result you need—not technical features you have to figure out yourself.
-            </p>
-          </motion.div>
+          </div>
         </section>
 
         <section className="pb-16 md:pb-24 px-6 bg-white">
           <div className="max-w-[1100px] mx-auto">
 
             {/* Core packages */}
-            <SectionHeading eyebrow="Three clear choices" title="What do you need" accent="your website to do?" />
+            <SectionHeading eyebrow="" title="What do you need" accent="your website to do?" />
             <ScopeGrid items={plans} />
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-5">
               <a
@@ -209,10 +200,6 @@ export default function PricingPage() {
 
             {/* All-plans inclusions */}
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-20px" }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
               className="mt-5 px-5 py-4 rounded-lg border border-[var(--color-border)] bg-white"
             >
               <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-3">Included in every website package</p>
@@ -274,14 +261,10 @@ export default function PricingPage() {
             <SectionHeading eyebrow="Other services" title="Already have a site," accent="or need more than a build?" />
             <div className="mb-16 rounded-lg border border-[var(--color-border)] overflow-hidden bg-white">
               <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[var(--color-border)]">
-                {otherServices.map((service, i) => (
+                {otherServices.map(service => (
                   <motion.div
                     key={service.name}
                     id={service.id}
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-20px" }}
-                    transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
                     className="p-6 md:p-8"
                   >
                     <div className="flex flex-wrap items-center gap-3 mb-2">
