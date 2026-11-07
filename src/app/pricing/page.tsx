@@ -23,22 +23,22 @@ function ArrowRight() {
 
 const plans = [
   {
-    name: "Landing Page", type: "Single-page Website", price: "RM500",
-    blurb: "One page, one goal.",
-    specs: { Timeline: "1–2 weeks", Pages: "1", "Revision rounds": "3", "Business emails": "1" },
+    name: "Landing Page", type: "Starter", price: "RM1,299",
+    blurb: "Get online quickly and turn visitors into enquiries.",
+    specs: { "Choose this if": "You need one focused page", Timeline: "5–7 working days", Scope: "1 page", "Revision rounds": "2" },
     cta: "Get started", waMsg: "Hi, I'm interested in the Landing Page package", featured: false,
   },
   {
-    name: "Business Website", type: "Multi-page Website", price: "From RM1,450",
-    blurb: "Multi-page, lead gen & brand authority.",
-    specs: { Timeline: "2–5 weeks", Pages: "5–10+", "Revision rounds": "4–5", "Business emails": "2–3" },
+    name: "Business Website", type: "Business", price: "RM3,499",
+    blurb: "Build trust and give customers a clear path to contact you.",
+    specs: { "Choose this if": "You need a complete company site", Timeline: "2–3 weeks", Scope: "Up to 5 core pages", "Revision rounds": "2" },
     cta: "Get started", waMsg: "Hi, I'm interested in the Business Website package", featured: true,
   },
   {
-    name: "E-Commerce", type: "Online Store", price: "RM5,000",
-    blurb: "Full online store.",
-    specs: { Timeline: "4–8 weeks", Pages: "Custom", "Revision rounds": "6", "Business emails": "3" },
-    cta: "Chat with us", waMsg: "Hi, I'm interested in the E-Commerce Website package", featured: false,
+    name: "Website + Automation", type: "Growth", price: "RM5,999+",
+    blurb: "Capture, organise, and follow up with leads more efficiently.",
+    specs: { "Choose this if": "You want a lead follow-up system", Timeline: "3–4 weeks", Scope: "Up to 5 pages + 1 workflow", "Revision rounds": "2" },
+    cta: "Chat with us", waMsg: "Hi, I'm interested in the Website + Automation package", featured: false,
   },
 ]
 
@@ -55,30 +55,30 @@ const included = [
 
 const otherServices = [
   {
-    name: "Website Redesign & Enhancement", price: "From RM750", timeline: "Est. 1–3 weeks",
-    desc: "Refresh an existing site — new design, faster load times, fixes to the parts that confuse visitors — without tearing down what you've already built.",
-    waMsg: "Hi, I'm interested in Website Redesign & Enhancement", trackLocation: "pricing_redesign",
+    name: "Website Redesign", price: "Free website review", timeline: "No obligation",
+    desc: "Already have a website? I’ll review what may be costing you trust or enquiries, then recommend whether a redesign is actually needed.",
+    waMsg: "Hi, I'd like a free review of my current website", trackLocation: "free_review_pricing", cta: "Get my free review", id: "free-review",
   },
   {
-    name: "Funnel Design", price: "From RM1,250", timeline: "Est. 2–4 weeks",
-    desc: "Multi-step funnel — offer page, lead capture, thank-you/upsell — built to guide one visitor all the way to a sale, instead of a one-off visit.",
-    waMsg: "Hi, I'm interested in Funnel Design", trackLocation: "pricing_funnel",
+    name: "E-Commerce & Custom", price: "Custom quote", timeline: "Scoped individually",
+    desc: "For online stores, bookings, memberships, multilingual websites, or more complex integrations and workflows.",
+    waMsg: "Hi, I'd like to discuss an e-commerce or custom website project", trackLocation: "pricing_custom", cta: "Discuss my project", id: undefined,
   },
 ]
 
 const maintenance = [
-  { plan: "Landing Page",     annual: "RM450",   monthly: "RM38/mo",  waMsg: "Hi, I'd like to add the Landing Page maintenance plan", cta: "Add this plan" },
-  { plan: "Business Website", annual: "RM700",   monthly: "RM59/mo", waMsg: "Hi, I'd like to add the Business Website maintenance plan", featured: true, cta: "Add this plan" },
-  { plan: "E-Commerce",       annual: "RM900",   monthly: "RM75/mo", waMsg: "Hi, I'd like to add the E-Commerce maintenance plan", cta: "Add this plan" },
+  { plan: "Essential", price: "RM99/mo", description: "Updates, backups, and uptime monitoring.", features: ["Routine update checks", "Website backups", "Uptime monitoring"] },
+  { plan: "Care", price: "RM199/mo", description: "Essential care plus small monthly content changes.", features: ["Everything in Essential", "30 minutes of minor edits", "Priority email support"], featured: true },
+  { plan: "Growth", price: "RM399/mo", description: "Ongoing care for businesses that update their site regularly.", features: ["Everything in Care", "Basic monthly report", "Up to 2 hours of updates"] },
 ]
 
 interface ScopePlan {
   name: string; type: string; price: string; blurb: string
   specs: Record<string, string>
-  cta: string; waMsg: string; featured: boolean
+  featured: boolean
 }
 
-function ScopeGrid({ items, trackLocation }: { items: ScopePlan[]; trackLocation: string }) {
+function ScopeGrid({ items }: { items: ScopePlan[] }) {
   return (
     <div className="grid md:grid-cols-3 gap-5 mb-5">
       {items.map((plan, i) => (
@@ -111,23 +111,6 @@ function ScopeGrid({ items, trackLocation }: { items: ScopePlan[]; trackLocation
                 <span className="font-medium text-[var(--color-ink)]">{value}</span>
               </div>
             ))}
-          </div>
-          <div className="px-6 pb-6 pt-4 bg-[var(--color-surface)]">
-            <motion.a
-              href={`https://wa.me/60199195314?text=${encodeURIComponent(plan.waMsg)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => track("whatsapp_click", { location: trackLocation, package: plan.name })}
-              whileHover={{ scale: 1.03, y: -2 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ type: "spring", stiffness: 380, damping: 22 }}
-              className={`inline-flex items-center justify-center gap-1.5 w-full text-[13px] font-medium py-3 rounded-full ${
-                plan.featured ? "bg-[var(--color-blue)] text-white" : "bg-[var(--color-ink)] text-white"
-              }`}
-            >
-              {plan.cta}
-              <ArrowRight />
-            </motion.a>
           </div>
         </motion.div>
       ))}
@@ -187,12 +170,12 @@ export default function PricingPage() {
               Pricing
             </p>
             <h1 className="font-serif text-[clamp(32px,4.5vw,54px)] font-normal tracking-tight leading-[1.1] mb-5">
-              Full pricing for every service.
+              Choose what your business
               <br />
-              <span className="text-[var(--color-blue)]">No hidden fees.</span>
+              <span className="text-[var(--color-blue)]">needs right now.</span>
             </h1>
             <p className="text-[16px] text-[var(--color-ink-muted)] max-w-[500px] mx-auto leading-[1.65]">
-              Website builds, redesigns, and funnels — ordered from lowest to highest. Pick what fits your business, or chat with us if you&apos;re not sure.
+              Three clear packages based on the result you need—not technical features you have to figure out yourself.
             </p>
           </motion.div>
         </section>
@@ -200,32 +183,29 @@ export default function PricingPage() {
         <section className="pb-16 md:pb-24 px-6 bg-white">
           <div className="max-w-[1100px] mx-auto">
 
-            {/* Build From Scratch */}
-            <SectionHeading eyebrow="From RM500" title="Build From Scratch" accent="Pick your scope." />
-            <ScopeGrid items={plans} trackLocation="pricing_card" />
-
-            {/* Custom — inline text row, no box */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-20px" }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="flex flex-wrap items-center justify-center gap-2 text-center text-[14px] text-[var(--color-ink-muted)] py-1"
-            >
-              <span>
-                Need something more complex — membership portals, bookings, API integrations? Est. 6–12 weeks, scoped individually.
-              </span>
+            {/* Core packages */}
+            <SectionHeading eyebrow="Three clear choices" title="What do you need" accent="your website to do?" />
+            <ScopeGrid items={plans} />
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-5">
               <a
-                href={`https://wa.me/60199195314?text=${encodeURIComponent("Hi, I'd like to discuss a Custom / Complex website")}`}
+                href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20not%20sure%20which%20website%20package%20fits%20my%20business"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => track("whatsapp_click", { location: "custom_quote_pricing" })}
-                className="inline-flex items-center gap-1 font-medium text-[var(--color-ink)] underline decoration-[var(--color-border)] hover:decoration-[var(--color-ink)] underline-offset-2 whitespace-nowrap"
+                onClick={() => track("whatsapp_click", { location: "package_help_pricing" })}
+                className="inline-flex items-center justify-center gap-2 text-[13px] font-medium bg-[var(--color-ink)] text-white px-5 py-2.5 rounded-full"
               >
-                Let&apos;s discuss
-                <ArrowRight />
+                Help me choose <ArrowRight />
               </a>
-            </motion.div>
+              <a
+                href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20ready%20to%20start%20a%20website%20project"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => track("whatsapp_click", { location: "package_start_pricing" })}
+                className="inline-flex items-center justify-center gap-2 text-[13px] font-medium border-2 border-[var(--color-ink)] text-[var(--color-ink)] px-5 py-2 rounded-full"
+              >
+                Start a project
+              </a>
+            </div>
 
             {/* All-plans inclusions */}
             <motion.div
@@ -249,27 +229,22 @@ export default function PricingPage() {
               </p>
             </motion.div>
 
-            {/* Monthly Maintenance */}
+            {/* Website Care Plans */}
             <div className="mt-10 mb-16">
-              <SectionHeading eyebrow="Optional add-on" title="Monthly maintenance," accent="billed annually." />
+              <SectionHeading eyebrow="After launch" title="Website Care Plans" accent="for ongoing support." />
               <p className="text-[14px] text-[var(--color-ink-muted)] -mt-3 mb-6 max-w-[440px] mx-auto leading-[1.65] text-center">
-                Email hosting, domain renewals, and minor updates — handled for you. Pay once a year, no monthly invoices.
+                Choose how much ongoing help you need. New pages, redesigns, paid tools, and hosting are quoted separately.
               </p>
 
               <div className="rounded-lg border border-[var(--color-border)] overflow-hidden">
                 <div className="grid grid-cols-1 lg:grid-cols-3 divide-y lg:divide-y-0 divide-x-0 lg:divide-x divide-[var(--color-border)]">
-                  {maintenance.map(({ plan, annual, monthly, waMsg, featured, cta }) => (
+                  {maintenance.map(({ plan, price, description, features, featured }) => (
                     <div key={plan} className={`flex flex-col p-4 md:p-7 ${featured ? "bg-[var(--color-surface)]" : "bg-white"}`}>
                       <p className="text-[10px] md:text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-ink-muted)] mb-2">{plan}</p>
-                      <p className="font-serif text-[26px] md:text-[34px] font-normal tracking-tight leading-none">{annual}</p>
-                      <p className="text-[11px] text-[var(--color-ink-muted)] mt-1 mb-5">{monthly}</p>
+                      <p className="font-serif text-[26px] md:text-[34px] font-normal tracking-tight leading-none mb-3">{price}</p>
+                      <p className="text-[12px] text-[var(--color-ink-muted)] leading-[1.6] mb-5">{description}</p>
                       <ul className="space-y-2 mb-6 flex-1">
-                        {[
-                          "Business email hosting",
-                          "Domain renewal mgmt",
-                          "Minor updates (2×/mo)",
-                          "Uptime monitoring",
-                        ].map(item => (
+                        {features.map(item => (
                           <li key={item} className="flex items-start gap-1.5 text-[11px] md:text-[12px] text-[var(--color-ink-muted)]">
                             <svg className="mt-[2px] shrink-0 text-[var(--color-blue)]" width="12" height="12" viewBox="0 0 12 12" fill="none">
                               <path d="M2 6l3 3 5-5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
@@ -278,22 +253,20 @@ export default function PricingPage() {
                           </li>
                         ))}
                       </ul>
-                      <motion.a
-                        href={`https://wa.me/60199195314?text=${encodeURIComponent(waMsg)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={() => track("whatsapp_click", { location: "maintenance_plan", package: plan })}
-                        whileHover={{ scale: 1.03, y: -2 }}
-                        whileTap={{ scale: 0.97 }}
-                        transition={{ type: "spring", stiffness: 380, damping: 22 }}
-                        className="inline-flex items-center justify-center gap-1.5 text-[11px] md:text-[13px] font-medium py-2.5 rounded-full bg-[var(--color-ink)] text-white whitespace-nowrap"
-                      >
-                        {cta}
-                        <ArrowRight />
-                      </motion.a>
                     </div>
                   ))}
                 </div>
+              </div>
+              <div className="text-center mt-6">
+                <a
+                  href="https://wa.me/60199195314?text=Hi%2C%20I%27d%20like%20to%20ask%20about%20a%20Website%20Care%20Plan"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => track("whatsapp_click", { location: "website_care_pricing" })}
+                  className="inline-flex items-center gap-2 text-[13px] font-medium bg-[var(--color-ink)] text-white px-5 py-2.5 rounded-full"
+                >
+                  Ask about website care <ArrowRight />
+                </a>
               </div>
             </div>
 
@@ -304,7 +277,7 @@ export default function PricingPage() {
                 {otherServices.map((service, i) => (
                   <motion.div
                     key={service.name}
-                    id={service.name === "Website Redesign & Enhancement" ? "free-review" : undefined}
+                    id={service.id}
                     initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-20px" }}
@@ -329,26 +302,9 @@ export default function PricingPage() {
                       transition={{ type: "spring", stiffness: 380, damping: 22 }}
                       className="inline-flex items-center gap-2 text-[13px] font-medium bg-[var(--color-ink)] text-white px-5 py-2.5 rounded-full whitespace-nowrap"
                     >
-                      Chat with us
+                      {service.cta}
                       <ArrowRight />
                     </motion.a>
-                    {service.name === "Website Redesign & Enhancement" && (
-                      <div className="mt-5 pt-5 border-t border-[var(--color-border)]">
-                        <p className="text-[13px] text-[var(--color-ink-muted)] leading-[1.6] mb-3">
-                          Not sure if your site needs work? Get a free 5-minute review — no obligation.
-                        </p>
-                        <a
-                          href="https://wa.me/60199195314?text=Hi%2C%20I%27d%20like%20a%20free%20review%20of%20my%20current%20website"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={() => track("whatsapp_click", { location: "free_review_pricing" })}
-                          className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[var(--color-blue)] hover:underline"
-                        >
-                          Get my free review
-                          <ArrowRight />
-                        </a>
-                      </div>
-                    )}
                   </motion.div>
                 ))}
               </div>

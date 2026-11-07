@@ -14,7 +14,6 @@ import { FooterSection } from "@/components/ui/footer-section";
 import {
   Code2, PenTool, Layers, Type, Palette,
   MousePointer2, LayoutTemplate, Zap, Smartphone, Globe,
-  Target, RefreshCw,
 } from "lucide-react";
 
 // ─── Animation toggle context ─────────────────────────────────────────────────
@@ -452,25 +451,34 @@ function WhyWebsite() {
 
 // ─── Pricing ──────────────────────────────────────────────────────────────────
 function Pricing() {
-  const servicePricing = [
+  const packages = [
     {
-      name: "Build From Scratch",
-      price: "From RM500",
-      desc: "No website yet? Full build from design to launch — pick your scope below.",
-      waMsg: "Hi, I'm interested in a Build From Scratch website",
+      tier: "Starter",
+      name: "Landing Page",
+      price: "RM1,299",
+      timeline: "5–7 working days",
+      situation: "I need one professional page for my business or offer.",
+      outcome: "Get online quickly with a clear page that turns visitors into WhatsApp enquiries.",
+      highlights: ["One focused page", "WhatsApp and enquiry form", "Basic Google setup"],
     },
     {
-      name: "Website Redesign & Enhancement",
-      price: "From RM750",
-      desc: "Refresh an existing site — new design, faster load times, fixes to the parts that confuse visitors.",
-      waMsg: "Hi, I'm interested in Website Redesign & Enhancement",
+      tier: "Business · Most Popular",
+      name: "Business Website",
+      price: "RM3,499",
+      timeline: "2–3 weeks",
+      situation: "I need a complete website that builds trust and brings enquiries.",
+      outcome: "Give customers everything they need to understand your business and contact you confidently.",
+      highlights: ["Up to 5 core pages", "Quotation enquiry form", "Analytics and Google setup"],
       featured: true,
     },
     {
-      name: "Funnel Design",
-      price: "From RM1,250",
-      desc: "Multi-step funnel — offer page, lead capture, thank-you/upsell — built to guide one visitor all the way to a sale.",
-      waMsg: "Hi, I'm interested in Funnel Design",
+      tier: "Growth",
+      name: "Website + Automation",
+      price: "RM5,999+",
+      timeline: "3–4 weeks",
+      situation: "I want enquiries captured, organised, and followed up automatically.",
+      outcome: "Connect your website to a simple lead workflow so fewer opportunities slip through the cracks.",
+      highlights: ["Up to 5 core pages", "One automated workflow", "Simple customer record setup"],
     },
   ]
 
@@ -481,90 +489,119 @@ function Pricing() {
         <FadeUp className="text-center mb-10">
           <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">Pricing</p>
           <h2 className="font-serif text-[clamp(30px,4vw,48px)] font-normal tracking-tight leading-[1.1] mb-4">
-            Simple, transparent pricing.
+            What does your business
             <br />
-            <span className="text-[var(--color-blue)]">No hidden fees.</span>
+            <span className="text-[var(--color-blue)]">need right now?</span>
           </h2>
+          <p className="text-[16px] text-[var(--color-ink-muted)] leading-[1.65] max-w-[520px] mx-auto">
+            Start with the outcome you need. You can compare the full scope before making any commitment.
+          </p>
         </FadeUp>
 
-        {/* Service-based pricing cards */}
+        {/* Outcome-led package cards */}
         <FadeUp delay={0.04} className="mb-12">
           <div className="grid md:grid-cols-3 gap-5">
-            {servicePricing.map(({ name, price, desc, waMsg, featured }, i) => (
+            {packages.map(({ tier, name, price, timeline, situation, outcome, highlights, featured }, i) => (
               <motion.div
                 key={name}
-                className={`neo-card p-6 md:p-7 flex flex-col ${featured ? "bg-[var(--color-blue)]" : "bg-white"}`}
+                className={`neo-card overflow-hidden flex flex-col ${featured ? "md:-translate-y-2" : ""}`}
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-30px" }}
                 transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
                 whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
               >
-                <p className={`font-serif text-[19px] font-normal tracking-tight mb-1 ${featured ? "text-white" : ""}`}>{name}</p>
-                <p className={`font-serif text-[26px] font-normal tracking-tight mb-3 ${featured ? "text-white" : "text-[var(--color-blue)]"}`}>{price}</p>
-                <p className={`text-[13px] leading-[1.65] mb-6 flex-1 ${featured ? "text-white/85" : "text-[var(--color-ink-muted)]"}`}>{desc}</p>
-                <motion.a
-                  href={`https://wa.me/60199195314?text=${encodeURIComponent(waMsg)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => track("whatsapp_click", { location: "pricing_card_home", package: name })}
-                  whileTap={{ scale: 0.97 }}
-                  transition={{ type: "spring", stiffness: 380, damping: 22 }}
-                  className={`inline-flex items-center justify-center gap-1.5 w-full text-[13px] font-medium py-3 rounded-full ${
-                    featured ? "bg-white text-[var(--color-blue)]" : "bg-[var(--color-ink)] text-white"
-                  }`}
-                >
-                  Chat with us
-                  <ArrowRight />
-                </motion.a>
+                <div className={`p-6 md:p-7 ${featured ? "bg-[var(--color-blue)] text-white" : "bg-white"}`}>
+                  <p className={`text-[10px] font-bold tracking-[0.08em] uppercase mb-3 ${featured ? "text-white/70" : "text-[var(--color-ink-muted)]"}`}>{tier}</p>
+                  <h3 className="font-serif text-[23px] font-normal tracking-tight mb-1">{name}</h3>
+                  <p className="font-serif text-[32px] font-normal tracking-tight leading-none mb-2">{price}</p>
+                  <p className={`text-[12px] ${featured ? "text-white/70" : "text-[var(--color-ink-muted)]"}`}>{timeline}</p>
+                </div>
+                <div className="p-6 md:p-7 bg-[var(--color-surface)] flex flex-col flex-1">
+                  <p className="text-[14px] font-semibold text-[var(--color-ink)] leading-[1.55] mb-3">“{situation}”</p>
+                  <p className="text-[13px] text-[var(--color-ink-muted)] leading-[1.65] mb-5">{outcome}</p>
+                  <ul className="space-y-2.5 mt-auto">
+                    {highlights.map(item => (
+                      <li key={item} className="flex items-start gap-2 text-[12px] text-[var(--color-ink-muted)]">
+                        <span className="text-[var(--color-blue)] mt-[1px]" aria-hidden="true">✓</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </motion.div>
             ))}
           </div>
         </FadeUp>
 
-        <FadeUp className="text-center mb-12">
-          <p className="text-[14px] text-[var(--color-ink-muted)]">
-            Build From Scratch scope ranges from a single landing page to a full online store.{" "}
-            <Link href="/pricing" className="font-medium text-[var(--color-blue)] hover:underline">
-              See full pricing &amp; package details →
-            </Link>
-          </p>
+        <FadeUp delay={0.12} className="flex flex-col sm:flex-row items-center justify-center gap-3">
+          <Link
+            href="/pricing"
+            className="inline-flex items-center justify-center gap-2 text-[14px] font-medium bg-[var(--color-ink)] text-white px-6 py-3 rounded-full"
+          >
+            Compare full package details
+            <ArrowRight />
+          </Link>
+          <a
+            href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20not%20sure%20which%20website%20package%20fits%20my%20business"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => track("whatsapp_click", { location: "package_help_home" })}
+            className="inline-flex items-center justify-center gap-2 text-[14px] font-medium border-2 border-[var(--color-ink)] text-[var(--color-ink)] px-6 py-[10px] rounded-full"
+          >
+            Help me choose
+          </a>
         </FadeUp>
 
-        {/* Custom — full-width banner */}
-        <FadeUp delay={0.12}>
-          <motion.div
-            className="neo-card bg-white"
-            whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
-          >
-            <div className="grid md:grid-cols-[1fr_auto] gap-6 p-6 md:p-8 items-center">
-              <div>
-                <div className="flex flex-wrap items-center gap-3 mb-2">
-                  <span className="text-[11px] font-bold tracking-[0.06em] uppercase bg-[var(--color-surface)] text-[var(--color-ink-muted)] px-2.5 py-1 rounded-full border border-[var(--color-border)]">Custom / Complex</span>
-                  <span className="font-serif text-[26px] font-normal tracking-tight">Custom Quote</span>
-                  <span className="text-[12px] text-[var(--color-ink-muted)] italic">Est. 6–12 weeks</span>
-                </div>
-                <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.7] max-w-[560px]">
-                  Bespoke builds for complex requirements — membership portals, booking systems, API integrations, and multi-language platforms. Scoped and priced individually based on your needs.
-                </p>
-              </div>
-              <motion.a
-                href={`https://wa.me/60199195314?text=${encodeURIComponent("Hi, I'd like to discuss a Custom / Complex website")}`}
+      </div>
+    </section>
+  )
+}
+
+function OtherNeeds() {
+  return (
+    <section className="py-16 md:py-20 px-6 bg-[var(--color-surface)]">
+      <div className="max-w-[900px] mx-auto">
+        <FadeUp className="text-center mb-9">
+          <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">Need something different?</p>
+          <h2 className="font-serif text-[clamp(28px,4vw,42px)] font-normal tracking-tight leading-[1.1]">
+            Already have a website,
+            <br />
+            <span className="text-[var(--color-blue)]">or need something custom?</span>
+          </h2>
+        </FadeUp>
+        <FadeUp delay={0.08}>
+          <div className="grid md:grid-cols-2 rounded-lg border border-[var(--color-border)] bg-white overflow-hidden divide-y md:divide-y-0 md:divide-x divide-[var(--color-border)]">
+            <div id="free-review" className="p-6 md:p-8">
+              <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-blue)] mb-2">My current website needs improvement</p>
+              <h3 className="font-serif text-[24px] tracking-tight mb-3">Get a free website review</h3>
+              <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.7] mb-5">I&apos;ll point out what may be costing you trust or enquiries, then recommend the right next step—no obligation.</p>
+              <a
+                href="https://wa.me/60199195314?text=Hi%2C%20I%27d%20like%20a%20free%20review%20of%20my%20current%20website"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => track("whatsapp_click", { location: "free_review_home" })}
+                className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[var(--color-blue)] hover:underline"
+              >
+                Get my free review <ArrowRight />
+              </a>
+            </div>
+            <div className="p-6 md:p-8">
+              <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-blue)] mb-2">E-commerce or custom requirements</p>
+              <h3 className="font-serif text-[24px] tracking-tight mb-3">Request a custom quote</h3>
+              <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.7] mb-5">For online stores, bookings, memberships, multilingual websites, or more complex workflows.</p>
+              <a
+                href={`https://wa.me/60199195314?text=${encodeURIComponent("Hi, I'd like to discuss a custom website project")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => track("whatsapp_click", { location: "custom_quote_home" })}
-                whileHover={{ scale: 1.04, y: -2 }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ type: "spring", stiffness: 380, damping: 22 }}
-                className="inline-flex items-center gap-2 text-[14px] font-medium bg-[var(--color-ink)] text-white px-6 py-3 rounded-full whitespace-nowrap shrink-0"
+                className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[var(--color-blue)] hover:underline"
               >
-                Let&apos;s discuss
-                <ArrowRight />
-              </motion.a>
+                Discuss my project <ArrowRight />
+              </a>
             </div>
-          </motion.div>
+          </div>
         </FadeUp>
-
       </div>
     </section>
   )
@@ -620,134 +657,6 @@ function HowItWorks() {
   );
 }
 
-// ─── Features ─────────────────────────────────────────────────────────────────
-function Features() {
-  const t = useT()
-  const icons = [
-    <Code2 key="code2" size={18} strokeWidth={1.5} />,
-    <RefreshCw key="refreshcw" size={18} strokeWidth={1.5} />,
-    <Target key="target" size={18} strokeWidth={1.5} />,
-  ]
-  const cards = t.features.cards.map((c, i) => ({ ...c, icon: icons[i] }))
-
-  return (
-    <section id="features" className="py-16 md:py-24 px-6 bg-[var(--color-surface)]">
-      <div className="max-w-[1100px] mx-auto">
-        <FadeUp className="mb-14">
-          <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
-            {t.features.label}
-          </p>
-          <h2 className="font-serif text-[clamp(30px,4vw,46px)] font-normal tracking-tight leading-[1.1] mb-4">
-            {t.features.heading.split("\n").map((line, i) => (
-              <span key={i}>{line}{i === 0 && <br />}</span>
-            ))}
-          </h2>
-          <p className="text-[16px] text-[var(--color-ink-muted)] leading-[1.65] max-w-[440px]">
-            {t.features.subheading}
-          </p>
-        </FadeUp>
-
-        <FadeUp delay={0.12}>
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
-          {cards.map(({ icon, title, body, bestFor }) => (
-            <motion.div
-              key={title}
-              id={title === "Website Redesign & Enhancement" ? "free-review" : undefined}
-              className="neo-card bg-white p-6 md:p-9 flex flex-col"
-              whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
-            >
-              <div className="w-[42px] h-[42px] bg-[var(--color-surface)] border-2 border-[var(--color-ink)] shadow-[2px_2px_0_var(--color-ink)] rounded flex items-center justify-center text-[var(--color-ink)] mb-5">
-                {icon}
-              </div>
-              <h3 className="text-[16px] font-semibold tracking-tight mb-2">{title}</h3>
-              <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.65] mb-4 flex-1">{body}</p>
-              <p className="text-[12px] font-semibold text-[var(--color-blue)] mb-4">{bestFor}</p>
-              {title === "Website Redesign & Enhancement" && (
-                <div className="pt-4 border-t border-[var(--color-border)]">
-                  <p className="text-[13px] text-[var(--color-ink-muted)] leading-[1.6] mb-3">
-                    Not sure if your site needs work? Get a free 5-minute review — no obligation.
-                  </p>
-                  <a
-                    href="https://wa.me/60199195314?text=Hi%2C%20I%27d%20like%20a%20free%20review%20of%20my%20current%20website"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => track("whatsapp_click", { location: "free_review_home" })}
-                    className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[var(--color-blue)] hover:underline"
-                  >
-                    Get my free review
-                    <ArrowRight />
-                  </a>
-                </div>
-              )}
-            </motion.div>
-          ))}
-        </div>
-        </FadeUp>
-      </div>
-    </section>
-  );
-}
-
-// ─── Is This For You ──────────────────────────────────────────────────────────
-function IsThisForYou() {
-  const bullets = [
-    "You're running ads or paying for traffic, but it's not turning into WhatsApp messages or leads.",
-    "Your current site looks outdated or broken on phones, and visitors leave before they even scroll.",
-    "You want one clean link to send customers on WhatsApp — instead of a messy Instagram profile.",
-  ]
-
-  return (
-    <section className="py-16 md:py-24 px-6 bg-white">
-      <div className="max-w-[720px] mx-auto text-center">
-        <FadeUp>
-          <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
-            Not sure yet?
-          </p>
-          <h2 className="font-serif text-[clamp(30px,4vw,46px)] font-normal tracking-tight leading-[1.1] mb-10">
-            This is for you if...
-          </h2>
-        </FadeUp>
-
-        <FadeUp delay={0.08}>
-          <div className="space-y-4 mb-10 text-left">
-            {bullets.map((text, i) => (
-              <motion.div
-                key={i}
-                className="neo-card bg-white flex items-start gap-4 px-6 py-5"
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, delay: 0.06 + i * 0.07, ease: [0.22, 1, 0.36, 1] }}
-                whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
-              >
-                <span className="shrink-0 mt-0.5 text-[var(--color-blue)]">
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-                    <path d="M3 9.5l4 4 8-9" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </span>
-                <p className="text-[15px] font-medium text-[var(--color-ink)] leading-snug">{text}</p>
-              </motion.div>
-            ))}
-          </div>
-        </FadeUp>
-
-        <FadeUp delay={0.2}>
-          <a
-            href="https://wa.me/60199195314?text=Hi%2C%20I%27m%20interested%20in%20a%20landing%20page"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => track("whatsapp_click", { location: "is_this_for_you" })}
-            className="whatsapp-glow inline-flex items-center gap-2 text-[14px] font-medium bg-[#25D366] text-white px-6 py-3 rounded-full hover:opacity-85 transition-opacity"
-          >
-            Sound familiar? Let&apos;s fix it
-            <ArrowRight />
-          </a>
-        </FadeUp>
-      </div>
-    </section>
-  )
-}
-
 // ─── Testimonials ─────────────────────────────────────────────────────────────
 function Testimonials() {
   const t = useT()
@@ -799,7 +708,7 @@ function ContactForm() {
   const [pkg,      setPkg]      = useState("")
   const [message,  setMessage]  = useState("")
 
-  const packages = ["Funnel Design", "Website Redesign & Enhancement", "Landing Page", "Business Website", "E-Commerce", "Custom / Complex", "Not sure yet"]
+  const packages = ["Landing Page", "Business Website", "Website + Automation", "Website Redesign", "E-Commerce / Custom", "Not sure yet"]
   const canSubmit = name.trim() && phone.trim() && business.trim()
 
   const submit = () => {
@@ -1002,7 +911,7 @@ const faqs: { q: string; a: React.ReactNode }[] = [
   },
   {
     q: "How much does a website cost in Malaysia?",
-    a: "Website design in Malaysia typically ranges from RM1,000 to RM10,000+ depending on scope and the provider. At vnbuildr, a Website Redesign & Enhancement starts from RM750, a Funnel Design starts from RM1,250, and Build From Scratch websites start at RM500 for a single-page landing page, from RM1,450 for a 5–10+ page business website, and RM5,000 for an online store. Domain registration and hosting are separate costs — typically RM50–RM300 per year depending on your provider.",
+    a: "Website design in Malaysia typically ranges from RM1,000 to RM10,000+ depending on scope and the provider. At vnbuildr, a Landing Page is RM1,299, a Business Website is RM3,499, and Website + Automation starts from RM5,999. E-commerce and custom requirements are quoted individually. Domain registration, hosting, paid tools, and third-party subscriptions are separate costs.",
   },
   {
     q: "What is a landing page? Is it the same as a website?",
@@ -1012,10 +921,10 @@ const faqs: { q: string; a: React.ReactNode }[] = [
     q: "How long does it take to complete a website?",
     a: (
       <span className="flex flex-col gap-3">
-        <span>· Landing Page (1 page): <strong>1–2 weeks</strong></span>
-        <span>· Business Website (5–10+ pages): <strong>2–5 weeks</strong></span>
-        <span>· E-Commerce: <strong>4–8 weeks</strong></span>
-        <span>· Custom / Complex: <strong>6–12 weeks</strong></span>
+        <span>· Landing Page: <strong>5–7 working days</strong></span>
+        <span>· Business Website: <strong>2–3 weeks</strong></span>
+        <span>· Website + Automation: <strong>3–4 weeks</strong></span>
+        <span>· E-Commerce / Custom: <strong>Scoped individually</strong></span>
         <span className="mt-2 opacity-70">These timelines require your content and brand assets to be ready at kickoff.</span>
       </span>
     ),
@@ -1084,7 +993,7 @@ const faqJsonLd = {
       "@type": "Answer",
       "text": typeof a === "string"
         ? a
-        : "Landing Page (1 page): 1–2 weeks. Business Website (5–10+ pages): 2–5 weeks. E-Commerce: 4–8 weeks. Custom / Complex: 6–12 weeks. These timelines require your content and brand assets to be ready at kickoff.",
+        : "Landing Page: 5–7 working days. Business Website: 2–3 weeks. Website + Automation: 3–4 weeks. E-Commerce and custom projects are scoped individually. These timelines require your content and brand assets to be ready at kickoff.",
     },
   })),
 }
@@ -1163,7 +1072,7 @@ const faqSchema = {
     {
       "@type": "Question",
       "name": "How much does a website cost in Malaysia?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Website design in Malaysia typically ranges from RM1,000 to RM10,000+ depending on scope. At vnbuildr, a Website Redesign & Enhancement starts from RM750, a Funnel Design starts from RM1,250, and Build From Scratch websites start at RM500 for a single-page landing page, from RM1,450 for a 5–10+ page business website, and RM5,000 for an online store. Domain and hosting are separate costs." },
+      "acceptedAnswer": { "@type": "Answer", "text": "Website design in Malaysia typically ranges from RM1,000 to RM10,000+ depending on scope. At vnbuildr, a Landing Page is RM1,299, a Business Website is RM3,499, and Website + Automation starts from RM5,999. E-commerce and custom projects are quoted individually. Domain, hosting, paid tools, and third-party subscriptions are separate costs." },
     },
     {
       "@type": "Question",
@@ -1173,7 +1082,7 @@ const faqSchema = {
     {
       "@type": "Question",
       "name": "How long does it take to complete a website?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Landing Page (1 page): 1–2 weeks. Business Website (5–10+ pages): 2–5 weeks. E-Commerce: 4–8 weeks. Custom / Complex: 6–12 weeks. These timelines require your content and brand assets to be ready at kickoff." },
+      "acceptedAnswer": { "@type": "Answer", "text": "Landing Page: 5–7 working days. Business Website: 2–3 weeks. Website + Automation: 3–4 weeks. E-Commerce and custom projects are scoped individually. These timelines require your content and brand assets to be ready at kickoff." },
     },
     {
       "@type": "Question",
@@ -1265,9 +1174,8 @@ export default function Home() {
         <Hero />
         <WhyWebsite />
         <HowItWorks />
-        <Features />
-        <IsThisForYou />
         <Pricing />
+        <OtherNeeds />
         <Testimonials />
         <About />
         <FAQ />
