@@ -51,7 +51,7 @@ export default function OGImage() {
               fontWeight: 600,
             }}
           >
-            Selected Works · Malaysia
+            Selected Website Projects
           </span>
           <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
             <span

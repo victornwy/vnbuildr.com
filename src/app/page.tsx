@@ -255,13 +255,11 @@ function FadeUp({ children, delay = 0, className }: {
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 interface HeroProps {
-  turnaroundTime?: string
   headline?: React.ReactNode
   subheadline?: string
 }
 
 function Hero({
-  turnaroundTime: _turnaroundTime = "7 days",
   headline,
   subheadline,
 }: HeroProps) {
@@ -385,45 +383,45 @@ function Hero({
 function WhyWebsite() {
   const bullets = [
     {
-      text: "Build SEO authority. Social profiles rarely do.",
+      text: "Explain what you offer",
       icon: <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><polyline points="2,14 6,9 10,12 16,4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/><polyline points="12,4 16,4 16,8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>,
     },
     {
-      text: "Collect leads without paying per click.",
+      text: "Build customer trust",
       icon: <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="7" stroke="currentColor" strokeWidth="1.5"/><circle cx="9" cy="9" r="3.5" stroke="currentColor" strokeWidth="1.5"/><circle cx="9" cy="9" r="1.2" fill="currentColor"/></svg>,
     },
     {
-      text: "Your data. Your rules. Your brand.",
+      text: "Look professional on mobile",
       icon: <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M9 1.5L2.5 5v4.5C2.5 13.5 5.5 16 9 17c3.5-1 6.5-3.5 6.5-7.5V5L9 1.5z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>,
     },
     {
-      text: "Works 24/7 — no feed, no algorithm.",
+      text: "Guide visitors towards an enquiry",
       icon: <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="7" stroke="currentColor" strokeWidth="1.5"/><path d="M9 5.5V9l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>,
     },
   ]
 
   return (
-    <section className="py-16 md:py-24 px-6 bg-[var(--color-surface)]">
+    <section className="py-16 md:py-20 px-6 bg-[var(--color-surface)]">
       <div className="max-w-[1100px] mx-auto">
 
         {/* Centered header */}
-        <FadeUp className="text-center mb-12">
+        <FadeUp className="text-center mb-10">
           <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
-            Posting everyday, still no enquiries?
+            A clearer online presence
           </p>
           <h2 className="font-serif text-[clamp(30px,4vw,48px)] font-normal tracking-tight leading-[1.1] mb-5">
-            10,000 followers. Zero leads.
+            Make your business easy to understand
             <br />
-            <span className="text-[var(--color-blue)]">Sound familiar?</span>
+            <span className="text-[var(--color-blue)]">and easy to contact.</span>
           </h2>
           <p className="text-[16px] text-[var(--color-ink-muted)] leading-[1.75] max-w-[520px] mx-auto">
-            Social media is designed to keep people scrolling — not to send them to you. You can post every day and still get no enquiries, because the platform decides who sees your content. A website puts you in control: your leads, your data, your brand, on your own terms.
+            A clear website helps customers understand your value, trust your business, and know what to do next.
           </p>
         </FadeUp>
 
         {/* 2×2 bullet grid */}
         <FadeUp delay={0.1}>
-          <div className="grid sm:grid-cols-2 gap-4 mb-10">
+          <div className="grid sm:grid-cols-2 gap-4">
             {bullets.map(({ text, icon }, i) => (
               <motion.div
                 key={i}
@@ -439,11 +437,43 @@ function WhyWebsite() {
               </motion.div>
             ))}
           </div>
-          <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.75] border-t border-[var(--color-border)] pt-7 italic text-center max-w-[560px] mx-auto">
-            Social brings the eyeballs. Your website converts them into customers.
-          </p>
         </FadeUp>
 
+      </div>
+    </section>
+  )
+}
+
+function WhyVnbuildr() {
+  const reasons = [
+    "Direct communication",
+    "Clear pricing",
+    "Fast delivery",
+    "Full ownership",
+  ]
+
+  return (
+    <section className="py-16 md:py-20 px-6 bg-[var(--color-surface)]">
+      <div className="max-w-[1100px] mx-auto">
+        <FadeUp className="text-center mb-10">
+          <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">Why vnbuildr</p>
+          <h2 className="font-serif text-[clamp(30px,4vw,48px)] font-normal tracking-tight leading-[1.1] mb-4">
+            A simpler way to
+            <br />
+            <span className="text-[var(--color-blue)]">build your website.</span>
+          </h2>
+          <p className="text-[16px] text-[var(--color-ink-muted)] leading-[1.7] max-w-[540px] mx-auto">
+            Work directly with the person designing and building your website.
+          </p>
+        </FadeUp>
+        <FadeUp delay={0.08} className="neo-card bg-white grid sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[var(--color-border)]">
+          {reasons.map((reason, i) => (
+            <div key={reason} className="flex items-center gap-3 px-5 py-5">
+              <span className="text-[11px] font-bold text-[var(--color-blue)]">0{i + 1}</span>
+              <span className="text-[14px] font-semibold text-[var(--color-ink)]">{reason}</span>
+            </div>
+          ))}
+        </FadeUp>
       </div>
     </section>
   )
@@ -457,8 +487,8 @@ function Pricing() {
       name: "Landing Page",
       price: "RM1,299",
       timeline: "5–7 working days",
-      situation: "I need one professional page for my business or offer.",
-      outcome: "Get online quickly with a clear page that turns visitors into WhatsApp enquiries.",
+      bestFor: "Best for one offer, campaign, or new business.",
+      outcome: "One focused page designed to generate enquiries.",
       highlights: ["One focused page", "WhatsApp and enquiry form", "Basic Google setup"],
     },
     {
@@ -466,8 +496,8 @@ function Pricing() {
       name: "Business Website",
       price: "RM3,499",
       timeline: "2–3 weeks",
-      situation: "I need a complete website that builds trust and brings enquiries.",
-      outcome: "Give customers everything they need to understand your business and contact you confidently.",
+      bestFor: "Best for established SMEs that need trust and enquiries.",
+      outcome: "A complete company website that builds trust.",
       highlights: ["Up to 5 core pages", "Quotation enquiry form", "Analytics and Google setup"],
       featured: true,
     },
@@ -476,14 +506,14 @@ function Pricing() {
       name: "Website + Automation",
       price: "RM5,999+",
       timeline: "3–4 weeks",
-      situation: "I want enquiries captured, organised, and followed up automatically.",
-      outcome: "Connect your website to a simple lead workflow so fewer opportunities slip through the cracks.",
-      highlights: ["Up to 5 core pages", "One automated workflow", "Simple customer record setup"],
+      bestFor: "Best for businesses that need organised lead follow-up.",
+      outcome: "A website with a simple enquiry follow-up system.",
+      highlights: ["Up to 5 core pages", "Enquiry saved → alert sent → follow-up prepared", "Simple customer record setup"],
     },
   ]
 
   return (
-    <section id="pricing" className="py-16 md:py-24 px-6 bg-white">
+    <section id="pricing" className="py-16 md:py-20 px-6 bg-white">
       <div className="max-w-[1100px] mx-auto">
 
         <FadeUp className="text-center mb-10">
@@ -501,25 +531,25 @@ function Pricing() {
         {/* Outcome-led package cards */}
         <FadeUp delay={0.04} className="mb-12">
           <div className="grid md:grid-cols-3 gap-5">
-            {packages.map(({ tier, name, price, timeline, situation, outcome, highlights, featured }, i) => (
+            {packages.map(({ tier, name, price, timeline, bestFor, outcome, highlights, featured }, i) => (
               <motion.div
                 key={name}
-                className={`neo-card overflow-hidden flex flex-col ${featured ? "md:-translate-y-2" : ""}`}
+                className="neo-card overflow-hidden flex h-full flex-col"
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-30px" }}
                 transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
                 whileHover={{ y: -4, transition: { type: "spring", stiffness: 340, damping: 34 } }}
               >
-                <div className={`p-6 md:p-7 ${featured ? "bg-[var(--color-blue)] text-white" : "bg-white"}`}>
+                <div className={`p-6 md:p-7 md:min-h-[194px] ${featured ? "bg-[var(--color-blue)] text-white" : "bg-white"}`}>
                   <p className={`text-[10px] font-bold tracking-[0.08em] uppercase mb-3 ${featured ? "text-white/70" : "text-[var(--color-ink-muted)]"}`}>{tier}</p>
                   <h3 className="font-serif text-[23px] font-normal tracking-tight mb-1">{name}</h3>
                   <p className="font-serif text-[32px] font-normal tracking-tight leading-none mb-2">{price}</p>
                   <p className={`text-[12px] ${featured ? "text-white/70" : "text-[var(--color-ink-muted)]"}`}>{timeline}</p>
                 </div>
                 <div className="p-6 md:p-7 bg-[var(--color-surface)] flex flex-col flex-1">
-                  <p className="text-[14px] font-semibold text-[var(--color-ink)] leading-[1.55] mb-3">“{situation}”</p>
-                  <p className="text-[13px] text-[var(--color-ink-muted)] leading-[1.65] mb-5">{outcome}</p>
+                  <p className="text-[12px] font-semibold text-[var(--color-blue)] leading-[1.5] mb-3 md:min-h-[36px]">{bestFor}</p>
+                  <p className="text-[14px] font-semibold text-[var(--color-ink)] leading-[1.55] mb-5 md:min-h-[44px]">{outcome}</p>
                   <ul className="space-y-2.5 mt-auto">
                     {highlights.map(item => (
                       <li key={item} className="flex items-start gap-2 text-[12px] text-[var(--color-ink-muted)]">
@@ -562,7 +592,7 @@ function OtherNeeds() {
   return (
     <section className="py-16 md:py-20 px-6 bg-[var(--color-surface)]">
       <div className="max-w-[900px] mx-auto">
-        <FadeUp className="text-center mb-9">
+        <FadeUp className="text-center mb-10">
           <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">Need something different?</p>
           <h2 className="font-serif text-[clamp(28px,4vw,42px)] font-normal tracking-tight leading-[1.1]">
             Already have a website,
@@ -572,30 +602,30 @@ function OtherNeeds() {
         </FadeUp>
         <FadeUp delay={0.08}>
           <div className="grid md:grid-cols-2 rounded-lg border border-[var(--color-border)] bg-white overflow-hidden divide-y md:divide-y-0 md:divide-x divide-[var(--color-border)]">
-            <div id="free-review" className="p-6 md:p-8">
+            <div id="free-review" className="p-6 md:p-8 flex h-full flex-col">
               <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-blue)] mb-2">My current website needs improvement</p>
-              <h3 className="font-serif text-[24px] tracking-tight mb-3">Get a free website review</h3>
-              <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.7] mb-5">I&apos;ll point out what may be costing you trust or enquiries, then recommend the right next step—no obligation.</p>
+              <h3 className="font-serif text-[24px] tracking-tight mb-3">Get a free 5-point website review</h3>
+              <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.7] mb-5">Get five practical recommendations to improve your current website within 2 working days.</p>
               <a
                 href="https://wa.me/60199195314?text=Hi%2C%20I%27d%20like%20a%20free%20review%20of%20my%20current%20website"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => track("whatsapp_click", { location: "free_review_home" })}
-                className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[var(--color-blue)] hover:underline"
+                className="mt-auto self-start inline-flex items-center gap-1.5 text-[13px] font-semibold text-[var(--color-blue)] hover:underline"
               >
                 Get my free review <ArrowRight />
               </a>
             </div>
-            <div className="p-6 md:p-8">
+            <div className="p-6 md:p-8 flex h-full flex-col">
               <p className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--color-blue)] mb-2">E-commerce or custom requirements</p>
               <h3 className="font-serif text-[24px] tracking-tight mb-3">Request a custom quote</h3>
-              <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.7] mb-5">For online stores, bookings, memberships, multilingual websites, or more complex workflows.</p>
+              <p className="text-[14px] text-[var(--color-ink-muted)] leading-[1.7] mb-5">For online stores, booking systems, multilingual websites, and custom requirements.</p>
               <a
                 href={`https://wa.me/60199195314?text=${encodeURIComponent("Hi, I'd like to discuss a custom website project")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => track("whatsapp_click", { location: "custom_quote_home" })}
-                className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[var(--color-blue)] hover:underline"
+                className="mt-auto self-start inline-flex items-center gap-1.5 text-[13px] font-semibold text-[var(--color-blue)] hover:underline"
               >
                 Discuss my project <ArrowRight />
               </a>
@@ -613,9 +643,9 @@ function HowItWorks() {
   const steps = t.how.steps
 
   return (
-    <section id="how" className="py-16 md:py-24 px-6 bg-white">
+    <section id="how" className="py-16 md:py-20 px-6 bg-white">
       <div className="max-w-[1100px] mx-auto">
-        <FadeUp className="text-center mb-16">
+        <FadeUp className="text-center mb-10">
           <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
             {t.how.label}
           </p>
@@ -633,7 +663,7 @@ function HowItWorks() {
           {steps.map(({ num, title, body, time }, i) => (
             <motion.div
               key={num}
-              className="neo-card bg-white p-6 md:p-10"
+              className="neo-card bg-white p-6 md:p-10 flex h-full flex-col"
               initial={{ opacity: 0, x: i === 0 ? -48 : i === 2 ? 48 : 0, y: i === 1 ? 36 : 0 }}
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
@@ -645,7 +675,7 @@ function HowItWorks() {
               </div>
               <h3 className="text-[18px] font-semibold tracking-tight mb-2">{title}</h3>
               <p className="text-[15px] text-[var(--color-ink-muted)] leading-[1.65]">{body}</p>
-              <div className="mt-5 text-[12px] font-semibold text-[var(--color-ink-muted)] tracking-widest uppercase flex items-center gap-2">
+              <div className="mt-auto pt-5 text-[12px] font-semibold text-[var(--color-ink-muted)] tracking-widest uppercase flex items-center gap-2">
                 <span className="block w-4 h-px bg-current" />
                 {time}
               </div>
@@ -661,9 +691,9 @@ function HowItWorks() {
 function Testimonials() {
   const t = useT()
   return (
-    <section className="py-16 md:py-24 px-6 bg-[var(--color-surface)]">
+    <section className="py-16 md:py-20 px-6 bg-[var(--color-surface)]">
       <div className="max-w-[1100px] mx-auto">
-        <FadeUp className="mb-14">
+        <FadeUp className="mb-10">
           <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
             {t.testimonials.label}
           </p>
@@ -688,6 +718,9 @@ function Testimonials() {
                   </div>
                   <p className="text-[13px] font-semibold text-[var(--color-ink)]">{role}</p>
                 </div>
+                <Link href="/portfolio" className="text-[12px] font-semibold text-[var(--color-blue)] hover:underline">
+                  View project →
+                </Link>
               </motion.div>
             ))}
           </div>
@@ -708,7 +741,7 @@ function ContactForm() {
   const [pkg,      setPkg]      = useState("")
   const [message,  setMessage]  = useState("")
 
-  const packages = ["Landing Page", "Business Website", "Website + Automation", "Website Redesign", "E-Commerce / Custom", "Not sure yet"]
+  const packages = ["Landing Page", "Business Website", "Website + Automation", "Free Website Review / Redesign", "E-Commerce / Custom", "Not sure yet"]
   const canSubmit = name.trim() && phone.trim() && business.trim()
 
   const submit = () => {
@@ -795,7 +828,7 @@ function ContactForm() {
 function CtaSection() {
   const t = useT()
   return (
-    <section id="contact" className="py-16 md:py-24 px-6 bg-[var(--color-ink)]">
+    <section id="contact" className="py-16 md:py-20 px-6 bg-[var(--color-ink)]">
       <div className="max-w-[600px] mx-auto">
         <FadeUp className="text-center mb-2">
           <span className="inline-flex items-center gap-1.5 bg-white/10 text-white/55 text-[13px] font-medium px-3 py-1 rounded-full mb-6 before:content-[''] before:w-1.5 before:h-1.5 before:rounded-full before:bg-[#5c9e6e]">
@@ -836,7 +869,7 @@ function ArrowRight() {
 function About() {
   const t = useT()
   return (
-    <section className="py-16 md:py-24 px-6 bg-[var(--color-surface)]">
+    <section className="py-16 md:py-20 px-6 bg-[var(--color-surface)]">
       <div className="max-w-[1100px] mx-auto">
         <FadeUp>
           <div className="neo-card bg-white overflow-hidden">
@@ -878,9 +911,9 @@ function About() {
                   <p className="text-[15px] text-[var(--color-ink-muted)] leading-[1.75] mb-3">
                     {t.about.bio1}
                   </p>
-                  <p className="text-[15px] text-[var(--color-ink-muted)] leading-[1.75]">
-                    {t.about.bio2}
-                  </p>
+                  {t.about.bio2 ? (
+                    <p className="text-[15px] text-[var(--color-ink-muted)] leading-[1.75]">{t.about.bio2}</p>
+                  ) : null}
                 </div>
 
                 <div className="flex flex-wrap gap-2">
@@ -906,16 +939,8 @@ function About() {
 // ─── FAQ ──────────────────────────────────────────────────────────────────────
 const faqs: { q: string; a: React.ReactNode }[] = [
   {
-    q: "How can you build and deploy a custom website so quickly?",
-    a: "Most agencies spend weeks sketching mockups before anyone even starts building — then rebuild everything again in code. I skip that detour: I design and build at the same time, using the same clean, professional building blocks the best web teams use. That's how a beautiful, working website gets to you in days, not months.",
-  },
-  {
-    q: "How much does a website cost in Malaysia?",
-    a: "Website design in Malaysia typically ranges from RM1,000 to RM10,000+ depending on scope and the provider. At vnbuildr, a Landing Page is RM1,299, a Business Website is RM3,499, and Website + Automation starts from RM5,999. E-commerce and custom requirements are quoted individually. Domain registration, hosting, paid tools, and third-party subscriptions are separate costs.",
-  },
-  {
-    q: "What is a landing page? Is it the same as a website?",
-    a: "A landing page is a single, focused web page built around one goal — usually to capture a lead, promote an offer, or get someone to contact you. A full website has multiple pages (Home, About, Services, Portfolio, Contact, etc.) and covers your entire business. A landing page is faster to build, more affordable, and more effective when you have one clear message. Many businesses start with a landing page and grow into a full website over time. At vnbuildr, our Landing Page package is a polished single-page site, while our Business Website package covers multi-page websites.",
+    q: "Which package should I choose?",
+    a: "Choose a Landing Page when you have one clear offer or campaign. Choose a Business Website when customers need several pages to understand and trust your company. Choose Website + Automation when you also need enquiries organised and followed up. If you're unsure, message me and I'll recommend the simplest option that fits.",
   },
   {
     q: "How long does it take to complete a website?",
@@ -930,56 +955,16 @@ const faqs: { q: string; a: React.ReactNode }[] = [
     ),
   },
   {
-    q: "What materials do I need to provide before we start?",
-    a: "Copywriting is included — I write the page copy for you. What helps most is having your high-resolution logo, primary brand colors, and any product photos or graphics ready to share. The more brand context you can give me upfront, the faster we hit the launch timeline.",
+    q: "What do I need to provide before we start?",
+    a: "Your logo, brand colours, product or business photos, and a short explanation of what you offer are enough to begin. I write the core website copy for you and guide you through anything else needed.",
   },
   {
-    q: "Can I provide my own design?",
-    a: "Yes! If you already have a complete design or mockup, I can build exactly that — pixel by pixel. I'll turn your design files into a fast, fully working website in record time.",
+    q: "Is copywriting included?",
+    a: "Yes. I write the core headlines, section copy, and calls to action needed for your website. Blog articles, full brand strategy, professional photography, advertising, and ongoing marketing are not included, so you will need to provide these or arrange them with a specialist if required.",
   },
   {
-    q: "Do you design logos or brand identities?",
-    a: "Not quite — I stick to web design and development. Logos and brand identity are a different skill set, so I leave that to the specialists. If you already have a logo and brand colors, I'll build your entire site around them. If you don't have one yet, let me know and I can point you to designers I trust, or build a clean, typography-led page while you sort your branding out separately.",
-  },
-  {
-    q: "Will my website be mobile-friendly?",
-    a: "Yes, 100%. Every block I build is engineered to be responsive from the ground up. Your website will adapt fluidly and look premium on smartphones, tablets, and large desktop screens alike.",
-  },
-  {
-    q: "What is your payment term?",
-    a: "I operate on a straightforward 50/50 payment schedule. A 50% non-refundable deposit is required upfront to secure your development window. The remaining 50% balance is due upon project completion, right after you approve the staging link and before final code handover or domain transfer.",
-  },
-  {
-    q: "Can I request a refund?",
-    a: "The initial 50% deposit is non-refundable as it locks in your slot on my calendar and covers the intensive development labor during kickoff. Once coding has commenced, resources are fully committed to your project.",
-  },
-  {
-    q: "Can I remove any design or attribution branding?",
-    a: "No. A small 'Built by vnbuildr' credit is included in the footer of every project. This is a standard part of the agreement and helps support the work. It is subtle, unobtrusive, and does not interfere with your brand — but it is non-negotiable.",
-  },
-  {
-    q: "Can I download the source code or use it to DIY my website later?",
-    a: "Yes. You receive the full source code upon project completion and final payment. You're free to host it anywhere, modify it, or hand it off to another developer — no lock-in.",
-  },
-  {
-    q: "If I cancel my hosting or contract, do I keep my domain and data?",
-    a: "Yes. You have complete ownership. Because I build with clean, standard code instead of locking you into a website-builder subscription, everything — your website files, your domain — is yours. You can host it anywhere, anytime, completely independent of me.",
-  },
-  {
-    q: "Do you provide after-sales support?",
-    a: "Every project includes a standard 14-day post-launch support window to fix any unexpected bugs or display glitches. If you need ongoing maintenance, text edits, or periodic updates after that, I offer a predictable monthly support retainer based on your needs.",
-  },
-  {
-    q: "Do you use templates like WordPress, Wix, or Squarespace?",
-    a: "No. Every page is built from scratch, by hand — not assembled from a template. That means it loads instantly on mobile, stays fully customizable to your brand, and never breaks because of a bloated plugin update you didn't ask for.",
-  },
-  {
-    q: "Do you handle marketing or SEO campaigns?",
-    a: "Basic page copywriting is included — I write the headlines, section copy, and CTAs for your landing page as part of every project. What I don't offer is broader marketing strategy, paid ad management, or ongoing SEO campaigns. If you need those, have them planned out before kickoff and I'll make sure the page is built to support them.",
-  },
-  {
-    q: "What's not included?",
-    a: "A few things sit outside every package: professional copywriting and content writing (I write the basic page copy — headlines, section copy, CTAs — but not blog posts, brand messaging, or long-form content), photography and custom illustrations (bring your own photos and graphics, or I can suggest stock imagery), and professional or ongoing SEO campaigns (basic on-page SEO setup is included, not keyword strategy or continuous optimization).",
+    q: "What happens after my website launches?",
+    a: "Every project includes 14 days of post-launch support for unexpected bugs or display issues. If you need regular updates after that, monthly Website Care Plans start from RM99.",
   },
 ];
 
@@ -1004,13 +989,13 @@ function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-16 md:py-24 px-6 bg-white">
+    <section id="faq" className="py-16 md:py-20 px-6 bg-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <div className="max-w-[720px] mx-auto">
-        <FadeUp className="text-center mb-14">
+        <FadeUp className="text-center mb-10">
           <p className="text-[12px] font-semibold tracking-[0.1em] uppercase text-[var(--color-ink-muted)] mb-4">
             {t.faq.label}
           </p>
@@ -1059,99 +1044,6 @@ function FAQ() {
   );
 }
 
-// ─── FAQ schema ───────────────────────────────────────────────────────────────
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "How can you build and deploy a custom website so quickly?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Traditional web agencies spend weeks manually drawing static layouts in Figma before rewriting them from scratch. I work differently — by pairing deep frontend engineering expertise with the world's leading UI design systems, I write clean, production-ready code from day one. This allows me to deliver beautiful, functional websites in days rather than months." },
-    },
-    {
-      "@type": "Question",
-      "name": "How much does a website cost in Malaysia?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Website design in Malaysia typically ranges from RM1,000 to RM10,000+ depending on scope. At vnbuildr, a Landing Page is RM1,299, a Business Website is RM3,499, and Website + Automation starts from RM5,999. E-commerce and custom projects are quoted individually. Domain, hosting, paid tools, and third-party subscriptions are separate costs." },
-    },
-    {
-      "@type": "Question",
-      "name": "What is a landing page? Is it the same as a website?",
-      "acceptedAnswer": { "@type": "Answer", "text": "A landing page is a single, focused web page built around one goal — usually to capture a lead, promote an offer, or get someone to contact you. A full website has multiple pages covering your entire business. A landing page is faster to build, more affordable, and more effective when you have one clear message. Many businesses start with a landing page and grow into a full website over time." },
-    },
-    {
-      "@type": "Question",
-      "name": "How long does it take to complete a website?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Landing Page: 5–7 working days. Business Website: 2–3 weeks. Website + Automation: 3–4 weeks. E-Commerce and custom projects are scoped individually. These timelines require your content and brand assets to be ready at kickoff." },
-    },
-    {
-      "@type": "Question",
-      "name": "What materials do I need to provide before we start?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Copywriting is included — I write the page copy for you. What helps most is having your high-resolution logo, primary brand colors, and any product photos or graphics ready to share. The more brand context you can give me upfront, the faster we hit the launch timeline." },
-    },
-    {
-      "@type": "Question",
-      "name": "Can I provide my own design?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes! If you already have a complete mockup or a Figma blueprint, I can act strictly as your developer. I will translate your static design files into pixel-perfect, clean React/Tailwind or static HTML/CSS code in record time." },
-    },
-    {
-      "@type": "Question",
-      "name": "Do you design logos or brand identities?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Not quite — I stick to web design and development. Logos and brand identity are a different skill set, so I leave that to the specialists. If you already have a logo and brand colors, I'll build your entire site around them. If you don't have one yet, let me know and I can point you to designers I trust, or build a clean, typography-led page while you sort your branding out separately." },
-    },
-    {
-      "@type": "Question",
-      "name": "Will my website be mobile-friendly?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes, 100%. Every block I build is engineered to be responsive from the ground up. Your website will adapt fluidly and look premium on smartphones, tablets, and large desktop screens alike." },
-    },
-    {
-      "@type": "Question",
-      "name": "What is your payment term?",
-      "acceptedAnswer": { "@type": "Answer", "text": "I operate on a straightforward 50/50 payment schedule. A 50% non-refundable deposit is required upfront to secure your development window. The remaining 50% balance is due upon project completion, right after you approve the staging link and before final code handover or domain transfer." },
-    },
-    {
-      "@type": "Question",
-      "name": "Can I request a refund?",
-      "acceptedAnswer": { "@type": "Answer", "text": "The initial 50% deposit is non-refundable as it locks in your slot on my calendar and covers the intensive development labor during kickoff. Once coding has commenced, resources are fully committed to your project." },
-    },
-    {
-      "@type": "Question",
-      "name": "Can I remove any design or attribution branding?",
-      "acceptedAnswer": { "@type": "Answer", "text": "No. A small 'Built by vnbuildr' credit is included in the footer of every project. This is a standard part of the agreement and helps support the work. It is subtle, unobtrusive, and does not interfere with your brand — but it is non-negotiable." },
-    },
-    {
-      "@type": "Question",
-      "name": "Can I download the source code or use it to DIY my website later?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. You receive the full source code upon project completion and final payment. You're free to host it anywhere, modify it, or hand it off to another developer — no lock-in." },
-    },
-    {
-      "@type": "Question",
-      "name": "If I cancel my hosting or contract, do I keep my domain and data?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Yes. You have complete ownership. Because I write raw, native code instead of locking you into a proprietary website builder subscription, you own your source files. Your domain and repository can be hosted absolutely anywhere, anytime, completely independent of me." },
-    },
-    {
-      "@type": "Question",
-      "name": "Do you provide after-sales support?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Every project includes a standard 14-day post-launch support window to fix any unexpected bugs or display glitches. If you need ongoing maintenance, text edits, or periodic updates after that, I offer a predictable monthly support retainer based on your needs." },
-    },
-    {
-      "@type": "Question",
-      "name": "Do you use templates like WordPress, Wix, or Squarespace?",
-      "acceptedAnswer": { "@type": "Answer", "text": "No. Every page is hand-crafted using clean, lightweight code frameworks. This ensures your site loads instantly on mobile devices, stays entirely customizable, and never suffers from heavy, broken plugin updates." },
-    },
-    {
-      "@type": "Question",
-      "name": "Do you handle marketing or SEO campaigns?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Basic page copywriting is included — I write the headlines, section copy, and CTAs for your landing page as part of every project. What I don't offer is broader marketing strategy, paid ad management, or ongoing SEO campaigns. If you need those, have them planned out before kickoff and I'll make sure the page is built to support them." },
-    },
-    {
-      "@type": "Question",
-      "name": "What's not included?",
-      "acceptedAnswer": { "@type": "Answer", "text": "A few things sit outside every package: professional copywriting and content writing (I write the basic page copy — headlines, section copy, CTAs — but not blog posts, brand messaging, or long-form content), photography and custom illustrations (bring your own photos and graphics, or I can suggest stock imagery), and professional or ongoing SEO campaigns (basic on-page SEO setup is included, not keyword strategy or continuous optimization)." },
-    },
-  ],
-}
-
 // ─── Page root ────────────────────────────────────────────────────────────────
 export default function Home() {
   const [animOn, setAnimOn] = useState(true)
@@ -1165,15 +1057,12 @@ export default function Home() {
 
   return (
     <AnimContext.Provider value={{ on: animOn, set: setAnimOn }}>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
       <Nav />
       <main>
         <Hero />
         <WhyWebsite />
         <HowItWorks />
+        <WhyVnbuildr />
         <Pricing />
         <OtherNeeds />
         <Testimonials />
