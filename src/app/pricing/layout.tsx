@@ -1,9 +1,9 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Website Packages & Pricing — vnbuildr Malaysia",
+  title: "Website Packages & Pricing | vnbuildr",
   description:
-    "Compare three clear website packages for Malaysian SMEs: Landing Page RM1,299, Business Website RM3,499, and Website + Automation from RM5,999.",
+    "Compare clear website packages for small businesses: Landing Page RM1,299, Business Website RM3,499, and Website + Automation from RM5,999.",
   metadataBase: new URL("https://vnbuildr.com"),
   alternates: {
     canonical: "https://vnbuildr.com/pricing",
@@ -11,11 +11,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Pricing — vnbuildr",
     description:
-      "Compare Landing Page, Business Website, and Website + Automation packages for Malaysian SMEs.",
+      "Compare Landing Page, Business Website, and Website + Automation packages for small businesses.",
     url: "https://vnbuildr.com/pricing",
     siteName: "vnbuildr",
     type: "website",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "vnbuildr — Pricing for funnel design, website redesigns, and custom-built websites" }],
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "vnbuildr website packages and pricing" }],
   },
   twitter: {
     card: "summary_large_image",

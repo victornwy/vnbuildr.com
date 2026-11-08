@@ -11,9 +11,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "vnbuildr — Custom Website & Landing Page Design | Malaysia",
+  title: "Custom Websites, Landing Pages & Automation | vnbuildr",
   description:
-    "Freelance web designer in Kuala Lumpur. Landing pages, business websites, and website automation for Malaysian SMEs — from RM1,299.",
+    "Clear, professional websites that help small businesses build trust and generate enquiries. Based in Kuala Lumpur, working locally and worldwide.",
   keywords: [
     "landing page design Malaysia",
     "web designer KL",
@@ -28,8 +28,9 @@ export const metadata: Metadata = {
     "SME website Malaysia",
     "landing page cost Malaysia",
     "business website Malaysia",
-    "sales funnel design Malaysia",
-    "funnel design Malaysia",
+    "website automation Malaysia",
+    "small business web designer",
+    "custom business website",
     "website redesign Malaysia",
     "website revamp Malaysia",
     "ecommerce website Malaysia",
@@ -40,9 +41,9 @@ export const metadata: Metadata = {
     canonical: "https://vnbuildr.com",
   },
   openGraph: {
-    title: "vnbuildr — Custom Website & Landing Page Design | Malaysia",
+    title: "Custom Websites, Landing Pages & Automation | vnbuildr",
     description:
-      "Landing pages, business websites, and website automation for Malaysian SMEs — from RM1,299.",
+      "Clear, professional websites that help small businesses build trust and generate enquiries — locally and worldwide.",
     url: "https://vnbuildr.com",
     siteName: "vnbuildr",
     type: "website",
@@ -50,83 +51,117 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "vnbuildr — Custom Website & Landing Page Design | Malaysia",
+    title: "Custom Websites, Landing Pages & Automation | vnbuildr",
     description:
-      "Landing pages, business websites, and website automation for Malaysian SMEs — from RM1,299.",
+      "Clear, professional websites that help small businesses build trust and generate enquiries — locally and worldwide.",
     images: ["/og-image.jpg"],
   },
 };
 
+const businessId = "https://vnbuildr.com/#business"
+
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": ["ProfessionalService", "LocalBusiness"],
-  "name": "vnbuildr",
-  "url": "https://vnbuildr.com",
-  "telephone": "+60199195314",
-  "email": "hello@vnbuildr.com",
-  "description": "Freelance web designer in Kuala Lumpur specialising in landing pages, business websites, and website automation for Malaysian SMEs. From RM1,299.",
-  "priceRange": "RM1,299 – RM5,999+",
-  "currenciesAccepted": "MYR, USD",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Kuala Lumpur",
-    "addressCountry": "MY"
-  },
-  "sameAs": [
-    "https://www.instagram.com/vnbuildr/",
-    "https://www.facebook.com/profile.php?id=61590036136359",
-    "https://xhslink.com/m/3wQseBxD3r1"
-  ],
-  "areaServed": [
-    { "@type": "Country", "name": "Malaysia" },
-    { "@type": "AdministrativeArea", "name": "Southeast Asia" }
-  ],
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "Website Design Services Malaysia",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Landing Page",
-          "description": "A focused, mobile-friendly page for a business or offer. RM1,299, delivered in 5–7 working days."
-        }
+  "@graph": [
+    {
+      "@type": ["ProfessionalService", "LocalBusiness"],
+      "@id": businessId,
+      "name": "vnbuildr",
+      "url": "https://vnbuildr.com",
+      "logo": "https://vnbuildr.com/icon.png",
+      "image": "https://vnbuildr.com/og-image.jpg",
+      "telephone": "+60199195314",
+      "email": "hello@vnbuildr.com",
+      "description": "Custom landing pages, business websites, and website automation for small businesses in Malaysia and worldwide.",
+      "priceRange": "RM1,299 – RM5,999+",
+      "currenciesAccepted": "MYR, USD",
+      "knowsLanguage": ["English"],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Kuala Lumpur",
+        "addressCountry": "MY"
       },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Business Website",
-          "description": "Up to five core pages designed to build trust and generate enquiries. RM3,499, delivered in 2–3 weeks."
-        }
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "telephone": "+60199195314",
+        "email": "hello@vnbuildr.com",
+        "availableLanguage": ["English"]
       },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Website and Automation",
-          "description": "A business website with one defined lead-capture and follow-up workflow. From RM5,999, delivered in 3–4 weeks."
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "Website Redesign Review",
-          "description": "A free review for businesses that want to understand whether their existing website needs improvement."
-        }
-      },
-      {
-        "@type": "Offer",
-        "itemOffered": {
-          "@type": "Service",
-          "name": "E-Commerce and Custom Website",
-          "description": "Custom-scoped websites for online stores, bookings, memberships, multilingual content, and complex integrations."
-        }
+      "sameAs": [
+        "https://www.instagram.com/vnbuildr/",
+        "https://www.facebook.com/profile.php?id=61590036136359",
+        "https://xhslink.com/m/3wQseBxD3r1"
+      ],
+      "areaServed": [
+        { "@type": "Country", "name": "Malaysia" },
+        { "@type": "Place", "name": "Worldwide" }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Website Design Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "price": "1299",
+            "priceCurrency": "MYR",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Landing Page",
+              "description": "One focused, mobile-friendly page designed to generate enquiries, delivered in 5–7 working days."
+            }
+          },
+          {
+            "@type": "Offer",
+            "price": "3499",
+            "priceCurrency": "MYR",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Business Website",
+              "description": "A complete business website with up to five core pages, delivered in 2–3 weeks."
+            }
+          },
+          {
+            "@type": "Offer",
+            "price": "5999",
+            "priceCurrency": "MYR",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Website and Automation",
+              "description": "A business website with one enquiry capture and follow-up workflow, delivered in 3–4 weeks."
+            }
+          },
+          {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "MYR",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Five-Point Website Review",
+              "description": "Five practical recommendations to improve an existing website, delivered within two working days."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "E-Commerce and Custom Website",
+              "description": "Custom-scoped websites for online stores, booking systems, multilingual content, and complex workflows."
+            }
+          }
+        ]
       }
-    ]
-  }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://vnbuildr.com/#website",
+      "url": "https://vnbuildr.com",
+      "name": "vnbuildr",
+      "description": "Custom websites, landing pages, and website automation for small businesses.",
+      "inLanguage": "en",
+      "publisher": { "@id": businessId }
+    }
+  ]
 }
 
 export default function RootLayout({
@@ -135,7 +170,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-MY" className={`${inter.variable} h-full antialiased`}>
+    <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <script
           type="application/ld+json"

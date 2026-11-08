@@ -1,25 +1,25 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Portfolio — vnbuildr | Landing Page Design Malaysia",
+  title: "Website Design Portfolio | vnbuildr",
   description:
-    "Landing pages hand-coded for startups and SMEs in Malaysia. Browse real client work — clean, fast, mobile-first pages built by vnbuildr.",
+    "Explore landing pages, business websites, and online stores created by vnbuildr for businesses locally and worldwide.",
   metadataBase: new URL("https://vnbuildr.com"),
   alternates: {
     canonical: "https://vnbuildr.com/portfolio",
   },
   robots: {
     index: true,
-    follow: false,
+    follow: true,
     googleBot: {
       index: true,
-      follow: false,
+      follow: true,
     },
   },
   openGraph: {
     title: "Portfolio — vnbuildr",
     description:
-      "Selected works by vnbuildr. Hand-coded landing pages and websites built for modern brands.",
+      "Selected landing pages, business websites, and online stores created by vnbuildr.",
     url: "https://vnbuildr.com/portfolio",
   },
 }

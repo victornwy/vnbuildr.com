@@ -17,6 +17,7 @@ const projects = [
     goal: "Sell downloadable creative assets through a focused product-to-checkout journey.",
     stack: "Digital downloads storefront",
     evidence: "Live product discovery, filtering, product pages, and purchase-ready calls to action.",
+    package: "E-Commerce & Custom",
     image: "/our-works/lumora.png",
     imageFit: "contain",
     url: "https://vnbuildr-digital-store.pages.dev",
@@ -29,6 +30,7 @@ const projects = [
     goal: "Sell digital products through a clear product-to-checkout path.",
     stack: "Trading education storefront",
     evidence: "Payment-ready funnel from landing page to secure checkout.",
+    package: "E-Commerce & Custom",
     image: "/our-works/chart-and-chain-browser.png",
     imageFit: "contain",
     url: "https://chart-and-chain.pages.dev",
@@ -41,6 +43,7 @@ const projects = [
     goal: "Turn mobile visitors into WhatsApp service bookings.",
     stack: "Automotive landing page",
     evidence: "Service-focused CTAs, vehicle categories, and trust signals.",
+    package: "Landing Page",
     image: "/our-works/cargo-browser.png",
     url: "https://vnbuildr-car-go-garage.pages.dev",
   },
@@ -52,6 +55,7 @@ const projects = [
     goal: "Convert visitors into accounting and tax enquiries.",
     stack: "Professional services landing page",
     evidence: "Credibility-first layout with direct lead capture paths.",
+    package: "Landing Page",
     image: "/our-works/an-account-browser.png",
     url: "https://vnbuildr-an-accounts.pages.dev",
   },
@@ -63,6 +67,7 @@ const projects = [
     goal: "Generate qualified precision machining enquiries.",
     stack: "B2B product showcase",
     evidence: "Trade-buyer messaging with clear service discovery.",
+    package: "Business Website",
     image: "/our-works/everbest-link-browser.png",
     url: "https://vnbuildr-everbest.pages.dev",
   },
@@ -74,6 +79,7 @@ const projects = [
     goal: "Help retail and warehouse buyers request shelving quotes.",
     stack: "B2B catalogue landing page",
     evidence: "Product categories and enquiry CTAs structured for buyers.",
+    package: "Business Website",
     image: "/our-works/topspace-browser.png",
     url: "https://vnbuildr-top-space.pages.dev",
   },
@@ -85,6 +91,7 @@ const projects = [
     goal: "Build trust quickly for high-value advisory enquiries.",
     stack: "Finance landing page",
     evidence: "Authority-led messaging and direct acquisition CTAs.",
+    package: "Landing Page",
     image: "/our-works/meridian-browser.png",
     url: "https://vnbuildr-meridian.pages.dev",
   },
@@ -96,6 +103,7 @@ const projects = [
     goal: "Move crypto-curious visitors toward account signup.",
     stack: "Acquisition landing page",
     evidence: "Benefit-led sections, trust cues, and signup prompts.",
+    package: "Landing Page",
     image: "/our-works/novadax-browser.png",
     url: "https://vnbuildr-exchange.pages.dev",
   },
@@ -107,6 +115,7 @@ const projects = [
     goal: "Turn local discovery into reservations and online orders.",
     stack: "Restaurant landing page",
     evidence: "Menu, ambience, and ordering paths surfaced early.",
+    package: "Landing Page",
     image: "/our-works/ember-oak-browser.png",
     url: "https://vnbuildr-cafe.pages.dev",
   },
@@ -118,6 +127,7 @@ const projects = [
     goal: "Convert property searchers into buyer and seller leads.",
     stack: "Personal brand landing page",
     evidence: "Project credibility and contact CTAs built into the flow.",
+    package: "Landing Page",
     image: "/our-works/ryan-lim-browser.png",
     url: "https://vnbuildr-property-agent.pages.dev",
   },
@@ -237,11 +247,12 @@ function ProjectCard({ project, priority = false }: { project: typeof projects[0
         <p className="text-[12px] text-[var(--color-ink-muted)] leading-[1.6] line-clamp-2">{project.description}</p>
         <div className="mt-auto grid gap-2 border-t border-[var(--color-border)] pt-3">
           {[
-            ["Goal", project.goal],
-            ["Scope", project.stack],
-            ["Proof", project.evidence],
+            ["Need", project.goal],
+            ["Build", project.stack],
+            ["Result", project.evidence],
+            ["Package", project.package],
           ].map(([label, value]) => (
-            <div key={label} className="grid grid-cols-[44px_1fr] gap-2 text-[11px] leading-snug">
+            <div key={label} className="grid grid-cols-[54px_1fr] gap-2 text-[11px] leading-snug">
               <span className="font-bold uppercase tracking-[0.06em] text-[var(--color-blue)]">{label}</span>
               <span className="text-[var(--color-ink-muted)]">{value}</span>
             </div>
